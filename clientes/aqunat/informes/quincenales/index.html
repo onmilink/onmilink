@@ -494,13 +494,6 @@ function renderRendimiento() {
   document.getElementById("r-rend-table").innerHTML=`<thead><tr><th>Campaña</th><th style="text-align:right">Inversión</th><th style="text-align:right">Leads CRM</th><th style="text-align:right">CPL</th></tr></thead><tbody>${rows.join("")}<tr class="total-row"><td>TOTAL</td><td style="text-align:right">$${fmtD(tG)}</td><td style="text-align:right">${tL}</td><td style="text-align:right">$${(tG/tL).toFixed(2)}</td></tr></tbody>`;
 }
 
-<script src="data.js"></script>
-
-<script>
-  window.addEventListener("load", function () {
-    document.title = DATA.cliente + " – Informe quincenal";
-  });
 </script>
 </body>
 </html>
-``
