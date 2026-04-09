@@ -497,7 +497,10 @@ function renderRendimiento() {
 <script src="data.js"></script>
 
 <script>
-  document.title = DATA.cliente + " – Informe quincenal";
+  window.addEventListener("load", function () {
+    document.title = DATA.cliente + " – Informe quincenal";
+  });
 </script>
 </body>
 </html>
+``
