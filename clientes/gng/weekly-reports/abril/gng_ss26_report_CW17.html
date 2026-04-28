@@ -91,6 +91,103 @@ body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif
 .green-val{color:var(--green);font-weight:500;}.amber-val{color:var(--amber);}
 .footer{margin-top:32px;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;}
 .footer-note{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--mid);letter-spacing:0.06em;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+
+  /* Header */
+  .hdr{padding:14px 16px;gap:12px;}
+  .hdr svg{width:48px;height:21px;flex-shrink:0;}
+  .hdr-title{font-size:12px;}
+  .hdr-sub{font-size:9px;}
+  .hdr-tag{display:none;}
+
+  /* Layout */
+  .wrap{padding:20px 16px 40px;}
+
+  /* KPI strip: 2 cols on mobile */
+  .kpi-strip{
+    grid-template-columns:repeat(2,1fr);
+    border-radius:4px;
+  }
+  .kpi-cell{
+    padding:12px 14px;
+    border-right:none;
+    border-bottom:1px solid var(--border);
+  }
+  .kpi-cell:nth-child(odd){border-right:1px solid var(--border);}
+  .kpi-cell:last-child{
+    grid-column:1/-1;
+    border-right:none;
+  }
+  .kpi-v{font-size:18px;}
+
+  /* Campaign table: scrollable */
+  .camp-table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin-bottom:32px;
+  }
+  .camp-table{
+    min-width:580px;
+    font-size:11px;
+    margin-bottom:0;
+  }
+  .camp-table th,.camp-table td{padding:7px 8px;}
+  .mb32{margin-bottom:24px;}
+
+  /* Creative grid: 1 col */
+  .cr-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .cr-img{aspect-ratio:4/3;}
+
+  /* Mail grid: 1 col */
+  .mail-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .mail-metrics{grid-template-columns:repeat(2,1fr);}
+
+  /* Ecomm top: 2 cols */
+  .eco-top{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .eco-cell{
+    border-right:none;
+    border-bottom:1px solid var(--border);
+  }
+  .eco-cell:nth-child(odd){border-right:1px solid var(--border);}
+  .eco-cell:last-child{border-bottom:none;}
+
+  /* Eco 2-col: stack */
+  .eco-2col{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  /* Conv grid: keep 2 col but smaller */
+  .conv-grid{gap:6px;}
+  .conv-v{font-size:15px;}
+
+  /* Eco 3-col: stack */
+  .eco-3col{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  /* Footer */
+  .footer{flex-direction:column;gap:4px;}
+}
+
+@media(max-width:480px){
+  .hdr-div{display:none;}
+  .hdr-sub{display:none;}
+  .kpi-v{font-size:16px;}
+  .mail-metrics{grid-template-columns:repeat(2,1fr);gap:6px;}
+  .mm-v{font-size:14px;}
+}
 </style>
 </head>
 <body>
@@ -123,7 +220,7 @@ body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif
   <div class="kpi-cell"><div class="kpi-l">ROAS Negocio</div><div class="kpi-v pos">3,32</div><div class="kpi-s">Ecomm total / Inv. Meta</div></div>
 </div>
 
-<table class="camp-table mb32">
+<div class="camp-table-wrap"><table class="camp-table mb32">
   <thead>
     <tr>
       <th>Campaña</th>
@@ -178,7 +275,7 @@ body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif
       <td class="r"><span class="roas-lo">0,50</span></td><td class="r">1,83%</td><td class="r">3,08€</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <!-- CREATIVES -->
 <div class="sec-label mb24">Top 3 creatividades &nbsp;·&nbsp; 20–26 abr · por compras</div>
