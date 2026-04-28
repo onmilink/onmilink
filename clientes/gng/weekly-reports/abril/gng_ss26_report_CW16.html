@@ -121,6 +121,94 @@ body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif
 /* FOOTER */
 .footer{margin-top:32px;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;}
 .footer-note{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--mid);letter-spacing:0.06em;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+
+  /* Header */
+  .hdr{padding:14px 16px;gap:12px;}
+  .hdr svg{width:48px;height:21px;flex-shrink:0;}
+  .hdr-title{font-size:12px;}
+  .hdr-sub{font-size:9px;}
+  .hdr-tag{display:none;}
+
+  /* Layout */
+  .wrap{padding:20px 16px 40px;}
+
+  /* KPI strip: 2 cols */
+  .kpi-strip{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .kpi-cell{
+    padding:12px 14px;
+    border-right:none;
+    border-bottom:1px solid var(--border);
+  }
+  .kpi-cell:nth-child(odd){border-right:1px solid var(--border);}
+  .kpi-cell:last-child{
+    grid-column:1/-1;
+    border-right:none;
+  }
+  .kpi-v{font-size:18px;}
+
+  /* Campaign table: horizontal scroll */
+  .camp-table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin-bottom:24px;
+  }
+  .camp-table{
+    min-width:580px;
+    font-size:11px;
+    margin-bottom:0;
+  }
+  .camp-table th,.camp-table td{padding:7px 8px;}
+  .mb32{margin-bottom:24px;}
+
+  /* Creative grid: 1 col (overrides inline style too) */
+  .cr-grid{
+    grid-template-columns:1fr !important;
+    gap:12px;
+  }
+  .cr-img{aspect-ratio:4/3;}
+
+  /* Mail grid: 1 col */
+  .mail-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .mail-metrics{grid-template-columns:repeat(2,1fr);}
+
+  /* Ecomm top: 2 cols */
+  .eco-top{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .eco-cell{
+    border-right:none;
+    border-bottom:1px solid var(--border);
+  }
+  .eco-cell:nth-child(odd){border-right:1px solid var(--border);}
+  .eco-cell:last-child{border-bottom:none;}
+
+  /* Eco 2-col and 3-col: stack */
+  .eco-2col{grid-template-columns:1fr;gap:10px;}
+  .eco-3col{grid-template-columns:1fr;gap:10px;}
+
+  /* Conv grid */
+  .conv-grid{gap:6px;}
+  .conv-v{font-size:15px;}
+
+  /* Footer */
+  .footer{flex-direction:column;gap:4px;}
+}
+
+@media(max-width:480px){
+  .hdr-div{display:none;}
+  .hdr-sub{display:none;}
+  .kpi-v{font-size:16px;}
+  .mail-metrics{gap:6px;}
+  .mm-v{font-size:14px;}
+}
 </style>
 </head>
 <body>
@@ -203,7 +291,7 @@ body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif
   </div>
 </div>
 
-<table class="camp-table mb32">
+<div class="camp-table-wrap"><table class="camp-table mb32">
   <thead>
     <tr>
       <th>Campaña</th>
@@ -277,7 +365,7 @@ body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif
       <td class="r">8,51€</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <!-- CREATIVES -->
 <div class="sec-label mb24">Top creatividades &nbsp;·&nbsp; 15–19 abr · por ROAS · fuente Foreplay</div>
