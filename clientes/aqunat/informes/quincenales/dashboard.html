@@ -150,6 +150,44 @@ tbody tr:hover td{background:#f8fcf8!important}
 .platform-dot{color:#76B900;font-size:9px}
 .header-sep{color:rgba(255,255,255,0.3);font-size:12px}
 .header-date{font-size:12px;color:rgba(255,255,255,0.5);font-weight:300}
+
+
+/* Mobile polish */
+@media(max-width:640px){
+  html,body{overflow-x:hidden;}
+  .wrapper{padding:14px 10px 30px!important;max-width:none;}
+  .header{border-radius:12px 12px 0 0;padding:16px 14px!important;display:grid!important;grid-template-columns:1fr;gap:12px;}
+  .header::before,.header::after{display:none;}
+  .header-logo img{height:34px!important;max-width:160px;}
+  .header-center{padding:0!important;min-width:0;}
+  .header-main-title{font-size:15px!important;line-height:1.25;}
+  .header-meta{gap:6px 8px;}
+  .header-sep{display:none;}
+  .header-platform,.header-date{font-size:11px;line-height:1.35;}
+  .badge{justify-self:start;width:max-content;font-size:9px;padding:4px 10px;}
+  .nav-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .nav-tab{min-width:150px;padding:13px 12px;font-size:10px;white-space:nowrap;}
+  .panel{padding:18px 12px!important;border-radius:0 0 12px 12px;}
+  .section-title{font-size:9px;letter-spacing:1.4px;line-height:1.35;margin:22px 0 12px;}
+  .filter-bar,.rtabs,.legend{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;}
+  .filter-btn,.rtab{white-space:nowrap;}
+  .kpis{grid-template-columns:1fr 1fr!important;gap:8px;}
+  .kpi{padding:13px 12px;border-radius:8px;min-width:0;}
+  .kpi-val{font-size:20px;line-height:1.08;word-break:break-word;}
+  .chart-grid,.creat-grid{grid-template-columns:1fr!important;gap:12px;}
+  .chart-card,.creat-card{padding:14px 12px;overflow:hidden;}
+  .chart-box{height:260px!important;min-width:0;}
+  .table-wrap,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
+  table{min-width:560px;}
+  .exec-header,.exec-trends{align-items:flex-start;}
+  .exec-trends{margin-left:0;width:100%;}
+  .footer{line-height:1.4;padding:0 8px;}
+}
+@media(max-width:380px){
+  .wrapper{padding-left:8px!important;padding-right:8px!important;}
+  .kpis{grid-template-columns:1fr!important;}
+  .nav-tab{min-width:132px;}
+}
 </style>
 </head>
 <body>

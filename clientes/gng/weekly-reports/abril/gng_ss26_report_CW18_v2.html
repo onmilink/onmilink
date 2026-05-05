@@ -203,6 +203,44 @@ body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif
   .hdr-div{display:none;}
   .section-block-hdr{flex-wrap:wrap;gap:8px;}
 }
+
+
+/* Mobile polish */
+@media(max-width:640px){
+  html,body{overflow-x:hidden;}
+  .hdr{padding:14px 14px!important;gap:10px!important;flex-wrap:wrap;align-items:flex-start;}
+  .hdr svg{width:48px!important;height:auto!important;}
+  .hdr-div,.hdr-spacer,.hdr-tag{display:none!important;}
+  .hdr-info{min-width:0;}
+  .hdr-title{font-size:12px!important;line-height:1.25;}
+  .hdr-sub{font-size:8.5px!important;line-height:1.35;white-space:normal;}
+  .hdr-onmi{width:100%;margin-left:0!important;justify-content:flex-start;}
+  .hdr-onmi-label{font-size:7px;}
+  .wrap{padding:18px 12px 34px!important;max-width:none;}
+  .sec-label{font-size:8px;letter-spacing:.12em;line-height:1.35;margin-bottom:10px;}
+  .mb32{margin-bottom:22px!important;}.mb24{margin-bottom:18px!important;}.mb16{margin-bottom:14px!important;}.mb12{margin-bottom:10px!important;}
+  .kpi-strip,.kpi-row,.kpi-row-4,.kpi-row-3,.eco-kpi-row,.eco-top{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  .kpi-cell,.eco-kpi-cell,.eco-cell{padding:12px 12px!important;min-width:0;border-bottom:1px solid var(--border);}
+  .kpi-v{font-size:18px!important;line-height:1.05;word-break:break-word;}
+  .kpi-l,.kpi-s{line-height:1.35;}
+  .camp-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
+  .camp-table,.prod-tbl,.rev-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;min-width:620px;}
+  .camp-table th,.camp-table td{white-space:nowrap;}
+  .cr-grid{grid-template-columns:1fr!important;gap:10px!important;}
+  .cr-img{aspect-ratio:4/3;}
+  .mail-grid,.mail-cards,.mail-total-grid,.eco-2col,.eco-3col{grid-template-columns:1fr!important;gap:10px!important;}
+  .mail-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  .eco-box{padding:14px 14px!important;overflow-x:auto;}
+  .section-block-hdr{flex-wrap:wrap;gap:8px;}
+  .footer{flex-direction:column!important;align-items:flex-start!important;gap:10px;font-size:10px;}
+  .footer-note{line-height:1.45;}
+  img{max-width:100%;height:auto;}
+}
+@media(max-width:380px){
+  .kpi-strip,.kpi-row,.kpi-row-4,.kpi-row-3,.eco-kpi-row,.eco-top{grid-template-columns:1fr!important;}
+  .kpi-cell,.eco-kpi-cell,.eco-cell{border-right:none!important;}
+  .kpi-v{font-size:17px!important;}
+}
 </style>
 
 <body>

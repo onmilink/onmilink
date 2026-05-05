@@ -278,6 +278,32 @@ body{
   .report-tags{display:none;}
   .report-week{width:36px;margin-right:12px;}
 }
+
+
+/* Mobile polish */
+@media(max-width:640px){
+  body{overflow-x:hidden;}
+  .hdr{padding:14px 16px;gap:12px;flex-wrap:wrap;align-items:flex-start;}
+  .hdr svg{width:52px!important;height:23px!important;}
+  .hdr-div,.hdr-spacer,.hdr-badge{display:none;}
+  .hdr-title{font-size:13px;line-height:1.25;}
+  .hdr-sub{font-size:8.5px;line-height:1.35;}
+  .wrap{padding:28px 14px 42px;}
+  .hero{margin-bottom:30px;padding-bottom:24px;}
+  .hero-label,.sec-label{font-size:8px;letter-spacing:.12em;line-height:1.35;}
+  .hero-title{font-size:26px;line-height:1.08;margin-bottom:12px;}
+  .hero-desc{font-size:13px;line-height:1.55;}
+  .meta-row{gap:7px;margin-top:16px;}
+  .meta-pill{font-size:7.5px;padding:4px 8px;}
+  .report-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;padding:14px 0;align-items:start;}
+  .report-week{width:auto;margin:1px 0 0;font-size:9px;grid-row:1 / span 3;}
+  .report-date-range{display:block;width:auto;margin:0;font-size:9.5px;color:var(--muted);}
+  .report-title{font-size:14px;line-height:1.35;min-width:0;}
+  .latest-badge{width:max-content;margin:0;font-size:7px;}
+  .report-tags{display:flex;margin:2px 0 0;flex-wrap:wrap;gap:5px;}
+  .report-arrow{display:none;}
+  .footer{margin-top:34px;align-items:flex-start;flex-direction:column;}
+}
 </style>
 </head>
 <body>
