@@ -2,12 +2,115 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Omnilink Reporting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONMI Link — Reportings Paid Media</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --ink:#111;
+      --muted:#77736b;
+      --soft:#f4f2ee;
+      --paper:#fff;
+      --line:#dedad2;
+      --line-dark:#c8c2b7;
+    }
+    body{
+      font-family:'DM Sans',sans-serif;
+      background:var(--soft);
+      color:var(--ink);
+      min-height:100vh;
+      padding:48px 24px;
+      -webkit-font-smoothing:antialiased;
+    }
+    .wrap{max-width:760px;width:100%;margin:0 auto}
+    .label{
+      font-family:'DM Mono',monospace;
+      font-size:9px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:12px;
+    }
+    h1{font-size:clamp(26px,5vw,38px);font-weight:300;margin-bottom:8px}
+    .intro{color:var(--muted);font-size:15px;margin-bottom:34px;max-width:520px}
+    .section{margin-top:30px}
+    .section-title{
+      font-family:'DM Mono',monospace;
+      font-size:10px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:10px;
+    }
+    ul{list-style:none;display:grid;gap:8px}
+    a{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:16px;
+      align-items:center;
+      padding:15px 18px;
+      border:1px solid rgba(0,0,0,.09);
+      border-radius:4px;
+      background:var(--paper);
+      color:var(--ink);
+      text-decoration:none;
+      font-size:14px;
+      transition:background .15s,border-color .15s,transform .15s;
+    }
+    a:hover{background:#ebe8e1;border-color:var(--line-dark);transform:translateY(-1px)}
+    .meta{
+      font-family:'DM Mono',monospace;
+      font-size:9px;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .disabled{
+      color:#9c978d;
+      background:#f8f7f4;
+      cursor:default;
+    }
+    .disabled:hover{background:#f8f7f4;border-color:rgba(0,0,0,.09);transform:none}
+    @media (max-width:560px){
+      body{padding:32px 18px}
+      a{grid-template-columns:1fr}
+      .meta{white-space:normal}
+    }
+  </style>
 </head>
 <body>
+  <main class="wrap">
+    <div class="label">ONMI Link · Paid Media</div>
+    <h1>Reportings Paid Media</h1>
+    <p class="intro">Repositorio estático de informes, dashboards y documentación interna para clientes de ONMI Link.</p>
 
-<h1>📊 Omnilink – Reportings Paid Media</h1>
-<p>Plataforma interna y clientes</p>
+    <section class="section">
+      <div class="section-title">Clientes</div>
+      <ul>
+        <li><a href="clientes/gng/index.html"><span>GNG.la</span><span class="meta">Weekly reports</span></a></li>
+        <li><a href="clientes/aqunat/index.html"><span>Aqunat</span><span class="meta">Dashboard quincenal</span></a></li>
+        <li><a href="clientes/global-corner/index.html"><span>Global Corner</span><span class="meta">Estrategia</span></a></li>
+      </ul>
+    </section>
 
+    <section class="section">
+      <div class="section-title">Accesos directos</div>
+      <ul>
+        <li><a href="clientes/gng/weekly-reports/abril/gng_ss26_report_CW18_v2.html"><span>GNG.la — último informe SS26</span><span class="meta">W18</span></a></li>
+        <li><a href="clientes/aqunat/informes/quincenales/dashboard.html"><span>Aqunat — dashboard Paid Media</span><span class="meta">Actual</span></a></li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Interno</div>
+      <ul>
+        <li><a href="interno/omnilink_guia_claude.html"><span>Guía de uso de Claude</span><span class="meta">ONMI Link</span></a></li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>

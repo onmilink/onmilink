@@ -2,19 +2,36 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Aqunat | Cliente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aqunat — ONMI Link</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',sans-serif;background:#f4f6f5;color:#26372e;min-height:100vh;padding:48px 24px}
+    main{max-width:680px;margin:0 auto}
+    .label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#6b7d72;margin-bottom:12px}
+    h1{font-size:clamp(26px,5vw,36px);font-weight:300;margin-bottom:8px}
+    p{color:#6b7d72;font-size:15px;margin-bottom:32px}
+    ul{list-style:none;display:grid;gap:8px}
+    a{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:15px 18px;border:1px solid #dfe7e2;border-radius:4px;background:#fff;color:#26372e;text-decoration:none;font-size:14px;transition:background .15s,border-color .15s}
+    a:hover{background:#eef6ee;border-color:#c8e6b0}
+    .meta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#6b7d72}
+  </style>
 </head>
 <body>
-  <h1>Cliente Aqunat</h1>
-  <p>Acceso a informes de Paid Media</p>
+  <main>
+    <div class="label">Cliente · Paid Media</div>
+    <h1>Aqunat</h1>
+    <p>Acceso a informes y dashboards de Paid Media.</p>
 
-  <ul>
-  <li>
-    <a href="informes/quincenales/index.html">
-      Informe quincenal Paid Media (actual)
-    </a>
-  </li>
-</ul>
+    <ul>
+      <li>
+        <a href="informes/quincenales/dashboard.html">
+          <span>Informe quincenal Paid Media</span>
+          <span class="meta">Dashboard actual</span>
+        </a>
+      </li>
+    </ul>
+  </main>
 </body>
 </html>
-``
