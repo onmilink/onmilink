@@ -176,17 +176,24 @@ tbody tr:hover td{background:#f8fcf8!important}
   .kpi-val{font-size:20px;line-height:1.08;word-break:break-word;}
   .chart-grid,.creat-grid{grid-template-columns:1fr!important;gap:12px;}
   .chart-card,.creat-card{padding:14px 12px;overflow:hidden;}
-  .chart-box{height:260px!important;min-width:0;}
+  .chart-box{height:auto!important;min-width:0;overflow:hidden;}
+  .chart-wrap{height:180px!important;}
+  .chart-wrap.tall{height:220px!important;}
   .table-wrap,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
   table{min-width:560px;}
   .exec-header,.exec-trends{align-items:flex-start;}
   .exec-trends{margin-left:0;width:100%;}
   .footer{line-height:1.4;padding:0 8px;}
+  .kpi-val{word-break:break-word;overflow-wrap:break-word;}
+  .kpi-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+  .rend-table{min-width:480px;}
+  .rtabs{padding-bottom:4px;}
 }
-@media(max-width:380px){
+@media(max-width:360px){
   .wrapper{padding-left:8px!important;padding-right:8px!important;}
   .kpis{grid-template-columns:1fr!important;}
   .nav-tab{min-width:132px;}
+  .rtab{font-size:10px;padding:5px 12px;}
 }
 </style>
 </head>
@@ -254,7 +261,7 @@ tbody tr:hover td{background:#f8fcf8!important}
         <div class="chart-box full"><div class="chart-title">Cotizaciones por canal (USD)</div><div class="legend" id="r-leg-quot"></div><div class="chart-wrap"><canvas id="r-quot"></canvas></div></div>
       </div>
       <div class="section-title">Tabla de rendimiento por campaña</div>
-      <table class="rend-table" id="r-rend-table"></table>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table class="rend-table" id="r-rend-table"></table></div>
       <hr class="divider" id="r-creat-divider">
       <div id="r-creat-section">
         <div class="section-title">Creatividades del periodo</div>
@@ -272,11 +279,11 @@ tbody tr:hover td{background:#f8fcf8!important}
    ============================================================ */
 const CONFIG = {
 
-  fechaActualizacion: "29 de abril de 2026",
+  fechaActualizacion: "3 de mayo de 2026",
 
   inv: {
     invDiaria: 50,
-    semanas: 10,
+    semanas: 11,
     campanyas: 4,
     nombres: ["Tráfico web", "Leads Landing", "Leads WhatsApp", "TESTING (Conv.)"],
     colores: ["#00693E", "#76B900", "#5B9E6E", "#A8B8AD"],
@@ -291,15 +298,15 @@ const CONFIG = {
       { label: "CW14", rango: "30.03 - 05.04" },
       { label: "CW15", rango: "06.04 - 12.04" },
       { label: "CW16", rango: "13.04 - 19.04" },
-      { label: "CW17", rango: "20.04 - 26.04" }
-      /* NUEVA SEMANA: { label: "CW18", rango: "27.04 - 03.05" } */
+      { label: "CW17", rango: "20.04 - 26.04" },
+      { label: "CW18", rango: "27.04 - 03.05" }
     ],
     /* [Web, Landing, WhatsApp, TESTING] — añadir valor al final de cada array para nueva semana */
     gastoSemanal: [
-      [20.22, 34.64, 34.27, 35.18, 36.61, 33.08, 34.90, 34.93, 34.45, 35.68],
-      [55.55, 201.80, 217.20, 211.32, 215.35, 272.08, 350.36, 280.09, 214.51, 248.24],
-      [81.23, 195.81, 206.73, 212.73, 205.93, 152.21, 37.50, 34.33, 35.42, 35.45],
-      [null, null, null, null, null, null, null, 31.52, 62.42, 31.69]
+      [20.22, 34.64, 34.27, 35.18, 36.61, 33.08, 34.90, 34.93, 34.45, 35.68, 34.54],
+      [55.55, 201.80, 217.20, 211.32, 215.35, 272.08, 350.36, 280.09, 214.51, 248.24, 138.97],
+      [81.23, 195.81, 206.73, 212.73, 205.93, 152.21, 37.50, 34.33, 35.42, 35.45, 33.49],
+      [null, null, null, null, null, null, null, 31.52, 62.42, 31.69, 153.17]
     ]
   },
 
@@ -308,8 +315,8 @@ const CONFIG = {
     { key: "cw1112", label: "CW11–CW12 (9–22 Mar)" },
     { key: "cw1314", label: "CW13–CW14 (23 Mar–5 Abr)" },
     { key: "cw1516", label: "CW15–CW16 (6–19 Abr)" },
-    { key: "cw17",   label: "CW17 (20–26 Abr)" },
-    { key: "total",  label: "Total (18 Feb–26 Abr)" }
+    { key: "cw1718", label: "CW17–CW18 (20 Abr–3 May)" },
+    { key: "total",  label: "Total (18 Feb–3 May)" }
   ],
 
   rendimiento: {
@@ -338,24 +345,24 @@ const CONFIG = {
       /* leadsCanal: TESTING (atribución Meta) se separa del Landing CRM para evitar doble conteo */
       leadsCanal: { WhatsApp:31, Landing:28, Home:3, Testing:9 }
     },
-    cw17: {
-      leads: 13, cotizados: 4, cotizacionesUSD: 14808,
-      fuente: { WhatsApp: 3, Landing: 10, Web: 0 },
-      estado: { "Guanajuato":2,"Sinaloa":1,"Hidalgo":1,"Veracruz":1,"Jalisco":1,"San Luis Potosí":1,"Michoacán":1,"Nuevo León":1,"Oaxaca":1,"Puebla":1,"Estado de México":1 },
-      quot: [{ canal:"WhatsApp", usd:7830 }, { canal:"Landing", usd:6978 }, { canal:"Web", usd:0 }],
-      gastoCanal: { WhatsApp:35.45, Landing:248.24, Home:35.68, Testing:31.69 },
-      leadsCanal: { WhatsApp:3, Landing:10, Home:0, Testing:0 }
+    cw1718: {
+      leads: 18, cotizados: 5, cotizacionesUSD: 22036,
+      fuente: { WhatsApp: 3, Landing: 15, Web: 0 },
+      estado: { "Guanajuato":2,"Jalisco":2,"Veracruz":2,"Puebla":2,"Tlaxcala":2,"Sinaloa":1,"Hidalgo":1,"San Luis Potosí":1,"Michoacán":1,"Nuevo León":1,"Oaxaca":1,"Estado de México":1 },
+      quot: [{ canal:"Landing", usd:14206 }, { canal:"WhatsApp", usd:7830 }],
+      gastoCanal: { WhatsApp:68.94, Landing:387.21, Home:70.22, Testing:184.86 },
+      leadsCanal: { WhatsApp:3, Landing:13, Home:0, Testing:2 }
     },
     total: {
-      leads: 343, cotizados: 75, cotizacionesUSD: 497176,
-      fuente: { WhatsApp: 151, Landing: 176, Web: 16 },
-      estado: { "Puebla":31,"Guanajuato":22,"Michoacán":19,"Jalisco":18,"Sonora":13,"Veracruz":12,"Oaxaca":11,"Querétaro":9,"Nayarit":8,"Estado de México":7,"San Luis Potosí":7,"Hidalgo":7 },
-      quot: [{ canal:"Landing", usd:335322 }, { canal:"Web", usd:84891 }, { canal:"WhatsApp", usd:76962 }],
-      gastoCanal: { WhatsApp:1197.34, Landing:2266.50, Home:333.96, Testing:125.63 },
+      leads: 348, cotizados: 76, cotizacionesUSD: 504404,
+      fuente: { WhatsApp: 151, Landing: 181, Web: 16 },
+      estado: { "Puebla":32,"Guanajuato":22,"Michoacán":19,"Jalisco":19,"Sonora":13,"Veracruz":13,"Oaxaca":11,"Querétaro":9,"Nayarit":8,"Estado de México":7,"San Luis Potosí":7,"Hidalgo":7,"Tlaxcala":2 },
+      quot: [{ canal:"Landing", usd:342550 }, { canal:"Web", usd:84891 }, { canal:"WhatsApp", usd:76962 }],
+      gastoCanal: { WhatsApp:1230.83, Landing:2405.47, Home:368.50, Testing:278.80 },
       /* leadsCanal: TESTING (atribución Meta) se separa del Landing CRM para evitar doble conteo */
-      leadsCanal: { WhatsApp:151, Landing:167, Home:16, Testing:9 }
+      leadsCanal: { WhatsApp:151, Landing:170, Home:16, Testing:11 }
     }
-    /* NUEVO PERIODO: cw18: { leads:..., ... } */
+
   },
 
   /* Creativos destacados por periodo. Periodos sin creativos (o "total") ocultan la sección. */
@@ -368,7 +375,7 @@ const CONFIG = {
       { titulo: "[VID] Testimonio AD01 — \"Que tenía\"", leads: 7, inversion: 96.13, imagen: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgNjQwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InNreSIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjY2ZlM2YwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSIjZTlmMmY3Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJmaWVsZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjN2VhODRhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjNWI4YTNhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzNkNjgyNiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPCEtLSBza3kgLS0+CiAgPHJlY3Qgd2lkdGg9IjM2MCIgaGVpZ2h0PSIzMjAiIGZpbGw9InVybCgjc2t5KSIvPgogIDwhLS0gZmllbGQgLS0+CiAgPHJlY3QgeT0iMzIwIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjMyMCIgZmlsbD0idXJsKCNmaWVsZCkiLz4KICA8IS0tIGZpZWxkIHRleHR1cmUgLS0+CiAgPGcgZmlsbD0iIzNkNjgyNiIgb3BhY2l0eT0iMC4zNSI+CiAgICA8cmVjdCB4PSIwIiAgIHk9IjM0NSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiAgIHk9IjM2NSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiAgIHk9IjM5NSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiAgIHk9IjQzMCIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiAgIHk9IjQ3NSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiAgIHk9IjUyNSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiAgIHk9IjU4NSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgPC9nPgogIDwhLS0gYXF1bmF0IGxvZ28gdG9wIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLDI4KSI+CiAgICA8Y2lyY2xlIGN4PSIxNCIgY3k9IjE0IiByPSIxNCIgZmlsbD0iIzdlYzg1MCIvPgogICAgPHRleHQgeD0iMTQiIHk9IjE5IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UTwvdGV4dD4KICAgIDx0ZXh0IHg9IjM2IiB5PSIxNCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyMjIiPkFxdW5hdDwvdGV4dD4KICAgIDx0ZXh0IHg9IjM2IiB5PSIyOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM2NjYiPkFudW5jaW88L3RleHQ+CiAgPC9nPgogIDwhLS0gYXF1bmF0IHdhdGVybWFyayBjZW50ZXIgLS0+CiAgPHRleHQgeD0iMTgwIiB5PSIxODAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjMyIiBmb250LXdlaWdodD0iMzAwIiBsZXR0ZXItc3BhY2luZz0iMiIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC44NSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+YXF1bmF0PC90ZXh0PgogIDwhLS0gbWFuIHNpbGhvdWV0dGUgLS0+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTgwLDMzMCkiPgogICAgPCEtLSBoZWFkIC0tPgogICAgPGVsbGlwc2UgY3g9IjAiIGN5PSItMzAiIHJ4PSIyMiIgcnk9IjI2IiBmaWxsPSIjM2EyODE4Ii8+CiAgICA8IS0tIG5lY2sgLS0+CiAgICA8cmVjdCB4PSItOCIgeT0iLTgiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxMCIgZmlsbD0iIzNhMjgxOCIvPgogICAgPCEtLSBzaGlydCBib2R5IChwbGFpZCBsb29rKSAtLT4KICAgIDxwYXRoIGQ9Ik0gLTUwIDAgUSAtNTUgLTUgLTQ1IC0xMCBMIC0yMiAtMiBMIDAgLTQgTCAyMiAtMiBMIDQ1IC0xMCBRIDU1IC01IDUwIDAgTCA1NSA3MCBMIDQ1IDEzMCBMIC00NSAxMzAgTCAtNTUgNzAgWiIgZmlsbD0iIzViNmY4YSIvPgogICAgPCEtLSBwbGFpZCBsaW5lcyAtLT4KICAgIDxnIHN0cm9rZT0iIzNkNGE1ZSIgc3Ryb2tlLXdpZHRoPSIxLjIiIG9wYWNpdHk9IjAuNyIgZmlsbD0ibm9uZSI+CiAgICAgIDxsaW5lIHgxPSItNTAiIHkxPSIyMCIgeDI9IjUwIiB5Mj0iMjAiLz4KICAgICAgPGxpbmUgeDE9Ii01MCIgeTE9IjUwIiB4Mj0iNTAiIHkyPSI1MCIvPgogICAgICA8bGluZSB4MT0iLTUwIiB5MT0iODAiIHgyPSI1MCIgeTI9IjgwIi8+CiAgICAgIDxsaW5lIHgxPSItNTAiIHkxPSIxMTAiIHgyPSI1MCIgeTI9IjExMCIvPgogICAgICA8bGluZSB4MT0iLTMwIiB5MT0iLTUiIHgyPSItMzAiIHkyPSIxMjUiLz4KICAgICAgPGxpbmUgeDE9IjAiICAgeTE9Ii01IiB4Mj0iMCIgICB5Mj0iMTI1Ii8+CiAgICAgIDxsaW5lIHgxPSIzMCIgIHkxPSItNSIgeDI9IjMwIiAgeTI9IjEyNSIvPgogICAgPC9nPgogICAgPCEtLSBhcm1zIC0tPgogICAgPHBhdGggZD0iTSAtNTAgMCBMIC02NSA2MCBMIC01NSAxMTAgTCAtNDUgMTEwIEwgLTQ1IDYwIFoiIGZpbGw9IiM1YjZmOGEiLz4KICAgIDxwYXRoIGQ9Ik0gIDUwIDAgTCAgNjUgNjAgTCAgNTUgMTEwIEwgIDQ1IDExMCBMICA0NSA2MCBaIiBmaWxsPSIjNWI2ZjhhIi8+CiAgICA8IS0tIGJlbHQgLS0+CiAgICA8cmVjdCB4PSItNDYiIHk9IjEyOCIgd2lkdGg9IjkyIiBoZWlnaHQ9IjYiIGZpbGw9IiMyYTFhMGMiLz4KICAgIDwhLS0gcGFudHMgLS0+CiAgICA8cGF0aCBkPSJNIC00NSAxMzQgTCAtNTAgMjAwIEwgLTEwIDIwMCBMIC01IDEzNCBaIiBmaWxsPSIjMzY1MDdhIi8+CiAgICA8cGF0aCBkPSJNICA0NSAxMzQgTCAgNTAgMjAwIEwgIDEwIDIwMCBMICAgNSAxMzQgWiIgZmlsbD0iIzM2NTA3YSIvPgogIDwvZz4KICA8IS0tIHN1YnRpdGxlIGJhciAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLDU2MCkiPgogICAgPHJlY3QgeD0iNjAiIHk9IjAiIHdpZHRoPSIyNDAiIGhlaWdodD0iNDYiIGZpbGw9IiM3ZWM4NTAiLz4KICAgIDx0ZXh0IHg9IjE4MCIgeT0iMzIiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjI2IiBmb250LXdlaWdodD0iODAwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5xdWUgdGVuw61hPC90ZXh0PgogIDwvZz4KPC9zdmc+Cg==" },
       { titulo: "[VID] Testimonio AD01 — \"Agricultores\"", leads: 7, inversion: 96.13, imagen: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgNjQwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImR1c3Rza3kiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E4YjNhOCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjZmI5OGUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Imdyb3VuZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjOWM3YTRhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzZlNGYyYyIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZHVzdHNreSkiLz4KICA8cmVjdCB5PSIyODAiIHdpZHRoPSIzNjAiIGhlaWdodD0iMzYwIiBmaWxsPSJ1cmwoI2dyb3VuZCkiLz4KICA8IS0tIGRyeSBzdGFsa3MgLS0+CiAgPGcgc3Ryb2tlPSIjNWE0MjIwIiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9IjAuODUiPgogICAgPGxpbmUgeDE9IjIwIiAgeTE9IjI0MCIgeDI9IjIyIiAgeTI9IjI5MCIvPgogICAgPGxpbmUgeDE9IjUwIiAgeTE9IjIyMCIgeDI9IjU1IiAgeTI9IjI5MCIvPgogICAgPGxpbmUgeDE9IjkwIiAgeTE9IjIzMCIgeDI9IjkyIiAgeTI9IjI5MCIvPgogICAgPGxpbmUgeDE9IjEzMCIgeTE9IjIxNSIgeDI9IjEzNSIgeTI9IjI5MCIvPgogICAgPGxpbmUgeDE9IjE4MCIgeTE9IjIyNSIgeDI9IjE3OCIgeTI9IjI5MCIvPgogICAgPGxpbmUgeDE9IjIyMCIgeTE9IjIxMCIgeDI9IjIyNSIgeTI9IjI5MCIvPgogICAgPGxpbmUgeDE9IjI2MCIgeTE9IjIyMCIgeDI9IjI1OCIgeTI9IjI5MCIvPgogICAgPGxpbmUgeDE9IjMwMCIgeTE9IjIzMCIgeDI9IjMwNSIgeTI9IjI5MCIvPgogICAgPGxpbmUgeDE9IjMzNSIgeTE9IjIyNSIgeDI9IjMzMCIgeTI9IjI5MCIvPgogIDwvZz4KICA8IS0tIGNyYWNrcyAtLT4KICA8ZyBzdHJva2U9IiMzZDI4MTQiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjciPgogICAgPHBhdGggZD0iTSAwIDQyMCBRIDgwIDQxNSAxNTAgNDMwIFQgMzYwIDQyNSIvPgogICAgPHBhdGggZD0iTSAwIDQ4MCBRIDEwMCA0NzUgMjAwIDQ5MCBUIDM2MCA0ODUiLz4KICAgIDxwYXRoIGQ9Ik0gNjAgNDAwIEwgOTAgNDYwIEwgODAgNTAwIi8+CiAgICA8cGF0aCBkPSJNIDIyMCA0MTAgTCAyNTAgNDcwIEwgMjQwIDUyMCIvPgogICAgPHBhdGggZD0iTSAwIDU2MCBRIDEyMCA1NTUgMjIwIDU3MCBUIDM2MCA1NjUiLz4KICA8L2c+CiAgPCEtLSBwaXBlIC0tPgogIDxnPgogICAgPGVsbGlwc2UgY3g9IjQwIiBjeT0iNDMwIiByeD0iMjIiIHJ5PSIzOCIgZmlsbD0iIzFhMWExYSIvPgogICAgPGVsbGlwc2UgY3g9IjQwIiBjeT0iNDMwIiByeD0iMTQiIHJ5PSIyNCIgZmlsbD0iIzAwMCIvPgogICAgPHBhdGggZD0iTSA0MCA0MDggTCAzNjAgNDcwIEwgMzYwIDUxMCBMIDQwIDQ3MCBaIiBmaWxsPSIjMmEyYTJhIi8+CiAgICA8cGF0aCBkPSJNIDQwIDQwOCBMIDM2MCA0NzAgTCAzNjAgNDcwIEwgNDAgNDEwIFoiIGZpbGw9IiMzYTNhM2EiLz4KICA8L2c+CiAgPCEtLSBhcXVuYXQgbG9nbyAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCwyOCkiPgogICAgPGNpcmNsZSBjeD0iMTQiIGN5PSIxNCIgcj0iMTQiIGZpbGw9IiM3ZWM4NTAiLz4KICAgIDx0ZXh0IHg9IjE0IiB5PSIxOSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlE8L3RleHQ+CiAgICA8dGV4dCB4PSIzNiIgeT0iMTQiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMjIyIj5BcXVuYXQ8L3RleHQ+CiAgICA8dGV4dCB4PSIzNiIgeT0iMjgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNTAwIiBmaWxsPSIjNjY2Ij5BbnVuY2lvPC90ZXh0PgogIDwvZz4KICA8IS0tIGFxdW5hdCB3YXRlcm1hcmsgLS0+CiAgPHRleHQgeD0iMTgwIiB5PSIxNzAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjMyIiBmb250LXdlaWdodD0iMzAwIiBsZXR0ZXItc3BhY2luZz0iMiIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC44NSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+YXF1bmF0PC90ZXh0PgogIDwhLS0gc3VidGl0bGUgLS0+CiAgPHRleHQgeD0iMTgwIiB5PSI2MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjMyIiBmb250LXdlaWdodD0iODAwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXN0eWxlPSJpdGFsaWMiPmFncmljdWx0b3JlczwvdGV4dD4KPC9zdmc+Cg==" }
     ],
-    cw17: [
+    cw1718: [
       { titulo: "[VID] Testimonio AD01 — \"La producción\"", leads: 7, inversion: 96.13, imagen: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgNjQwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InNreTMiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NmZTNmMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iI2U5ZjJmNyIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZmllbGQzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZWE4NGEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM1YjhhM2EiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjM2Q2ODI2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMzYwIiBoZWlnaHQ9IjMyMCIgZmlsbD0idXJsKCNza3kzKSIvPgogIDxyZWN0IHk9IjMyMCIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIzMjAiIGZpbGw9InVybCgjZmllbGQzKSIvPgogIDxnIGZpbGw9IiMzZDY4MjYiIG9wYWNpdHk9IjAuMzUiPgogICAgPHJlY3QgeD0iMCIgeT0iMzQ1IiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjIiLz4KICAgIDxyZWN0IHg9IjAiIHk9IjM2NSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiB5PSIzOTUiIHdpZHRoPSIzNjAiIGhlaWdodD0iMiIvPgogICAgPHJlY3QgeD0iMCIgeT0iNDMwIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjIiLz4KICAgIDxyZWN0IHg9IjAiIHk9IjQ3NSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiB5PSI1MjUiIHdpZHRoPSIzNjAiIGhlaWdodD0iMiIvPgogICAgPHJlY3QgeD0iMCIgeT0iNTg1IiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjIiLz4KICA8L2c+CiAgPHRleHQgeD0iMTgwIiB5PSIxODAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjMyIiBmb250LXdlaWdodD0iMzAwIiBsZXR0ZXItc3BhY2luZz0iMiIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC45IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5hcXVuYXQ8L3RleHQ+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTgwLDMzMCkiPgogICAgPGVsbGlwc2UgY3g9IjAiIGN5PSItMzAiIHJ4PSIyMiIgcnk9IjI2IiBmaWxsPSIjM2EyODE4Ii8+CiAgICA8cmVjdCB4PSItOCIgeT0iLTgiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxMCIgZmlsbD0iIzNhMjgxOCIvPgogICAgPHBhdGggZD0iTSAtNTAgMCBRIC01NSAtNSAtNDUgLTEwIEwgLTIyIC0yIEwgMCAtNCBMIDIyIC0yIEwgNDUgLTEwIFEgNTUgLTUgNTAgMCBMIDU1IDcwIEwgNDUgMTMwIEwgLTQ1IDEzMCBMIC01NSA3MCBaIiBmaWxsPSIjNWI2ZjhhIi8+CiAgICA8ZyBzdHJva2U9IiMzZDRhNWUiIHN0cm9rZS13aWR0aD0iMS4yIiBvcGFjaXR5PSIwLjciIGZpbGw9Im5vbmUiPgogICAgICA8bGluZSB4MT0iLTUwIiB5MT0iMjAiIHgyPSI1MCIgeTI9IjIwIi8+CiAgICAgIDxsaW5lIHgxPSItNTAiIHkxPSI1MCIgeDI9IjUwIiB5Mj0iNTAiLz4KICAgICAgPGxpbmUgeDE9Ii01MCIgeTE9IjgwIiB4Mj0iNTAiIHkyPSI4MCIvPgogICAgICA8bGluZSB4MT0iLTUwIiB5MT0iMTEwIiB4Mj0iNTAiIHkyPSIxMTAiLz4KICAgICAgPGxpbmUgeDE9Ii0zMCIgeTE9Ii01IiB4Mj0iLTMwIiB5Mj0iMTI1Ii8+CiAgICAgIDxsaW5lIHgxPSIwIiB5MT0iLTUiIHgyPSIwIiB5Mj0iMTI1Ii8+CiAgICAgIDxsaW5lIHgxPSIzMCIgeTE9Ii01IiB4Mj0iMzAiIHkyPSIxMjUiLz4KICAgIDwvZz4KICAgIDxwYXRoIGQ9Ik0gLTUwIDAgTCAtNjUgNjAgTCAtNTUgMTEwIEwgLTQ1IDExMCBMIC00NSA2MCBaIiBmaWxsPSIjNWI2ZjhhIi8+CiAgICA8cGF0aCBkPSJNICA1MCAwIEwgIDY1IDYwIEwgIDU1IDExMCBMICA0NSAxMTAgTCAgNDUgNjAgWiIgZmlsbD0iIzViNmY4YSIvPgogICAgPHJlY3QgeD0iLTQ2IiB5PSIxMjgiIHdpZHRoPSI5MiIgaGVpZ2h0PSI2IiBmaWxsPSIjMmExYTBjIi8+CiAgICA8cGF0aCBkPSJNIC00NSAxMzQgTCAtNTAgMjAwIEwgLTEwIDIwMCBMIC01IDEzNCBaIiBmaWxsPSIjMzY1MDdhIi8+CiAgICA8cGF0aCBkPSJNICA0NSAxMzQgTCAgNTAgMjAwIEwgIDEwIDIwMCBMICAgNSAxMzQgWiIgZmlsbD0iIzM2NTA3YSIvPgogIDwvZz4KICA8dGV4dCB4PSIxODAiIHk9IjYwMCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzIiIGZvbnQtd2VpZ2h0PSI4MDAiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TGEgcHJvZHVjY2nDs248L3RleHQ+Cjwvc3ZnPgo=" }
     ]
   }
@@ -608,11 +615,13 @@ renderRendimiento = function() {
   const currCPL = currL>0 ? currG/currL : 0;
   const prevCPL = prevL>0 ? prevG/prevL : 0;
   
+  const currTicket = currCot > 0 ? currUSD / currCot : 0;
+  const prevTicket = prevCot > 0 ? prevUSD / prevCot : 0;
   const pairs = [
     [currLeads, prevLeads, false],
     [currCot, prevCot, false],
     [currUSD, prevUSD, false],
-    [currCPL, prevCPL, true]  // lower CPL = better
+    [currTicket, prevTicket, false]  // ticket medio — higher is better
   ];
   document.querySelectorAll('#r-kpi-crm .kpi').forEach((kpi, i) => {
     if (i >= pairs.length) return;
