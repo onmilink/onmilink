@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ganga Academy – Curso Profesional de Tatuaje</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    /* ---- Aro (display) ---- */
+    @font-face {
+      font-family: 'Aro';
+      src: url('06 - TIPOGRAFÍAS/ARO/Web/Aro/Aro-Condensed.woff2') format('woff2'),
+           url('06 - TIPOGRAFÍAS/ARO/Web/Aro/Aro-Condensed.woff') format('woff');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Aro';
+      src: url('06 - TIPOGRAFÍAS/ARO/Web/Aro/Aro-CondensedItalic.woff2') format('woff2'),
+           url('06 - TIPOGRAFÍAS/ARO/Web/Aro/Aro-CondensedItalic.woff') format('woff');
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+    /* ---- NB International Pro (body / UI) ---- */
+    @font-face {
+      font-family: 'NBInt';
+      src: url('06 - TIPOGRAFÍAS/NB-International-Pro-CG-Edition-OTF/NBInternationalProCG-Light.otf') format('opentype');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'NBInt';
+      src: url('06 - TIPOGRAFÍAS/NB-International-Pro-CG-Edition-OTF/NBInternationalProCG-Regular.otf') format('opentype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'NBInt';
+      src: url('06 - TIPOGRAFÍAS/NB-International-Pro-CG-Edition-OTF/NBInternationalProCG-Medium.otf') format('opentype');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'NBInt';
+      src: url('06 - TIPOGRAFÍAS/NB-International-Pro-CG-Edition-OTF/NBInternationalProCG-Bold.otf') format('opentype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:   '#181818',
+            chalk: '#F0F0F0',
+            ash:   '#B6B6B6',
+          },
+          fontFamily: {
+            display: ['Aro', 'sans-serif'],
+            body:    ['NBInt', 'sans-serif'],
+          },
+          letterSpacing: {
+            display: '0.01em',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    [x-cloak] { display: none !important; }
+    body { font-family: 'NBInt', sans-serif; background: #181818; color: #F0F0F0; }
+
+    /* ---- Buttons ---- */
+    .btn-chalk {
+      background: #F0F0F0; color: #181818;
+      font-weight: 700; letter-spacing: 0.04em;
+      transition: background 0.15s;
+    }
+    .btn-chalk:hover { background: #fff; }
+    .btn-ink {
+      background: #181818; color: #F0F0F0;
+      font-weight: 700; letter-spacing: 0.04em;
+      border: 1.5px solid #181818;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-ink:hover { background: #2a2a2a; }
+
+    /* ---- Images ---- */
+    .img-cover { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+
+    /* ---- Display font util ---- */
+    .font-display { font-family: 'Aro', sans-serif; letter-spacing: 0.01em; }
+
+    /* ---- Divider ---- */
+    .rule { border-color: #2e2e2e; }
+    .rule-chalk { border-color: #d8d8d8; }
+
+    /* ---- Subtle card ---- */
+    .card-dark { background: #1f1f1f; border: 1px solid #2e2e2e; }
+    .card-chalk { background: #fff; border: 1px solid #e0e0e0; }
+
+    /* ---- Photo grain overlay ---- */
+    .photo-wrap { position:relative; overflow:hidden; }
+    .photo-wrap::after {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(24,24,24,0.45) 100%);
+      pointer-events:none;
+    }
+
+    /* ---- FAQ ---- */
+    .faq-answer { overflow:hidden; transition: max-height 0.3s ease; }
+
+    /* ---- Testimonios carousel ---- */
+    .testimonios-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 12px;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .testimonios-track::-webkit-scrollbar { display: none; }
+    .testimonio-card {
+      flex: 0 0 78vw;
+      scroll-snap-align: start;
+    }
+    @media (min-width: 768px) {
+      .testimonios-track {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: visible;
+        gap: 16px;
+      }
+      .testimonio-card {
+        flex: unset;
+      }
+    }
+
+    /* ---- Hero title — mobile (full width) vs desktop (half col) ---- */
+    .hero-title { font-size: clamp(2.2rem, 13vw, 3.5rem); }
+    @media (min-width: 768px) {
+      .hero-title { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================
+     URGENCY BAR
+================================================================ -->
+<div class="bg-chalk text-ink text-xs font-semibold text-center py-2.5 px-4 tracking-widest uppercase">
+  Solo 17 plazas por convocatoria &nbsp;·&nbsp; Quedan <strong>4 plazas para junio</strong>
+</div>
+
+<!-- ================================================================
+     NAVBAR
+================================================================ -->
+<nav class="bg-chalk border-b border-gray-200 px-6 md:px-10 py-4 flex justify-between items-center sticky top-0 z-50">
+  <img src="CONTENIDO%20WEB/GNG_ACADEMY_CENTER.png" alt="Ganga Academy" class="h-8 md:h-9" style="mix-blend-mode: multiply;" />
+  <div class="hidden md:flex gap-8 text-sm font-medium text-ink/70">
+    <a href="#programa"   class="hover:text-ink transition">Programa</a>
+<a href="#requisitos" class="hover:text-ink transition">Requisitos</a>
+    <a href="#faq"        class="hover:text-ink transition">FAQ</a>
+  </div>
+  <a href="#formulario">
+    <button class="btn-ink text-xs px-5 py-2.5 rounded-sm">Solicitar plaza →</button>
+  </a>
+</nav>
+
+<!-- ================================================================
+     HERO — SPLIT
+================================================================ -->
+<section class="bg-ink relative overflow-hidden" id="programa">
+  <!-- Efecto tinta — fondo oscuro -->
+  <img src="CONTENIDO%20WEB/efectos/BLACK%20BG/GNG_ColorBlur_bk_3.png" aria-hidden="true"
+       class="absolute pointer-events-none select-none"
+       style="bottom:-8%;left:-6%;width:65%;opacity:0.28;mix-blend-mode:screen;z-index:0;" />
+  <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[88vh] relative z-10">
+
+    <!-- Left: texto -->
+    <div class="flex flex-col justify-center px-8 md:px-14 py-16 md:py-24">
+      <div class="text-ash text-xs tracking-widest uppercase mb-6 font-medium">
+        Presencial en Murcia · Título UCAM
+      </div>
+
+      <h1 class="font-display text-chalk leading-none mb-6 hero-title">
+        CONVIÉRTETE EN<br/>
+        TATUADOR<br/>
+        PROFESIONAL<br/>
+        EN 2 SEMANAS
+      </h1>
+
+      <p class="text-ash leading-relaxed mb-10 max-w-md text-sm md:text-base">
+        Formación 100% presencial con titulación universitaria oficial. Tatúas desde el primer día con supervisión directa de un profesional en activo. Sin experiencia previa necesaria.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 mb-10">
+        <a href="#formulario">
+          <button class="btn-chalk px-8 py-3.5 rounded-sm text-sm w-full sm:w-auto">
+            Quiero mi plaza →
+          </button>
+        </a>
+      </div>
+
+      <!-- Métricas inline -->
+      <div class="flex gap-8 pt-8 border-t border-white/10">
+        <div>
+          <div class="font-display text-chalk text-3xl">+1000</div>
+          <div class="text-ash text-xs mt-0.5">alumnos formados</div>
+        </div>
+        <div>
+          <div class="font-display text-chalk text-3xl">80H</div>
+          <div class="text-ash text-xs mt-0.5">formación presencial</div>
+        </div>
+        <div>
+          <div class="font-display text-chalk text-3xl">5</div>
+          <div class="text-ash text-xs mt-0.5">alumnos por cabina</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: foto -->
+    <div class="photo-wrap relative h-[70vw] md:h-auto md:min-h-full">
+      <img
+        src="CONTENIDO%20WEB/drive-download-20260506T132801Z-3-001/KV-GNG-04107.jpg"
+        alt="Alumna tatuando en cabina"
+        class="img-cover"
+      />
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     CREDENCIALES / LOGOS
+================================================================ -->
+<section class="bg-[#111111] border-y border-white/5 px-6 py-8">
+  <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-10 md:gap-16 text-ash text-xs tracking-widest uppercase">
+    <div class="text-center">
+      <div class="font-display text-chalk text-xl mb-1">UCAM</div>
+      <div>Univ. Católica de Murcia</div>
+    </div>
+    <div class="h-8 w-px bg-white/10 hidden md:block"></div>
+    <div class="text-center">
+      <div class="font-display text-chalk text-xl mb-1">UE</div>
+      <div>Normativa higiénico-sanitaria</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     PROBLEMA — LIGHT SECTION
+================================================================ -->
+<section class="bg-chalk px-6 py-20 md:py-28">
+  <div class="max-w-3xl mx-auto">
+    <p class="text-ink/40 text-xs tracking-widest uppercase mb-6 font-semibold">El problema</p>
+    <h2 class="font-display text-ink leading-tight mb-6" style="font-size: clamp(2.5rem, 5vw, 4rem);">
+      LLEVAS MESES VIENDO<br/>TUTORIALES Y SIGUES<br/>SIN SABER TATUAR.
+    </h2>
+    <p class="text-ink/60 leading-relaxed text-base md:text-lg max-w-xl">
+      El problema no es tu dedicación. Es que los tutoriales no te corrigen en tiempo real, no simulan el peso de una sesión de verdad ni te obligan a tomar decisiones bajo presión. <strong class="text-ink">La única forma de aprender es tatuando.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ================================================================
+     TESTIMONIOS — DARK, CAROUSEL MOBILE / 3 COLS DESKTOP
+================================================================ -->
+<section class="bg-ink px-6 py-16 md:py-24">
+  <div class="max-w-6xl mx-auto">
+    <p class="text-ash text-xs tracking-widest uppercase mb-3 font-semibold">003 — Testimonios</p>
+    <h2 class="font-display text-chalk leading-none mb-12" style="font-size: clamp(2rem, 4vw, 3.2rem);">
+      LO QUE DICEN<br/>NUESTROS ALUMNOS
+    </h2>
+
+    <!-- Track: scroll horizontal en mobile, grid en desktop -->
+    <div class="testimonios-track">
+
+      <div class="testimonio-card">
+        <div class="relative bg-[#111] overflow-hidden flex items-center justify-center" style="aspect-ratio: 9/16;">
+          <div class="flex flex-col items-center gap-3 text-ash/40">
+            <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+            <span class="text-xs tracking-widest uppercase">Vídeo testimonio</span>
+          </div>
+        </div>
+        <div class="mt-3">
+          <p class="text-chalk text-xs font-semibold tracking-wide">Laura Martínez</p>
+          <p class="text-ash text-xs mt-0.5">Promoción enero 2026</p>
+        </div>
+      </div>
+
+      <div class="testimonio-card">
+        <div class="relative bg-[#111] overflow-hidden flex items-center justify-center" style="aspect-ratio: 9/16;">
+          <div class="flex flex-col items-center gap-3 text-ash/40">
+            <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+            <span class="text-xs tracking-widest uppercase">Vídeo testimonio</span>
+          </div>
+        </div>
+        <div class="mt-3">
+          <p class="text-chalk text-xs font-semibold tracking-wide">Testimonio</p>
+          <p class="text-ash text-xs mt-0.5">Abril 2026</p>
+        </div>
+      </div>
+
+      <div class="testimonio-card">
+        <div class="relative bg-[#111] overflow-hidden flex items-center justify-center" style="aspect-ratio: 9/16;">
+          <div class="flex flex-col items-center gap-3 text-ash/40">
+            <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+            <span class="text-xs tracking-widest uppercase">Vídeo testimonio</span>
+          </div>
+        </div>
+        <div class="mt-3">
+          <p class="text-chalk text-xs font-semibold tracking-wide">9 meses después</p>
+          <p class="text-ash text-xs mt-0.5">Seguimiento post-curso</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     QUÉ INCLUYE — LIGHT, 5 CARDS
+================================================================ -->
+<section class="bg-chalk px-6 py-16 md:py-24 relative overflow-hidden">
+  <!-- Efecto tinta — fondo claro -->
+  <img src="CONTENIDO%20WEB/efectos/WHITE%20BG/GNG_ColorBlur_wh_4.png" aria-hidden="true"
+       class="absolute pointer-events-none select-none"
+       style="top:-15%;right:-8%;width:72%;opacity:0.5;mix-blend-mode:multiply;z-index:0;" />
+  <div class="max-w-6xl mx-auto relative z-10">
+    <p class="text-ink/40 text-xs tracking-widest uppercase mb-10 font-semibold">003 — Qué incluye</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-ink/10 border border-ink/10">
+
+      <!-- 01 -->
+      <div class="p-7 md:p-8 flex flex-col gap-6">
+        <div class="flex items-start justify-between">
+          <span class="text-ink/30 text-xs font-semibold tracking-widest">01</span>
+        </div>
+        <div class="w-11 h-11 rounded-full border border-ink/20 flex items-center justify-center text-ink flex-shrink-0">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M12 3v18M3 12h18M6.34 6.34l11.32 11.32M17.66 6.34L6.34 17.66"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-ink text-sm mb-2 leading-snug">Título Higiénico Sanitario</h3>
+          <p class="text-ink/50 text-xs leading-relaxed">Título obligatorio para poder trabajar profesionalmente en cualquier estudio de tatuaje de Europa.</p>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="p-7 md:p-8 flex flex-col gap-6">
+        <div class="flex items-start justify-between">
+          <span class="text-ink/30 text-xs font-semibold tracking-widest">02</span>
+        </div>
+        <div class="w-11 h-11 rounded-full border border-ink/20 flex items-center justify-center text-ink flex-shrink-0">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="2.5"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="10"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-ink text-sm mb-2 leading-snug">Título Experto UCAM</h3>
+          <p class="text-ink/50 text-xs leading-relaxed">Título expedido por la UCAM (Universidad Católica San Antonio de Murcia) que te acredita como Experto Universitario en Diseño y Tatuaje.</p>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="p-7 md:p-8 flex flex-col gap-6">
+        <div class="flex items-start justify-between">
+          <span class="text-ink/30 text-xs font-semibold tracking-widest">03</span>
+        </div>
+        <div class="w-11 h-11 rounded-full border border-ink/20 flex items-center justify-center text-ink flex-shrink-0">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+            <path d="M12 2L22 12L12 22L2 12Z"/>
+            <path d="M12 7L17 12L12 17L7 12Z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-ink text-sm mb-2 leading-snug">Maletín Ganga Academy</h3>
+          <p class="text-ink/50 text-xs leading-relaxed">Maletín completo con agujas, tinta, cups y máquina para tatuar modelo EZ Evotech Wireless para empezar desde el primer día.</p>
+        </div>
+      </div>
+
+
+      <!-- 05 -->
+      <div class="p-7 md:p-8 flex flex-col gap-6">
+        <div class="flex items-start justify-between">
+          <span class="text-ink/30 text-xs font-semibold tracking-widest">05</span>
+        </div>
+        <div class="w-11 h-11 rounded-full border border-ink/20 flex items-center justify-center text-ink flex-shrink-0">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M13 2L4 14h7l-1 8L20 10h-7z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-ink text-sm mb-2 leading-snug">GNG / Nike Merch</h3>
+          <p class="text-ink/50 text-xs leading-relaxed">Una camiseta exclusiva de la marca GNG en colaboración con NIKE.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     BENEFICIOS — DARK, 3 COLS
+================================================================ -->
+<section class="bg-ink px-6 py-20 md:py-28">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-ash text-xs tracking-widest uppercase mb-6 font-semibold">Cómo lo hacemos</p>
+    <h2 class="font-display text-chalk leading-none mb-16" style="font-size: clamp(2.5rem, 4vw, 3.5rem);">
+      APRENDES TATUANDO.<br/>DESDE EL DÍA 1.
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
+
+      <div class="card-dark p-8 md:p-10 bg-ink">
+        <div class="font-display text-chalk text-5xl mb-4">01</div>
+        <h3 class="font-bold text-chalk mb-3 text-base">80 horas presenciales</h3>
+        <p class="text-ash text-sm leading-relaxed">
+          De lunes a viernes en un estudio profesional real. Nada de simuladores ni prácticas en papel.
+        </p>
+      </div>
+
+      <div class="card-dark p-8 md:p-10 bg-[#1a1a1a]">
+        <div class="font-display text-chalk text-5xl mb-4">02</div>
+        <h3 class="font-bold text-chalk mb-3 text-base">Máximo 5 alumnos por cabina</h3>
+        <p class="text-ash text-sm leading-relaxed">
+          Atención directa e individualizada. El instructor te corrige a ti, no a un grupo de 20.
+        </p>
+      </div>
+
+      <div class="card-dark p-8 md:p-10 bg-ink">
+        <div class="font-display text-chalk text-5xl mb-4">03</div>
+        <h3 class="font-bold text-chalk mb-3 text-base">Supervisión en cada sesión</h3>
+        <p class="text-ash text-sm leading-relaxed">
+          Cada error se corrige en el momento. Sin esperar. Sin seguir mal durante días.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Foto ambiente estudio -->
+    <div class="mt-px photo-wrap h-52 md:h-96">
+      <img
+        src="CONTENIDO%20WEB/drive-download-20260506T132801Z-3-001/KV-GNG-00050.jpg"
+        alt="Alumnos en el estudio de Ganga Academy"
+        class="img-cover"
+        style="object-position: center 35%;"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     CHECKLIST — LIGHT SECTION
+================================================================ -->
+<section class="bg-chalk px-6 py-20 md:py-28">
+  <div class="max-w-3xl mx-auto">
+    <p class="text-ink/40 text-xs tracking-widest uppercase mb-6 font-semibold">Todo incluido</p>
+    <h2 class="font-display text-ink leading-none mb-12" style="font-size: clamp(2.5rem, 4vw, 3.5rem);">
+      TODO LO QUE NECESITAS<br/>PARA EMPEZAR A TATUAR
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4 mb-12">
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">80h de formación presencial en estudio real</span>
+      </div>
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">Kit profesional completo</span>
+      </div>
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">Máquina profesional incluida</span>
+      </div>
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">Certificación higiénico-sanitaria (normativa UE)</span>
+      </div>
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">Alojamiento incluido</span>
+      </div>
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">Todo el material de prácticas</span>
+      </div>
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">Título universitario oficial UCAM</span>
+      </div>
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">2 masterclasses bonus exclusivas</span>
+      </div>
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">Seguimiento post-curso</span>
+      </div>
+      <div class="flex items-start gap-3 border-b border-ink/10 pb-4">
+        <span class="text-ink font-bold mt-0.5 flex-shrink-0">—</span>
+        <span class="text-ink/80 text-sm">Financiación disponible sin intereses</span>
+      </div>
+    </div>
+
+    <a href="#formulario">
+      <button class="btn-ink w-full py-4 rounded-sm text-sm tracking-widest uppercase">
+        Quiero mi plaza →
+      </button>
+    </a>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     GRID ALUMNOS — DARK
+================================================================ -->
+<section class="bg-[#111] px-6 py-20 md:py-28">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div>
+        <p class="text-ash text-xs tracking-widest uppercase mb-3 font-semibold">Resultados reales</p>
+        <h2 class="font-display text-chalk leading-none" style="font-size: clamp(2.5rem, 4vw, 3.5rem);">
+          ASÍ TATÚAN NUESTROS<br/>ALUMNOS AL TERMINAR
+        </h2>
+      </div>
+      <p class="text-ash text-sm max-w-xs">Sin años de experiencia. Con 2 semanas de formación.</p>
+    </div>
+
+    <!-- 2×3 grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-px bg-white/5">
+      <div class="photo-wrap aspect-[3/4]">
+        <img src="CONTENIDO%20WEB/drive-download-20260506T132801Z-3-001/KV-GNG-00195.jpg"
+             alt="Alumna tatuando" class="img-cover" />
+      </div>
+      <div class="photo-wrap aspect-[3/4]">
+        <img src="CONTENIDO%20WEB/drive-download-20260506T132801Z-3-001/DSC01512.jpg"
+             alt="Alumna en cabina" class="img-cover" style="object-position: center 30%;" />
+      </div>
+      <div class="photo-wrap aspect-[3/4]">
+        <img src="CONTENIDO%20WEB/drive-download-20260506T132801Z-3-001/KV-GNG-04202.jpg"
+             alt="Alumna tatuando" class="img-cover" style="object-position: center 20%;" />
+      </div>
+      <div class="photo-wrap aspect-[3/4]">
+        <img src="CONTENIDO%20WEB/drive-download-20260506T132801Z-3-001/KV-GNG-04326.jpg"
+             alt="Alumno tatuando" class="img-cover" style="object-position: center 15%;" />
+      </div>
+      <div class="photo-wrap aspect-[3/4]">
+        <img src="CONTENIDO%20WEB/drive-download-20260506T132801Z-3-001/DSC05027.jpg"
+             alt="Alumna tatuando" class="img-cover" style="object-position: center 20%;" />
+      </div>
+      <div class="photo-wrap aspect-[3/4]">
+        <img src="CONTENIDO%20WEB/drive-download-20260506T132801Z-3-001/KV-GNG-00084.jpg"
+             alt="Alumna practicando" class="img-cover" style="object-position: center 10%;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     PRUEBA SOCIAL — DIPLOMA (LIGHT)
+================================================================ -->
+<section class="bg-chalk px-6 py-20 md:py-28">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+    <div class="photo-wrap rounded-sm overflow-hidden h-64 md:h-[420px]">
+      <img
+        src="CONTENIDO%20WEB/drive-download-20260506T132801Z-3-001/DSC01593-Editar.jpg"
+        alt="Alumna con título Ganga Academy"
+        class="img-cover"
+        style="object-position: center 15%;"
+      />
+    </div>
+
+    <div>
+      <p class="text-ink/40 text-xs tracking-widest uppercase mb-6 font-semibold">Titulación oficial</p>
+      <h2 class="font-display text-ink leading-none mb-6" style="font-size: clamp(2.5rem, 4vw, 3.5rem);">
+        SALES CON UN<br/>TÍTULO QUE<br/>TE AVALA
+      </h2>
+      <p class="text-ink/60 text-sm leading-relaxed mb-8 max-w-sm">
+        Título universitario oficial expedido por la UCAM (Universidad Católica de Murcia). Reconocido en España y la Unión Europea. No un certificado de asistencia. Un título de verdad.
+      </p>
+      <div class="flex gap-8">
+        <div>
+          <div class="font-display text-ink text-3xl">UCAM</div>
+          <div class="text-ink/40 text-xs mt-0.5">Universidad oficial</div>
+        </div>
+        <div class="w-px bg-ink/10"></div>
+        <div>
+          <div class="font-display text-ink text-3xl">UE</div>
+          <div class="text-ink/40 text-xs mt-0.5">Normativa europea</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     ¿ES PARA TI? — DARK
+================================================================ -->
+<section class="bg-ink px-6 py-20 md:py-28" id="requisitos">
+  <div class="max-w-4xl mx-auto">
+    <p class="text-ash text-xs tracking-widest uppercase mb-6 font-semibold">Antes de solicitar</p>
+    <h2 class="font-display text-chalk leading-none mb-16" style="font-size: clamp(2.5rem, 4vw, 3.5rem);">
+      ¿ES PARA TI?
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10">
+
+      <!-- SÍ -->
+      <div class="bg-ink p-10">
+        <h3 class="font-display text-chalk text-2xl mb-6 tracking-display">SÍ ES PARA TI SI...</h3>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="text-chalk font-bold mt-0.5 flex-shrink-0">✓</span>
+            <span class="text-chalk/70 text-sm">Quieres vivir del tatuaje como profesional</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-chalk font-bold mt-0.5 flex-shrink-0">✓</span>
+            <span class="text-chalk/70 text-sm">Puedes comprometerte 2 semanas completas</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-chalk font-bold mt-0.5 flex-shrink-0">✓</span>
+            <span class="text-chalk/70 text-sm">Buscas aprender técnica real, no más teoría</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-chalk font-bold mt-0.5 flex-shrink-0">✓</span>
+            <span class="text-chalk/70 text-sm">Quieres un título universitario que te avale</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- NO -->
+      <div class="bg-[#1a1a1a] p-10">
+        <h3 class="font-display text-ash text-2xl mb-6 tracking-display">NO ES PARA TI SI...</h3>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="text-ash font-bold mt-0.5 flex-shrink-0">✗</span>
+            <span class="text-ash/70 text-sm">Solo buscas un hobby para los fines de semana</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-ash font-bold mt-0.5 flex-shrink-0">✗</span>
+            <span class="text-ash/70 text-sm">No puedes comprometerte 2 semanas seguidas</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-ash font-bold mt-0.5 flex-shrink-0">✗</span>
+            <span class="text-ash/70 text-sm">Prefieres un curso 100% online o teórico</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-ash font-bold mt-0.5 flex-shrink-0">✗</span>
+            <span class="text-ash/70 text-sm">No estás dispuesto a tatuar desde el primer día</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     FAQ — LIGHT
+================================================================ -->
+<section class="bg-chalk px-6 py-20 md:py-28" id="faq" x-data>
+  <div class="max-w-3xl mx-auto">
+    <p class="text-ink/40 text-xs tracking-widest uppercase mb-6 font-semibold">Preguntas frecuentes</p>
+    <h2 class="font-display text-ink leading-none mb-16" style="font-size: clamp(2.5rem, 4vw, 3.5rem);">
+      RESOLVEMOS TUS DUDAS
+    </h2>
+
+    <div class="divide-y divide-ink/10">
+
+      <div x-data="{ open: false }">
+        <button @click="open = !open"
+          class="w-full flex justify-between items-center py-5 text-left gap-4">
+          <span class="font-semibold text-ink text-sm">¿Hay que saber dibujar para apuntarse?</span>
+          <span class="text-ink/40 text-xl flex-shrink-0 transition-transform duration-200"
+                :class="open ? 'rotate-45' : ''">+</span>
+        </button>
+        <div x-show="open" x-cloak class="pb-5 text-ink/60 text-sm leading-relaxed">
+          No. Enseñamos desde cero. Lo que importa es la dedicación y las ganas de aprender. El dibujo se mejora con la práctica.
+        </div>
+      </div>
+
+      <div x-data="{ open: false }">
+        <button @click="open = !open"
+          class="w-full flex justify-between items-center py-5 text-left gap-4">
+          <span class="font-semibold text-ink text-sm">¿Puedo hacerlo sin ninguna experiencia previa?</span>
+          <span class="text-ink/40 text-xl flex-shrink-0 transition-transform duration-200"
+                :class="open ? 'rotate-45' : ''">+</span>
+        </button>
+        <div x-show="open" x-cloak class="pb-5 text-ink/60 text-sm leading-relaxed">
+          Sí. La gran mayoría de nuestros alumnos empiezan sin ninguna experiencia previa en tatuaje. El programa está diseñado exactamente para eso.
+        </div>
+      </div>
+
+      <div x-data="{ open: false }">
+        <button @click="open = !open"
+          class="w-full flex justify-between items-center py-5 text-left gap-4">
+          <span class="font-semibold text-ink text-sm">¿Qué incluye exactamente el alojamiento?</span>
+          <span class="text-ink/40 text-xl flex-shrink-0 transition-transform duration-200"
+                :class="open ? 'rotate-45' : ''">+</span>
+        </button>
+        <div x-show="open" x-cloak class="pb-5 text-ink/60 text-sm leading-relaxed">
+          Hotel 4 estrellas durante las 14 noches del curso, con desayuno incluido. Sin coste adicional.
+        </div>
+      </div>
+
+      <div x-data="{ open: false }">
+        <button @click="open = !open"
+          class="w-full flex justify-between items-center py-5 text-left gap-4">
+          <span class="font-semibold text-ink text-sm">¿Cuándo es el próximo curso disponible?</span>
+          <span class="text-ink/40 text-xl flex-shrink-0 transition-transform duration-200"
+                :class="open ? 'rotate-45' : ''">+</span>
+        </button>
+        <div x-show="open" x-cloak class="pb-5 text-ink/60 text-sm leading-relaxed">
+          Hay convocatorias mensuales. Al rellenar el formulario te informamos de las fechas disponibles y comprobamos si hay plaza libre.
+        </div>
+      </div>
+
+      <div x-data="{ open: false }">
+        <button @click="open = !open"
+          class="w-full flex justify-between items-center py-5 text-left gap-4">
+          <span class="font-semibold text-ink text-sm">¿Hay financiación disponible?</span>
+          <span class="text-ink/40 text-xl flex-shrink-0 transition-transform duration-200"
+                :class="open ? 'rotate-45' : ''">+</span>
+        </button>
+        <div x-show="open" x-cloak class="pb-5 text-ink/60 text-sm leading-relaxed">
+          Sí. Ofrecemos financiación sin intereses. Te damos todos los detalles una vez confirmes tu interés con el formulario.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     CTA FINAL + FORMULARIO — DARK
+================================================================ -->
+<section class="bg-ink px-6 py-20 md:py-28" id="formulario">
+  <div class="max-w-xl mx-auto">
+
+    <p class="text-ash text-xs tracking-widest uppercase mb-6 font-semibold text-center">
+      Solo 17 plazas por convocatoria
+    </p>
+    <h2 class="font-display text-chalk leading-none mb-4 text-center"
+        style="font-size: clamp(3rem, 6vw, 5rem);">
+      RESERVA<br/>TU PLAZA
+    </h2>
+    <p class="text-ash text-sm text-center mb-12 leading-relaxed">
+      Rellena el formulario y te llamamos<br/>en menos de 24 horas para confirmar disponibilidad.
+    </p>
+
+    <form class="space-y-4">
+      <input type="text" placeholder="Nombre completo"
+        class="w-full bg-[#1a1a1a] border border-white/10 text-chalk placeholder-ash/50
+               px-4 py-3.5 rounded-sm focus:border-chalk/40 focus:outline-none transition text-sm" />
+      <input type="email" placeholder="Email"
+        class="w-full bg-[#1a1a1a] border border-white/10 text-chalk placeholder-ash/50
+               px-4 py-3.5 rounded-sm focus:border-chalk/40 focus:outline-none transition text-sm" />
+      <input type="tel" placeholder="Teléfono"
+        class="w-full bg-[#1a1a1a] border border-white/10 text-chalk placeholder-ash/50
+               px-4 py-3.5 rounded-sm focus:border-chalk/40 focus:outline-none transition text-sm" />
+
+      <label class="flex items-start gap-3 cursor-pointer py-1">
+        <input type="checkbox" class="mt-0.5 cursor-pointer accent-chalk" />
+        <span class="text-ash text-xs leading-relaxed">
+          Tengo experiencia previa en tatuaje (no es obligatorio)
+        </span>
+      </label>
+
+      <button type="submit" class="btn-chalk w-full py-4 rounded-sm text-sm tracking-widest uppercase">
+        Quiero mi plaza →
+      </button>
+
+      <p class="text-ash/40 text-xs text-center pt-2">
+        Sin compromiso · Cancelación gratuita en las primeras 24h
+      </p>
+    </form>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+<footer class="bg-[#111] border-t border-white/5 px-6 md:px-10 py-8">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <img src="CONTENIDO%20WEB/GNG_ACADEMY_CENTER.png" alt="Ganga Academy" class="h-7" style="filter: invert(1); mix-blend-mode: screen;" />
+    <div class="flex gap-6 text-xs text-ash">
+      <span class="cursor-pointer hover:text-chalk transition">Política de privacidad</span>
+      <span class="cursor-pointer hover:text-chalk transition">Aviso legal</span>
+      <span class="cursor-pointer hover:text-chalk transition">Contacto</span>
+    </div>
+    <div class="text-xs text-ash/40">© 2026 Ganga Academy</div>
+  </div>
+</footer>
+
+</body>
+</html>
