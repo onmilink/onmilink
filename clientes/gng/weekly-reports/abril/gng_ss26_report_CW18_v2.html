@@ -470,7 +470,7 @@ const WEEKS = {
     label: 'CW19', range: '4\u201310 may 2026',
     meta: {
       inv: 4098.28, compras: 106, valConv: 9368.96, cpa: 38.66,
-      roasMeta: 2.29, roasNeg: 4.56, roasNeto: 3.65,
+      roasMeta: 2.29, roasNeg: 3.68, roasNeto: 2.94,
       campanas: [
         { nombre: 'VENTS_ABO_FRIO_ESP_MAIN', tipo: 'main', cat: 'venta', desc: 'Campaña de ventas a tráfico frío excluyendo audiencias que ya conocen la marca o han interactuado con ella', inv: 1812.40, compras: 66, val: 6561.49, aov: 99.42, roas: 3.62, ctr: 4.16, cpm: 2.70 },
         { nombre: 'VENTS_ABO_CALIENTE_ESP_CAT', tipo: 'hot', cat: 'venta', desc: 'Campaña de venta a tráfico caliente mediante campañas de catálogo', inv: 738.00, compras: 19, val: 1331.70, aov: 70.09, roas: 1.81, ctr: 3.82, cpm: 2.86 },
@@ -501,39 +501,40 @@ const WEEKS = {
       ]
     },
     ecomm: {
-      brutas: 16071.56, descuentos: -680.00, devoluciones: -420.00, netas: 14971.56,
-      envio: 597.00, devCargos: 20.00, impuestos: 3100.00, totales: 18688.56,
-      pedidos: 214, preparados: null, aov: 69.91, habituales: null,
+      brutas: 16122.03, descuentos: -3117.31, devoluciones: -963.40, netas: 12041.32,
+      envio: 518.11, devCargos: 24.00, impuestos: 2488.13, totales: 15071.56,
+      pedidos: 186, preparados: 292, aov: 69.91, habituales: 21.91,
       sesiones: 21788, conv: 0.69, carrito: 4.16, pago: 2.18, compra: 0.69,
       cartSes: 907, pagoSes: 475, compraSes: 151,
       nota: null,
       topProductos: [
-        { nombre: 'Knit Bill Yellow', vistas: 888, uds: 14, conv: 1.58 },
+        { nombre: 'Knit Bill Yellow', vistas: 886, uds: 14, conv: 1.58 },
         { nombre: 'Motion Cargo Shorts Eroded Brown', vistas: 830, uds: 18, conv: 2.17 },
         { nombre: 'State Cargo Shorts Ash Blue', vistas: 582, uds: 13, conv: 2.23 },
         { nombre: 'Tank Top Basic 2x Pack', vistas: 487, uds: 24, conv: 4.93 },
         { nombre: 'Flag Zipper Navy', vistas: 358, uds: 7, conv: 1.95 },
+        { nombre: 'GNG Cut Logo Tee Black', vistas: 336, uds: 16, conv: 4.76 },
         { nombre: 'State Cargo Shorts Sand', vistas: 308, uds: 11, conv: 3.57 },
-        { nombre: 'Knit Bill Black', vistas: 280, uds: 9, conv: 3.21 },
+        { nombre: 'Knit Bill Black', vistas: 281, uds: 9, conv: 3.20 },
         { nombre: 'Skin T-Shirt Black', vistas: 267, uds: 9, conv: 3.37 },
         { nombre: 'LA Archive T-Shirt White', vistas: 248, uds: 8, conv: 3.23 },
         { nombre: 'Nike Longsleeve Burgundy', vistas: 220, uds: 0, conv: 0.00 },
         { nombre: 'Skin Zipper Black', vistas: 208, uds: 5, conv: 2.40 },
         { nombre: 'Knit Bill Grey', vistas: 204, uds: 8, conv: 3.92 },
         { nombre: 'Skin T-Shirt Brown', vistas: 203, uds: 10, conv: 4.93 },
-        { nombre: 'GNG Shorts Laser', vistas: 177, uds: 2, conv: 1.13 },
+        { nombre: 'Skin Shorts Laser', vistas: 177, uds: 2, conv: 1.13 },
         { nombre: 'Motion Cargo Shorts Worn Navy', vistas: 107, uds: 9, conv: 8.41 }
       ],
       topVentas: [
-        { nombre: 'Tank Top Basic 2x Pack', val: null },
-        { nombre: 'Knit Bill Yellow', val: null },
-        { nombre: 'Motion Cargo Shorts Eroded Brown', val: null },
-        { nombre: 'State Cargo Shorts Ash Blue', val: null },
-        { nombre: 'Knit Bill Black', val: null }
+        { nombre: 'Tank Top Basic 2x Pack', val: 1100 },
+        { nombre: 'Knit Bill Yellow', val: 1000 },
+        { nombre: 'Motion Cargo Shorts Eroded Brown', val: 958 },
+        { nombre: 'State Cargo Shorts Ash Blue', val: 861 },
+        { nombre: 'Knit Bill Black', val: 800 }
       ],
       topPaginas: [
         { nombre: 'Homepage /', ses: 3487 },
-        { nombre: 'Knit Bill Yellow', ses: 888 },
+        { nombre: 'Knit Bill Yellow', ses: 886 },
         { nombre: 'Motion Cargo Shorts Eroded Brown', ses: 830 },
         { nombre: 'State Cargo Shorts Ash Blue', ses: 582 },
         { nombre: 'Tank Top Basic 2x Pack', ses: 487 },
