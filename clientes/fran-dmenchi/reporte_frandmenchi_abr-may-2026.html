@@ -161,6 +161,7 @@ tr.total-row td:first-child { color: var(--c-landing) !important; font-family: '
 .th-engage { background: rgba(80,80,80,0.04) !important; color: #555 !important; }
 .th-conv { background: rgba(34,85,187,0.05) !important; color: #2255bb !important; }
 .th-crm { background: rgba(0,107,79,0.05) !important; color: var(--c-dm) !important; }
+.th-trafico { background: rgba(122,74,0,0.05) !important; color: var(--c-trafico) !important; }
 .group-row td { padding: 5px 16px; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; background: var(--surface2); border-top: 2px solid var(--border-md); text-align: left !important; white-space: nowrap; font-family: 'DM Mono', monospace; }
 .group-landing td { color: var(--c-landing) !important; }
 .group-dm td { color: var(--c-dm) !important; }
@@ -643,6 +644,7 @@ function showTab(id, btn) {
             <th colspan="5" class="th-meta">Meta · Inversión &amp; alcance</th>
             <th colspan="3" class="th-engage">Meta · Engagement</th>
             <th colspan="3" class="th-conv">Meta · Conversión</th>
+            <th colspan="2" class="th-trafico">Tráfico · Visitas</th>
             <th colspan="6" class="th-crm">CRM · Pipeline</th>
           </tr>
           <tr>
@@ -650,12 +652,13 @@ function showTab(id, btn) {
             <th>Inv.</th><th>Imp.</th><th>Alcance</th><th>Freq.</th><th>CPM</th>
             <th>Clics</th><th>CTR</th><th>CPC</th>
             <th>Leads M.</th><th>CPL M.</th><th>Conv.%</th>
+            <th>Visitas</th><th>CPV</th>
             <th>Leads CRM</th><th>Resp.</th><th>Sin resp.</th><th>% Resp.</th><th>Cierres</th><th>Revenue</th>
           </tr>
         </thead>
         <tbody>
           <tr class="group-row group-landing">
-            <td colspan="19">Landing · Campañas de formulario</td>
+            <td colspan="21">Landing · Campañas de formulario</td>
           </tr>
           <tr class="cr-landing">
             <td><div class="cr-name">fran · AD05<span class="fmt-badge fmt-img">IMG</span></div></td>
@@ -665,7 +668,7 @@ function showTab(id, btn) {
             <td class="val-result">2</td>
             <td class="val-cp">$113,83</td>
             <td>1,8%</td>
-            <td class="val-result">2</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">2</td>
             <td>2</td>
             <td>0</td>
             <td>100%</td>
@@ -680,7 +683,7 @@ function showTab(id, btn) {
             <td class="val-result">3</td>
             <td class="val-cp">$54,11</td>
             <td>4,9%</td>
-            <td class="val-result">3</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">3</td>
             <td>3</td>
             <td>0</td>
             <td>100%</td>
@@ -695,7 +698,7 @@ function showTab(id, btn) {
             <td class="val-result">1</td>
             <td class="val-cp">$118,35</td>
             <td>1,6%</td>
-            <td class="val-result">1</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">1</td>
             <td>1</td>
             <td>0</td>
             <td>100%</td>
@@ -710,7 +713,7 @@ function showTab(id, btn) {
             <td class="val-result">1</td>
             <td class="val-cp">$67,29</td>
             <td>2,6%</td>
-            <td class="val-result">1</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">1</td>
             <td>0</td>
             <td class="val-cp">1</td>
             <td>0%</td>
@@ -725,7 +728,7 @@ function showTab(id, btn) {
             <td class="val-result">1</td>
             <td class="val-cp">$62,39</td>
             <td>3,6%</td>
-            <td class="val-result">1*</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">1*</td>
             <td>0</td>
             <td class="val-cp">1</td>
             <td>0%</td>
@@ -740,7 +743,7 @@ function showTab(id, btn) {
             <td class="val-result">0</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
-            <td class="val-result">0</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">0</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
@@ -755,7 +758,7 @@ function showTab(id, btn) {
             <td class="val-result">1</td>
             <td class="val-cp">$57,49</td>
             <td>4,8%</td>
-            <td class="val-result">1</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">1</td>
             <td>1</td>
             <td>0</td>
             <td>100%</td>
@@ -770,7 +773,7 @@ function showTab(id, btn) {
             <td class="val-result">0</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
-            <td class="val-result">0</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">0</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
@@ -785,7 +788,7 @@ function showTab(id, btn) {
             <td class="val-result">1</td>
             <td class="val-cp">$50,62</td>
             <td>6,2%</td>
-            <td class="val-result">0</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">0</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
@@ -800,7 +803,7 @@ function showTab(id, btn) {
             <td class="val-result">0</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
-            <td class="val-result">0</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">0</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
@@ -815,7 +818,7 @@ function showTab(id, btn) {
             <td class="val-result">3</td>
             <td class="val-cp">$7,04</td>
             <td>33,3%</td>
-            <td class="val-result">2</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">2</td>
             <td>2</td>
             <td>0</td>
             <td>100%</td>
@@ -830,7 +833,7 @@ function showTab(id, btn) {
             <td class="val-result">1</td>
             <td class="val-cp">$20,53</td>
             <td>7,1%</td>
-            <td class="val-result">0</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="val-result">0</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
             <td class="null-val">—</td>
@@ -838,59 +841,59 @@ function showTab(id, btn) {
             <td class="null-val">—</td>
           </tr>
           <tr class="group-row group-dm">
-            <td colspan="19">DM · Mensajes directos — sin datos · restricción privacidad Meta (múltiples cuentas afectadas)</td>
+            <td colspan="21">DM · Mensajes directos — sin datos · restricción privacidad Meta (múltiples cuentas afectadas)</td>
           </tr>
           <tr class="cr-dm">
             <td><div class="cr-name">pierna · AD01<span class="fmt-badge fmt-img">IMG</span></div></td>
             <td class="val-invest">$257,93</td>
             <td>18.956</td><td>8.836</td><td>2,15</td><td class="val-cpm">$13,61</td>
             <td>238</td><td>1,26%</td><td>$1,08</td>
-            <td class="warn-val">⚠️ sin datos</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="warn-val">⚠️ sin datos</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
           </tr>
           <tr class="cr-dm">
             <td><div class="cr-name">mano<span class="fmt-badge fmt-img">IMG</span></div></td>
             <td class="val-invest">$21,90</td>
             <td>2.336</td><td>1.803</td><td>1,30</td><td class="val-cpm">$9,38</td>
             <td>29</td><td>1,24%</td><td>$0,76</td>
-            <td class="warn-val">⚠️ sin datos</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="warn-val">⚠️ sin datos</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
           </tr>
           <tr class="cr-dm">
             <td><div class="cr-name">elefante<span class="fmt-badge fmt-img">IMG</span></div></td>
             <td class="val-invest">$3,32</td>
             <td>230</td><td>194</td><td>1,19</td><td class="val-cpm">$14,43</td>
             <td>0</td><td class="null-val">—</td><td class="null-val">—</td>
-            <td class="warn-val">⚠️ sin datos</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="warn-val">⚠️ sin datos</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
           </tr>
           <tr class="group-row group-trafico">
-            <td colspan="19">Tráfico · Awareness <span style="font-weight:400;opacity:0.65;font-size:10px">(resultado: visitas al perfil)</span></td>
+            <td colspan="21">Tráfico · Awareness <span style="font-weight:400;opacity:0.65;font-size:10px">(resultado: visitas al perfil)</span></td>
           </tr>
           <tr class="cr-trafico">
             <td><div class="cr-name">tattooes · AD03<span class="fmt-badge fmt-vid">VID</span></div></td>
             <td class="val-invest">$112,67</td>
             <td>7.252</td><td>5.548</td><td>1,31</td><td class="val-cpm">$15,54</td>
             <td>426</td><td>5,87%</td><td>$0,26</td>
-            <td>448</td><td>$0,25</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td>448</td><td>$0,25</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
           </tr>
           <tr class="cr-trafico">
             <td><div class="cr-name">tattooes · AD02<span class="fmt-badge fmt-vid">VID</span></div></td>
             <td class="val-invest">$72,41</td>
             <td>4.045</td><td>3.059</td><td>1,32</td><td class="val-cpm">$17,90</td>
             <td>241</td><td>5,96%</td><td>$0,30</td>
-            <td>187</td><td>$0,39</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td>187</td><td>$0,39</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
           </tr>
           <tr class="cr-trafico">
             <td><div class="cr-name">tattooes · AD01<span class="fmt-badge fmt-vid">VID</span></div></td>
             <td class="val-invest">$8,06</td>
             <td>513</td><td>469</td><td>1,09</td><td class="val-cpm">$15,71</td>
             <td>27</td><td>5,26%</td><td>$0,30</td>
-            <td>18</td><td>$0,45</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td>18</td><td>$0,45</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
           </tr>
           <tr class="cr-trafico">
             <td><div class="cr-name">videosamurai!<span class="fmt-badge fmt-img">IMG</span></div></td>
             <td class="val-invest">$1,00</td>
             <td>93</td><td>89</td><td>1,04</td><td class="val-cpm">$10,75</td>
             <td>6</td><td>6,45%</td><td>$0,17</td>
-            <td>10</td><td>$0,10</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td>10</td><td>$0,10</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
           </tr>
         </tbody>
       </table>
