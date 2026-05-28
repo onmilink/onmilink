@@ -279,11 +279,11 @@ tbody tr:hover td{background:#f8fcf8!important}
    ============================================================ */
 const CONFIG = {
 
-  fechaActualizacion: "3 de mayo de 2026",
+  fechaActualizacion: "17 de mayo de 2026",
 
   inv: {
     invDiaria: 50,
-    semanas: 11,
+    semanas: 13,
     campanyas: 4,
     nombres: ["Tráfico web", "Leads Landing", "Leads WhatsApp", "TESTING (Conv.)"],
     colores: ["#00693E", "#76B900", "#5B9E6E", "#A8B8AD"],
@@ -299,14 +299,16 @@ const CONFIG = {
       { label: "CW15", rango: "06.04 - 12.04" },
       { label: "CW16", rango: "13.04 - 19.04" },
       { label: "CW17", rango: "20.04 - 26.04" },
-      { label: "CW18", rango: "27.04 - 03.05" }
+      { label: "CW18", rango: "27.04 - 03.05" },
+      { label: "CW19", rango: "04.05 - 10.05" },
+      { label: "CW20", rango: "11.05 - 17.05" }
     ],
     /* [Web, Landing, WhatsApp, TESTING] — añadir valor al final de cada array para nueva semana */
     gastoSemanal: [
-      [20.22, 34.64, 34.27, 35.18, 36.61, 33.08, 34.90, 34.93, 34.45, 35.68, 34.54],
-      [55.55, 201.80, 217.20, 211.32, 215.35, 272.08, 350.36, 280.09, 214.51, 248.24, 138.97],
-      [81.23, 195.81, 206.73, 212.73, 205.93, 152.21, 37.50, 34.33, 35.42, 35.45, 33.49],
-      [null, null, null, null, null, null, null, 31.52, 62.42, 31.69, 153.17]
+      [20.22, 34.64, 34.27, 35.18, 36.61, 33.08, 34.90, 34.93, 34.45, 35.68, 34.54, 30.85, 30.85],
+      [55.55, 201.80, 217.20, 211.32, 215.35, 272.08, 350.36, 280.09, 214.51, 248.24, 138.97, 179.41, 179.42],
+      [81.23, 195.81, 206.73, 212.73, 205.93, 152.21, 37.50, 34.33, 35.42, 35.45, 33.49, 35.42, 35.43],
+      [null, null, null, null, null, null, null, 31.52, 62.42, 31.69, 153.17, 68.33, 68.33]
     ]
   },
 
@@ -316,7 +318,8 @@ const CONFIG = {
     { key: "cw1314", label: "CW13–CW14 (23 Mar–5 Abr)" },
     { key: "cw1516", label: "CW15–CW16 (6–19 Abr)" },
     { key: "cw1718", label: "CW17–CW18 (20 Abr–3 May)" },
-    { key: "total",  label: "Total (18 Feb–3 May)" }
+    { key: "cw1920", label: "CW19–CW20 (4–17 May)" },
+    { key: "total",  label: "Total (18 Feb–17 May)" }
   ],
 
   rendimiento: {
@@ -353,14 +356,23 @@ const CONFIG = {
       gastoCanal: { WhatsApp:68.94, Landing:387.21, Home:70.22, Testing:184.86 },
       leadsCanal: { WhatsApp:3, Landing:13, Home:0, Testing:2 }
     },
-    total: {
-      leads: 348, cotizados: 76, cotizacionesUSD: 504404,
-      fuente: { WhatsApp: 151, Landing: 181, Web: 16 },
-      estado: { "Puebla":32,"Guanajuato":22,"Michoacán":19,"Jalisco":19,"Sonora":13,"Veracruz":13,"Oaxaca":11,"Querétaro":9,"Nayarit":8,"Estado de México":7,"San Luis Potosí":7,"Hidalgo":7,"Tlaxcala":2 },
-      quot: [{ canal:"Landing", usd:342550 }, { canal:"Web", usd:84891 }, { canal:"WhatsApp", usd:76962 }],
-      gastoCanal: { WhatsApp:1230.83, Landing:2405.47, Home:368.50, Testing:278.80 },
+    cw1920: {
+      leads: 26, cotizados: 7, cotizacionesUSD: 88136,
+      fuente: { WhatsApp: 0, Landing: 26, Web: 0 },
+      estado: { "Michoacán":5,"Veracruz":5,"Puebla":4,"Oaxaca":2,"Jalisco":2,"Guanajuato":1,"Chihuahua":1,"Yucatán":1,"Durango":1,"San Luis Potosí":1,"Aguascalientes":1,"Campeche":1,"Estado de México":1 },
+      quot: [{ canal:"Landing", usd:88136 }],
+      gastoCanal: { WhatsApp:70.85, Landing:358.83, Home:61.70, Testing:136.66 },
       /* leadsCanal: TESTING (atribución Meta) se separa del Landing CRM para evitar doble conteo */
-      leadsCanal: { WhatsApp:151, Landing:170, Home:16, Testing:11 }
+      leadsCanal: { WhatsApp:0, Landing:22, Home:0, Testing:4 }
+    },
+    total: {
+      leads: 374, cotizados: 83, cotizacionesUSD: 592540,
+      fuente: { WhatsApp: 151, Landing: 207, Web: 16 },
+      estado: { "Puebla":36,"Michoacán":24,"Guanajuato":23,"Jalisco":21,"Veracruz":18,"Sonora":13,"Oaxaca":13,"Querétaro":9,"Estado de México":8,"San Luis Potosí":8,"Nayarit":8,"Hidalgo":7,"Tlaxcala":2 },
+      quot: [{ canal:"Landing", usd:430686 }, { canal:"Web", usd:84891 }, { canal:"WhatsApp", usd:76962 }],
+      gastoCanal: { WhatsApp:1301.68, Landing:2764.30, Home:430.20, Testing:415.46 },
+      /* leadsCanal: TESTING (atribución Meta) se separa del Landing CRM para evitar doble conteo */
+      leadsCanal: { WhatsApp:151, Landing:192, Home:16, Testing:15 }
     }
 
   },
@@ -377,6 +389,8 @@ const CONFIG = {
     ],
     cw1718: [
       { titulo: "[VID] Testimonio AD01 — \"La producción\"", leads: 7, inversion: 96.13, imagen: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgNjQwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InNreTMiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NmZTNmMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iI2U5ZjJmNyIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZmllbGQzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZWE4NGEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM1YjhhM2EiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjM2Q2ODI2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMzYwIiBoZWlnaHQ9IjMyMCIgZmlsbD0idXJsKCNza3kzKSIvPgogIDxyZWN0IHk9IjMyMCIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIzMjAiIGZpbGw9InVybCgjZmllbGQzKSIvPgogIDxnIGZpbGw9IiMzZDY4MjYiIG9wYWNpdHk9IjAuMzUiPgogICAgPHJlY3QgeD0iMCIgeT0iMzQ1IiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjIiLz4KICAgIDxyZWN0IHg9IjAiIHk9IjM2NSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiB5PSIzOTUiIHdpZHRoPSIzNjAiIGhlaWdodD0iMiIvPgogICAgPHJlY3QgeD0iMCIgeT0iNDMwIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjIiLz4KICAgIDxyZWN0IHg9IjAiIHk9IjQ3NSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyIi8+CiAgICA8cmVjdCB4PSIwIiB5PSI1MjUiIHdpZHRoPSIzNjAiIGhlaWdodD0iMiIvPgogICAgPHJlY3QgeD0iMCIgeT0iNTg1IiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjIiLz4KICA8L2c+CiAgPHRleHQgeD0iMTgwIiB5PSIxODAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjMyIiBmb250LXdlaWdodD0iMzAwIiBsZXR0ZXItc3BhY2luZz0iMiIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC45IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5hcXVuYXQ8L3RleHQ+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTgwLDMzMCkiPgogICAgPGVsbGlwc2UgY3g9IjAiIGN5PSItMzAiIHJ4PSIyMiIgcnk9IjI2IiBmaWxsPSIjM2EyODE4Ii8+CiAgICA8cmVjdCB4PSItOCIgeT0iLTgiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxMCIgZmlsbD0iIzNhMjgxOCIvPgogICAgPHBhdGggZD0iTSAtNTAgMCBRIC01NSAtNSAtNDUgLTEwIEwgLTIyIC0yIEwgMCAtNCBMIDIyIC0yIEwgNDUgLTEwIFEgNTUgLTUgNTAgMCBMIDU1IDcwIEwgNDUgMTMwIEwgLTQ1IDEzMCBMIC01NSA3MCBaIiBmaWxsPSIjNWI2ZjhhIi8+CiAgICA8ZyBzdHJva2U9IiMzZDRhNWUiIHN0cm9rZS13aWR0aD0iMS4yIiBvcGFjaXR5PSIwLjciIGZpbGw9Im5vbmUiPgogICAgICA8bGluZSB4MT0iLTUwIiB5MT0iMjAiIHgyPSI1MCIgeTI9IjIwIi8+CiAgICAgIDxsaW5lIHgxPSItNTAiIHkxPSI1MCIgeDI9IjUwIiB5Mj0iNTAiLz4KICAgICAgPGxpbmUgeDE9Ii01MCIgeTE9IjgwIiB4Mj0iNTAiIHkyPSI4MCIvPgogICAgICA8bGluZSB4MT0iLTUwIiB5MT0iMTEwIiB4Mj0iNTAiIHkyPSIxMTAiLz4KICAgICAgPGxpbmUgeDE9Ii0zMCIgeTE9Ii01IiB4Mj0iLTMwIiB5Mj0iMTI1Ii8+CiAgICAgIDxsaW5lIHgxPSIwIiB5MT0iLTUiIHgyPSIwIiB5Mj0iMTI1Ii8+CiAgICAgIDxsaW5lIHgxPSIzMCIgeTE9Ii01IiB4Mj0iMzAiIHkyPSIxMjUiLz4KICAgIDwvZz4KICAgIDxwYXRoIGQ9Ik0gLTUwIDAgTCAtNjUgNjAgTCAtNTUgMTEwIEwgLTQ1IDExMCBMIC00NSA2MCBaIiBmaWxsPSIjNWI2ZjhhIi8+CiAgICA8cGF0aCBkPSJNICA1MCAwIEwgIDY1IDYwIEwgIDU1IDExMCBMICA0NSAxMTAgTCAgNDUgNjAgWiIgZmlsbD0iIzViNmY4YSIvPgogICAgPHJlY3QgeD0iLTQ2IiB5PSIxMjgiIHdpZHRoPSI5MiIgaGVpZ2h0PSI2IiBmaWxsPSIjMmExYTBjIi8+CiAgICA8cGF0aCBkPSJNIC00NSAxMzQgTCAtNTAgMjAwIEwgLTEwIDIwMCBMIC01IDEzNCBaIiBmaWxsPSIjMzY1MDdhIi8+CiAgICA8cGF0aCBkPSJNICA0NSAxMzQgTCAgNTAgMjAwIEwgIDEwIDIwMCBMICAgNSAxMzQgWiIgZmlsbD0iIzM2NTA3YSIvPgogIDwvZz4KICA8dGV4dCB4PSIxODAiIHk9IjYwMCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzIiIGZvbnQtd2VpZ2h0PSI4MDAiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TGEgcHJvZHVjY2nDs248L3RleHQ+Cjwvc3ZnPgo=" }
+    ],
+    cw1920: [
     ]
   }
 };
