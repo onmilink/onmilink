@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Rendimiento - Ecommerce + Meta Ads</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: #f8f9fa;
+            color: #1a1a1a;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0a0a0a;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .date-range {
+            font-size: 13px;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #0a0a0a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 14px;
+        }
+
+        .section-ecommerce .section-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .section-meta .section-icon {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 1.8rem;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: #bbb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0a0a0a;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+        }
+
+        .metric-subtext {
+            font-size: 12px;
+            color: #bbb;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 1100px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-container {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .chart-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #0a0a0a;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 280px;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-wrapper.tall {
+            height: 320px;
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+
+        .breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breakdown-label {
+            color: #666;
+        }
+
+        .breakdown-value {
+            font-weight: 600;
+            color: #0a0a0a;
+        }
+
+        .funnel-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+
+        .funnel-step {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .funnel-label {
+            color: #666;
+        }
+
+        .funnel-value {
+            font-weight: 600;
+            color: #0a0a0a;
+        }
+
+        .funnel-percentage {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 12px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 3rem;
+        }
+
+        .highlight {
+            background: #f0f8ff;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-title {
+            font-weight: 600;
+            color: #0a0a0a;
+            margin-bottom: 0.4rem;
+        }
+
+        .highlight-text {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .comparison-table th {
+            background: #f5f5f5;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #0a0a0a;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .value-cell {
+            font-weight: 600;
+            color: #0a0a0a;
+        }
+
+        .product-list {
+            list-style: none;
+            font-size: 13px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .product-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .product-name {
+            color: #666;
+        }
+
+        .product-value {
+            font-weight: 600;
+            color: #0a0a0a;
+        }
+
+        .device-list {
+            list-style: none;
+            font-size: 13px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .device-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .location-list {
+            list-style: none;
+            font-size: 13px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .location-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .dashboard {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>📊 Dashboard de Rendimiento</h1>
+            <p>Análisis integral de Ecommerce + Meta Ads</p>
+            <div class="date-range">Período: 18 - 25 de mayo de 2026</div>
+        </div>
+
+        <!-- ECOMMERCE SECTION -->
+        <div class="section section-ecommerce">
+            <h2 class="section-title">
+                <span class="section-icon">🛍️</span>
+                E-commerce
+            </h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Sesiones</div>
+                    <div class="metric-value">786</div>
+                    <div class="metric-subtext">Visitas totales</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Compras completadas</div>
+                    <div class="metric-value">11</div>
+                    <div class="metric-subtext">Órdenes finalizadas</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Tasa de conversión</div>
+                    <div class="metric-value">1,14%</div>
+                    <div class="metric-subtext">Sesiones a compra</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Valor medio pedido</div>
+                    <div class="metric-value">€87,26</div>
+                    <div class="metric-subtext">Promedio por orden</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Ventas totales</div>
+                    <div class="metric-value">€934,89</div>
+                    <div class="metric-subtext">Período analizado</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">ROAS Negocio</div>
+                    <div class="metric-value">4,81x</div>
+                    <div class="metric-subtext">Retorno del negocio</div>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Desglose del funnel de conversión</div>
+                    <div class="chart-wrapper">
+                        <canvas id="ecommFunnelChart" role="img" aria-label="Funnel: 786 sesiones, 68 carrito, 33 pago, 9 compra">Funnel de conversión</canvas>
+                    </div>
+                    <div class="funnel-breakdown">
+                        <div class="funnel-step">
+                            <span class="funnel-label">Sesiones</span>
+                            <span class="funnel-value">786 <span class="funnel-percentage">(100%)</span></span>
+                        </div>
+                        <div class="funnel-step">
+                            <span class="funnel-label">Sesiones con carrito</span>
+                            <span class="funnel-value">68 <span class="funnel-percentage">(8,65%)</span></span>
+                        </div>
+                        <div class="funnel-step">
+                            <span class="funnel-label">Pagos iniciados</span>
+                            <span class="funnel-value">33 <span class="funnel-percentage">(4,20%)</span></span>
+                        </div>
+                        <div class="funnel-step">
+                            <span class="funnel-label">Compras completadas</span>
+                            <span class="funnel-value">11 <span class="funnel-percentage">(1,40%)</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Ventas totales por producto</div>
+                    <div class="chart-wrapper">
+                        <canvas id="ecommProductsChart" role="img" aria-label="Ventas por producto: Essentia €799, Origo €159, Horizon -€79,99">Productos</canvas>
+                    </div>
+                    <ul class="product-list">
+                        <li class="product-item">
+                            <span class="product-name">Camiseta 1200 Essentia</span>
+                            <span class="product-value">€799</span>
+                        </li>
+                        <li class="product-item">
+                            <span class="product-name">Camiseta 1200 Origo</span>
+                            <span class="product-value">€159</span>
+                        </li>
+                        <li class="product-item">
+                            <span class="product-name">Camiseta 1200 Horizon (devolución)</span>
+                            <span class="product-value">-€79,99</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Sesiones por tipo de dispositivo</div>
+                    <div class="chart-wrapper">
+                        <canvas id="ecommDeviceChart" role="img" aria-label="Dispositivos: Móvil 726, Escritorio 58, Tableta 2">Dispositivos</canvas>
+                    </div>
+                    <ul class="device-list">
+                        <li class="device-item">
+                            <span class="product-name">Móvil</span>
+                            <span class="product-value">726 (92,4%)</span>
+                        </li>
+                        <li class="device-item">
+                            <span class="product-name">Escritorio</span>
+                            <span class="product-value">58 (7,4%)</span>
+                        </li>
+                        <li class="device-item">
+                            <span class="product-name">Tableta</span>
+                            <span class="product-value">2 (0,3%)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Sesiones por ubicación</div>
+                    <div class="chart-wrapper">
+                        <canvas id="ecommLocationChart" role="img" aria-label="Ubicaciones: Murcia 110, Madrid 96, Ninguno 75, Valencia 38">Ubicaciones</canvas>
+                    </div>
+                    <ul class="location-list">
+                        <li class="location-item">
+                            <span class="product-name">Murcia</span>
+                            <span class="product-value">110</span>
+                        </li>
+                        <li class="location-item">
+                            <span class="product-name">Madrid</span>
+                            <span class="product-value">96</span>
+                        </li>
+                        <li class="location-item">
+                            <span class="product-name">Ninguno (sin ubicación)</span>
+                            <span class="product-value">75</span>
+                        </li>
+                        <li class="location-item">
+                            <span class="product-name">Valencia</span>
+                            <span class="product-value">38</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Desglose de ventas totales</div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Importe (€)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="value-cell">Ventas brutas</td>
+                            <td>€1.039,87</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Descuentos</td>
+                            <td>€0,00</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Devoluciones</td>
+                            <td>-€159,98</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Ventas netas</td>
+                            <td>€879,89</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Cargos de envío</td>
+                            <td>€55,00</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Cargos por devolución</td>
+                            <td>€0,00</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Impuestos</td>
+                            <td>€0,00</td>
+                        </tr>
+                        <tr style="background: #f9f9f9; font-weight: 600;">
+                            <td>VENTAS TOTALES</td>
+                            <td>€934,89</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- META ADS SECTION -->
+        <div class="section section-meta">
+            <h2 class="section-title">
+                <span class="section-icon">📱</span>
+                Meta Ads
+            </h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Inversión total</div>
+                    <div class="metric-value">€194,30</div>
+                    <div class="metric-subtext">Gasto en campaña</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Compras generadas</div>
+                    <div class="metric-value">4</div>
+                    <div class="metric-subtext">Conversiones</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Coste por compra</div>
+                    <div class="metric-value">€48,58</div>
+                    <div class="metric-subtext">CPA</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">CPM</div>
+                    <div class="metric-value">€3,25</div>
+                    <div class="metric-subtext">Por mil impresiones</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Valor conversión</div>
+                    <div class="metric-value">€419,95</div>
+                    <div class="metric-subtext">Total generado</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">ROAS</div>
+                    <div class="metric-value">2,16x</div>
+                    <div class="metric-subtext">Retorno invertido</div>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Distribución de gasto por conjunto de anuncios</div>
+                    <div class="chart-wrapper">
+                        <canvas id="metaAdSetsChart" role="img" aria-label="Gasto: Prosp/Esp/Adv+ €77,40 (39%), Prosp/Murcia/Adv+ €116,90 (61%)">Distribución gasto</canvas>
+                    </div>
+                    <div class="breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Prosp/Esp/Adv+</span>
+                            <span class="breakdown-value">€77,40 (39%)</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Prosp/Murcia/Adv+</span>
+                            <span class="breakdown-value">€116,90 (61%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">ROAS por conjunto de anuncios</div>
+                    <div class="chart-wrapper">
+                        <canvas id="metaROASChart" role="img" aria-label="ROAS: Prosp/Esp/Adv+ 2.20x, Prosp/Murcia/Adv+ 2.14x">ROAS por ad set</canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Detalle de conjuntos de anuncios</div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Conjunto de anuncios</th>
+                            <th>Gasto (€)</th>
+                            <th>CPM (€)</th>
+                            <th>Visitas perfil</th>
+                            <th>Compras</th>
+                            <th>Valor conversión (€)</th>
+                            <th>CPA (€)</th>
+                            <th>ROAS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="value-cell">Prosp/Esp/Adv+</td>
+                            <td>€77,40</td>
+                            <td>€3,25</td>
+                            <td>132</td>
+                            <td>2</td>
+                            <td>€169,98</td>
+                            <td>€38,70</td>
+                            <td class="value-cell">2,20</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Prosp/Murcia/Adv+</td>
+                            <td>€116,90</td>
+                            <td>€3,26</td>
+                            <td>198</td>
+                            <td>2</td>
+                            <td>€249,97</td>
+                            <td>€58,45</td>
+                            <td class="value-cell">2,14</td>
+                        </tr>
+                        <tr style="background: #f9f9f9; font-weight: 600;">
+                            <td>TOTAL</td>
+                            <td>€194,30</td>
+                            <td>€3,25</td>
+                            <td>330</td>
+                            <td>4</td>
+                            <td>€419,95</td>
+                            <td>€48,58</td>
+                            <td>2,16</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="footer">
+            <p>Dashboard generado el 26 de mayo de 2026 | Datos verificados del período 18-25 mayo 2026</p>
+            <p>Documento confidencial - Solo para uso autorizado</p>
+        </div>
+    </div>
+
+    <script>
+        const chartColors = {
+            primary: '#667eea',
+            secondary: '#764ba2',
+            accent: '#f5576c',
+            success: '#10b981',
+            warning: '#f59e0b',
+            info: '#3b82f6'
+        };
+
+        // 1. Ecommerce Funnel
+        new Chart(document.getElementById('ecommFunnelChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Sesiones', 'Con carrito', 'Pagos iniciados', 'Compras'],
+                datasets: [{
+                    label: 'Usuarios',
+                    data: [786, 68, 33, 11],
+                    backgroundColor: [chartColors.primary, '#667eea80', '#667eea60', '#667eea40'],
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { beginAtZero: true } }
+            }
+        });
+
+        // 2. Ecommerce Products
+        new Chart(document.getElementById('ecommProductsChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Essentia', 'Origo', 'Horizon (dev)'],
+                datasets: [{
+                    label: 'Ventas (€)',
+                    data: [799, 159, -79.99],
+                    backgroundColor: [chartColors.primary, chartColors.success, '#ef4444'],
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { beginAtZero: true } }
+            }
+        });
+
+        // 3. Ecommerce Devices
+        new Chart(document.getElementById('ecommDeviceChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Móvil (92,4%)', 'Escritorio (7,4%)', 'Tableta (0,3%)'],
+                datasets: [{
+                    data: [726, 58, 2],
+                    backgroundColor: [chartColors.primary, '#667eea80', '#667eea40']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } }
+            }
+        });
+
+        // 4. Ecommerce Locations
+        new Chart(document.getElementById('ecommLocationChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Murcia', 'Madrid', 'Ninguno', 'Valencia'],
+                datasets: [{
+                    label: 'Sesiones',
+                    data: [110, 96, 75, 38],
+                    backgroundColor: chartColors.primary,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { beginAtZero: true } }
+            }
+        });
+
+        // 5. Meta Ad Sets
+        new Chart(document.getElementById('metaAdSetsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Prosp/Esp/Adv+', 'Prosp/Murcia/Adv+'],
+                datasets: [{
+                    data: [77.40, 116.90],
+                    backgroundColor: [chartColors.primary, chartColors.accent]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } }
+            }
+        });
+
+        // 6. Meta ROAS
+        new Chart(document.getElementById('metaROASChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Prosp/Esp/Adv+', 'Prosp/Murcia/Adv+'],
+                datasets: [{
+                    label: 'ROAS',
+                    data: [2.20, 2.14],
+                    backgroundColor: [chartColors.primary, chartColors.accent],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { beginAtZero: true } }
+            }
+        });
+    </script>
+</body>
+</html>
