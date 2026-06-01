@@ -510,7 +510,7 @@ function renderCreativos() {
       if (!map[c.titulo]) map[c.titulo] = { titulo: c.titulo, leads: 0, inversion: 0, ventasUSD: 0 };
       map[c.titulo].leads          += c.leads || 0;
       map[c.titulo].inversion      += c.inversion || 0;
-      map[c.titulo].cotizacionesUSD += c.ventasUSD || 0;
+      map[c.titulo].ventasUSD       += c.ventasUSD || 0;
     });
     list = Object.values(map);
   } else {
