@@ -557,13 +557,8 @@ function renderCreativos() {
       <td class="right">${c.leads}</td>
       <td class="right">$${fmt(c.inversion)}</td>
       <td class="right">${cpl}$</td>
-      <td class="right">${hasVenta ? "$"+fmt(Math.round(c.ventasUSD)) : '<span style="color:var(--muted)">—</span>'}</td>
+      <td class="right">${hasVenta ? `$${fmt(Math.round(c.ventasUSD))} <span class="roi-val ${roiClass}" style="font-size:11px;margin-left:4px">${roi.toFixed(1)}x</span>` : '<span style="color:var(--muted)">—</span>'}</td>
       <td class="right">${avgQ}</td>
-      <td>
-        ${hasVenta
-          ? `<div class="roi-bar-wrap"><div class="roi-bar" style="width:${roiPct}%"></div><span class="roi-val ${roiClass}">${roi.toFixed(1)}x</span></div>`
-          : '<span style="color:var(--muted);font-size:12px">—</span>'}
-      </td>
     </tr>`;
   }).join("");
 
@@ -574,7 +569,6 @@ function renderCreativos() {
     <td class="right">${totCPL.toFixed(1)}$</td>
     <td class="right">${totVentas > 0 ? "$"+fmt(Math.round(totVentas)) : "—"}</td>
     <td class="right">${totLeads > 0 && totVentas > 0 ? "$"+fmt(Math.round(totVentas/totLeads)) : "—"}</td>
-    <td><span class="roi-val ${totROI >= 10 ? "good" : totROI >= 3 ? "mid" : "low"}">${totROI > 0 ? totROI.toFixed(1)+"x" : "—"}</span></td>
   </tr>`;
 
   tableEl.innerHTML = `
@@ -586,7 +580,6 @@ function renderCreativos() {
       <th class="right">CPL</th>
       <th class="right">Ventas USD</th>
       <th class="right">Venta/Lead</th>
-      <th>ROI</th>
     </tr></thead>
     <tbody>${rows}${totalRow}</tbody>
   `;
