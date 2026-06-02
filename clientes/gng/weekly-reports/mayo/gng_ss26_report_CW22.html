@@ -241,6 +241,28 @@ body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif
   .kpi-cell,.eco-kpi-cell,.eco-cell{border-right:none!important;}
   .kpi-v{font-size:17px!important;}
 }
+
+/* TREND CHART */
+.trend-block{background:#fff;border:1px solid var(--border);margin-bottom:24px;}
+.trend-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;border-bottom:1px solid var(--border);}
+.trend-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.trend-legend{display:flex;gap:16px;align-items:center;}
+.tl-item{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:.06em;}
+.tl-bar{width:10px;height:8px;display:inline-block;}
+.tl-line{width:14px;height:2px;display:inline-block;position:relative;top:-1px;}
+.trend-svg-wrap{padding:16px 20px 10px;position:relative;}
+.trend-tooltip{
+  position:absolute;pointer-events:none;
+  background:var(--black);color:var(--white);
+  font-family:'DM Mono',monospace;font-size:9px;line-height:1.6;
+  padding:8px 12px;white-space:nowrap;
+  border:none;z-index:100;display:none;
+  letter-spacing:.04em;
+}
+.trend-tooltip .tt-week{font-size:10px;font-weight:500;margin-bottom:4px;letter-spacing:.08em;}
+.trend-tooltip .tt-row{display:flex;justify-content:space-between;gap:20px;}
+.trend-tooltip .tt-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:5px;position:relative;top:1px;flex-shrink:0;}
+.trend-tooltip .tt-val{font-weight:500;}
 </style>
 
 <body>
@@ -1100,6 +1122,149 @@ function renderEcommSection(d, p) {
 }
 
 // ---- MAIN RENDER ----
+
+
+function renderTrendChart(activeWk) {
+  const allWks = Object.keys(WEEKS);
+  const W = 760, H = 180, PL = 56, PR = 48, PT = 10, PB = 36;
+  const CW = W - PL - PR, CH = H - PT - PB;
+  const n = allWks.length;
+  const barW = Math.floor(CW / n * 0.32);
+  const gap  = CW / n;
+
+  const netas = allWks.map(k => WEEKS[k].ecomm?.netas ?? 0);
+  const inv   = allWks.map(k => WEEKS[k].meta?.inv   ?? 0);
+  const roas  = allWks.map(k => WEEKS[k].meta?.roasNeg ?? 0);
+
+  const maxEur  = Math.max(...netas, ...inv) * 1.15;
+  const maxRoas = Math.max(...roas) * 1.25 || 5;
+
+  const yE = v => PT + CH - (v / maxEur) * CH;
+  const yR = v => PT + CH - (v / maxRoas) * CH;
+  const xC = i => PL + gap * i + gap / 2;
+
+  // Grid lines
+  let grid = '';
+  const ticks = 4;
+  for (let t = 0; t <= ticks; t++) {
+    const yy = PT + (CH / ticks) * t;
+    const val = maxEur * (1 - t / ticks);
+    const label = val >= 1000 ? (val/1000).toFixed(0)+'k' : val.toFixed(0);
+    grid += `<line x1="${PL}" y1="${yy}" x2="${W-PR}" y2="${yy}" stroke="#e8e4dd" stroke-width="1"/>`;
+    grid += `<text x="${PL-6}" y="${yy+4}" text-anchor="end" font-family="DM Mono,monospace" font-size="7" fill="#7a7670">${label}€</text>`;
+  }
+  for (let t = 0; t <= ticks; t++) {
+    const yy = PT + (CH / ticks) * t;
+    const val = maxRoas * (1 - t / ticks);
+    grid += `<text x="${W-PR+6}" y="${yy+4}" text-anchor="start" font-family="DM Mono,monospace" font-size="7" fill="#b8b4ac">${val.toFixed(1)}x</text>`;
+  }
+
+  // Bars + hover zones
+  let bars = '', hovers = '';
+  allWks.forEach((wk, i) => {
+    const cx    = xC(i);
+    const isAct = wk === activeWk;
+    const opN   = isAct ? 1 : 0.45;
+    const opI   = isAct ? 0.7 : 0.28;
+
+    const yI = yE(inv[i]),   hI = CH - (yI - PT);
+    const yN = yE(netas[i]), hN = CH - (yN - PT);
+
+    bars += `<rect x="${cx-barW-1}" y="${yI}" width="${barW}" height="${hI}" fill="#0a0a0a" opacity="${opI}" data-idx="${i}"/>`;
+    bars += `<rect x="${cx+1}"      y="${yN}" width="${barW}" height="${hN}" fill="#0a0a0a" opacity="${opN}" data-idx="${i}"/>`;
+
+    const lblFill = isAct ? '#0a0a0a' : '#b8b4ac';
+    bars += `<text x="${cx}" y="${H-PB+14}" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="${lblFill}" font-weight="${isAct?'500':'400'}">${WEEKS[wk].label}</text>`;
+
+    if (isAct) {
+      bars += `<text x="${cx-barW/2-1}" y="${yI-4}" text-anchor="middle" font-family="DM Mono,monospace" font-size="6.5" fill="#7a7670">${(inv[i]/1000).toFixed(1)}k</text>`;
+      bars += `<text x="${cx+barW/2+1}" y="${yN-4}" text-anchor="middle" font-family="DM Mono,monospace" font-size="6.5" fill="#0a0a0a">${(netas[i]/1000).toFixed(1)}k</text>`;
+    }
+
+    // Invisible hover rect spanning the full column height
+    hovers += `<rect class="trend-hover-zone" x="${cx-gap/2}" y="${PT}" width="${gap}" height="${CH+PB}" fill="transparent" data-idx="${i}" style="cursor:default"/>`;
+  });
+
+  // ROAS line
+  const pts = allWks.map((wk, i) => `${xC(i)},${yR(roas[i])}`).join(' ');
+  let roasLine = `<polyline points="${pts}" fill="none" stroke="#8B6914" stroke-width="1.5" stroke-linejoin="round"/>`;
+  allWks.forEach((wk, i) => {
+    const isAct = wk === activeWk;
+    roasLine += `<circle cx="${xC(i)}" cy="${yR(roas[i])}" r="${isAct?4:2.5}" fill="${isAct?'#8B6914':'#c9a84c'}" stroke="#fff" stroke-width="1" data-idx="${i}"/>`;
+    if (isAct) {
+      roasLine += `<text x="${xC(i)}" y="${yR(roas[i])-7}" text-anchor="middle" font-family="DM Mono,monospace" font-size="7" fill="#8B6914" font-weight="500">${roas[i].toFixed(2)}x</text>`;
+    }
+  });
+
+  // Encode data for tooltip access
+  const dataAttr = encodeURIComponent(JSON.stringify(allWks.map((wk, i) => ({
+    wk: WEEKS[wk].label,
+    range: WEEKS[wk].range,
+    inv: inv[i],
+    netas: netas[i],
+    roas: roas[i]
+  }))));
+
+  const svgId = 'trend-svg-' + activeWk;
+  const ttId  = 'trend-tt-'  + activeWk;
+
+  const svg = `<svg id="${svgId}" width="100%" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" data-chart="${dataAttr}">${grid}${bars}${roasLine}${hovers}</svg>`;
+
+  const block = `<div class="trend-block">
+    <div class="trend-hdr">
+      <div class="trend-title">Evolución semanal</div>
+      <div class="trend-legend">
+        <div class="tl-item"><span class="tl-bar" style="background:#0a0a0a;opacity:.3"></span>Inversión</div>
+        <div class="tl-item"><span class="tl-bar" style="background:#0a0a0a"></span>Ventas netas</div>
+        <div class="tl-item"><span class="tl-line" style="background:#8B6914"></span>ROAS negocio</div>
+      </div>
+    </div>
+    <div class="trend-svg-wrap">
+      ${svg}
+      <div id="${ttId}" class="trend-tooltip"></div>
+    </div>
+  </div>`;
+
+  // Attach listeners after render
+  setTimeout(() => {
+    const svgEl = document.getElementById(svgId);
+    const ttEl  = document.getElementById(ttId);
+    if (!svgEl || !ttEl) return;
+
+    const raw = JSON.parse(decodeURIComponent(svgEl.dataset.chart));
+
+    svgEl.querySelectorAll('.trend-hover-zone').forEach(zone => {
+      zone.addEventListener('mouseenter', function(e) {
+        const d = raw[parseInt(this.dataset.idx)];
+        ttEl.innerHTML = `
+          <div class="tt-week">${d.wk} · ${d.range}</div>
+          <div class="tt-row"><span><span class="tt-dot" style="background:#0a0a0a;opacity:.35"></span>Inversión</span><span class="tt-val">${d.inv.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})}€</span></div>
+          <div class="tt-row"><span><span class="tt-dot" style="background:#0a0a0a"></span>Ventas netas</span><span class="tt-val">${d.netas.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})}€</span></div>
+          <div class="tt-row"><span><span class="tt-dot" style="background:#8B6914"></span>ROAS negocio</span><span class="tt-val">${d.roas.toFixed(2)}x</span></div>`;
+        ttEl.style.display = 'block';
+      });
+
+      zone.addEventListener('mousemove', function(e) {
+        const wrap = svgEl.closest('.trend-svg-wrap');
+        const rect = wrap.getBoundingClientRect();
+        let left = e.clientX - rect.left + 14;
+        let top  = e.clientY - rect.top  - 10;
+        // Keep tooltip inside wrapper
+        const ttW = ttEl.offsetWidth;
+        if (left + ttW > rect.width - 8) left = e.clientX - rect.left - ttW - 14;
+        ttEl.style.left = left + 'px';
+        ttEl.style.top  = top  + 'px';
+      });
+
+      zone.addEventListener('mouseleave', function() {
+        ttEl.style.display = 'none';
+      });
+    });
+  }, 0);
+
+  return block;
+}
+
 function renderWeek(wk, prevWk) {
   const d = WEEKS[wk];
   const p = prevWk ? WEEKS[prevWk] : null;
@@ -1108,6 +1273,7 @@ function renderWeek(wk, prevWk) {
   mailFilter = 'campanas';
 
   let html = generateSummary(d, p);
+  html += renderTrendChart(wk);
   html += renderMetaSection(d, p);
   html += renderMailSection(d);
   html += renderEcommSection(d, p);
