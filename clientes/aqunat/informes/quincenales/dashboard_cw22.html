@@ -293,7 +293,8 @@ tbody tr:hover td{background:#f8fcf8!important}
       <div class="chart-grid">
         <div class="chart-box"><div class="chart-title">Leads por fuente</div><div class="legend" id="r-leg-donut"></div><div class="chart-wrap"><canvas id="r-donut"></canvas></div></div>
         <div class="chart-box"><div class="chart-title">Análisis de oportunidades por Estado MX</div><div class="chart-wrap tall" id="r-estado-wrap"><canvas id="r-estado"></canvas></div></div>
-        <div class="chart-box full"><div class="chart-title">Análisis inversión y CPL por plataforma/landing destino</div><div class="legend" id="r-leg-invcpl"></div><div class="chart-wrap"><canvas id="r-invcpl"></canvas></div></div>
+        <div class="chart-box full"><div class="chart-title">Inversión por canal y periodo</div><div class="legend" id="r-leg-inv-evol"></div><div class="chart-wrap tall"><canvas id="r-inv-evol"></canvas></div></div>
+        <div class="chart-box full"><div class="chart-title">CPL por canal y periodo</div><div class="legend" id="r-leg-cpl-evol"></div><div class="chart-wrap tall"><canvas id="r-cpl-evol"></canvas></div></div>
       </div>
       <div class="section-title">Análisis por canal — Cotizaciones y Leads</div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table class="rend-table" id="r-rend-table"></table></div>
@@ -745,30 +746,42 @@ function renderRendimiento() {
   const elabels=Object.keys(d.estado),evals=Object.values(d.estado);
   document.getElementById("r-estado-wrap").style.height=Math.max(220,elabels.length*22+40)+"px";
   RCH["estado"]=new Chart(document.getElementById("r-estado"),{type:"bar",data:{labels:elabels,datasets:[{data:evals,backgroundColor:"#00693ECC",borderWidth:0,borderRadius:3}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:11,family:'Rational,sans-serif'}}},y:{ticks:{font:{size:12,family:'Rational,sans-serif'}}}}}});
-  rdc("invcpl");
+  // --- Inversión y CPL por canal y periodo (evolución) ---
   const CAMPS_DISPLAY = CAMPS.map(k => k === "Testing" ? "Testing (Guanajuato)" : k);
-  document.getElementById("r-leg-invcpl").innerHTML = CAMPS.map((k,i) => `<span style="display:flex;align-items:center;gap:4px"><span class="ldot" style="background:${col(k)}"></span>${CAMPS_DISPLAY[i]} — Inv: $${fmtD(g[k])} · CPL: ${l[k]>0?"$"+(g[k]/l[k]).toFixed(2):"-"}</span>`).join("");
-  RCH["invcpl"] = new Chart(document.getElementById("r-invcpl"), {
-    type: "bar",
-    data: {
-      labels: CAMPS_DISPLAY,
-      datasets: [
-        { type: "bar", label: "Inversión ($)", data: CAMPS.map(k => g[k]), backgroundColor: CAMPS.map(k => col(k)), borderWidth: 0, borderRadius: 4, yAxisID: "y" },
-        { type: "line", label: "CPL ($)", data: CAMPS.map(k => l[k] > 0 ? +(g[k]/l[k]).toFixed(2) : null), borderColor: "#374151", backgroundColor: "#37415122", borderWidth: 2, pointRadius: 6, pointBackgroundColor: "#374151", tension: 0.3, yAxisID: "y2" }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { position: "bottom", labels: { font: { size: 12, family: "Rational,sans-serif" }, boxWidth: 12 } },
-        tooltip: { callbacks: { label: c => c.dataset.yAxisID === "y2" ? "$" + c.raw + "/lead" : "$" + fmt(c.raw) } }
-      },
-      scales: {
-        x: { ticks: { font: { size: 12, family: "Rational,sans-serif" } } },
-        y: { beginAtZero: true, position: "left", ticks: { font: { size: 11, family: "Rational,sans-serif" }, callback: v => "$" + fmt(v) } },
-        y2: { beginAtZero: true, position: "right", grid: { drawOnChartArea: false }, ticks: { font: { size: 11, family: "Rational,sans-serif" }, callback: v => "$" + v } }
-      }
-    }
+  const allPeriodos = CONFIG.periodos.filter(p => p.key !== "total");
+  const periodoLabels = allPeriodos.map(p => p.label.split(" ")[0]); // e.g. "CW11–CW12"
+  // Build series: for each camp, value per period
+  const invSeries = CAMPS.map((k, i) => ({
+    label: CAMPS_DISPLAY[i],
+    data: allPeriodos.map(p => (CONFIG.rendimiento[p.key]?.gastoCanal?.[k]) || 0),
+    borderColor: col(k),
+    backgroundColor: col(k) + "33",
+    pointBackgroundColor: col(k),
+    borderWidth: 2, pointRadius: 5, tension: 0.35, fill: false
+  }));
+  const cplSeries = CAMPS.map((k, i) => {
+    const data = allPeriodos.map(p => {
+      const rd = CONFIG.rendimiento[p.key];
+      if (!rd) return null;
+      const gk = rd.gastoCanal?.[k] || 0, lk = rd.leadsCanal?.[k] || 0;
+      return lk > 0 ? +(gk / lk).toFixed(2) : null;
+    });
+    return { label: CAMPS_DISPLAY[i], data, borderColor: col(k), backgroundColor: col(k) + "33", pointBackgroundColor: col(k), borderWidth: 2, pointRadius: 5, tension: 0.35, fill: false };
+  });
+  const chartFont = { size: 12, family: "Rational,sans-serif" };
+  rdc("inv-evol");
+  document.getElementById("r-leg-inv-evol").innerHTML = CAMPS.map((k,i) => `<span style="display:flex;align-items:center;gap:4px"><span class="ldot" style="background:${col(k)}"></span>${CAMPS_DISPLAY[i]}</span>`).join("");
+  RCH["inv-evol"] = new Chart(document.getElementById("r-inv-evol"), {
+    type: "line",
+    data: { labels: periodoLabels, datasets: invSeries },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } , tooltip: { callbacks: { label: c => c.dataset.label + ": $" + fmt(c.raw) } } }, scales: { x: { ticks: { font: chartFont } }, y: { beginAtZero: true, ticks: { font: { size: 11, family: "Rational,sans-serif" }, callback: v => "$" + fmt(v) } } } }
+  });
+  rdc("cpl-evol");
+  document.getElementById("r-leg-cpl-evol").innerHTML = CAMPS.map((k,i) => `<span style="display:flex;align-items:center;gap:4px"><span class="ldot" style="background:${col(k)}"></span>${CAMPS_DISPLAY[i]}</span>`).join("");
+  RCH["cpl-evol"] = new Chart(document.getElementById("r-cpl-evol"), {
+    type: "line",
+    data: { labels: periodoLabels, datasets: cplSeries },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.dataset.label + ": $" + (c.raw ?? "—") + "/lead" } } }, scales: { x: { ticks: { font: chartFont } }, y: { beginAtZero: true, ticks: { font: { size: 11, family: "Rational,sans-serif" }, callback: v => "$" + v } } } }
   });
   // Build cotizaciones by canal lookup
   const quotByCanal = {};
