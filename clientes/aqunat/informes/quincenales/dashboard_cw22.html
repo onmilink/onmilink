@@ -833,15 +833,14 @@ function buildResumen(period) {
   const cplCamps = CAMPS.filter(k => l[k] && l[k]>0);
   const bestCamp = cplCamps.length ? cplCamps.reduce((best,k)=>( (g[k]/l[k]) < (g[best]/l[best]) ? k : best ), cplCamps[0]) : null;
   
-  // Trend vs previous
+  // Trends: only show for non-total periods with a previous period to compare against
   let trendHTML = '';
-  if (prev) {
+  if (prev && period !== 'total') {
     const prevL = Object.values(prev.leadsCanal).reduce((a,b)=>a+b,0);
     const prevG = Object.values(prev.gastoCanal).reduce((a,b)=>a+b,0);
     const prevCPL = prevL > 0 ? prevG/prevL : null;
     const trendLeads = getTrend(tL, prevL);
     const trendCPL = prevCPL ? getTrend(parseFloat(cpl), prevCPL) : {icon:'',cls:'',pct:''};
-    // For CPL, lower is better — invert the class
     const cplCls = trendCPL.cls === 'trend-down' ? 'trend-up' : (trendCPL.cls === 'trend-up' ? 'trend-down' : '');
     trendHTML = `<span class="exec-trend ${trendLeads.cls}">${trendLeads.icon} ${trendLeads.pct} leads vs periodo anterior</span>
     <span class="exec-trend ${cplCls}">${trendCPL.icon} CPL ${trendCPL.pct} vs periodo anterior</span>`;
