@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Rendimiento - 1200 Limited | 26 May – 1 Jun 2026</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f8f9fa;
+            color: #1a1a1a;
+        }
+
+        .dashboard { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        .header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .header h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; color: #0a0a0a; }
+        .header p { font-size: 14px; color: #666; }
+        .date-range { font-size: 13px; color: #999; margin-top: 0.5rem; }
+
+        /* WoW summary bar */
+        .wow-bar {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2.5rem;
+            display: grid;
+            grid-template-columns: auto repeat(6, 1fr);
+            align-items: center;
+            gap: 0;
+        }
+        .wow-bar-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+            padding-right: 1.5rem;
+            border-right: 1px solid #f0f0f0;
+            white-space: nowrap;
+        }
+        .wow-kpi {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1rem;
+            border-right: 1px solid #f0f0f0;
+            gap: 4px;
+        }
+        .wow-kpi:last-child { border-right: none; }
+        .wow-kpi-name { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
+        .wow-kpi-value { font-size: 18px; font-weight: 700; color: #0a0a0a; }
+        .wow-kpi-delta { font-size: 12px; font-weight: 600; padding: 1px 6px; border-radius: 4px; }
+        .delta-good { background: #d1fae5; color: #065f46; }
+        .delta-bad { background: #fee2e2; color: #991b1b; }
+        .delta-neutral { background: #f3f4f6; color: #6b7280; }
+
+        @media (max-width: 900px) {
+            .wow-bar { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .wow-bar-label { display: none; }
+            .wow-kpi { border-right: none; border-bottom: 1px solid #f0f0f0; padding: 0.5rem 0; }
+        }
+
+        .section { margin-bottom: 2.5rem; }
+        .section-title {
+            font-size: 18px; font-weight: 600; margin-bottom: 1.2rem; color: #0a0a0a;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .section-icon {
+            width: 24px; height: 24px; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; color: white; font-size: 14px;
+        }
+        .section-ecommerce .section-icon { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .section-meta .section-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 1.8rem;
+        }
+        .metric-card {
+            background: white; border: 1px solid #e0e0e0; border-radius: 10px;
+            padding: 1.2rem; transition: all 0.3s ease;
+        }
+        .metric-card:hover { border-color: #bbb; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .metric-label { font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem; font-weight: 600; }
+        .metric-value { font-size: 24px; font-weight: 700; color: #0a0a0a; line-height: 1.2; margin-bottom: 0.4rem; }
+        .metric-subtext { font-size: 12px; color: #bbb; }
+        .metric-delta {
+            font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px;
+            display: inline-block; margin-top: 6px;
+        }
+
+        .two-col {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;
+        }
+        @media (max-width: 1100px) { .two-col { grid-template-columns: 1fr; } }
+
+        .chart-container { background: white; border: 1px solid #e0e0e0; border-radius: 10px; padding: 1.5rem; }
+        .chart-title { font-size: 15px; font-weight: 600; margin-bottom: 1.2rem; color: #0a0a0a; }
+        .chart-wrapper { position: relative; height: 280px; margin-bottom: 0.5rem; }
+        .chart-wrapper.tall { height: 320px; }
+        canvas { max-width: 100%; }
+
+        .breakdown {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+            margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; font-size: 13px;
+        }
+        .breakdown-item { display: flex; justify-content: space-between; align-items: center; }
+        .breakdown-label { color: #666; }
+        .breakdown-value { font-weight: 600; color: #0a0a0a; }
+
+        .breakdown-3 {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;
+            margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; font-size: 13px;
+        }
+
+        .funnel-breakdown { display: flex; flex-direction: column; gap: 8px; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; font-size: 13px; }
+        .funnel-step { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; }
+        .funnel-label { color: #666; }
+        .funnel-value { font-weight: 600; color: #0a0a0a; }
+        .funnel-percentage { color: #999; font-size: 12px; }
+
+        .footer {
+            text-align: center; padding: 2rem; color: #999; font-size: 12px;
+            border-top: 1px solid #e0e0e0; margin-top: 3rem;
+        }
+
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .comparison-table th { background: #f5f5f5; padding: 1rem; text-align: left; font-weight: 600; color: #0a0a0a; border-bottom: 2px solid #e0e0e0; }
+        .comparison-table td { padding: 1rem; border-bottom: 1px solid #f0f0f0; color: #666; }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .value-cell { font-weight: 600; color: #0a0a0a; }
+
+        .product-list, .device-list, .location-list { list-style: none; font-size: 13px; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
+        .product-item, .device-item, .location-item { display: flex; justify-content: space-between; padding: 8px 0; }
+        .product-name { color: #666; }
+        .product-value { font-weight: 600; color: #0a0a0a; }
+
+        .badge-new {
+            font-size: 10px; font-weight: 700; background: #dbeafe; color: #1e40af;
+            padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
+        }
+
+        .note { font-size: 12px; color: #999; margin-top: 0.6rem; font-style: italic; }
+
+        @media print { body { background: white; } .dashboard { padding: 0; } }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+
+    <div class="header">
+        <h1>📊 Dashboard de Rendimiento — 1200 Limited</h1>
+        <p>Análisis integral de Ecommerce + Meta Ads</p>
+        <div class="date-range">Período: 26 de mayo – 1 de junio de 2026 &nbsp;·&nbsp; Semana 2</div>
+    </div>
+
+    <!-- WoW SUMMARY BAR -->
+    <div class="wow-bar">
+        <div class="wow-bar-label">vs. semana anterior<br>(18–25 mayo)</div>
+
+        <div class="wow-kpi">
+            <span class="wow-kpi-name">Ventas</span>
+            <span class="wow-kpi-value">€1.349,84</span>
+            <span class="wow-kpi-delta delta-good">▲ +44,4%</span>
+        </div>
+        <div class="wow-kpi">
+            <span class="wow-kpi-name">Sesiones</span>
+            <span class="wow-kpi-value">563</span>
+            <span class="wow-kpi-delta delta-bad">▼ −28,4%</span>
+        </div>
+        <div class="wow-kpi">
+            <span class="wow-kpi-name">CVR</span>
+            <span class="wow-kpi-value">2,30%</span>
+            <span class="wow-kpi-delta delta-good">▲ +1,16pp</span>
+        </div>
+        <div class="wow-kpi">
+            <span class="wow-kpi-name">ROAS Neg.</span>
+            <span class="wow-kpi-value">5,82x</span>
+            <span class="wow-kpi-delta delta-good">▲ +21,0%</span>
+        </div>
+        <div class="wow-kpi">
+            <span class="wow-kpi-name">CPA Meta</span>
+            <span class="wow-kpi-value">€38,67</span>
+            <span class="wow-kpi-delta delta-good">▼ −20,4%</span>
+        </div>
+        <div class="wow-kpi">
+            <span class="wow-kpi-name">Compras Meta</span>
+            <span class="wow-kpi-value">6</span>
+            <span class="wow-kpi-delta delta-good">▲ +50,0%</span>
+        </div>
+    </div>
+
+    <!-- ECOMMERCE -->
+    <div class="section section-ecommerce">
+        <h2 class="section-title">
+            <span class="section-icon">🛍️</span>
+            E-commerce
+        </h2>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Sesiones</div>
+                <div class="metric-value">563</div>
+                <div class="metric-subtext">Visitas totales</div>
+                <span class="metric-delta delta-bad">▼ −28,4% vs sem. ant.</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Compras completadas</div>
+                <div class="metric-value">13</div>
+                <div class="metric-subtext">Órdenes finalizadas</div>
+                <span class="metric-delta delta-good">▲ +18,2% vs sem. ant.</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Tasa de conversión</div>
+                <div class="metric-value">2,30%</div>
+                <div class="metric-subtext">Sesiones a compra</div>
+                <span class="metric-delta delta-good">▲ +1,16pp vs sem. ant.</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Valor medio pedido</div>
+                <div class="metric-value">€84,69</div>
+                <div class="metric-subtext">Promedio por orden</div>
+                <span class="metric-delta delta-bad">▼ −2,9% vs sem. ant.</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Ventas totales</div>
+                <div class="metric-value">€1.349,84</div>
+                <div class="metric-subtext">Período analizado</div>
+                <span class="metric-delta delta-good">▲ +44,4% vs sem. ant.</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">ROAS Negocio</div>
+                <div class="metric-value">5,82x</div>
+                <div class="metric-subtext">Retorno del negocio</div>
+                <span class="metric-delta delta-good">▲ +21,0% vs sem. ant.</span>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div class="chart-container">
+                <div class="chart-title">Desglose del funnel de conversión</div>
+                <div class="chart-wrapper">
+                    <canvas id="ecommFunnelChart"></canvas>
+                </div>
+                <div class="funnel-breakdown">
+                    <div class="funnel-step">
+                        <span class="funnel-label">Sesiones</span>
+                        <span class="funnel-value">563 <span class="funnel-percentage">(100%)</span></span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-label">Sesiones con carrito</span>
+                        <span class="funnel-value">43 <span class="funnel-percentage">(7,63%)</span></span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-label">Pagos iniciados</span>
+                        <span class="funnel-value">23 <span class="funnel-percentage">(4,08%)</span></span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-label">Compras completadas</span>
+                        <span class="funnel-value">13 <span class="funnel-percentage">(2,30%)</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Ventas totales por producto</div>
+                <div class="chart-wrapper">
+                    <canvas id="ecommProductsChart"></canvas>
+                </div>
+                <ul class="product-list">
+                    <li class="product-item">
+                        <span class="product-name">Camiseta 1200 Essentia</span>
+                        <span class="product-value">€719,00</span>
+                    </li>
+                    <li class="product-item">
+                        <span class="product-name">Camiseta 1200 Horizon</span>
+                        <span class="product-value">€559,00</span>
+                    </li>
+                    <li class="product-item">
+                        <span class="product-name">Camiseta 1200 Origo</span>
+                        <span class="product-value">€0,00</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div class="chart-container">
+                <div class="chart-title">Sesiones por tipo de dispositivo</div>
+                <div class="chart-wrapper">
+                    <canvas id="ecommDeviceChart"></canvas>
+                </div>
+                <ul class="device-list">
+                    <li class="device-item">
+                        <span class="product-name">Móvil</span>
+                        <span class="product-value">528 (93,8%)</span>
+                    </li>
+                    <li class="device-item">
+                        <span class="product-name">Escritorio</span>
+                        <span class="product-value">33 (5,9%)</span>
+                    </li>
+                    <li class="device-item">
+                        <span class="product-name">Tableta</span>
+                        <span class="product-value">2 (0,4%)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Sesiones por ubicación (top 5)</div>
+                <div class="chart-wrapper">
+                    <canvas id="ecommLocationChart"></canvas>
+                </div>
+                <ul class="location-list">
+                    <li class="location-item"><span class="product-name">Murcia</span><span class="product-value">77</span></li>
+                    <li class="location-item"><span class="product-name">Madrid</span><span class="product-value">69</span></li>
+                    <li class="location-item"><span class="product-name">Sin ubicación</span><span class="product-value">60</span></li>
+                    <li class="location-item"><span class="product-name">Valencia</span><span class="product-value">45</span></li>
+                    <li class="location-item"><span class="product-name">Valencia (sin ciudad)</span><span class="product-value">28</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">Desglose de ventas totales — comparativa semanal</div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Sem. 2 — 26 May–1 Jun</th>
+                        <th>Sem. 1 — 18–25 May</th>
+                        <th>Variación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="value-cell">Ventas brutas</td>
+                        <td>€1.519,81</td>
+                        <td>€1.039,87</td>
+                        <td style="color:#065f46;font-weight:600;">▲ +46,2%</td>
+                    </tr>
+                    <tr>
+                        <td class="value-cell">Descuentos</td>
+                        <td>€0,00</td>
+                        <td>€0,00</td>
+                        <td style="color:#6b7280;">—</td>
+                    </tr>
+                    <tr>
+                        <td class="value-cell">Devoluciones</td>
+                        <td>−€239,97</td>
+                        <td>−€159,98</td>
+                        <td style="color:#991b1b;font-weight:600;">▲ +50,0%</td>
+                    </tr>
+                    <tr>
+                        <td class="value-cell">Ventas netas</td>
+                        <td>€1.279,84</td>
+                        <td>€879,89</td>
+                        <td style="color:#065f46;font-weight:600;">▲ +45,5%</td>
+                    </tr>
+                    <tr>
+                        <td class="value-cell">Cargos de envío</td>
+                        <td>€70,00</td>
+                        <td>€55,00</td>
+                        <td style="color:#6b7280;">▲ +27,3%</td>
+                    </tr>
+                    <tr>
+                        <td class="value-cell">Cargos por devolución</td>
+                        <td>€0,00</td>
+                        <td>€0,00</td>
+                        <td style="color:#6b7280;">—</td>
+                    </tr>
+                    <tr>
+                        <td class="value-cell">Impuestos</td>
+                        <td>€0,00</td>
+                        <td>€0,00</td>
+                        <td style="color:#6b7280;">—</td>
+                    </tr>
+                    <tr style="background:#f9f9f9;font-weight:600;">
+                        <td>VENTAS TOTALES</td>
+                        <td>€1.349,84</td>
+                        <td>€934,89</td>
+                        <td style="color:#065f46;">▲ +44,4%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- META ADS -->
+    <div class="section section-meta">
+        <h2 class="section-title">
+            <span class="section-icon">📱</span>
+            Meta Ads
+        </h2>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Inversión total</div>
+                <div class="metric-value">€232,04</div>
+                <div class="metric-subtext">Gasto en campaña</div>
+                <span class="metric-delta delta-neutral">▲ +19,4% vs sem. ant.</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Compras generadas</div>
+                <div class="metric-value">6</div>
+                <div class="metric-subtext">Conversiones</div>
+                <span class="metric-delta delta-good">▲ +50,0% vs sem. ant.</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Coste por compra</div>
+                <div class="metric-value">€38,67</div>
+                <div class="metric-subtext">CPA</div>
+                <span class="metric-delta delta-good">▼ −20,4% vs sem. ant.</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">CPM</div>
+                <div class="metric-value">€3,37</div>
+                <div class="metric-subtext">Por mil impresiones</div>
+                <span class="metric-delta delta-neutral">▲ +3,7% vs sem. ant.</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Clics en enlace</div>
+                <div class="metric-value">827</div>
+                <div class="metric-subtext">Total período</div>
+                <span class="metric-delta delta-neutral">3 ad sets activos</span>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">ROAS Negocio</div>
+                <div class="metric-value">5,82x</div>
+                <div class="metric-subtext">Ventas / Inversión</div>
+                <span class="metric-delta delta-good">▲ +21,0% vs sem. ant.</span>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div class="chart-container">
+                <div class="chart-title">Distribución de gasto por conjunto de anuncios</div>
+                <div class="chart-wrapper">
+                    <canvas id="metaAdSetsChart"></canvas>
+                </div>
+                <div class="breakdown-3">
+                    <div class="breakdown-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                        <span class="breakdown-label">Prosp/Murcia/Adv+</span>
+                        <span class="breakdown-value">€115,44 (49,7%)</span>
+                    </div>
+                    <div class="breakdown-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                        <span class="breakdown-label">Prosp/Esp/Adv+</span>
+                        <span class="breakdown-value">€77,49 (33,4%)</span>
+                    </div>
+                    <div class="breakdown-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                        <span class="breakdown-label">Ret/DPA/hot <span class="badge-new">NUEVO</span></span>
+                        <span class="breakdown-value">€39,11 (16,9%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">CPA por conjunto de anuncios</div>
+                <div class="chart-wrapper">
+                    <canvas id="metaCPAChart"></canvas>
+                </div>
+                <div class="note">Línea de referencia: CPA sem. anterior €48,58</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">Detalle de conjuntos de anuncios — comparativa semanal</div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Conjunto de anuncios</th>
+                        <th>Gasto (€)</th>
+                        <th>CPM (€)</th>
+                        <th>Clics enlace</th>
+                        <th>Compras</th>
+                        <th>CPA (€)</th>
+                        <th>vs sem. ant.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="value-cell">Prosp/Murcia/Adv+</td>
+                        <td>€115,44</td>
+                        <td>€3,29</td>
+                        <td>484</td>
+                        <td>4</td>
+                        <td class="value-cell">€28,86</td>
+                        <td style="color:#065f46;font-weight:600;">CPA ▼ vs €58,45</td>
+                    </tr>
+                    <tr>
+                        <td class="value-cell">Prosp/Esp/Adv+</td>
+                        <td>€77,49</td>
+                        <td>€3,16</td>
+                        <td>275</td>
+                        <td>1</td>
+                        <td class="value-cell">€77,49</td>
+                        <td style="color:#991b1b;font-weight:600;">CPA ▲ vs €38,70</td>
+                    </tr>
+                    <tr>
+                        <td class="value-cell">Ret/DPA/hot <span class="badge-new">NUEVO</span></td>
+                        <td>€39,11</td>
+                        <td>€4,22</td>
+                        <td>68</td>
+                        <td>1</td>
+                        <td class="value-cell">€39,11</td>
+                        <td style="color:#6b7280;">Primera semana</td>
+                    </tr>
+                    <tr style="background:#f9f9f9;font-weight:600;">
+                        <td>TOTAL</td>
+                        <td>€232,04</td>
+                        <td>€3,37</td>
+                        <td>827</td>
+                        <td>6</td>
+                        <td>€38,67</td>
+                        <td style="color:#065f46;">▲ +2 compras · ▼ CPA −20,4%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="note" style="margin-top:0.8rem;">Sem. anterior: €194,30 gasto · 4 compras · CPA €48,58 · CPM €3,25 (2 ad sets)</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Dashboard generado el 3 de junio de 2026 &nbsp;·&nbsp; Datos del período 26 mayo – 1 junio 2026</p>
+        <p>Documento confidencial — Solo para uso autorizado</p>
+    </div>
+</div>
+
+<script>
+    const C = {
+        primary: '#667eea',
+        secondary: '#764ba2',
+        accent: '#f5576c',
+        success: '#10b981',
+        warning: '#f59e0b',
+        info: '#3b82f6',
+        ret: '#f59e0b'
+    };
+
+    // 1. Funnel
+    new Chart(document.getElementById('ecommFunnelChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Sesiones', 'Con carrito', 'Pagos iniciados', 'Compras'],
+            datasets: [{
+                label: 'Usuarios',
+                data: [563, 43, 23, 13],
+                backgroundColor: [C.primary, C.primary + 'CC', C.primary + '99', C.primary + '55'],
+                borderRadius: 6,
+                borderSkipped: false
+            }]
+        },
+        options: {
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true } }
+        }
+    });
+
+    // 2. Productos
+    new Chart(document.getElementById('ecommProductsChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Essentia', 'Horizon', 'Origo'],
+            datasets: [{
+                label: 'Ventas (€)',
+                data: [719, 559, 0],
+                backgroundColor: [C.primary, C.success, '#d1d5db'],
+                borderRadius: 6, borderSkipped: false
+            }]
+        },
+        options: {
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true } }
+        }
+    });
+
+    // 3. Dispositivos
+    new Chart(document.getElementById('ecommDeviceChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Móvil (93,8%)', 'Escritorio (5,9%)', 'Tableta (0,4%)'],
+            datasets: [{
+                data: [528, 33, 2],
+                backgroundColor: [C.primary, C.primary + '80', C.primary + '40']
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } }
+        }
+    });
+
+    // 4. Ubicaciones
+    new Chart(document.getElementById('ecommLocationChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Murcia', 'Madrid', 'Sin ubicación', 'Valencia', 'Valencia (s/c)'],
+            datasets: [{
+                label: 'Sesiones',
+                data: [77, 69, 60, 45, 28],
+                backgroundColor: C.primary, borderRadius: 6
+            }]
+        },
+        options: {
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true } }
+        }
+    });
+
+    // 5. Distribución gasto Meta
+    new Chart(document.getElementById('metaAdSetsChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Prosp/Murcia/Adv+', 'Prosp/Esp/Adv+', 'Ret/DPA/hot'],
+            datasets: [{
+                data: [115.44, 77.49, 39.11],
+                backgroundColor: [C.primary, C.accent, C.ret]
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } }
+        }
+    });
+
+    // 6. CPA por ad set
+    new Chart(document.getElementById('metaCPAChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Prosp/Murcia/Adv+', 'Prosp/Esp/Adv+', 'Ret/DPA/hot'],
+            datasets: [
+                {
+                    label: 'CPA sem. 2',
+                    data: [28.86, 77.49, 39.11],
+                    backgroundColor: [C.primary, C.accent, C.ret],
+                    borderRadius: 6
+                },
+                {
+                    label: 'CPA sem. 1 (ref.)',
+                    data: [58.45, 38.70, null],
+                    backgroundColor: ['#667eea33', '#f5576c33', 'transparent'],
+                    borderColor: ['#667eea88', '#f5576c88', 'transparent'],
+                    borderWidth: 2,
+                    borderRadius: 6,
+                    type: 'bar'
+                }
+            ]
+        },
+        options: {
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } },
+            scales: { x: { beginAtZero: true } }
+        }
+    });
+</script>
+</body>
+</html>
