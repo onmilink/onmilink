@@ -215,6 +215,14 @@ tbody tr:hover td{background:#f8fcf8!important}
   .nav-tab{min-width:132px;}
   .rtab{font-size:10px;padding:5px 12px;}
 }
+
+.leg-chip{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;border:1.5px solid transparent;cursor:pointer;font-size:12px;font-family:'Rational',sans-serif;font-weight:500;background:#f8faf8;transition:all .15s;user-select:none}
+.leg-chip:hover{border-color:var(--g-light);background:#f0f7ec}
+.leg-chip.active{border-color:currentColor;background:#fff;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.leg-chip.dimmed{opacity:.3}
+.leg-chip-all{padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);cursor:pointer;font-size:11px;font-family:'Rational',sans-serif;font-weight:600;background:#fff;color:var(--subtle);text-transform:uppercase;letter-spacing:.5px;transition:all .15s}
+.leg-chip-all:hover,.leg-chip-all.active{border-color:var(--g-dark);color:var(--g-dark);background:#f0f7ec}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 </style>
 </head>
 <body>
