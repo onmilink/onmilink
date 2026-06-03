@@ -493,6 +493,29 @@ const fmt  = n => (+n).toLocaleString("es-MX",{maximumFractionDigits:0});
 const fmtD = n => (+n).toFixed(2);
 const col  = k => CANAL_COLORS[k] || "#888";
 let RCH = {};
+let evolFilter = null;
+function applyEvolFilter(idx) {
+  evolFilter = idx;
+  [RCH["inv-evol"], RCH["cpl-evol"]].forEach(ch => {
+    if (!ch) return;
+    ch.data.datasets.forEach((ds, i) => { ds.hidden = (idx !== null && i !== idx); });
+    ch.update();
+  });
+  ["r-leg-inv-evol","r-leg-cpl-evol"].forEach(legId => {
+    document.querySelectorAll("#"+legId+" .leg-chip").forEach((c, i) => {
+      c.classList.toggle("active", idx === i);
+      c.classList.toggle("dimmed", idx !== null && idx !== i);
+    });
+    const allBtn = document.querySelector("#"+legId+" .leg-chip-all");
+    if (allBtn) allBtn.classList.toggle("active", idx === null);
+  });
+}
+function buildEvolLegend(containerId, campsDisplay) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '<button class="leg-chip-all active" onclick="applyEvolFilter(null)">Todos</button>'
+    + CAMPS.map((k, i) => `<button class="leg-chip" style="color:${col(k)}" onclick="applyEvolFilter(evolFilter===${i}?null:${i})"><span class="ldot" style="background:${col(k)}"></span>${campsDisplay[i]}</button>`).join("");
+}
 let rView = CONFIG.periodos[0].key;
 
 document.getElementById("hdr-date").textContent = "Actualizado al " + CONFIG.fechaActualizacion;
@@ -777,33 +800,7 @@ function renderRendimiento() {
     return { label: CAMPS_DISPLAY[i], data, borderColor: col(k), backgroundColor: col(k) + "33", pointBackgroundColor: col(k), borderWidth: 2, pointRadius: 5, tension: 0.35, fill: false };
   });
   const chartFont = { size: 12, family: "Rational,sans-serif" };
-  let evolFilter = null; // null = all channels visible
-
-  function applyEvolFilter(idx) {
-    [RCH["inv-evol"], RCH["cpl-evol"]].forEach(ch => {
-      if (!ch) return;
-      ch.data.datasets.forEach((ds, i) => { ds.hidden = (idx !== null && i !== idx); });
-      ch.update();
-    });
-    // Update chip styles for both legends
-    ["r-leg-inv-evol","r-leg-cpl-evol"].forEach(legId => {
-      const chips = document.querySelectorAll(`#${legId} .leg-chip`);
-      chips.forEach((c, i) => {
-        c.classList.toggle("active", idx === i);
-        c.classList.toggle("dimmed", idx !== null && idx !== i);
-      });
-      const allBtn = document.querySelector(`#${legId} .leg-chip-all`);
-      if (allBtn) allBtn.classList.toggle("active", idx === null);
-    });
-  }
-
-  function buildEvolLegend(containerId) {
-    const c = document.getElementById(containerId);
-    if (!c) return;
-    c.innerHTML = `<button class="leg-chip-all active" onclick="evolFilter=null;applyEvolFilter(null)">Todos</button>`
-      + CAMPS.map((k, i) => `<button class="leg-chip" style="color:${col(k)}" onclick="evolFilter=(evolFilter===${i}?null:${i});applyEvolFilter(evolFilter)"><span class="ldot" style="background:${col(k)}"></span>${CAMPS_DISPLAY[i]}</button>`).join("");
-  }
-
+  evolFilter = null;
   rdc("inv-evol");
   RCH["inv-evol"] = new Chart(document.getElementById("r-inv-evol"), {
     type: "line",
@@ -816,8 +813,8 @@ function renderRendimiento() {
     data: { labels: periodoLabels, datasets: cplSeries },
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.dataset.label + ": $" + (c.raw ?? "—") + "/lead" } } }, scales: { x: { ticks: { font: chartFont } }, y: { beginAtZero: true, ticks: { font: { size: 11, family: "Rational,sans-serif" }, callback: v => "$" + v } } } }
   });
-  buildEvolLegend("r-leg-inv-evol");
-  buildEvolLegend("r-leg-cpl-evol");
+  buildEvolLegend("r-leg-inv-evol", CAMPS_DISPLAY);
+  buildEvolLegend("r-leg-cpl-evol", CAMPS_DISPLAY);
   if (evolFilter !== null) applyEvolFilter(evolFilter);
   // Build cotizaciones by canal lookup
   const quotByCanal = {};
