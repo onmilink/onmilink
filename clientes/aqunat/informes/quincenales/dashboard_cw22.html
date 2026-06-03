@@ -280,10 +280,10 @@ tbody tr:hover td{background:#f8fcf8!important}
       <div class="rtabs" id="r-tabs"></div>
 
       <!-- Filtro de canal -->
-      <div class="filter-bar" id="filter-bar"></div>
+      <div class="filter-bar" id="filter-bar" style="display:none"></div>
 
       <!-- Resumen ejecutivo -->
-      <div class="exec-box" id="exec-summary"></div>
+      <div class="exec-box" id="exec-summary" style="display:none"></div>
 
       <div class="section-title">KPIs de CRM</div>
       <div class="kpis" id="r-kpi-crm"></div>
@@ -560,7 +560,7 @@ function renderCreativos() {
     kpisEl.after(d);
     return d;
   })();
-  disclaimerEl.innerHTML = "<strong>Nota:</strong> Los datos de esta sección recogen únicamente leads atribuidos a la <strong>landing de captación</strong> mediante UTM. Los leads de WhatsApp y homepage no están disponibles con atribución por creativo. Las ventas reflejan <strong>cotizaciones enviadas</strong>, no ventas cerradas. Se actualizarán cuando se confirmen los cierres.";
+  disclaimerEl.innerHTML = "<strong>Nota:</strong> Los datos de esta sección recogen únicamente leads atribuidos a la <strong>landing de captación</strong> mediante UTM. Los leads de WhatsApp y homepage no están disponibles con atribución por creativo. Las <strong>ventas reflejan ventas reales cerradas</strong>. Las cotizaciones pendientes de cierre no se contabilizan.";
 
   // Tabla — ordenar por cotizacionesUSD desc
   const sorted = [...list].sort((a,b) => (b.cotizacionesUSD||0) - (a.cotizacionesUSD||0));
@@ -853,6 +853,7 @@ function buildResumen(period) {
   
   const el = document.getElementById('exec-summary');
   if (!el) return;
+  el.style.display = '';
   el.innerHTML = `
     <div class="exec-header">
       <span class="exec-icon">📋</span>
@@ -939,6 +940,7 @@ function buildFilterBar() {
     + ['<button class="filter-btn active" onclick="setFilter(null,this)">Todos</button>']
     .concat(CAMPS.map(k => `<button class="filter-btn" style="--fc:${col(k)}" onclick="setFilter('${k}',this)">${k}</button>`))
     .join('');
+  bar.style.display = '';
 }
 
 function setFilter(camp, el) {
