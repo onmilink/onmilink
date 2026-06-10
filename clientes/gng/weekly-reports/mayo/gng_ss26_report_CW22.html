@@ -1136,7 +1136,7 @@ function renderTrendChart(activeWk) {
   const inv    = allWks.map(k => WEEKS[k].meta?.inv   ?? 0);
   const roas   = allWks.map(k => WEEKS[k].meta?.roasNeg ?? 0);
   const totales = allWks.map(k => WEEKS[k].ecomm?.totales ?? 0);
-  const mer    = allWks.map((k, i) => inv[i] > 0 ? (totales[i] / inv[i] * 100) : 0);
+  const mer    = allWks.map((k, i) => inv[i] > 0 ? (totales[i] / inv[i]) : 0);
 
   const maxEur  = Math.max(...netas, ...inv) * 1.15;
   const maxRoas = Math.max(...roas) * 1.25 || 5;
@@ -1177,7 +1177,7 @@ function renderTrendChart(activeWk) {
 
     const lblFill = isAct ? '#0a0a0a' : '#b8b4ac';
     bars += `<text x="${cx}" y="${H-PB+14}" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="${lblFill}" font-weight="${isAct?'500':'400'}">${WEEKS[wk].label}</text>`;
-    bars += `<text x="${cx}" y="${H-PB+26}" text-anchor="middle" font-family="DM Mono,monospace" font-size="6.5" fill="${isAct?'#8B6914':'#c9a84c'}" font-weight="${isAct?'500':'400'}">${mer[i].toFixed(0)}%</text>`;
+    bars += `<text x="${cx}" y="${H-PB+26}" text-anchor="middle" font-family="DM Mono,monospace" font-size="6.5" fill="${isAct?'#8B6914':'#c9a84c'}" font-weight="${isAct?'500':'400'}">${mer[i].toFixed(2)}</text>`;
 
     if (isAct) {
       bars += `<text x="${cx-barW/2-1}" y="${yI-4}" text-anchor="middle" font-family="DM Mono,monospace" font-size="6.5" fill="#7a7670">${(inv[i]/1000).toFixed(1)}k</text>`;
@@ -1221,7 +1221,7 @@ function renderTrendChart(activeWk) {
         <div class="tl-item"><span class="tl-bar" style="background:#0a0a0a;opacity:.3"></span>Inversión</div>
         <div class="tl-item"><span class="tl-bar" style="background:#0a0a0a"></span>Ventas netas</div>
         <div class="tl-item"><span class="tl-line" style="background:#8B6914"></span>ROAS negocio</div>
-        <div class="tl-item"><span style="font-family:'DM Mono',monospace;font-size:8px;font-weight:600;color:#8B6914;margin-right:2px">%</span>MER</div>
+        <div class="tl-item"><span style="font-family:'DM Mono',monospace;font-size:8px;font-weight:600;color:#8B6914;margin-right:3px">~</span>MER</div>
       </div>
     </div>
     <div class="trend-svg-wrap">
@@ -1246,7 +1246,7 @@ function renderTrendChart(activeWk) {
           <div class="tt-row"><span><span class="tt-dot" style="background:#0a0a0a;opacity:.35"></span>Inversión</span><span class="tt-val">${d.inv.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})}€</span></div>
           <div class="tt-row"><span><span class="tt-dot" style="background:#0a0a0a"></span>Ventas netas</span><span class="tt-val">${d.netas.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})}€</span></div>
           <div class="tt-row"><span><span class="tt-dot" style="background:#8B6914"></span>ROAS negocio</span><span class="tt-val">${d.roas.toFixed(2)}x</span></div>
-          <div class="tt-row"><span><span class="tt-dot" style="background:#8B6914;opacity:.5"></span>MER</span><span class="tt-val">${d.mer.toFixed(0)}%</span></div>`;
+          <div class="tt-row"><span><span class="tt-dot" style="background:#8B6914;opacity:.5"></span>MER</span><span class="tt-val">${d.mer.toFixed(2)}</span></div>`;
         ttEl.style.display = 'block';
       });
 
