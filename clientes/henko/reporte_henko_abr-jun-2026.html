@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte HENKO — Meta Ads · Histórico Abr–Jun 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f4f3ef;
+  --surface: #ffffff;
+  --surface2: #edece8;
+  --border: rgba(0,0,0,0.08);
+  --border-md: rgba(0,0,0,0.13);
+  --text: #111110;
+  --muted: #6b6b68;
+  --faint: #b0afab;
+  --c-landing: #3d6b00;
+  --c-dm: #006b4f;
+  --c-trafico: #7a4a00;
+}
+html { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; }
+body { max-width: 1200px; margin: 0 auto; padding: 32px 20px 80px; }
+
+.logo-wrap { flex-shrink: 0; }
+.logo-wrap img { height: 42px; width: auto; max-width: 120px; display: block; opacity: 0.85; object-fit: contain; }
+.divider-v { width: 1px; height: 38px; background: var(--border-md); }
+.header-left { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1.5px solid var(--border-md); }
+.header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px, 5.5vw, 54px); letter-spacing: 0.04em; color: var(--text); line-height: 1; }
+.header-title span { color: var(--c-landing); }
+.header-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 4px; }
+.header-meta { text-align: right; }
+.header-meta p { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 5px; }
+.period-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); border: 1px solid var(--border-md); padding: 4px 10px; border-radius: 5px; background: var(--surface); }
+
+.tab-nav { display: flex; gap: 8px; margin-bottom: 28px; border-bottom: 2px solid var(--border-md); padding-bottom: 0; }
+.tab-btn { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 10px 20px; border: none; border-bottom: 3px solid transparent; background: transparent; color: var(--faint); cursor: pointer; margin-bottom: -2px; transition: all .15s; border-radius: 6px 6px 0 0; }
+.tab-btn:hover { color: var(--muted); background: var(--surface2); }
+.tab-btn.active { color: var(--text); border-bottom-color: var(--c-dm); background: transparent; font-weight: 600; }
+.tab-btn.active.tab-main { border-bottom-color: var(--c-landing); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+.info-banner { background: rgba(0,107,79,0.04); border: 1px solid rgba(0,107,79,0.2); border-radius: 8px; padding: 10px 14px; font-family: 'DM Mono', monospace; font-size: 11px; color: #004d38; margin-bottom: 24px; line-height: 1.6; }
+.info-banner strong { font-weight: 600; }
+
+.legend { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 24px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+.ldot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+
+.kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 32px; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; border-left: 4px solid transparent; }
+.kpi.k-total   { border-left-color: var(--c-landing); }
+.kpi.k-leads   { border-left-color: var(--c-landing); }
+.kpi.k-dm      { border-left-color: var(--c-dm); }
+.kpi.k-landing { border-left-color: #b07000; }
+.kpi.k-trafico { border-left-color: var(--c-trafico); }
+.kpi-label { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+.kpi-val { font-family: 'DM Mono', monospace; font-size: clamp(17px, 2.8vw, 22px); font-weight: 500; color: var(--text); line-height: 1; margin-bottom: 5px; }
+.kpi-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+.kpi-warn { font-family: 'DM Mono', monospace; font-size: 10px; color: #c87000; margin-top: 5px; }
+
+.section-title { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.table-section { margin-bottom: 48px; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--border-md); border-radius: 12px; background: var(--surface); -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+thead tr th { background: var(--surface2); font-family: 'DM Mono', monospace; font-size: 9px; color: var(--faint); padding: 8px 10px 7px; text-align: right; border-bottom: 1px solid var(--border-md); white-space: nowrap; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; }
+thead tr th:first-child { text-align: left; min-width: 110px; padding-left: 16px; }
+.th-week { background: rgba(0,0,0,0.02); color: var(--muted) !important; font-size: 10px !important; text-align: center !important; border-bottom: 1px solid var(--border-md); }
+.th-acum { background: rgba(61,107,0,0.06) !important; color: var(--c-landing) !important; text-align: center !important; }
+.td-acum { background: rgba(61,107,0,0.03) !important; }
+
+/* ── Week-table: separadores y alternancia ── */
+.week-table thead tr:first-child th:nth-child(3),
+.week-table thead tr:first-child th:nth-child(4),
+.week-table thead tr:first-child th:nth-child(5),
+.week-table thead tr:first-child th:nth-child(6),
+.week-table thead tr:first-child th:nth-child(7) { border-left: 2px solid rgba(0,0,0,0.10); }
+.week-table thead tr:last-child th:nth-child(4),
+.week-table thead tr:last-child th:nth-child(7),
+.week-table thead tr:last-child th:nth-child(10),
+.week-table thead tr:last-child th:nth-child(13),
+.week-table thead tr:last-child th:nth-child(16) { border-left: 2px solid rgba(0,0,0,0.10); }
+.week-table tbody td:nth-child(5),
+.week-table tbody td:nth-child(8),
+.week-table tbody td:nth-child(11),
+.week-table tbody td:nth-child(14),
+.week-table tbody td:nth-child(17) { border-left: 2px solid rgba(0,0,0,0.07); }
+/* Tinte semanas pares (S2, S4, S6) en cabecera */
+.week-table thead tr:first-child th:nth-child(3),
+.week-table thead tr:first-child th:nth-child(5),
+.week-table thead tr:first-child th:nth-child(7) { background: rgba(0,0,0,0.032); }
+.week-table thead tr:last-child th:nth-child(4),
+.week-table thead tr:last-child th:nth-child(5),
+.week-table thead tr:last-child th:nth-child(6),
+.week-table thead tr:last-child th:nth-child(10),
+.week-table thead tr:last-child th:nth-child(11),
+.week-table thead tr:last-child th:nth-child(12),
+.week-table thead tr:last-child th:nth-child(16),
+.week-table thead tr:last-child th:nth-child(17),
+.week-table thead tr:last-child th:nth-child(18) { background: rgba(0,0,0,0.025); }
+/* Tinte semanas pares en filas de datos */
+.week-table tbody tr:not(.total-row) td:nth-child(5),
+.week-table tbody tr:not(.total-row) td:nth-child(6),
+.week-table tbody tr:not(.total-row) td:nth-child(7),
+.week-table tbody tr:not(.total-row) td:nth-child(11),
+.week-table tbody tr:not(.total-row) td:nth-child(12),
+.week-table tbody tr:not(.total-row) td:nth-child(13),
+.week-table tbody tr:not(.total-row) td:nth-child(17),
+.week-table tbody tr:not(.total-row) td:nth-child(18),
+.week-table tbody tr:not(.total-row) td:nth-child(19) { background: rgba(0,0,0,0.016); }
+.th-week { font-size: 11px !important; font-weight: 600 !important; letter-spacing: 0.04em !important; }
+tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: rgba(0,0,0,0.018); }
+tbody td { padding: 9px 10px; text-align: right; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); white-space: nowrap; }
+tbody td:first-child { text-align: left; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: var(--text); padding-left: 16px; }
+.val-invest { color: var(--text); font-weight: 500; }
+.val-result { color: #2255bb; }
+.val-cp     { color: #aa2222; }
+.val-cpm    { color: var(--muted); }
+.null-val   { color: var(--faint); }
+.warn-val   { color: #c87000; }
+tr.type-landing td:first-child { color: var(--c-landing); }
+tr.type-dm      td:first-child { color: var(--c-dm); }
+tr.type-trafico td:first-child { color: var(--c-trafico); }
+tr.total-row td { background: var(--surface2); font-weight: 600; color: var(--text) !important; border-top: 1.5px solid var(--border-md); }
+tr.total-row td:first-child { color: var(--c-landing) !important; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; }
+tr.total-row .td-acum { background: rgba(61,107,0,0.06) !important; }
+
+.charts-full { margin-bottom: 16px; }
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 18px 14px; }
+.chart-label { font-size: 10px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.chart-legend-inline { font-weight: 400; color: var(--faint); display: flex; gap: 10px; flex-wrap: wrap; }
+.cli { display: flex; align-items: center; gap: 4px; font-size: 10px; }
+.cli span { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+.chart-wrap-tall { position: relative; width: 100%; height: 220px; }
+.chart-wrap      { position: relative; width: 100%; height: 210px; }
+
+.roas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 48px; }
+.roas-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+.roas-card-total { border-color: var(--border-md); }
+.roas-card-title { font-size: 10px; font-weight: 600; letter-spacing: .10em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px; }
+.roas-row { display: flex; justify-content: space-between; align-items: center; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border); }
+.roas-row:last-child { border-bottom: none; }
+.roas-highlight { background: rgba(61,107,0,.04); border-radius: 6px; padding: 8px 10px !important; margin-top: 8px; border-bottom: none !important; font-weight: 600; color: var(--text) !important; }
+.roas-highlight-trafico { background: rgba(122,74,0,0.04) !important; }
+.roas-big { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: var(--text); }
+.roas-big-trafico { color: var(--c-trafico); }
+.roas-na  { font-family: 'DM Mono', monospace; font-size: 16px; color: var(--faint); }
+.roas-note { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--faint); margin-top: 10px; line-height: 1.5; }
+.roas-warn-card { background: #fff8e1; border-radius: 6px; padding: 8px 10px; margin-top: 8px; font-family: 'DM Mono', monospace; font-size: 10px; color: #7a5200; line-height: 1.5; }
+
+.leads-section { margin-bottom: 48px; }
+.leads-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.leads-header th { background: var(--surface2); font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); padding: 9px 10px; text-align: left; border-bottom: 1.5px solid var(--border-md); white-space: nowrap; }
+.leads-table tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+.leads-table tbody tr:hover { background: rgba(0,0,0,.015); }
+.leads-table td { padding: 9px 10px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+.td-name { font-family: 'Inter', sans-serif !important; font-weight: 500; color: var(--text) !important; }
+.td-date { color: var(--faint) !important; white-space: nowrap; }
+.td-status { border-radius: 4px; font-size: 10px !important; text-align: center !important; padding: 4px 8px !important; white-space: nowrap; }
+.td-num { text-align: right !important; }
+.td-ad { font-size: 10px !important; color: var(--faint) !important; }
+.fn { font-size: 10px; color: var(--faint); margin-top: 8px; font-family: 'DM Mono', monospace; }
+
+.creativos-note { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 14px; line-height: 1.7; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+.creativos-note strong { font-weight: 600; color: var(--text); }
+.thead-groups th { background: var(--surface2); text-align: center !important; border-bottom: 1px solid var(--border-md); padding: 5px 8px; font-size: 8px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+.thead-groups th:first-child { text-align: left !important; }
+.th-meta { background: rgba(61,107,0,0.05) !important; color: var(--c-landing) !important; }
+.th-engage { background: rgba(80,80,80,0.04) !important; color: #555 !important; }
+.th-conv { background: rgba(34,85,187,0.05) !important; color: #2255bb !important; }
+.group-row td { padding: 5px 16px; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; background: var(--surface2); border-top: 2px solid var(--border-md); text-align: left !important; white-space: nowrap; font-family: 'DM Mono', monospace; }
+.cr-name { display: flex; flex-direction: column; gap: 2px; }
+.cr-name span { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--faint); font-weight: 400; }
+.fmt-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 8px; font-weight: 600; letter-spacing: 0.06em; border-radius: 3px; padding: 1px 4px; margin-left: 4px; vertical-align: middle; }
+.fmt-img { background: rgba(61,107,0,0.1); color: var(--c-landing); }
+.fmt-vid { background: rgba(122,74,0,0.1); color: var(--c-trafico); }
+tr.cr-landing td:first-child { color: var(--c-landing) !important; font-family: 'Inter', sans-serif; }
+tr.cr-dm      td:first-child { color: var(--c-dm) !important;      font-family: 'Inter', sans-serif; }
+tr.cr-trafico td:first-child { color: var(--c-trafico) !important;  font-family: 'Inter', sans-serif; }
+
+@media (max-width: 900px) {
+  .kpi-row { grid-template-columns: repeat(3, 1fr); }
+  .charts-grid { grid-template-columns: 1fr; }
+  .roas-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  body { padding: 16px 12px 60px; }
+  .kpi-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kpi { padding: 12px; }
+  .header-meta { width: 100%; text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo-wrap">
+      <img src="onmi-logo.png" alt="ONMI LINK">
+    </div>
+    <div class="divider-v"></div>
+    <div>
+      <div class="header-title">Reporte <span>HENKO</span></div>
+      <div class="header-sub">Meta Ads · Análisis histórico de campañas</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    <p>Abr – Jun 2026</p>
+    <span class="period-tag">27 abr — 7 jun 2026</span>
+  </div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn tab-main active" onclick="showTab('tab-main',this)">Métricas</button>
+  <button class="tab-btn" onclick="showTab('tab-leads',this)">Seguimiento de leads</button>
+  <button class="tab-btn" onclick="showTab('tab-creativos',this)">Creativos</button>
+</div>
+
+<!-- ===================== TAB MÉTRICAS ===================== -->
+<div id="tab-main" class="tab-pane active">
+
+  <div class="info-banner">
+    💡 <strong>Contexto cuenta:</strong> Campaña activa desde el 23 abr 2026. Landing desde S1 · DM incorporada en S4 (18 may) · Tráfico activo todo el período. Los leads via Instagram bio (link_in_bio) se atribuyen a paid — son usuarios que vieron los anuncios, visitaron el perfil y reservaron desde la biografía.
+    &nbsp;·&nbsp; <strong>Conversión:</strong> inversión Meta convertida de MXN a USD al tipo de cambio de referencia 1 USD = 18,5 MXN · facturación CRM en USD sin modificación.
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="ldot" style="background:var(--c-landing)"></span>Landing (leads formulario)</div>
+    <div class="legend-item"><span class="ldot" style="background:var(--c-dm)"></span>DM (conversaciones)</div>
+    <div class="legend-item"><span class="ldot" style="background:var(--c-trafico)"></span>Tráfico (visitas perfil → bio)</div>
+  </div>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-row">
+    <div class="kpi k-total">
+      <div class="kpi-label">Inversión total</div>
+      <div class="kpi-val">$2.048</div>
+      <div class="kpi-sub">6 semanas · USD</div>
+    </div>
+    <div class="kpi k-landing">
+      <div class="kpi-label">Inversión Landing</div>
+      <div class="kpi-val">$1.417</div>
+      <div class="kpi-sub">69,2% del total</div>
+    </div>
+    <div class="kpi k-dm">
+      <div class="kpi-label">Inversión DM</div>
+      <div class="kpi-val">$428</div>
+      <div class="kpi-sub">20,9% · activa desde S4</div>
+    </div>
+    <div class="kpi k-leads">
+      <div class="kpi-label">Leads Landing</div>
+      <div class="kpi-val">37</div>
+      <div class="kpi-sub">CPL: $38 · total CRM</div>
+    </div>
+    <div class="kpi k-trafico">
+      <div class="kpi-label">Facturado (paid bio)</div>
+      <div class="kpi-val">$8.500</div>
+      <div class="kpi-sub">USD · 5 cierres vía bio</div>
+    </div>
+  </div>
+
+  <!-- TABLA SEMANAL MULTIPERIODO -->
+  <div class="table-section">
+    <div class="section-title">Datos por canal · Histórico semanal 27 abr – 7 jun 2026 · USD</div>
+    <div class="table-wrap">
+      <table class="week-table">
+        <thead>
+          <tr>
+            <th rowspan="2" style="vertical-align:bottom;min-width:110px;">Canal</th>
+            <th colspan="3" class="th-week">S1 · 27abr–3may</th>
+            <th colspan="3" class="th-week">S2 · 4–10may</th>
+            <th colspan="3" class="th-week">S3 · 11–17may</th>
+            <th colspan="3" class="th-week">S4 · 18–24may</th>
+            <th colspan="3" class="th-week">S5 · 25–31may</th>
+            <th colspan="3" class="th-week">S6 · 1–7jun</th>
+            <th colspan="4" class="th-week th-acum">Acumulado</th>
+          </tr>
+          <tr>
+            <th>Inv.$</th><th>Res.</th><th>CP$</th>
+            <th>Inv.$</th><th>Res.</th><th>CP$</th>
+            <th>Inv.$</th><th>Res.</th><th>CP$</th>
+            <th>Inv.$</th><th>Res.</th><th>CP$</th>
+            <th>Inv.$</th><th>Res.</th><th>CP$</th>
+            <th>Inv.$</th><th>Res.</th><th>CP$</th>
+            <th class="td-acum">Inv.$</th><th class="td-acum">Res.</th><th class="td-acum">CP$</th><th class="td-acum">CPM$</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="type-landing">
+            <td>Landing</td>
+            <td class="val-invest">312</td><td class="val-result">5</td><td class="val-cp">62</td>
+            <td class="val-invest">295</td><td class="val-result">8</td><td class="val-cp">37</td>
+            <td class="val-invest">304</td><td class="val-result">7</td><td class="val-cp">43</td>
+            <td class="val-invest">292</td><td class="val-result warn-val">2</td><td class="val-cp warn-val">146</td>
+            <td class="val-invest">139</td><td class="val-result warn-val">1</td><td class="val-cp warn-val">139</td>
+            <td class="val-invest">74</td><td class="val-result warn-val">1</td><td class="val-cp warn-val">74</td>
+            <td class="td-acum val-invest">1.417</td><td class="td-acum val-result">24</td><td class="td-acum val-cp">59</td><td class="td-acum val-cpm">19,8</td>
+          </tr>
+          <tr class="type-dm">
+            <td>DM</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="null-val">—</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="val-invest">63</td><td class="null-val">0</td><td class="null-val">—</td>
+            <td class="val-invest">159</td><td class="val-result">1</td><td class="val-cp warn-val">159</td>
+            <td class="val-invest">206</td><td class="val-result">2</td><td class="val-cp">103</td>
+            <td class="td-acum val-invest">428</td><td class="td-acum val-result">3</td><td class="td-acum val-cp">143</td><td class="td-acum val-cpm">11,3</td>
+          </tr>
+          <tr class="type-trafico">
+            <td>Tráfico</td>
+            <td class="val-invest">34</td><td class="val-result">408</td><td class="val-cpm">$0.08</td>
+            <td class="val-invest">33</td><td class="val-result">276</td><td class="val-cpm">$0.12</td>
+            <td class="val-invest">33</td><td class="val-result">331</td><td class="val-cpm">$0.10</td>
+            <td class="val-invest">32</td><td class="val-result">363</td><td class="val-cpm">$0.09</td>
+            <td class="val-invest">32</td><td class="val-result">406</td><td class="val-cpm">$0.08</td>
+            <td class="val-invest">39</td><td class="val-result">422</td><td class="val-cpm">$0.09</td>
+            <td class="td-acum val-invest">203</td><td class="td-acum val-result">2.206</td><td class="td-acum val-cpm">$0.09</td><td class="td-acum val-cpm">7,9</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL</td>
+            <td class="val-invest">346</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="val-invest">327</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="val-invest">337</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="val-invest">387</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="val-invest">331</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="val-invest">320</td><td class="null-val">—</td><td class="null-val">—</td>
+            <td class="td-acum val-invest">2.048</td><td class="td-acum null-val">—</td><td class="td-acum null-val">—</td><td class="td-acum null-val">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fn">Res. = Resultado principal: Landing = leads formulario (Meta), DM = conversaciones iniciadas, Tráfico = visitas al perfil. Todos los valores monetarios en USD (conversión: 1 USD = 18,5 MXN). Leads Landing KPI = 37 (total CRM, todos los canales) · Meta registró 24 · CPL = $1.417 / 37 = $38. DM activa S4–S6.</p>
+  </div>
+
+  <!-- GRÁFICOS -->
+  <div class="charts-full">
+    <div class="chart-card">
+      <div class="chart-label">
+        Inversión semanal por canal (USD)
+        <div class="chart-legend-inline">
+          <div class="cli"><span style="background:rgba(61,107,0,0.7)"></span>Landing</div>
+          <div class="cli"><span style="background:rgba(0,107,79,0.7)"></span>DM</div>
+          <div class="cli"><span style="background:rgba(122,74,0,0.6)"></span>Tráfico</div>
+        </div>
+      </div>
+      <div class="chart-wrap-tall"><canvas id="chartInvTotal"></canvas></div>
+    </div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-label">
+        Leads y conversiones por semana
+        <div class="chart-legend-inline">
+          <div class="cli"><span style="background:rgba(61,107,0,0.85)"></span>Landing (formulario)</div>
+          <div class="cli"><span style="background:rgba(61,107,0,0.35)"></span>Paid bio</div>
+          <div class="cli"><span style="background:rgba(0,107,79,0.7)"></span>Conv. DM</div>
+        </div>
+      </div>
+      <div class="chart-wrap"><canvas id="chartLeads"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Distribución inversión acumulada</div>
+      <div class="chart-wrap"><canvas id="chartDonut"></canvas></div>
+    </div>
+  </div>
+
+  <!-- FACTURACIÓN / ROAS -->
+  <div class="table-section">
+    <div class="section-title">Facturación atribuida a Meta Ads · 27 abr – 7 jun 2026</div>
+    <div class="roas-grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="roas-card">
+        <div class="roas-card-title" style="color:var(--c-landing)">Landing · Paid formulario + bio</div>
+        <div class="roas-row"><span>Leads formulario (CRM)</span><span>14</span></div>
+        <div class="roas-row"><span>Leads via bio (CRM)</span><span>13</span></div>
+        <div class="roas-row"><span>Leads sin tracking (CRM)</span><span>10</span></div>
+        <div class="roas-row"><span>Total leads CRM</span><span><strong>37</strong></span></div>
+        <div class="roas-row"><span>Cierres confirmados (bio)</span><span>5</span></div>
+        <div class="roas-row"><span>Inversión formulario</span><span>$1.417 USD</span></div>
+        <div class="roas-row"><span>Inversión tráfico (bio)</span><span>$203 USD</span></div>
+        <div class="roas-row"><span>Inversión total canal</span><span><strong>$1.620 USD</strong></span></div>
+        <div class="roas-row"><span>Facturación cerrada</span><span><strong>$8.500 USD</strong></span></div>
+        <div class="roas-row roas-highlight">
+          <span>ROAS</span><span class="roas-big" style="color:var(--c-landing)">5.2x</span>
+        </div>
+        <p class="roas-note">
+          5 cierres vía link_in_bio (Krasa $900, Chhabra $1.400, Pearson $4.000, Dajani $1.200, Valencia $1.000). Formulario: pipeline en construcción — 14 leads activos, ciclo de cierre &gt;30 días.<br><br>
+          ROAS total paid (todos los canales): $8.500 / $2.048 = <strong>4.1x</strong>
+        </p>
+      </div>
+      <div class="roas-card">
+        <div class="roas-card-title" style="color:var(--c-dm)">DM · Paid conversaciones</div>
+        <div class="roas-row"><span>Conv. iniciadas (Meta)</span><span>3</span></div>
+        <div class="roas-row"><span>Cierres confirmados</span><span>0</span></div>
+        <div class="roas-row"><span>Inversión</span><span>$428 USD</span></div>
+        <div class="roas-row"><span>Activa desde</span><span>S4 · 18 may · solo California</span></div>
+        <div class="roas-row roas-highlight">
+          <span>ROAS</span><span class="roas-na">N/D</span>
+        </div>
+        <div class="roas-warn-card">
+          ⚑ Solo 3 semanas de datos. Las conversaciones están en proceso de seguimiento.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-main -->
+
+<!-- ===================== TAB SEGUIMIENTO ===================== -->
+<div id="tab-leads" class="tab-pane">
+
+  <div class="leads-section">
+    <div class="section-title" style="margin-bottom:16px">Todos los leads · Abr – Jun 2026 · 37 contactos · facturación en USD</div>
+    <div class="table-wrap">
+      <table class="leads-table">
+        <thead class="leads-header">
+          <tr>
+            <th>Fecha</th><th>Nombre</th><th>Canal</th><th>Creativo / fuente</th>
+            <th>Estado contacto</th><th>Estado final</th>
+            <th style="text-align:right">Depósito</th><th style="text-align:right">Ses.</th><th style="text-align:right">Total proy.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-date">22/04</td><td class="td-name">Name Krasa</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>In contact</td><td><span class="td-status" style="background:#e8f5e9;color:#2e7d32">✓ Closed</span></td><td class="td-num">$400</td><td class="td-num">1</td><td class="td-num">$900</td></tr>
+          <tr><td class="td-date">25/04</td><td class="td-name">Pratishtha Chhabra</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>In contact</td><td><span class="td-status" style="background:#e8f5e9;color:#2e7d32">✓ Closed</span></td><td class="td-num">$200</td><td class="td-num">1</td><td class="td-num">$1.400</td></tr>
+          <tr><td class="td-date">25/04</td><td class="td-name">Arturo Cruz</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>2a llamada</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">25/04</td><td class="td-name">Brandon Reese</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[split]_[AD01]</td><td>2a llamada</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">27/04</td><td class="td-name">Maui Houn</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[split]_[AD01]</td><td>In contact</td><td><span class="td-status" style="background:#fdf3e7;color:#8a5200">Pending</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">29/04</td><td class="td-name">Devin Ross</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[split]_[AD01]</td><td>1er DM</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">29/04</td><td class="td-name">Jose Zegarra</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[split]_[AD01]</td><td>2a llamada</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">01/05</td><td class="td-name">Jose Santoyo</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[split]_[AD01]</td><td>2a llamada</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">01/05</td><td class="td-name">Lupita Casillas</td><td>Sin tracking</td><td class="td-ad">—</td><td>Closed by otro</td><td><span class="td-status" style="background:#e3e5e8;color:#333">Closed by otro</span></td><td class="td-num">$200</td><td class="td-num">1</td><td class="td-num">$800</td></tr>
+          <tr><td class="td-date">02/05</td><td class="td-name">Joshua Gomez</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[split]_[AD01]</td><td>In contact</td><td><span class="td-status" style="background:#fdf3e7;color:#8a5200">Pending</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">05/05</td><td class="td-name">Jaden Pearson</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>In contact</td><td><span class="td-status" style="background:#e8f5e9;color:#2e7d32">✓ Closed</span></td><td class="td-num">$800</td><td class="td-num">2</td><td class="td-num">$4.000</td></tr>
+          <tr><td class="td-date">06/05</td><td class="td-name">Moses Dajani</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>In contact</td><td><span class="td-status" style="background:#e8f5e9;color:#2e7d32">✓ Closed</span></td><td class="td-num">$400</td><td class="td-num">1</td><td class="td-num">$1.200</td></tr>
+          <tr><td class="td-date">06/05</td><td class="td-name">Aysha Harper</td><td>Sin tracking</td><td class="td-ad">—</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">06/05</td><td class="td-name">Azia Squire</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[split.2]_[AD06]</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">07/05</td><td class="td-name">Nathalia Campos</td><td>Sin tracking</td><td class="td-ad">—</td><td>In contact</td><td><span class="td-status" style="background:#fce4e4;color:#a00">Lost</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">08/05</td><td class="td-name">Kristen Heavin</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>In contact</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">09/05</td><td class="td-name">Melissa Vigil</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>In contact</td><td><span class="td-status" style="background:#fdf3e7;color:#8a5200">Pending</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">10/05</td><td class="td-name">Kiana Hsian</td><td>Sin tracking</td><td class="td-ad">—</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">10/05</td><td class="td-name">Samantha Maners</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[pierna]_[AD07]</td><td>Cancel</td><td><span class="td-status" style="background:#fce4e4;color:#a00">Lost</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">11/05</td><td class="td-name">Desean Watts</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[split.2]_[AD06]</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">12/05</td><td class="td-name">Chayse Salvini</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[Cristo]_[AD03]</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">13/05</td><td class="td-name">Caleb Batchman</td><td>Sin tracking</td><td class="td-ad">—</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">13/05</td><td class="td-name">Andrea Reyes</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">15/05</td><td class="td-name">Cristopher Thatcher</td><td>Sin tracking</td><td class="td-ad">—</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">16/05</td><td class="td-name">Felicia Carmona</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[split.2]_[AD06]</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">17/05</td><td class="td-name">Antonio Pacheco</td><td>Sin tracking</td><td class="td-ad">—</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">20/05</td><td class="td-name">Lawrence Barnhart</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[brazo triángulo]_[AD08]</td><td>Follow UP</td><td><span class="td-status" style="background:#fce4e4;color:#a00">Lost</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">23/05</td><td class="td-name">Wilson Garcia</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[arbol]_[AD011]</td><td>1a llamada</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">27/05</td><td class="td-name">Cameron Chatterton</td><td style="color:var(--c-landing)">Landing</td><td class="td-ad">[pierna]_[AD07]</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">27/05</td><td class="td-name">Karina Gaspar</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>—</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">28/05</td><td class="td-name">Pablo Castro</td><td>Sin tracking</td><td class="td-ad">—</td><td>Follow UP</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">30/05</td><td class="td-name">Aiden McDermott</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>In contact</td><td><span class="td-status" style="background:#fce4e4;color:#a00">Lost</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">01/06</td><td class="td-name">Jordan Valencia</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>Follow UP</td><td><span class="td-status" style="background:#e8f5e9;color:#2e7d32">✓ Closed</span></td><td class="td-num">$400</td><td class="td-num">1</td><td class="td-num">$1.000</td></tr>
+          <tr><td class="td-date">03/06</td><td class="td-name">Elmer Sarceno</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>In contact</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">06/06</td><td class="td-name">Andrea Carabello</td><td>Sin tracking</td><td class="td-ad">—</td><td>In contact</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+          <tr><td class="td-date">08/06</td><td class="td-name">Erick Zuccolotto</td><td style="color:var(--c-trafico)">Paid (bio)</td><td class="td-ad">link_in_bio</td><td>1a llamada</td><td><span class="td-status" style="background:#fafafa;color:#b0afab">· Sin resp.</span></td><td class="td-num">—</td><td class="td-num">—</td><td class="td-num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fn">37 leads totales: 14 Landing paid (formulario) · 13 Paid (bio / Tráfico) · 10 Sin tracking. Facturación paid confirmada: $8.500 USD (5 cierres vía bio). Lupita Casillas (Closed by otro) = cerrada por otro artista, no atribuida a paid. Valores depósito/sesión/total en USD sin conversión.</p>
+  </div>
+
+</div><!-- /tab-leads -->
+
+<!-- ===================== TAB CREATIVOS ===================== -->
+<div id="tab-creativos" class="tab-pane">
+
+  <div class="creativos-note">
+    <strong>Leads M.</strong> = registrados por píxel Meta. &nbsp;<strong>Leads CRM</strong> = fuente de verdad. &nbsp;CPL calculado sobre leads Meta (comparativa entre creativos).<br>
+    Todos los importes en USD (1 USD = 18,5 MXN). &nbsp;DM: Conv.% = conv. / clics.<br><br>
+    📁 <strong>Creatividades con al menos un lead atribuido:</strong> &nbsp;<a href="https://onmies.sharepoint.com/:f:/r/sites/ONMIDIGITAL/Documentos%20compartidos/00-General/CORRIENTE/2026/Ganga%20Tattoo%20LA%20-%20Tatuadores/2.%20Tatuadores/Tatuador%204%20-%20Henko/2.%20Creatividades%20Ads/creatividades%20report?csf=1&web=1&e=pCvKtA" target="_blank" rel="noopener" style="color:var(--c-landing);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(61,107,0,0.3)">Ver carpeta en SharePoint →</a>
+  </div>
+
+  <!-- LANDING CREATIVES -->
+  <div class="table-section">
+    <div class="section-title">Landing — Rendimiento acumulado por creativo · 27 abr – 7 jun 2026 (S1–S6)</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr class="thead-groups">
+            <th style="min-width:200px">Creativo</th>
+            <th colspan="3" class="th-meta">Inversión</th>
+            <th colspan="3" class="th-engage">Alcance</th>
+            <th colspan="3" class="th-conv">Conversión</th>
+          </tr>
+          <tr>
+            <th style="text-align:left;padding-left:16px">Nombre</th>
+            <th>Inv. USD</th><th>% total</th><th>CPM $</th>
+            <th>Imp.</th><th>Clics</th><th>CTR</th>
+            <th>Leads M.</th><th>CPL $</th><th>Conv.%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[split.2] · AD06<span class="fmt-badge fmt-img">IMG</span><span>Top S3 · 4 leads en una semana</span></div></td>
+            <td class="val-invest">$364</td><td class="val-cpm">25,7%</td><td class="val-cpm">$18,0</td>
+            <td>20.234</td><td class="val-result">289</td><td>1,43%</td>
+            <td class="val-result">6</td><td class="val-cp">$61</td><td>2,08%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[split] · AD01<span class="fmt-badge fmt-img">IMG</span><span>Mejor CPL · activo S1–S6</span></div></td>
+            <td class="val-invest">$344</td><td class="val-cpm">24,3%</td><td class="val-cpm">$17,7</td>
+            <td>19.405</td><td class="val-result">290</td><td>1,49%</td>
+            <td class="val-result">9</td><td class="val-cp">$38</td><td>3,09%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[pierna] · AD07<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$336</td><td class="val-cpm">23,7%</td><td class="val-cpm">$20,9</td>
+            <td>16.081</td><td class="val-result">260</td><td>1,62%</td>
+            <td class="val-result">5</td><td class="val-cp">$67</td><td>3,11%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[ROSA] · AD03<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$108</td><td class="val-cpm">7,6%</td><td class="val-cpm">$22,2</td>
+            <td>4.870</td><td class="val-result">93</td><td>1,91%</td>
+            <td class="val-result">1</td><td class="val-cp warn-val">$108</td><td>1,08%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[arbol] · AD011<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$83</td><td class="val-cpm">5,9%</td><td class="val-cpm">$25,4</td>
+            <td>3.290</td><td class="val-result">41</td><td>1,25%</td>
+            <td class="val-result">1</td><td class="val-cp warn-val">$83</td><td>2,44%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[brazo triángulo] · AD08<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$74</td><td class="val-cpm">5,2%</td><td class="val-cpm">$26,0</td>
+            <td>2.846</td><td class="val-result">46</td><td>1,62%</td>
+            <td class="val-result">1</td><td class="val-cp warn-val">$74</td><td>2,17%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[VID brazo] · bring your project<span class="fmt-badge fmt-vid">VID</span></div></td>
+            <td class="val-invest">$43</td><td class="val-cpm">3,1%</td><td class="val-cpm">$22,8</td>
+            <td>1.907</td><td class="val-result">21</td><td>1,10%</td>
+            <td class="null-val">0</td><td class="null-val">—</td><td class="null-val">0%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[VID Not Every B&G] · AD10<span class="fmt-badge fmt-vid">VID</span></div></td>
+            <td class="val-invest">$23</td><td class="val-cpm">1,7%</td><td class="val-cpm">$26,2</td>
+            <td>893</td><td class="val-result">8</td><td>0,90%</td>
+            <td class="null-val">0</td><td class="null-val">—</td><td class="null-val">0%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[VID tattoes] · AD05<span class="fmt-badge fmt-vid">VID</span></div></td>
+            <td class="val-invest">$12</td><td class="val-cpm">0,8%</td><td class="val-cpm">$22,2</td>
+            <td>507</td><td class="val-result">6</td><td>1,18%</td>
+            <td class="null-val">0</td><td class="null-val">—</td><td class="null-val">0%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[Cara] · AD04<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$8</td><td class="val-cpm">0,5%</td><td class="val-cpm">$18,3</td>
+            <td>407</td><td class="val-result">6</td><td>1,47%</td>
+            <td class="val-result">1</td><td class="val-cp">$8</td><td>16,7%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[ángel] · looking for<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$6</td><td class="val-cpm">0,4%</td><td class="val-cpm">$21,1</td>
+            <td>300</td><td class="val-result">2</td><td>0,67%</td>
+            <td class="null-val">0</td><td class="null-val">—</td><td class="null-val">0%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[cabra] · book your session<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$6</td><td class="val-cpm">0,4%</td><td class="val-cpm">$21,9</td>
+            <td>259</td><td class="val-result">4</td><td>1,54%</td>
+            <td class="null-val">0</td><td class="null-val">—</td><td class="null-val">0%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[Cristo] · AD02<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$6</td><td class="val-cpm">0,4%</td><td class="val-cpm">$20,1</td>
+            <td>296</td><td class="val-result">4</td><td>1,35%</td>
+            <td class="null-val">0</td><td class="null-val">—</td><td class="null-val">0%</td>
+          </tr>
+          <tr class="cr-landing">
+            <td><div class="cr-name">[split] · book now<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$4</td><td class="val-cpm">0,2%</td><td class="val-cpm">$17,3</td>
+            <td>203</td><td class="val-result">2</td><td>0,99%</td>
+            <td class="null-val">0</td><td class="null-val">—</td><td class="null-val">0%</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL LANDING</td>
+            <td class="val-invest">$1.417</td><td class="null-val">100%</td><td class="val-cpm">$19,8</td>
+            <td>71.498</td><td class="val-result">1.072</td><td>1,50%</td>
+            <td class="val-result">24</td><td class="val-cp">$59</td><td class="null-val">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- DM CREATIVES -->
+  <div class="table-section">
+    <div class="section-title">DM — Rendimiento acumulado por creativo · 18 may – 7 jun 2026 (S4–S6)</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr class="thead-groups">
+            <th style="min-width:200px">Creativo</th>
+            <th colspan="3" class="th-meta">Inversión</th>
+            <th colspan="3" class="th-engage">Alcance</th>
+            <th colspan="2" class="th-conv">Resultado</th>
+          </tr>
+          <tr>
+            <th style="text-align:left;padding-left:16px">Nombre</th>
+            <th>Inv. USD</th><th>% total</th><th>CPM $</th>
+            <th>Imp.</th><th>Clics</th><th>CTR</th>
+            <th>Conv.</th><th>CP Conv. $</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cr-dm">
+            <td><div class="cr-name">[VID brazo] · bring your project to life (California)<span class="fmt-badge fmt-vid">VID</span></div></td>
+            <td class="val-invest">$128</td><td class="val-cpm">29,9%</td><td class="val-cpm">$11,0</td>
+            <td>11.632</td><td class="val-result">24</td><td>0,21%</td>
+            <td class="val-result">2</td><td class="val-cp warn-val">$64</td>
+          </tr>
+          <tr class="cr-dm">
+            <td><div class="cr-name">[dune] · AD03 (California)<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$123</td><td class="val-cpm">28,7%</td><td class="val-cpm">$11,2</td>
+            <td>10.934</td><td class="val-result">103</td><td>0,94%</td>
+            <td class="val-result">1</td><td class="val-cp warn-val">$123</td>
+          </tr>
+          <tr class="cr-dm">
+            <td><div class="cr-name">[cabra] · book your session (California)<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$117</td><td class="val-cpm">27,3%</td><td class="val-cpm">$11,6</td>
+            <td>10.061</td><td class="val-result">137</td><td>1,36%</td>
+            <td class="null-val">0</td><td class="null-val">—</td>
+          </tr>
+          <tr class="cr-dm">
+            <td><div class="cr-name">[cara] · project to life (California)<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$21</td><td class="val-cpm">2,9%</td><td class="val-cpm">$11,1</td>
+            <td>1.881</td><td class="val-result">29</td><td>1,54%</td>
+            <td class="null-val">0</td><td class="null-val">—</td>
+          </tr>
+          <tr class="cr-dm">
+            <td><div class="cr-name">[rosa] · AD02 (California)<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$17</td><td class="val-cpm">2,3%</td><td class="val-cpm">$12,0</td>
+            <td>1.393</td><td class="val-result">12</td><td>0,86%</td>
+            <td class="null-val">0</td><td class="null-val">—</td>
+          </tr>
+          <tr class="cr-dm">
+            <td><div class="cr-name">[split] · book now (California)<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$11</td><td class="val-cpm">1,5%</td><td class="val-cpm">$10,8</td>
+            <td>979</td><td class="val-result">11</td><td>1,12%</td>
+            <td class="null-val">0</td><td class="null-val">—</td>
+          </tr>
+          <tr class="cr-dm">
+            <td><div class="cr-name">[golondrina] · AD01 (California)<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$9</td><td class="val-cpm">1,3%</td><td class="val-cpm">$13,1</td>
+            <td>714</td><td class="val-result">3</td><td>0,42%</td>
+            <td class="null-val">0</td><td class="null-val">—</td>
+          </tr>
+          <tr class="cr-dm">
+            <td><div class="cr-name">[ángel] · looking for (California)<span class="fmt-badge fmt-img">IMG</span></div></td>
+            <td class="val-invest">$3</td><td class="val-cpm">0,4%</td><td class="val-cpm">$14,1</td>
+            <td>188</td><td class="val-result">2</td><td>1,06%</td>
+            <td class="null-val">0</td><td class="null-val">—</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL DM</td>
+            <td class="val-invest">$428</td><td class="null-val">100%</td><td class="val-cpm">$11,3</td>
+            <td>37.808</td><td class="val-result">399</td><td>1,06%</td>
+            <td class="val-result">3</td><td class="val-cp">$143</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fn">Conv. = Conversaciones con mensajes iniciadas (dato Meta Ads). Houston y California = segmentaciones geográficas distintas.</p>
+  </div>
+
+  <!-- TRÁFICO -->
+  <div class="table-section">
+    <div class="section-title">Tráfico · Paid bio — Rendimiento acumulado · 27 abr – 7 jun 2026</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left;padding-left:16px;min-width:220px">Creativo</th>
+            <th>Inv. USD</th><th>Impr.</th><th>Clics</th><th>CTR</th><th>Visitas perfil</th><th>CP Visita $</th><th>CPM $</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cr-trafico">
+            <td><div class="cr-name">[VID caballo] · AD01<span class="fmt-badge fmt-vid">VID</span><span>Único creativo · activo S1–S6 · 5 cierres atribuidos via bio · ROAS 41.9x</span></div></td>
+            <td class="val-invest">$203</td>
+            <td>22.256</td>
+            <td class="val-result">2.002</td>
+            <td>8,99%</td>
+            <td class="val-result">2.206</td>
+            <td class="val-cp">$0.09</td>
+            <td class="val-cpm">$7,9</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /tab-creativos -->
+
+<!-- FOOTER -->
+<div style="margin-top:60px;padding-top:20px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+  <img src="onmi-logo.png" style="height:20px;opacity:0.4;object-fit:contain">
+  <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--faint)">Generado por ONMI LINK · Meta Ads Report · 2026</span>
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+const ss = ['S1','S2','S3','S4','S5','S6'];
+
+new Chart(document.getElementById('chartInvTotal'), {
+  type: 'bar',
+  data: {
+    labels: ss,
+    datasets: [
+      { label:'Landing', data:[312,295,304,292,139,74], backgroundColor:'rgba(61,107,0,0.72)', borderRadius:3 },
+      { label:'DM',      data:[0,0,0,63,159,206],      backgroundColor:'rgba(0,107,79,0.72)',  borderRadius:3 },
+      { label:'Tráfico', data:[34,33,33,32,32,39],     backgroundColor:'rgba(122,74,0,0.55)', borderRadius:3 },
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` ${ctx.dataset.label}: $${ctx.raw.toLocaleString('en')} USD` } } },
+    scales:{
+      x:{ stacked:true, grid:{display:false}, ticks:{font:{family:"'DM Mono',monospace",size:10}} },
+      y:{ stacked:true, grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{family:"'DM Mono',monospace",size:10}, callback: v => '$'+v} }
+    }
+  }
+});
+
+new Chart(document.getElementById('chartLeads'), {
+  type: 'bar',
+  data: {
+    labels: ss,
+    datasets: [
+      { label:'Landing (formulario)', data:[5,8,7,2,1,1], backgroundColor:'rgba(61,107,0,0.85)', stack:'paid', borderRadius:0 },
+      { label:'Paid bio',             data:[3,4,1,0,2,3], backgroundColor:'rgba(61,107,0,0.30)', stack:'paid', borderRadius:3 },
+      { label:'Conv. DM',             data:[0,0,0,0,1,2], backgroundColor:'rgba(0,107,79,0.7)',  stack:'dm',   borderRadius:3 },
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ footer: items => `Total: ${items.reduce((s,i)=>s+i.raw,0)}` } } },
+    scales:{
+      x:{ grid:{display:false}, ticks:{font:{family:"'DM Mono',monospace",size:10}} },
+      y:{ grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{family:"'DM Mono',monospace",size:10}, stepSize:2} }
+    }
+  }
+});
+
+new Chart(document.getElementById('chartDonut'), {
+  type: 'doughnut',
+  data: {
+    labels:['Landing','DM','Tráfico'],
+    datasets:[{ data:[1417,428,203], backgroundColor:['rgba(61,107,0,0.75)','rgba(0,107,79,0.75)','rgba(122,74,0,0.6)'], borderWidth:0, hoverOffset:6 }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false, cutout:'65%',
+    plugins:{ legend:{ position:'bottom', labels:{ font:{family:"'DM Mono',monospace",size:10}, boxWidth:10, padding:12 } },
+      tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${Math.round(ctx.raw/2048*100)}%` } } }
+  }
+});
+
+</script>
+</body>
+</html>
