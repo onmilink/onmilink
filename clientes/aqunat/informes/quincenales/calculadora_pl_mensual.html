@@ -1,0 +1,156 @@
+
+<h2 class="sr-only">Calculadora P&L mensual Aqunat — ONMI Link. Introduce los datos de un mes y obtén el resultado neto.</h2>
+<style>
+*{box-sizing:border-box}
+.row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.row:last-child{border-bottom:none}
+.rl{font-size:14px;color:var(--color-text-primary)}
+.rs{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.rv{font-size:15px;font-weight:500;color:var(--color-text-primary);white-space:nowrap}
+.ri input{width:110px;text-align:right;font-size:14px}
+.divider{height:0.5px;background:var(--color-border-secondary);margin:4px 0}
+.pos{color:#1D9E75}
+.neg{color:#D85A30}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.kcard{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px}
+.kcard p{margin:0}
+.klbl{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px!important}
+.kval{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.params{display:flex;flex-wrap:wrap;gap:14px;padding:13px 16px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:24px;align-items:flex-end}
+.pg{display:flex;flex-direction:column;gap:4px}
+.pg label{font-size:11px;color:var(--color-text-secondary)}
+.pg input{width:76px}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:4px 16px;margin-bottom:16px}
+.section-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);letter-spacing:0.04em;padding:14px 0 2px}
+</style>
+
+<div style="padding:1rem 0">
+
+<div class="params">
+  <div class="pg"><label for="pm">Margen producto (%)</label><input type="number" id="pm" value="43" min="1" max="99" step="1"></div>
+  <div class="pg"><label for="ptc">TC EUR/USD</label><input type="number" id="ptc" value="1.16" min="0.5" max="2" step="0.01"></div>
+  <div class="pg"><label for="pb">Fee base ONMI (€/mes)</label><input type="number" id="pb" value="1500" min="0" step="50"></div>
+  <div class="pg"><label for="pco">Comisión ONMI (%)</label><input type="number" id="pco" value="12" min="0" max="30" step="1"></div>
+  <button id="brst" style="margin-left:auto;align-self:flex-end;font-size:12px;padding:6px 12px"><i class="ti ti-refresh" aria-hidden="true" style="font-size:14px;margin-right:4px"></i>Restaurar</button>
+</div>
+
+<div class="kgrid">
+  <div class="kcard"><p class="klbl">Resultado neto Aqunat</p><p class="kval" id="kn">—</p></div>
+  <div class="kcard"><p class="klbl">ROAS sobre inversión</p><p class="kval" id="kr">—</p><p style="font-size:11px;color:var(--color-text-secondary);margin:4px 0 0">mín. rentable: <span id="kmin">—</span></p></div>
+</div>
+
+<div class="block">
+  <p class="section-label">Ingresos</p>
+  <div class="row">
+    <div><div class="rl">Ventas del mes</div><div class="rs">Ventas cerradas atribuidas a campañas ONMI</div></div>
+    <div class="ri"><input type="number" id="iventas" value="15000" min="0" step="500"></div>
+  </div>
+</div>
+
+<div class="block">
+  <p class="section-label">Costes del producto</p>
+  <div class="row">
+    <div><div class="rl">Coste de producto</div><div class="rs">ventas × (100% − margen%). Calculado automáticamente</div></div>
+    <div class="rv neg" id="vcp">—</div>
+  </div>
+  <div class="divider"></div>
+  <div class="row">
+    <div><div class="rl" style="font-weight:500">Margen bruto</div><div class="rs">ventas × margen%</div></div>
+    <div class="rv pos" id="vmb">—</div>
+  </div>
+</div>
+
+<div class="block">
+  <p class="section-label">Costes de marketing</p>
+  <div class="row">
+    <div><div class="rl">Pauta Meta</div><div class="rs">Lo que Aqunat paga directamente a Facebook/Instagram</div></div>
+    <div class="ri"><input type="number" id="ipauta" value="2000" min="0" step="100"></div>
+  </div>
+  <div class="divider"></div>
+  <div class="row">
+    <div><div class="rl">Fee base ONMI</div><div class="rs">base€ × TC (fijo mensual)</div></div>
+    <div class="rv neg" id="vfb">—</div>
+  </div>
+  <div class="divider"></div>
+  <div class="row">
+    <div><div class="rl">Comisión ONMI</div><div class="rs">ventas × comisión%</div></div>
+    <div class="rv neg" id="vfc">—</div>
+  </div>
+  <div class="divider"></div>
+  <div class="row">
+    <div><div class="rl" style="font-weight:500">Total inversión marketing</div><div class="rs">pauta + fee base + comisión</div></div>
+    <div class="rv neg" id="vtot">—</div>
+  </div>
+</div>
+
+<div class="block">
+  <p class="section-label">Resultado</p>
+  <div class="row">
+    <div><div class="rl" style="font-weight:500;font-size:15px">Resultado neto Aqunat</div><div class="rs">margen bruto − total inversión marketing</div></div>
+    <div class="rv" id="vnet" style="font-size:18px">—</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function gp(){
+  return{
+    mar:parseFloat(document.getElementById('pm').value)||43,
+    tc: parseFloat(document.getElementById('ptc').value)||1.16,
+    base:parseFloat(document.getElementById('pb').value)||1500,
+    com: parseFloat(document.getElementById('pco').value)||12
+  };
+}
+
+function n(v){return Math.round(v).toLocaleString('es-ES')+' USD';}
+function s(v){var r=Math.round(v);return(r<0?'\u2212':'')+Math.abs(r).toLocaleString('es-ES')+' USD';}
+
+function upd(){
+  var p=gp();
+  var ventas=parseFloat(document.getElementById('iventas').value)||0;
+  var pauta=parseFloat(document.getElementById('ipauta').value)||0;
+
+  var cp=ventas*(1-p.mar/100);
+  var mb=ventas*(p.mar/100);
+  var fb=p.base*p.tc;
+  var fc=ventas*(p.com/100);
+  var ft=pauta+fb+fc;
+  var net=mb-ft;
+  var roas=ft>0?ventas/ft:0;
+  var minRoas=p.mar>0?(100/p.mar):0;
+
+  document.getElementById('vcp').textContent='\u2212'+n(cp);
+  document.getElementById('vmb').textContent=n(mb);
+  document.getElementById('vfb').textContent='\u2212'+n(fb);
+  document.getElementById('vfc').textContent='\u2212'+n(fc);
+  document.getElementById('vtot').textContent='\u2212'+n(ft);
+
+  var netEl=document.getElementById('vnet');
+  netEl.textContent=s(net);
+  netEl.className='rv '+(net>=0?'pos':'neg');
+
+  var knEl=document.getElementById('kn');
+  knEl.textContent=s(net);
+  knEl.className='kval '+(net>=0?'pos':'neg');
+
+  document.getElementById('kr').textContent=roas.toFixed(2)+'x';
+  document.getElementById('kmin').textContent=minRoas.toFixed(2)+'x';
+}
+
+function rst(){
+  document.getElementById('pm').value=43;
+  document.getElementById('ptc').value=1.16;
+  document.getElementById('pb').value=1500;
+  document.getElementById('pco').value=12;
+  document.getElementById('iventas').value=15000;
+  document.getElementById('ipauta').value=2000;
+  upd();
+}
+
+['pm','ptc','pb','pco','iventas','ipauta'].forEach(function(id){
+  document.getElementById(id).addEventListener('input',upd);
+});
+document.getElementById('brst').addEventListener('click',rst);
+upd();
+</script>
