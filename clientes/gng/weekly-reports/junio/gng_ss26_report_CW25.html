@@ -913,10 +913,10 @@ const WEEKS = {
         { nombre: 'Motion Cargo Shorts Eroded Brown', vistas: 343, uds: 0, conv: 0.00 },
         { nombre: 'State Zipper Green', vistas: 306, uds: 0, conv: 0.00 },
         { nombre: 'Flag Zipper Navy', vistas: 261, uds: 3, conv: 1.15 },
-        { nombre: 'Motion Cargo Shorts Worn Navy B', vistas: 249, uds: 0, conv: 0.00 },
+        { nombre: 'Motion Cargo Shorts Worn Navy', vistas: 249, uds: 0, conv: 0.00 },
         { nombre: 'Reverse Logo Tee White', vistas: 194, uds: 3, conv: 1.55 },
         { nombre: 'GNG Cut Logo Tee Black', vistas: 166, uds: 5, conv: 3.01 },
-        { nombre: 'Motion Cargo Shorts Eroded Brown B', vistas: 165, uds: 6, conv: 3.64 },
+        { nombre: 'Motion Cargo Shorts Eroded Brown', vistas: 165, uds: 6, conv: 3.64 },
         { nombre: 'LA Archive T-Shirt White', vistas: 154, uds: 0, conv: 0.00 }
       ],
       topVentas: [
@@ -961,7 +961,7 @@ const WEEKS = {
       ]
     },
     tiktok: {
-      inv: 430.84, compras: 34, cpa: 12.67, ctr: 0.48, cpm: 0.89, imp: 486641, roasTT: 5.02,
+      inv: 430.84, compras: 35, cpa: 12.31, ctr: 0.48, cpm: 0.89, imp: 486641, roasTT: 5.32, valConv: 2291.40,
       campanas: [
         { nombre: 'FRIO ESP ADV+CAT', estado: 'Pausado', inv: 380.39, compras: 32, cpa: 11.89, ctr: 0.50, cpm: 0.97, imp: 390918 },
         { nombre: 'Copia 1 FRIO ESP ADV+CAT', estado: 'Activo', inv: 50.45, compras: 2, cpa: 25.23, ctr: 0.39, cpm: 0.53, imp: 95723 }
@@ -1320,7 +1320,7 @@ function renderEcommSection(d, p) {
     </div>
   </div>`;
 
-  html += `<div class="eco-3col">
+  html += `<div class="eco-2col mb12">
     <div class="eco-box">
       <div class="eco-box-title">Top ventas por producto</div>
       <table class="prod-tbl"><tbody>`;
@@ -1335,10 +1335,11 @@ function renderEcommSection(d, p) {
     html += `<tr><td>${tp.nombre}</td><td class="r" style="font-family:'DM Mono',monospace">${tp.ses.toLocaleString('es-ES')}</td></tr>`;
   });
   html += `</tbody></table></div>
-    <div class="eco-box">
-      <div class="eco-box-title">Top productos · vistas, uds. y conv.</div>
+  </div>`;
+  html += `<div class="eco-box">
+      <div class="eco-box-title">Top productos · sesiones, uds. y conv.</div>
       <table class="prod-tbl">
-        <thead><tr><th>Producto</th><th class="r">Vistas</th><th class="r">Uds.</th><th class="r">Conv.</th></tr></thead>
+        <thead><tr><th>Producto</th><th class="r">Sesiones</th><th class="r">Uds.</th><th class="r">Conv.</th></tr></thead>
         <tbody>`;
   e.topProductos.forEach(tp => {
     const cc = tp.conv!=null&&tp.conv>=8?'green-val':tp.conv===0?'amber-val':'';
@@ -1349,7 +1350,7 @@ function renderEcommSection(d, p) {
       <td class="r"><span class="${cc}">${tp.conv!=null?fmtPct(tp.conv):'—'}</span></td>
     </tr>`;
   });
-  html += `</tbody></table></div></div>`;
+  html += `</tbody></table></div>`;
   html += `</div></div>`;
   return html;
 }
@@ -1519,7 +1520,7 @@ function renderTiktokSection(d) {
       <td class="r">${fmt(c.inv)}€</td>
       <td class="r">${c.compras}</td>
       <td class="r">${fmt(c.cpa)}€</td>
-      <td class="r">${(c.ctr*100).toFixed(2)}%</td>
+      <td class="r">${c.ctr.toFixed(2)}%</td>
       <td class="r">${fmt(c.cpm)}€</td>
     </tr>`;
   });
@@ -1529,10 +1530,13 @@ function renderTiktokSection(d) {
     </div>
     <div class="section-block-body">
     <div class="kpi-strip mb16">
-      <div class="kpi-row" style="grid-template-columns:repeat(6,minmax(0,1fr))">
+      <div class="kpi-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">
         <div class="kpi-cell"><div class="kpi-l">Inversión</div><div class="kpi-v">${fmt(tt.inv)}€</div></div>
+        <div class="kpi-cell"><div class="kpi-l">Valor conv.</div><div class="kpi-v">${fmt(tt.valConv)}€</div></div>
         <div class="kpi-cell"><div class="kpi-l">Compras</div><div class="kpi-v">${tt.compras}</div></div>
         <div class="kpi-cell"><div class="kpi-l">CPA</div><div class="kpi-v">${fmt(tt.cpa)}€</div></div>
+      </div>
+      <div class="kpi-row" style="grid-template-columns:repeat(3,minmax(0,1fr))">
         <div class="kpi-cell"><div class="kpi-l">ROAS TikTok</div><div class="kpi-v">${tt.roasTT.toFixed(2)}x</div></div>
         <div class="kpi-cell"><div class="kpi-l">CPM</div><div class="kpi-v">${fmt(tt.cpm)}€</div></div>
         <div class="kpi-cell"><div class="kpi-l">CTR</div><div class="kpi-v">${tt.ctr.toFixed(2)}%</div></div>
