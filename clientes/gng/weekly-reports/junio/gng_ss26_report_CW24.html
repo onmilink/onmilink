@@ -1412,57 +1412,39 @@ function renderTrendChart(activeWk) {
 function renderTiktokSection(d) {
   const tt = d.tiktok;
   const fmt = v => v.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2});
-  const fmtPct = v => v.toFixed(2) + '%';
   let rows = '';
   tt.campanas.forEach(c => {
+    const estadoStyle = c.estado==='Activo'
+      ? 'background:#e8f5e9;color:#2e7d32'
+      : 'background:#fff3e0;color:#e65100';
     rows += `<tr>
-      <td class="cell-name">${c.nombre}</td>
-      <td class="cell-tag tag-estado" style="background:${c.estado==='Activo'?'#e8f5e9':'#fff3e0'};color:${c.estado==='Activo'?'#2e7d32':'#e65100'}">${c.estado}</td>
-      <td>${fmt(c.inv)}€</td>
-      <td>${c.compras}</td>
-      <td>${fmt(c.cpa)}€</td>
-      <td>${(c.ctr*100).toFixed(2)}%</td>
-      <td>${fmt(c.cpm)}€</td>
+      <td><div class="camp-name">${c.nombre}</div></td>
+      <td><span class="pill" style="${estadoStyle};padding:2px 8px;border-radius:4px;font-size:11px">${c.estado}</span></td>
+      <td class="r">${fmt(c.inv)}€</td>
+      <td class="r">${c.compras}</td>
+      <td class="r">${fmt(c.cpa)}€</td>
+      <td class="r">${(c.ctr*100).toFixed(2)}%</td>
+      <td class="r">${fmt(c.cpm)}€</td>
     </tr>`;
   });
-  return `<div class="section-block">
-    <div class="section-hdr">
-      <div class="section-title">TikTok Ads</div>
-      <div class="section-badge" style="background:#010101;color:#fff">CW${d.label.replace('CW','')}</div>
+  return `<div class="section-block mb24">
+    <div class="section-block-hdr" style="background:#010101">
+      <div class="section-block-title" style="color:#fff">TikTok Ads · ${d.range}</div>
     </div>
-    <div class="kpi-row" style="margin-bottom:12px">
-      <div class="kpi-card">
-        <div class="kpi-label">Inversión TikTok</div>
-        <div class="kpi-val">${fmt(tt.inv)}€</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Compras TikTok</div>
-        <div class="kpi-val">${tt.compras}</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">CPA TikTok</div>
-        <div class="kpi-val">${fmt(tt.cpa)}€</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">ROAS TikTok</div>
-        <div class="kpi-val">${tt.roasTT.toFixed(2)}x</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">CPM</div>
-        <div class="kpi-val">${fmt(tt.cpm)}€</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">CTR</div>
-        <div class="kpi-val">${(tt.ctr).toFixed(2)}%</div>
+    <div class="section-block-body">
+    <div class="kpi-strip mb16">
+      <div class="kpi-row" style="grid-template-columns:repeat(6,minmax(0,1fr))">
+        <div class="kpi-cell"><div class="kpi-l">Inversión</div><div class="kpi-v">${fmt(tt.inv)}€</div></div>
+        <div class="kpi-cell"><div class="kpi-l">Compras</div><div class="kpi-v">${tt.compras}</div></div>
+        <div class="kpi-cell"><div class="kpi-l">CPA</div><div class="kpi-v">${fmt(tt.cpa)}€</div></div>
+        <div class="kpi-cell"><div class="kpi-l">ROAS TikTok</div><div class="kpi-v">${tt.roasTT.toFixed(2)}x</div></div>
+        <div class="kpi-cell"><div class="kpi-l">CPM</div><div class="kpi-v">${fmt(tt.cpm)}€</div></div>
+        <div class="kpi-cell"><div class="kpi-l">CTR</div><div class="kpi-v">${tt.ctr.toFixed(2)}%</div></div>
       </div>
     </div>
-    <div class="table-wrap">
-      <table class="data-table">
-        <thead><tr>
-          <th>Ad Group</th><th>Estado</th><th>Inversión</th><th>Compras</th><th>CPA</th><th>CTR</th><th>CPM</th>
-        </tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
+    <table class="camp-table mb24"><thead><tr>
+      <th>Ad Group</th><th>Estado</th><th class="r">Inversión</th><th class="r">Compras</th><th class="r">CPA</th><th class="r">CTR</th><th class="r">CPM</th>
+    </tr></thead><tbody>${rows}</tbody></table>
     </div>
   </div>`;
 }
