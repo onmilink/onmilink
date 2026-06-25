@@ -308,9 +308,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;background:var(-
         </div>
       </div>
 
-      <div class="section-title">Vinculación con CRM · datos acumulados</div>
-      <div class="kpis" id="creat-crm-kpis"></div>
-
       <div class="section-title" id="creat-section-utm">Leads del periodo en CRM</div>
       <div style="overflow-x:auto">
         <table class="perf-table" id="creat-utm-tabla"></table>
@@ -965,8 +962,6 @@ function buildCreativo() {
   buildCreativoKpis();
   buildCreativoTabla();
   buildCreativoCharts();
-  buildCreativoCrmKpis();
-  buildCreativoCrmCharts();
   buildCreativoUtmTabla();
 }
 
@@ -1077,30 +1072,6 @@ function buildCreativoCharts() {
   }, 50);
 }
 
-function buildCreativoCrmKpis() {
-  const q = CFG.cplQualificado;
-  const cplMetaCant = q.cant.invTotal / q.cant.metaLeads;
-  const cplMetaCint = q.cint.invTotal / q.cint.metaLeads;
-  const cplQualCant = q.cant.crmQualif > 0 ? q.cant.invTotal / q.cant.crmQualif : null;
-  const cplQualCint = q.cint.crmQualif > 0 ? q.cint.invTotal / q.cint.crmQualif : null;
-  const tasaCant = parseFloat((q.cant.crmQualif / q.cant.metaLeads * 100).toFixed(1));
-  const tasaCint = parseFloat((q.cint.crmQualif / q.cint.metaLeads * 100).toFixed(1));
-
-  document.getElementById('creat-crm-kpis').innerHTML = `
-    <div class="kpi" style="border-top:3px solid var(--cant)"><div class="kpi-label">CPL Meta · Cant</div><div class="kpi-val" style="color:var(--cant)">${fmtD(cplMetaCant)} €</div><div class="kpi-sub">53 leads Meta</div></div>
-    <div class="kpi" style="border-top:3px solid var(--cant)"><div class="kpi-label">CPL Cualif. · Cant</div><div class="kpi-val" style="color:var(--cant)">${cplQualCant ? fmtD(cplQualCant) + ' €' : '—'}</div><div class="kpi-sub">3 leads cualificados</div></div>
-    <div class="kpi" style="border-top:3px solid var(--cint)"><div class="kpi-label">CPL Meta · Cintas</div><div class="kpi-val" style="color:var(--cint)">${fmtD(cplMetaCint)} €</div><div class="kpi-sub">47 leads Meta</div></div>
-    <div class="kpi" style="border-top:3px solid var(--cint)"><div class="kpi-label">CPL Cualif. · Cintas</div><div class="kpi-val" style="color:var(--cint)">${cplQualCint ? fmtD(cplQualCint) + ' €' : '—'}</div><div class="kpi-sub">1 lead cualificado</div></div>`;
-}
-
-function buildCreativoCrmCharts() {
-  const q = CFG.cplQualificado;
-  const cplMetaCant = parseFloat((q.cant.invTotal / q.cant.metaLeads).toFixed(2));
-  const cplMetaCint = parseFloat((q.cint.invTotal / q.cint.metaLeads).toFixed(2));
-  const cplQualCant = parseFloat((q.cant.invTotal / q.cant.crmQualif).toFixed(2));
-  const cplQualCint = parseFloat((q.cint.invTotal / q.cint.crmQualif).toFixed(2));
-
-}
 
 function buildCreativoUtmTabla() {
   const rango = PERIODO_FECHAS[creatPeriod] || PERIODO_FECHAS.TOT;
