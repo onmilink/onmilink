@@ -662,7 +662,7 @@ function buildInversion() {
 
   const noteM01 = 'Los conjuntos de anuncios iniciaron entrega el 29–30 abr. El periodo 14–28 abr corresponde a revisión y aprobación de Meta. Datos activos: ~14 días.';
   const noteM02 = 'Quincena completa de actividad. Campañas en plena entrega los 14 días. Los leads de LEADS Cintas Riego (ECU) experimentaron una mejora notable de CPL respecto a M01.';
-  const noteM03 = 'Periodo corto de 3 días (22–25 jun). LEADS Cantoneras generó 3 leads con CPL de 35,04€, concentrados en el vídeo [VID]_[sobrepago]_[V3]. LEADS Cintas sin leads registrados en este periodo.';
+  const noteM03 = 'Periodo corto de 3 días (22–25 jun). LEADS Cantoneras: 3 leads Meta (CPL 35,04€), 9 leads en CRM. LEADS Cintas Riego: 0 leads en Meta, 1 lead en CRM vía [VID]_[compara precios]_[V3].';
   const noteTOT = 'Acumulado desde inicio de campaña (14 abr – 24 jun 2026). Total: 2.326,78€ invertidos, 100 leads generados. CPL medio: 17,62€.';
   const noteMap = { M01: noteM01, M02: noteM02, M03: noteM03, TOT: noteTOT };
   document.getElementById('inv-note').textContent = noteMap[currentPeriod] || '';
@@ -991,6 +991,13 @@ function buildCreativoKpis() {
     <div class="kpi"><div class="kpi-label">Mejor CPL</div><div class="kpi-val">${bestCpl != null ? fmtD(bestCpl) + ' €' : '—'}</div><div class="kpi-sub">${withLeads.length > 0 ? withLeads.sort((a,b)=>a.cpl-b.cpl)[0].nombre : '—'}</div></div>
     <div class="kpi"><div class="kpi-label">Mejor CTR</div><div class="kpi-val">${fmtPct(bestCtr)}</div><div class="kpi-sub">${allCreat.sort((a,b)=>b.ctr-a.ctr)[0].nombre}</div></div>`;
 
+  const rango = PERIODO_FECHAS[creatPeriod] || PERIODO_FECHAS.TOT;
+  const crmByAdId = {};
+  CFG.crmLeads.filter(r => r.fecha >= rango.desde && r.fecha <= rango.hasta)
+    .forEach(r => { if (r.adId) crmByAdId[r.adId] = (crmByAdId[r.adId] || 0) + 1; });
+  const crmSobrpg  = crmByAdId['[VID]_[sobrepago]_[V3]']     || 0;
+  const crmCompra  = crmByAdId['[VID]_[compara precios]_[V3]'] || 0;
+
   document.getElementById('creat-exec').innerHTML = `
     <div class="exec-header">
       <span class="exec-icon">🎨</span>
@@ -1001,8 +1008,8 @@ function buildCreativoKpis() {
       </div>
     </div>
     <div class="exec-insights">
-      <div class="exec-item"><div class="exec-dot"></div><p>El vídeo <strong>[VID]_[sobrepago]_[V3]</strong> concentró los 3 únicos leads del periodo con CPL de <strong>22,33€</strong>, siendo el único formato que convirtió en Cantoneras.</p></div>
-      <div class="exec-item"><div class="exec-dot"></div><p>En Cintas Riego, el vídeo <strong>[VID]_[compara precios]_[V3]</strong> lidera en inversión (47,04€) con CTR de 1,08%, pero sin leads registrados en los días analizados.</p></div>
+      <div class="exec-item"><div class="exec-dot"></div><p>El vídeo <strong>[VID]_[sobrepago]_[V3]</strong> concentró los 3 leads de Meta del periodo (CPL <strong>22,33€</strong>)${crmSobrpg > 0 ? `, con <strong>${crmSobrpg} leads atribuidos vía CRM</strong> (CPL real ~${fmtD(66.99/crmSobrpg)}€)` : ''}. Único formato que convirtió en Cantoneras.</p></div>
+      <div class="exec-item"><div class="exec-dot"></div><p>En Cintas Riego, el vídeo <strong>[VID]_[compara precios]_[V3]</strong> lidera en inversión (47,04€) con CTR de 1,08%. Sin conversión registrada en Meta${crmCompra > 0 ? `, pero con <strong>${crmCompra} lead${crmCompra > 1 ? 's' : ''} atribuido${crmCompra > 1 ? 's' : ''} en CRM</strong>` : ''}.</p></div>
     </div>`;
 }
 
@@ -1017,13 +1024,19 @@ function buildCreativoTabla() {
   const data = getCreatData().sort((a,b)=> b.leads - a.leads || b.ctr - a.ctr);
   const maxLeads = Math.max(...data.map(c=>c.leads));
 
+  const rango2 = PERIODO_FECHAS[creatPeriod] || PERIODO_FECHAS.TOT;
+  const crmById = {};
+  CFG.crmLeads.filter(r => r.fecha >= rango2.desde && r.fecha <= rango2.hasta)
+    .forEach(r => { if (r.adId) crmById[r.adId] = (crmById[r.adId] || 0) + 1; });
+
   const thead = `<thead><tr>
     <th>Anuncio</th><th>Tipo</th><th>Producto</th>
     <th style="text-align:right">Inversión</th>
     <th style="text-align:right">Impr.</th>
     <th style="text-align:right">CPM</th>
     <th style="text-align:right">CTR</th>
-    <th style="text-align:right">Leads</th>
+    <th style="text-align:right">Leads Meta</th>
+    <th style="text-align:right">Leads CRM</th>
     <th style="text-align:right">CPL</th>
   </tr></thead>`;
 
@@ -1038,6 +1051,7 @@ function buildCreativoTabla() {
     const nombreCell = isWinner
       ? `<strong>${c.nombre}</strong> <span class="badge-winner badge-tipo">WINNER</span>`
       : `<strong>${c.nombre}</strong><br><span style="font-size:10px;color:var(--subtle)">${c.id}</span>`;
+    const crmL = crmById[c.id] || 0;
     return `<tr>
       <td>${nombreCell}</td>
       <td>${tipoBadge}</td>
@@ -1047,6 +1061,7 @@ function buildCreativoTabla() {
       <td style="text-align:right">${fmtEur(c.cpm)}</td>
       <td style="text-align:right">${fmtPct(c.ctr)}</td>
       <td style="text-align:right;font-weight:${c.leads>0?'700':'300'}">${c.leads}</td>
+      <td style="text-align:right;font-weight:${crmL>0?'700':'300'};color:${crmL>0?'var(--g-dark)':'inherit'}">${crmL}</td>
       <td style="text-align:right">${c.cpl != null ? fmtEur(c.cpl) : '<span class=\"val-null\">—</span>'}</td>
     </tr>`;
   });
