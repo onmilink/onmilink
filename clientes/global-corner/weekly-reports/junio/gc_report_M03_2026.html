@@ -280,10 +280,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;background:var(-
 
       <div class="rtabs" id="creat-period-tabs"></div>
 
-      <div class="section-title" id="creat-section-kpis">KPIs creativos</div>
-      <div class="kpis" id="creat-kpis"></div>
-      <div class="exec-box" id="creat-exec"></div>
-
       <div id="creat-nodata" style="display:none;padding:32px 0;text-align:center;color:var(--subtle);font-size:13px">Sin datos de creatividades para este periodo.</div>
 
       <div id="creat-data-block">
@@ -293,6 +289,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;background:var(-
           <button class="filter-btn active" onclick="setCreatFilter('cant',this)">Cantoneras</button>
           <button class="filter-btn" onclick="setCreatFilter('cint',this)">Cintas Riego</button>
         </div>
+        <div class="section-title" id="creat-section-kpis">KPIs creativos</div>
+        <div class="kpis" id="creat-kpis"></div>
+        <div class="exec-box" id="creat-exec"></div>
       <div style="overflow-x:auto">
         <table class="perf-table" id="creat-tabla"></table>
       </div>
@@ -921,6 +920,7 @@ function setCreatFilter(f, el) {
   creatFilter = f;
   document.querySelectorAll('#page-creativo .filter-btn').forEach(x => x.classList.remove('active'));
   el.classList.add('active');
+  buildCreativoKpis();
   buildCreativoTabla();
   buildCreativoCharts();
 }
@@ -946,10 +946,6 @@ function buildCreativo() {
     : !!(CFG.creatividades[creatPeriod]);
 
   /* Título de sección */
-  const periodoObj = CFG.periodos.find(p => p.key === creatPeriod);
-  document.getElementById('creat-section-kpis').textContent =
-    'KPIs creativos · ' + (periodoObj ? periodoObj.label : creatPeriod);
-
   document.getElementById('creat-nodata').style.display    = hasData ? 'none'  : 'block';
   document.getElementById('creat-data-block').style.display = hasData ? 'block' : 'none';
 
@@ -976,14 +972,15 @@ function _getCreatSource() {
 }
 
 function buildCreativoKpis() {
-  const src = _getCreatSource();
-  const allCreat = [...src.cant.map(c=>({...c,prod:'cant'})), ...src.cint.map(c=>({...c,prod:'cint'}))];
-  const invTotal  = allCreat.reduce((s,c)=>s+c.inv, 0);
+  const allCreat   = getCreatData();
+  const invTotal   = allCreat.reduce((s,c)=>s+c.inv, 0);
   const leadsTotal = allCreat.reduce((s,c)=>s+c.leads, 0);
   const withLeads  = allCreat.filter(c=>c.cpl != null);
   const bestCpl    = withLeads.length > 0 ? Math.min(...withLeads.map(c=>c.cpl)) : null;
   const bestCtr    = Math.max(...allCreat.map(c=>c.ctr));
   const periodoLabel = (CFG.periodos.find(p=>p.key===creatPeriod)||{}).range || creatPeriod;
+  const prodLabel  = creatFilter === 'cant' ? ' · Cantoneras' : creatFilter === 'cint' ? ' · Cintas Riego' : '';
+  document.getElementById('creat-section-kpis').textContent = 'KPIs creativos · ' + periodoLabel + prodLabel;
 
   document.getElementById('creat-kpis').innerHTML = `
     <div class="kpi"><div class="kpi-label">Inversión LEADS</div><div class="kpi-val">${fmtD(invTotal)} €</div><div class="kpi-sub">${periodoLabel}</div></div>
