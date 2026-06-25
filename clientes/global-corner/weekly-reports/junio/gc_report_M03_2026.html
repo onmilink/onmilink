@@ -982,16 +982,22 @@ function buildCreativoKpis() {
   const prodLabel  = creatFilter === 'cant' ? ' · Cantoneras' : creatFilter === 'cint' ? ' · Cintas Riego' : '';
   document.getElementById('creat-section-kpis').textContent = 'KPIs creativos · ' + periodoLabel + prodLabel;
 
+  const rango = PERIODO_FECHAS[creatPeriod] || PERIODO_FECHAS.TOT;
+  const prodFilt = creatFilter !== 'all' ? creatFilter : null;
+  const crmLeadsFiltered = CFG.crmLeads.filter(r =>
+    r.fecha >= rango.desde && r.fecha <= rango.hasta && (!prodFilt || r.prod === prodFilt));
+  const crmLeadsCnt = crmLeadsFiltered.length;
+  const cplCRM = crmLeadsCnt > 0 ? invTotal / crmLeadsCnt : null;
+  const bestCtrCreat = allCreat.slice().sort((a,b)=>b.ctr-a.ctr)[0];
+
   document.getElementById('creat-kpis').innerHTML = `
     <div class="kpi"><div class="kpi-label">Inversión LEADS</div><div class="kpi-val">${fmtD(invTotal)} €</div><div class="kpi-sub">${periodoLabel}</div></div>
-    <div class="kpi"><div class="kpi-label">Leads Totales</div><div class="kpi-val">${leadsTotal}</div><div class="kpi-sub">Formulario Meta</div></div>
-    <div class="kpi"><div class="kpi-label">Mejor CPL</div><div class="kpi-val">${bestCpl != null ? fmtD(bestCpl) + ' €' : '—'}</div><div class="kpi-sub">${withLeads.length > 0 ? withLeads.sort((a,b)=>a.cpl-b.cpl)[0].nombre : '—'}</div></div>
-    <div class="kpi"><div class="kpi-label">Mejor CTR</div><div class="kpi-val">${fmtPct(bestCtr)}</div><div class="kpi-sub">${allCreat.sort((a,b)=>b.ctr-a.ctr)[0].nombre}</div></div>`;
+    <div class="kpi"><div class="kpi-label">Leads CRM</div><div class="kpi-val">${crmLeadsCnt}</div><div class="kpi-sub">Registrados en CRM</div></div>
+    <div class="kpi"><div class="kpi-label">CPL CRM</div><div class="kpi-val">${cplCRM != null ? fmtD(cplCRM) + ' €' : '—'}</div><div class="kpi-sub">Inv. ÷ leads CRM</div></div>
+    <div class="kpi"><div class="kpi-label">Mejor CTR</div><div class="kpi-val">${fmtPct(bestCtr)}</div><div class="kpi-sub">${bestCtrCreat ? bestCtrCreat.nombre : '—'}</div></div>`;
 
-  const rango = PERIODO_FECHAS[creatPeriod] || PERIODO_FECHAS.TOT;
   const crmByAdId = {};
-  CFG.crmLeads.filter(r => r.fecha >= rango.desde && r.fecha <= rango.hasta)
-    .forEach(r => { if (r.adId) crmByAdId[r.adId] = (crmByAdId[r.adId] || 0) + 1; });
+  crmLeadsFiltered.forEach(r => { if (r.adId) crmByAdId[r.adId] = (crmByAdId[r.adId] || 0) + 1; });
   const crmSobrpg  = crmByAdId['[VID]_[sobrepago]_[V3]']     || 0;
   const crmCompra  = crmByAdId['[VID]_[compara precios]_[V3]'] || 0;
 
