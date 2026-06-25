@@ -424,18 +424,18 @@ const CFG = {
   creatividades: {
     M03: {
       cant: [
-        { nombre: 'Sobrepago',      id: '[VID]_[sobrepago]_[V3]',     tipo: 'video',  inv: 66.99, leads: 3, cpl: 22.33, ctr: 0.733, cpm: 5.78,  impr: 11599 },
-        { nombre: 'Volumen',        id: '[IMG]_[volumen]_[V3]',        tipo: 'imagen', inv: 13.83, leads: 0, cpl: null,  ctr: 1.328, cpm: 10.80, impr: 1280  },
-        { nombre: 'Fabr. Nacional', id: '[IMG]_[fabr. nacional]_[V3]', tipo: 'imagen', inv: 12.53, leads: 0, cpl: null,  ctr: 0.926, cpm: 9.67,  impr: 1296  },
-        { nombre: 'Ahorro',         id: '[IMG]_[Ahorro]_[V3]',         tipo: 'imagen', inv: 6.23,  leads: 0, cpl: null,  ctr: 0.532, cpm: 11.05, impr: 564   },
-        { nombre: 'Sobrepago IMG',  id: '[IMG]_[sobrepago]_[V3]',      tipo: 'imagen', inv: 5.51,  leads: 0, cpl: null,  ctr: 0.707, cpm: 6.49,  impr: 849   },
+        { nombre: 'Sobrepago',      id: '[VID]_[sobrepago]_[V3]',     tipo: 'video',  inv: 66.99, leads: 3, cpl: 22.33, ctr: 0.733, cpm: 5.78,  impr: 11599, alcance: 8653  },
+        { nombre: 'Volumen',        id: '[IMG]_[volumen]_[V3]',        tipo: 'imagen', inv: 13.83, leads: 0, cpl: null,  ctr: 1.328, cpm: 10.80, impr: 1280,  alcance: 971   },
+        { nombre: 'Fabr. Nacional', id: '[IMG]_[fabr. nacional]_[V3]', tipo: 'imagen', inv: 12.53, leads: 0, cpl: null,  ctr: 0.926, cpm: 9.67,  impr: 1296,  alcance: 1064  },
+        { nombre: 'Ahorro',         id: '[IMG]_[Ahorro]_[V3]',         tipo: 'imagen', inv: 6.23,  leads: 0, cpl: null,  ctr: 0.532, cpm: 11.05, impr: 564,   alcance: 508   },
+        { nombre: 'Sobrepago IMG',  id: '[IMG]_[sobrepago]_[V3]',      tipo: 'imagen', inv: 5.51,  leads: 0, cpl: null,  ctr: 0.707, cpm: 6.49,  impr: 849,   alcance: 749   },
       ],
       cint: [
-        { nombre: 'Compara precios', id: '[VID]_[compara precios]_[V3]', tipo: 'video',  inv: 47.04, leads: 0, cpl: null, ctr: 1.084, cpm: 4.43, impr: 10613 },
-        { nombre: 'Volumen',         id: '[IMG]_[volumen]_[V3]',          tipo: 'imagen', inv: 27.20, leads: 0, cpl: null, ctr: 0.614, cpm: 2.93, impr: 9283  },
-        { nombre: 'Ahorro',          id: '[IMG]_[ahorro]_[V3]',           tipo: 'imagen', inv: 10.57, leads: 0, cpl: null, ctr: 0.506, cpm: 3.34, impr: 3165  },
-        { nombre: 'Internacional',   id: '[IMG]_[internacional]_[V3]',    tipo: 'imagen', inv: 7.93,  leads: 0, cpl: null, ctr: 0.938, cpm: 3.10, impr: 2559  },
-        { nombre: 'Margen',          id: '[IMG]_[margen]_[V3]',           tipo: 'imagen', inv: 2.57,  leads: 0, cpl: null, ctr: 0.960, cpm: 3.53, impr: 729   },
+        { nombre: 'Compara precios', id: '[VID]_[compara precios]_[V3]', tipo: 'video',  inv: 47.04, leads: 0, cpl: null, ctr: 1.084, cpm: 4.43, impr: 10613, alcance: 5552  },
+        { nombre: 'Volumen',         id: '[IMG]_[volumen]_[V3]',          tipo: 'imagen', inv: 27.20, leads: 0, cpl: null, ctr: 0.614, cpm: 2.93, impr: 9283,  alcance: 6748  },
+        { nombre: 'Ahorro',          id: '[IMG]_[ahorro]_[V3]',           tipo: 'imagen', inv: 10.57, leads: 0, cpl: null, ctr: 0.506, cpm: 3.34, impr: 3165,  alcance: 2324  },
+        { nombre: 'Internacional',   id: '[IMG]_[internacional]_[V3]',    tipo: 'imagen', inv: 7.93,  leads: 0, cpl: null, ctr: 0.938, cpm: 3.10, impr: 2559,  alcance: 1921  },
+        { nombre: 'Margen',          id: '[IMG]_[margen]_[V3]',           tipo: 'imagen', inv: 2.57,  leads: 0, cpl: null, ctr: 0.960, cpm: 3.53, impr: 729,   alcance: 591   },
       ]
     }
   },
@@ -1035,7 +1035,7 @@ function buildCreativoTabla() {
   const thead = `<thead><tr>
     <th>Anuncio</th><th>Tipo</th><th>Producto</th>
     <th style="text-align:right">Inversión</th>
-    <th style="text-align:right">Impr.</th>
+    <th style="text-align:right">Alcance</th>
     <th style="text-align:right">CPM</th>
     <th style="text-align:right">CTR</th>
     <th style="text-align:right">Leads Meta</th>
@@ -1060,7 +1060,7 @@ function buildCreativoTabla() {
       <td>${tipoBadge}</td>
       <td>${prodPill}</td>
       <td style="text-align:right">${fmtEur(c.inv)}</td>
-      <td style="text-align:right">${fmt(c.impr)}</td>
+      <td style="text-align:right">${fmt(c.alcance)}</td>
       <td style="text-align:right">${fmtEur(c.cpm)}</td>
       <td style="text-align:right">${fmtPct(c.ctr)}</td>
       <td style="text-align:right;font-weight:${c.leads>0?'700':'300'}">${c.leads}</td>
