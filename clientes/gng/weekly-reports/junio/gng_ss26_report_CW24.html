@@ -1507,7 +1507,8 @@ function setMailFilter(f) {
   // Re-render only mail section
   const content = document.getElementById('main-content');
   const blocks = content.querySelectorAll('.section-block');
-  blocks[1].outerHTML = renderMailSection(d);
+  const mailIdx = d.tiktok ? 2 : 1;
+  blocks[mailIdx].outerHTML = renderMailSection(d);
 }
 
 // ---- WEEK SELECTOR ----
