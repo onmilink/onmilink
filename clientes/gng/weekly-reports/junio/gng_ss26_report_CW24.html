@@ -1142,11 +1142,11 @@ function renderMailSection(d) {
           <div class="mail-subject">${mv.subject}</div>
           ${mv.link ? `<a href="${mv.link}" target="_blank" style="flex-shrink:0;font-family:'DM Mono',monospace;font-size:7.5px;padding:3px 9px;border:1px solid var(--border);color:var(--muted);text-decoration:none;letter-spacing:0.08em;white-space:nowrap;margin-top:2px;" onmouseover="this.style.borderColor='var(--black)';this.style.color='var(--black)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">VER EMAIL ↗</a>` : ''}
         </div>
-        <div class="mail-from">${mv.fecha} CEST · ${mv.dest.toLocaleString('es-ES')} dest.</div>
+        <div class="mail-from">${mv.fecha} CEST${mv.dest != null ? ' · ' + mv.dest.toLocaleString('es-ES') + ' dest.' : ''}</div>
         <div class="mail-metrics">
           <div><div class="mm-l">Apertura</div><div class="mm-v">${fmtPct(mv.apertura)}</div></div>
           <div><div class="mm-l">Clics</div><div class="mm-v">${fmtPct(mv.clics)}</div></div>
-          <div><div class="mm-l">Pedidos</div><div class="mm-v" style="color:var(--green)">${mv.pedidos}</div></div>
+          <div><div class="mm-l">Pedidos</div><div class="mm-v" style="color:var(--green)">${mv.pedidos != null ? mv.pedidos : '—'}</div></div>
           <div><div class="mm-l">Ingresos</div><div class="mm-v">${fmtEur(mv.ingresos)}</div></div>
         </div>
       </div>`;
