@@ -1109,7 +1109,7 @@ const WEEKS = {
     label: 'CW27', range: '29 jun–5 jul 2026',
     meta: {
       inv: 5340.13, compras: 231, valConv: 19103.15, cpa: 23.12,
-      roasMeta: 3.58, roasNeg: 0, roasNeto: 0,
+      roasMeta: 3.58, roasNeg: 5.45, roasNeto: 4.31,
       campanas: [
         { nombre: 'VENTS ABO MAIN - Frío ESP', tipo: 'Prospección', cat: 'venta', desc: 'ABO · Frío · ESP',
           inv: 1768.69, compras: 135, val: 11477.86, aov: 85.02, roas: 6.49, ctr: 1.22, cpm: 3.51 },
@@ -1157,20 +1157,27 @@ const WEEKS = {
       ]
     },
     ecomm: {
-      brutas: 0, descuentos: 0, devoluciones: 0, netas: 0,
-      envio: 0, devCargos: 0, impuestos: 0, totales: 0,
-      pedidos: 0, aov: 0,
-      sesiones: 0, conv: 0, carrito: 0, pago: 0, compra: 0,
-      cartSes: 0, pagoSes: 0, compraSes: 0,
-      habituales: 0,
+      brutas: 28944.46, descuentos: 2890.66, devoluciones: 1770.96, netas: 24282.84,
+      envio: 1239.79, devCargos: 72.00, impuestos: 5093.43, totales: 30688.06,
+      pedidos: 427, aov: 61.01,
+      sesiones: 24669, conv: 1.35, carrito: 6.13, pago: 3.56, compra: 1.35,
+      cartSes: 1514, pagoSes: 879, compraSes: 333,
+      habituales: 24.27,
       topVentas: [
         { nombre: 'Tank Top Basic 2X Pack', val: null },
         { nombre: 'Skin Zipper Black', val: null },
-        { nombre: 'Flag Zipper Navy', val: null },
-        { nombre: 'Flag Zipper Grey Melange', val: null },
-        { nombre: '14oz Denim Short Raw Indigo', val: null }
+        { nombre: 'California Windbreaker Black', val: null },
+        { nombre: 'Skin Zipper Melange', val: null },
+        { nombre: 'Motion Cargo Shorts Worn Navy', val: null }
       ],
-      topPaginas: [],
+      topPaginas: [
+        { nombre: '/collections/rebajas', visitas: 6961 },
+        { nombre: 'Homepage /', visitas: 4707 },
+        { nombre: '/collections/ss26', visitas: 1456 },
+        { nombre: '/en-eu', visitas: 546 },
+        { nombre: '/products/tank-top', visitas: 649 },
+        { nombre: '/products/flag-zipper', visitas: 535 }
+      ],
       topProductos: [
         { nombre: 'Tank Top Basic 2X Pack', vistas: 649, uds: 36, conv: 5.55 },
         { nombre: 'Flag Zipper Navy', vistas: 535, uds: 9, conv: 1.68 },
