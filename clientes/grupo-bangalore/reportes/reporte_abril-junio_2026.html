@@ -436,7 +436,7 @@
         </button>
       </div>
       <div class="metric-selector">
-        <button class="tab active" onclick="switchMetric('inversion',this)">Inversión</button>
+        <button class="tab active" onclick="switchMetric('inversion',this)">Inv. Total</button>
         <button class="tab" onclick="switchMetric('visitas',this)">Visitas perfil</button>
         <button class="tab" onclick="switchMetric('seguidores',this)">Seguidores</button>
         <button class="tab" onclick="switchMetric('coste_seg',this)">€/seguidor</button>
@@ -459,7 +459,9 @@
       <thead>
         <tr>
           <th style="width:130px">Período</th>
-          <th>Inversión</th>
+          <th>Inv. Perfil</th>
+          <th>Inv. Reservas</th>
+          <th>Inv. Total</th>
           <th>Visitas perfil</th>
           <th>Seguidores</th>
           <th>€/visita perfil</th>
@@ -707,12 +709,12 @@ function buildTable() {
   RESTAURANTS.forEach(function(r) {
     var trRest = document.createElement('tr');
     trRest.className = 'rest-header';
-    trRest.innerHTML = '<td colspan="8" style="color:' + r.color + '">' + r.label + '</td>';
+    trRest.innerHTML = '<td colspan="10" style="color:' + r.color + '">' + r.label + '</td>';
     body.appendChild(trRest);
 
     var trCP = document.createElement('tr');
     trCP.className = 'camp-header perfil';
-    trCP.innerHTML = '<td colspan="8">Campaña &middot; Perfil</td>';
+    trCP.innerHTML = '<td colspan="10">Campaña &middot; Perfil</td>';
     body.appendChild(trCP);
 
     if (r.perfil) {
@@ -732,9 +734,14 @@ function buildTable() {
             : '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>');
         var tr  = document.createElement('tr');
         tr.className = 'data-row';
+        var invResCell = invR > 0
+          ? '<td class="num">' + fmtEur(invR, 2) + '</td>'
+          : '<td class="num" style="color:var(--muted)">—</td>';
         tr.innerHTML =
           '<td>' + p + '</td>' +
-          '<td class="num">' + fmtEur(inv, 2) + '</td>' +
+          '<td class="num">' + fmtEur(invPerfil, 2) + '</td>' +
+          invResCell +
+          '<td class="num" style="font-weight:600">' + fmtEur(inv, 2) + '</td>' +
           '<td class="num">' + fmtN(vis) + '</td>' +
           '<td class="num">+' + seg + '</td>' +
           '<td class="num">' + fmtEur(inv / vis, 2) + '</td>' +
@@ -758,9 +765,12 @@ function buildTable() {
       }
       var trTot  = document.createElement('tr');
       trTot.className = 'total-row';
+      var totInvPerfilOnly = sum(r.perfil.inversion);
       trTot.innerHTML =
         '<td>Total</td>' +
-        '<td class="num" style="color:' + r.color + '">' + fmtEur(totInv, 2) + '</td>' +
+        '<td class="num">' + fmtEur(totInvPerfilOnly, 2) + '</td>' +
+        '<td class="num">' + (totInvRes > 0 ? fmtEur(totInvRes, 2) : '<span style="color:var(--muted)">—</span>') + '</td>' +
+        '<td class="num" style="color:' + r.color + ';font-weight:600">' + fmtEur(totInv, 2) + '</td>' +
         '<td class="num">' + fmtN(totVis) + '</td>' +
         '<td class="num">+' + totSeg + '</td>' +
         '<td class="num">' + fmtEur(totInv / totVis, 2) + '</td>' +
@@ -770,7 +780,7 @@ function buildTable() {
     } else {
       var trPend = document.createElement('tr');
       trPend.className = 'pending-row';
-      trPend.innerHTML = '<td colspan="8">Datos pendientes</td>';
+      trPend.innerHTML = '<td colspan="10">Datos pendientes</td>';
       body.appendChild(trPend);
     }
 
