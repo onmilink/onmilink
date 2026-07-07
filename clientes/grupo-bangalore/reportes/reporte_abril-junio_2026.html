@@ -1,0 +1,763 @@
+<meta charset="UTF-8">
+<title>Grupo Bangalore — Reporte Q2 2026</title>
+<style>
+  :root {
+    --bg:        #0E0F13;
+    --surface:   #16181F;
+    --surface2:  #1D2029;
+    --border:    rgba(255,255,255,0.07);
+    --text:      #F0EDE8;
+    --muted:     #8A8990;
+    --gold:      #C8A96E;
+
+    --c-arooces:   #E07B39;
+    --c-bangalore: #3B9E8C;
+    --c-viggos:    #8B5CF6;
+    --c-perfil:    #3B9E8C;
+    --c-reservas:  #C8A96E;
+
+    --r: 8px;
+    --gap: 20px;
+  }
+  :root[data-theme="light"] {
+    --bg:      #F5F3EE;
+    --surface: #FFFFFF;
+    --surface2:#EAE7E0;
+    --border:  rgba(0,0,0,0.08);
+    --text:    #18191E;
+    --muted:   #6B6970;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg:      #F5F3EE;
+      --surface: #FFFFFF;
+      --surface2:#EAE7E0;
+      --border:  rgba(0,0,0,0.08);
+      --text:    #18191E;
+      --muted:   #6B6970;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .header {
+    padding: 36px 48px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-end;
+    justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  .eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 6px;
+  }
+  .header h1 {
+    font-family: Georgia, serif; font-size: 26px;
+    font-weight: normal; letter-spacing: -0.02em;
+    color: var(--text); line-height: 1.2;
+  }
+  .header-right { text-align: right; }
+  .header-right .period { font-size: 13px; color: var(--muted); }
+  .header-right .date   { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .topbar {
+    padding: 14px 48px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 14px;
+  }
+  .rest-legend { display: flex; gap: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; }
+  .legend-dot  { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .camp-legend { display: flex; gap: 10px; flex-wrap: wrap; }
+  .camp-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 20px;
+  }
+  .camp-pill.perfil   { background: rgba(59,158,140,0.15); color: var(--c-perfil); }
+  .camp-pill.reservas { background: rgba(200,169,110,0.15); color: var(--c-reservas); }
+  .camp-pill-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+  main {
+    padding: 28px 48px 64px;
+    display: flex; flex-direction: column;
+    gap: 28px; width: 100%;
+  }
+
+  /* ─── KPI Cards ─── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap);
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    border-top: 3px solid var(--c);
+    padding: 18px 20px;
+    display: flex; flex-direction: column;
+  }
+  .kpi-card.arooces   { --c: var(--c-arooces); }
+  .kpi-card.bangalore { --c: var(--c-bangalore); }
+  .kpi-card.viggos    { --c: var(--c-viggos); }
+
+  .kpi-rest-name {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--c); margin-bottom: 14px;
+  }
+  .camp-section { padding-bottom: 12px; }
+  .camp-section:last-child { padding-bottom: 0; }
+  .camp-divider { height: 1px; background: var(--border); margin: 12px 0; }
+  .camp-section-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .camp-section-label.perfil   { color: var(--c-perfil); }
+  .camp-section-label.reservas { color: var(--c-reservas); }
+
+  .kpi-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px 10px;
+  }
+  .kpi-label { font-size: 10px; color: var(--muted); margin-bottom: 1px; white-space: nowrap; }
+  .kpi-value {
+    font-size: 17px; font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em; color: var(--text);
+  }
+  .kpi-value.sm { font-size: 14px; }
+  .pending-camp { font-size: 12px; color: var(--muted); font-style: italic; padding: 4px 0; }
+
+  /* ─── Chart ─── */
+  .chart-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 22px 24px;
+  }
+  .section-header {
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: Georgia, serif; font-size: 15px;
+    font-weight: normal; color: var(--text);
+  }
+  .chart-note { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+  .chart-controls {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  /* Selector restaurante */
+  .rest-selector {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .rest-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border);
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    background: transparent; color: var(--muted);
+    transition: all 0.15s;
+  }
+  .rest-btn:hover { border-color: var(--c); color: var(--c); }
+  .rest-btn.active {
+    background: var(--c); color: #fff; border-color: var(--c);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--c) 30%, transparent);
+  }
+  .rest-btn .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: currentColor; flex-shrink: 0;
+  }
+  .rest-btn.active .dot { background: rgba(255,255,255,0.8); }
+
+  /* Selector métrica */
+  .metric-selector {
+    display: flex; gap: 4px;
+    background: var(--surface2); border-radius: 6px;
+    padding: 3px; width: fit-content;
+  }
+  .tab {
+    padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 500;
+    cursor: pointer; border: none; background: transparent; color: var(--muted);
+    transition: background 0.15s, color 0.15s;
+  }
+  .tab.active {
+    background: var(--surface); color: var(--text);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  .chart-empty {
+    display: flex; align-items: center; justify-content: center;
+    height: 180px; font-size: 13px; color: var(--muted); font-style: italic;
+  }
+  canvas { width: 100% !important; display: block; }
+
+  /* ─── Table ─── */
+  .table-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 22px 24px; overflow-x: auto;
+  }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px; font-variant-numeric: tabular-nums;
+    min-width: 600px;
+  }
+  thead th {
+    padding: 7px 12px; text-align: left;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--muted); border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  thead th:first-child { padding-left: 0; }
+
+  tr.rest-header td {
+    padding: 18px 12px 4px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border-bottom: none;
+  }
+  tr.rest-header:first-child td { padding-top: 8px; }
+  tr.rest-header td:first-child { padding-left: 0; }
+
+  tr.camp-header td {
+    padding: 7px 12px 6px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  tr.camp-header td:first-child { padding-left: 0; }
+  tr.camp-header.perfil td   { color: var(--c-perfil); }
+  tr.camp-header.reservas td { color: var(--c-reservas); }
+
+  tr.data-row td {
+    padding: 9px 12px; color: var(--text);
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr.data-row td:first-child { padding-left: 0; color: var(--muted); font-size: 12px; }
+
+  tr.total-row td {
+    padding: 8px 12px; font-weight: 700;
+    border-top: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
+  }
+  tr.total-row td:first-child {
+    padding-left: 0; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  }
+  tr.pending-row td {
+    padding: 10px 12px; font-size: 12px;
+    color: var(--muted); font-style: italic;
+    border-bottom: 2px solid var(--border);
+  }
+  tr.pending-row td:first-child { padding-left: 0; }
+  .num { font-weight: 600; }
+
+  .footer {
+    padding: 20px 48px; border-top: 1px solid var(--border);
+    font-size: 11px; color: var(--muted);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+
+  @media (max-width: 900px) { .kpi-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) {
+    .header, main, .topbar, .footer { padding-left: 20px; padding-right: 20px; }
+    .kpi-grid { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .topbar { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<div class="header">
+  <div class="header-left">
+    <div class="eyebrow">Reporte mensual &middot; Paid Social</div>
+    <h1>Grupo Bangalore<br><span style="color:var(--gold)">El Pillo &middot; Bangalore &middot; Viggos</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="period">Abril — Julio 2026</div>
+    <div class="date">Generado 7 julio 2026</div>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="rest-legend">
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--c-arooces)"></div>
+      Arroces El Pillo
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--c-bangalore)"></div>
+      Bangalore Playa
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--c-viggos)"></div>
+      Viggos
+    </div>
+  </div>
+  <div class="camp-legend">
+    <span class="camp-pill perfil"><span class="camp-pill-dot"></span>Perfil</span>
+    <span class="camp-pill reservas"><span class="camp-pill-dot"></span>Reservas</span>
+  </div>
+</div>
+
+<main>
+
+  <div class="kpi-grid">
+
+    <!-- Arroces El Pillo -->
+    <div class="kpi-card arooces">
+      <div class="kpi-rest-name">Arroces El Pillo</div>
+      <div class="camp-section">
+        <div class="camp-section-label perfil">Perfil</div>
+        <div class="kpi-row">
+          <div class="kpi-item">
+            <div class="kpi-label">Inversión</div>
+            <div class="kpi-value">336,42 €</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Visitas perfil</div>
+            <div class="kpi-value">2.474</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Seguidores</div>
+            <div class="kpi-value">+406</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">€/visita</div>
+            <div class="kpi-value sm">0,14 €</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">€/seguidor</div>
+            <div class="kpi-value sm">0,83 €</div>
+          </div>
+        </div>
+      </div>
+      <div class="camp-divider"></div>
+      <div class="camp-section">
+        <div class="camp-section-label reservas">Reservas</div>
+        <div class="pending-camp">Datos pendientes</div>
+      </div>
+    </div>
+
+    <!-- Bangalore Playa -->
+    <div class="kpi-card bangalore">
+      <div class="kpi-rest-name">Bangalore Playa</div>
+      <div class="camp-section">
+        <div class="camp-section-label perfil">Perfil</div>
+        <div class="kpi-row">
+          <div class="kpi-item">
+            <div class="kpi-label">Inversión</div>
+            <div class="kpi-value">349,40 €</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Visitas perfil</div>
+            <div class="kpi-value">5.617</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Seguidores</div>
+            <div class="kpi-value">+368</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">€/visita</div>
+            <div class="kpi-value sm">0,06 €</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">€/seguidor</div>
+            <div class="kpi-value sm">0,95 €</div>
+          </div>
+        </div>
+      </div>
+      <div class="camp-divider"></div>
+      <div class="camp-section">
+        <div class="camp-section-label reservas">Reservas</div>
+        <div class="pending-camp">Datos pendientes</div>
+      </div>
+    </div>
+
+    <!-- Viggos -->
+    <div class="kpi-card viggos">
+      <div class="kpi-rest-name">Viggos</div>
+      <div class="camp-section">
+        <div class="camp-section-label perfil">Perfil</div>
+        <div class="kpi-row">
+          <div class="kpi-item">
+            <div class="kpi-label">Inversión</div>
+            <div class="kpi-value">349,80 €</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Visitas perfil</div>
+            <div class="kpi-value">2.082</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Seguidores</div>
+            <div class="kpi-value">+240</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">€/visita</div>
+            <div class="kpi-value sm">0,17 €</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">€/seguidor</div>
+            <div class="kpi-value sm">1,46 €</div>
+          </div>
+        </div>
+      </div>
+      <div class="camp-divider"></div>
+      <div class="camp-section">
+        <div class="camp-section-label reservas">Reservas</div>
+        <div class="pending-camp">Datos pendientes</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Gráfico -->
+  <div class="chart-section">
+    <div class="section-header" style="margin-bottom:0">
+      <div>
+        <div class="section-title">Evolución quincenas &middot; Campaña Perfil</div>
+        <div class="chart-note" id="chart-note">Selecciona un restaurante para ver su evolución</div>
+      </div>
+    </div>
+
+    <div class="chart-controls" style="margin-top:16px">
+      <div class="rest-selector">
+        <button class="rest-btn active" style="--c:var(--c-arooces)" onclick="switchRest('arooces',this)">
+          <span class="dot"></span>Arroces El Pillo
+        </button>
+        <button class="rest-btn" style="--c:var(--c-bangalore)" onclick="switchRest('bangalore',this)">
+          <span class="dot"></span>Bangalore Playa
+        </button>
+        <button class="rest-btn" style="--c:var(--c-viggos)" onclick="switchRest('viggos',this)">
+          <span class="dot"></span>Viggos
+        </button>
+      </div>
+      <div class="metric-selector">
+        <button class="tab active" onclick="switchMetric('inversion',this)">Inversión</button>
+        <button class="tab" onclick="switchMetric('visitas',this)">Visitas perfil</button>
+        <button class="tab" onclick="switchMetric('seguidores',this)">Seguidores</button>
+        <button class="tab" onclick="switchMetric('coste_seg',this)">€/seguidor</button>
+      </div>
+    </div>
+
+    <div id="chart-empty" class="chart-empty" style="display:none">Datos pendientes para este restaurante</div>
+    <canvas id="chart" height="210"></canvas>
+  </div>
+
+  <!-- Tabla -->
+  <div class="table-section">
+    <div class="section-header" style="margin-bottom:12px">
+      <span class="section-title">Detalle por restaurante y quincena</span>
+      <span style="font-size:12px;color:var(--muted)">Abr &middot; May &middot; Jun &middot; Jul 2026</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:130px">Período</th>
+          <th>Inversión</th>
+          <th>Visitas perfil</th>
+          <th>Seguidores</th>
+          <th>€/visita</th>
+          <th>€/seguidor</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-body"></tbody>
+    </table>
+  </div>
+
+</main>
+
+<div class="footer">
+  <span>ONMI Link &middot; Growth Marketing</span>
+  <span>Campaña Perfil completada &middot; Reservas pendientes</span>
+</div>
+
+<script>
+const RESTAURANTS = [
+  {
+    key: 'arooces',
+    label: 'Arroces El Pillo',
+    color: '#E07B39',
+    perfil: {
+      periodos:   ['20 Abr–3 May', '11–24 May', '25 May–7 Jun', '8–21 Jun', '22 Jun–5 Jul'],
+      inversion:  [57.10, 69.73, 70.38, 70.01, 69.20],
+      visitas:    [325, 343, 590, 470, 746],
+      seguidores: [91, 78, 91, 65, 81],
+    },
+    reservas: null,
+  },
+  {
+    key: 'bangalore',
+    label: 'Bangalore Playa',
+    color: '#3B9E8C',
+    perfil: {
+      periodos:   ['27 Abr–10 May', '4–17 May', '18–31 May', '1–14 Jun', '15–28 Jun'],
+      inversion:  [69.56, 69.97, 70.11, 69.48, 70.28],
+      visitas:    [1636, 1151, 1239, 1037, 554],
+      seguidores: [110, 88, 79, 52, 39],
+    },
+    reservas: null,
+  },
+  {
+    key: 'viggos',
+    label: 'Viggos',
+    color: '#8B5CF6',
+    perfil: {
+      periodos:   ['27 Abr–3 May', '4–17 May', '18–31 May', '1–14 Jun', '15–28 Jun', '29 Jun–5 Jul'],
+      inversion:  [35.08, 70.05, 69.99, 69.76, 70.01, 34.91],
+      visitas:    [229, 462, 443, 365, 386, 197],
+      seguidores: [32, 44, 53, 46, 43, 22],
+    },
+    reservas: null,
+  },
+];
+
+function sum(arr) { return arr.reduce(function(a,b){return a+b;}, 0); }
+function fmt(n, dec) {
+  return n.toFixed(dec !== undefined ? dec : 0)
+    .replace('.', ',')
+    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+function fmtEur(n, dec) { return fmt(n, dec !== undefined ? dec : 2) + ' €'; }
+function fmtN(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+
+var canvas  = document.getElementById('chart');
+var ctx     = canvas.getContext('2d');
+var elEmpty = document.getElementById('chart-empty');
+var elNote  = document.getElementById('chart-note');
+var currentMetric = 'inversion';
+var currentRest   = 'arooces';
+
+function getRestData(key) {
+  for (var i = 0; i < RESTAURANTS.length; i++) {
+    if (RESTAURANTS[i].key === key) return RESTAURANTS[i];
+  }
+  return null;
+}
+
+function getVals(r, metric) {
+  if (!r.perfil) return null;
+  return r.perfil.inversion.map(function(inv, i) {
+    if (metric === 'coste_seg') return inv / r.perfil.seguidores[i];
+    return r.perfil[metric][i];
+  });
+}
+
+function drawChart() {
+  var r = getRestData(currentRest);
+  var vals = getVals(r, currentMetric);
+
+  if (!vals) {
+    canvas.style.display = 'none';
+    elEmpty.style.display = 'flex';
+    elNote.textContent = 'Sin datos para este restaurante';
+    return;
+  }
+  canvas.style.display = 'block';
+  elEmpty.style.display = 'none';
+
+  var periodos = r.perfil.periodos;
+  var noteBase = periodos[0] + ' – ' + periodos[periodos.length - 1];
+  elNote.textContent = noteBase + (r.key === 'bangalore' ? ' · * Q1: Resultados combinado (perfil + página)' : '');
+
+  var dpr = window.devicePixelRatio || 1;
+  var W   = canvas.parentElement.clientWidth - 48;
+  var H   = 230;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  var N   = vals.length;
+  var pad = { top: 28, right: 28, bottom: 44, left: 62 };
+  var cW  = W - pad.left - pad.right;
+  var cH  = H - pad.top  - pad.bottom;
+
+  var maxV = Math.max.apply(null, vals) * 1.22;
+  function xPos(i) { return pad.left + (i / (N - 1)) * cW; }
+  function yPos(v) { return pad.top  + cH - (v / maxV) * cH; }
+
+  var isDark = document.documentElement.dataset.theme === 'dark' ||
+    (!document.documentElement.dataset.theme &&
+     window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)';
+  var textColor = isDark ? '#8A8990' : '#6B6970';
+  var col = r.color;
+
+  var ticks = 4;
+  ctx.font = '11px system-ui';
+  ctx.fillStyle = textColor;
+  ctx.textAlign = 'right';
+  for (var t = 0; t <= ticks; t++) {
+    var tv = (maxV / ticks) * t;
+    var ty = yPos(tv);
+    ctx.beginPath();
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+    ctx.moveTo(pad.left, ty);
+    ctx.lineTo(W - pad.right, ty);
+    ctx.stroke();
+    var tlbl = (currentMetric === 'inversion' || currentMetric === 'coste_seg')
+      ? fmt(tv, 0) + ' €' : fmtN(tv);
+    ctx.fillText(tlbl, pad.left - 8, ty + 4);
+  }
+
+  ctx.textAlign = 'center';
+  periodos.forEach(function(p, i) {
+    ctx.fillStyle = textColor;
+    ctx.font = '10px system-ui';
+    ctx.fillText(p, xPos(i), H - 8);
+  });
+
+  ctx.beginPath();
+  ctx.moveTo(xPos(0), yPos(vals[0]));
+  vals.forEach(function(v, i) { ctx.lineTo(xPos(i), yPos(v)); });
+  ctx.lineTo(xPos(N - 1), pad.top + cH);
+  ctx.lineTo(xPos(0), pad.top + cH);
+  ctx.closePath();
+  ctx.fillStyle = col + '1A';
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(xPos(0), yPos(vals[0]));
+  vals.slice(1).forEach(function(v, i) { ctx.lineTo(xPos(i + 1), yPos(v)); });
+  ctx.strokeStyle = col;
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+
+  vals.forEach(function(v, i) {
+    ctx.beginPath();
+    ctx.strokeStyle = col + '22';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.moveTo(xPos(i), yPos(v));
+    ctx.lineTo(xPos(i), pad.top + cH);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    ctx.arc(xPos(i), yPos(v), 5, 0, Math.PI * 2);
+    ctx.fillStyle = col;
+    ctx.fill();
+    ctx.strokeStyle = isDark ? '#16181F' : '#fff';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    ctx.font = 'bold 11px system-ui';
+    ctx.fillStyle = col;
+    ctx.textAlign = 'center';
+    var lbl = (currentMetric === 'inversion' || currentMetric === 'coste_seg')
+      ? fmt(v, currentMetric === 'coste_seg' ? 2 : 0) + ' €'
+      : fmtN(v);
+    ctx.fillText(lbl, xPos(i), yPos(v) - 11);
+  });
+}
+
+function switchMetric(metric, btn) {
+  currentMetric = metric;
+  document.querySelectorAll('.metric-selector .tab').forEach(function(t) { t.classList.remove('active'); });
+  btn.classList.add('active');
+  drawChart();
+}
+
+function switchRest(key, btn) {
+  currentRest = key;
+  document.querySelectorAll('.rest-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  drawChart();
+}
+
+function buildTable() {
+  var body = document.getElementById('tabla-body');
+
+  RESTAURANTS.forEach(function(r) {
+    var trRest = document.createElement('tr');
+    trRest.className = 'rest-header';
+    trRest.innerHTML = '<td colspan="6" style="color:' + r.color + '">' + r.label + '</td>';
+    body.appendChild(trRest);
+
+    var trCP = document.createElement('tr');
+    trCP.className = 'camp-header perfil';
+    trCP.innerHTML = '<td colspan="6">Campaña &middot; Perfil</td>';
+    body.appendChild(trCP);
+
+    if (r.perfil) {
+      r.perfil.periodos.forEach(function(p, i) {
+        var inv = r.perfil.inversion[i];
+        var vis = r.perfil.visitas[i];
+        var seg = r.perfil.seguidores[i];
+        var tr  = document.createElement('tr');
+        tr.className = 'data-row';
+        tr.innerHTML =
+          '<td>' + p + '</td>' +
+          '<td class="num">' + fmtEur(inv, 2) + '</td>' +
+          '<td class="num">' + fmtN(vis) + '</td>' +
+          '<td class="num">+' + seg + '</td>' +
+          '<td class="num">' + fmtEur(inv / vis, 2) + '</td>' +
+          '<td class="num">' + fmtEur(inv / seg, 2) + '</td>';
+        body.appendChild(tr);
+      });
+
+      var totInv = sum(r.perfil.inversion);
+      var totVis = sum(r.perfil.visitas);
+      var totSeg = sum(r.perfil.seguidores);
+      var trTot  = document.createElement('tr');
+      trTot.className = 'total-row';
+      trTot.innerHTML =
+        '<td>Total</td>' +
+        '<td class="num" style="color:' + r.color + '">' + fmtEur(totInv, 2) + '</td>' +
+        '<td class="num">' + fmtN(totVis) + '</td>' +
+        '<td class="num">+' + totSeg + '</td>' +
+        '<td class="num">' + fmtEur(totInv / totVis, 2) + '</td>' +
+        '<td class="num">' + fmtEur(totInv / totSeg, 2) + '</td>';
+      body.appendChild(trTot);
+    } else {
+      var trPend = document.createElement('tr');
+      trPend.className = 'pending-row';
+      trPend.innerHTML = '<td colspan="6">Datos pendientes</td>';
+      body.appendChild(trPend);
+    }
+
+    var trCR = document.createElement('tr');
+    trCR.className = 'camp-header reservas';
+    trCR.innerHTML = '<td colspan="6">Campaña &middot; Reservas</td>';
+    body.appendChild(trCR);
+
+    var trRes = document.createElement('tr');
+    trRes.className = 'pending-row';
+    trRes.innerHTML = '<td colspan="6">Datos pendientes</td>';
+    body.appendChild(trRes);
+  });
+}
+
+buildTable();
+drawChart();
+window.addEventListener('resize', drawChart);
+
+var observer = new MutationObserver(drawChart);
+observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', drawChart);
+</script>
