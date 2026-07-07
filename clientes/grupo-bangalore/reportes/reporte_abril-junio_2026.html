@@ -506,7 +506,8 @@ const RESTAURANTS = [
       inversion:   [57.10, 69.73, 70.38, 70.01, 69.20],
       visitas:     [325, 343, 590, 470, 746],
       seguidores:  [91, 78, 91, 65, 81],
-      visitas_web: [10, 11, 16, 16, 15],
+      visitas_web: [1106, 1209, 223, 184, 206],
+      inv_reservas:[106.69, 68.54, 69.38, 69.77, 69.74],
     },
     reservas: null,
   },
@@ -519,7 +520,8 @@ const RESTAURANTS = [
       inversion:   [69.56, 69.97, 70.11, 69.48, 70.28],
       visitas:     [1636, 1151, 1239, 1037, 554],
       seguidores:  [110, 88, 79, 52, 39],
-      visitas_web: [null, null, 4, 7, 4],
+      visitas_web: [null, null, 17, 90, 79],
+      inv_reservas:[null, null, 58.48, 69.73, 71.47],
     },
     reservas: null,
   },
@@ -572,9 +574,10 @@ function getVals(r, metric) {
     if (!r.perfil.visitas_web) return null;
     var hasAny2 = r.perfil.visitas_web.some(function(v){ return v !== null; });
     if (!hasAny2) return null;
-    return r.perfil.inversion.map(function(inv, i) {
+    var invRes = r.perfil.inv_reservas || r.perfil.inversion;
+    return invRes.map(function(inv, i) {
       var vw = r.perfil.visitas_web[i];
-      return (vw !== null && vw > 0) ? inv / vw : null;
+      return (vw !== null && vw > 0 && inv !== null) ? inv / vw : null;
     });
   }
   return r.perfil.inversion.map(function(inv, i) {
@@ -733,10 +736,11 @@ function buildTable() {
         var seg = r.perfil.seguidores[i];
         var vw  = (r.perfil.visitas_web && r.perfil.visitas_web[i] !== null && r.perfil.visitas_web[i] !== undefined)
                   ? r.perfil.visitas_web[i] : null;
+        var invRes = (r.perfil.inv_reservas && r.perfil.inv_reservas[i] !== null) ? r.perfil.inv_reservas[i] : null;
         var webCells = (r.perfil.visitas_web === null)
           ? '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>'
-          : (vw !== null
-            ? '<td class="num">' + fmtN(vw) + '</td><td class="num">' + fmtEur(inv / vw, 2) + '</td>'
+          : (vw !== null && invRes !== null
+            ? '<td class="num">' + fmtN(vw) + '</td><td class="num">' + fmtEur(invRes / vw, 2) + '</td>'
             : '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>');
         var tr  = document.createElement('tr');
         tr.className = 'data-row';
@@ -759,8 +763,11 @@ function buildTable() {
         totWebCells = '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>';
       } else {
         var totVW = r.perfil.visitas_web.reduce(function(a,b){ return a + (b || 0); }, 0);
-        totWebCells = totVW > 0
-          ? '<td class="num">' + fmtN(totVW) + '</td><td class="num">' + fmtEur(totInv / totVW, 2) + '</td>'
+        var totInvRes = r.perfil.inv_reservas
+          ? r.perfil.inv_reservas.reduce(function(a,b){ return a + (b || 0); }, 0)
+          : 0;
+        totWebCells = (totVW > 0 && totInvRes > 0)
+          ? '<td class="num">' + fmtN(totVW) + '</td><td class="num">' + fmtEur(totInvRes / totVW, 2) + '</td>'
           : '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>';
       }
       var trTot  = document.createElement('tr');
