@@ -315,7 +315,6 @@
   </div>
   <div class="camp-legend">
     <span class="camp-pill perfil"><span class="camp-pill-dot"></span>Perfil</span>
-    <span class="camp-pill reservas"><span class="camp-pill-dot"></span>Reservas</span>
   </div>
 </div>
 
@@ -351,11 +350,6 @@
           </div>
         </div>
       </div>
-      <div class="camp-divider"></div>
-      <div class="camp-section">
-        <div class="camp-section-label reservas">Reservas</div>
-        <div class="pending-camp">Datos pendientes</div>
-      </div>
     </div>
 
     <!-- Bangalore Playa -->
@@ -386,11 +380,6 @@
           </div>
         </div>
       </div>
-      <div class="camp-divider"></div>
-      <div class="camp-section">
-        <div class="camp-section-label reservas">Reservas</div>
-        <div class="pending-camp">Datos pendientes</div>
-      </div>
     </div>
 
     <!-- Viggos -->
@@ -420,11 +409,6 @@
             <div class="kpi-value sm">1,46 €</div>
           </div>
         </div>
-      </div>
-      <div class="camp-divider"></div>
-      <div class="camp-section">
-        <div class="camp-section-label reservas">Reservas</div>
-        <div class="pending-camp">Datos pendientes</div>
       </div>
     </div>
 
@@ -492,7 +476,6 @@
 
 <div class="footer">
   <span>ONMI Link &middot; Growth Marketing</span>
-  <span>Campaña Perfil completada &middot; Reservas pendientes</span>
 </div>
 
 <script>
@@ -790,15 +773,6 @@ function buildTable() {
       body.appendChild(trPend);
     }
 
-    var trCR = document.createElement('tr');
-    trCR.className = 'camp-header reservas';
-    trCR.innerHTML = '<td colspan="8">Campaña &middot; Reservas</td>';
-    body.appendChild(trCR);
-
-    var trRes = document.createElement('tr');
-    trRes.className = 'pending-row';
-    trRes.innerHTML = '<td colspan="8">Datos pendientes</td>';
-    body.appendChild(trRes);
   });
 }
 
