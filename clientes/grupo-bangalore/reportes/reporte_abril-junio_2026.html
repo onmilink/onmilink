@@ -434,7 +434,7 @@
   <div class="chart-section">
     <div class="section-header" style="margin-bottom:0">
       <div>
-        <div class="section-title">Evolución quincenas &middot; Campaña Perfil</div>
+        <div class="section-title">Evolución quincenas</div>
         <div class="chart-note" id="chart-note">Selecciona un restaurante para ver su evolución</div>
       </div>
     </div>
@@ -581,7 +581,9 @@ function getVals(r, metric) {
     });
   }
   return r.perfil.inversion.map(function(inv, i) {
-    if (metric === 'coste_seg') return inv / r.perfil.seguidores[i];
+    var totInv = inv + (r.perfil.inv_reservas && r.perfil.inv_reservas[i] ? r.perfil.inv_reservas[i] : 0);
+    if (metric === 'inversion') return totInv;
+    if (metric === 'coste_seg') return totInv / r.perfil.seguidores[i];
     return r.perfil[metric][i];
   });
 }
@@ -731,7 +733,9 @@ function buildTable() {
 
     if (r.perfil) {
       r.perfil.periodos.forEach(function(p, i) {
-        var inv = r.perfil.inversion[i];
+        var invPerfil = r.perfil.inversion[i];
+        var invR = (r.perfil.inv_reservas && r.perfil.inv_reservas[i]) ? r.perfil.inv_reservas[i] : 0;
+        var inv = invPerfil + invR;
         var vis = r.perfil.visitas[i];
         var seg = r.perfil.seguidores[i];
         var vw  = (r.perfil.visitas_web && r.perfil.visitas_web[i] !== null && r.perfil.visitas_web[i] !== undefined)
@@ -755,7 +759,8 @@ function buildTable() {
         body.appendChild(tr);
       });
 
-      var totInv = sum(r.perfil.inversion);
+      var totInvRes = r.perfil.inv_reservas ? r.perfil.inv_reservas.reduce(function(a,b){ return a+(b||0); },0) : 0;
+      var totInv = sum(r.perfil.inversion) + totInvRes;
       var totVis = sum(r.perfil.visitas);
       var totSeg = sum(r.perfil.seguidores);
       var totWebCells;
@@ -763,9 +768,6 @@ function buildTable() {
         totWebCells = '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>';
       } else {
         var totVW = r.perfil.visitas_web.reduce(function(a,b){ return a + (b || 0); }, 0);
-        var totInvRes = r.perfil.inv_reservas
-          ? r.perfil.inv_reservas.reduce(function(a,b){ return a + (b || 0); }, 0)
-          : 0;
         totWebCells = (totVW > 0 && totInvRes > 0)
           ? '<td class="num">' + fmtN(totVW) + '</td><td class="num">' + fmtEur(totInvRes / totVW, 2) + '</td>'
           : '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>';
