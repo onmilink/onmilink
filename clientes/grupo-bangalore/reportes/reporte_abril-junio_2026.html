@@ -456,6 +456,8 @@
         <button class="tab" onclick="switchMetric('visitas',this)">Visitas perfil</button>
         <button class="tab" onclick="switchMetric('seguidores',this)">Seguidores</button>
         <button class="tab" onclick="switchMetric('coste_seg',this)">€/seguidor</button>
+        <button class="tab" onclick="switchMetric('visitas_web',this)">Visitas web</button>
+        <button class="tab" onclick="switchMetric('coste_visweb',this)">€/visita web</button>
       </div>
     </div>
 
@@ -476,8 +478,10 @@
           <th>Inversión</th>
           <th>Visitas perfil</th>
           <th>Seguidores</th>
-          <th>€/visita</th>
+          <th>€/visita perfil</th>
           <th>€/seguidor</th>
+          <th>Visitas web</th>
+          <th>€/visita web</th>
         </tr>
       </thead>
       <tbody id="tabla-body"></tbody>
@@ -498,10 +502,11 @@ const RESTAURANTS = [
     label: 'Arroces El Pillo',
     color: '#E07B39',
     perfil: {
-      periodos:   ['20 Abr–3 May', '11–24 May', '25 May–7 Jun', '8–21 Jun', '22 Jun–5 Jul'],
-      inversion:  [57.10, 69.73, 70.38, 70.01, 69.20],
-      visitas:    [325, 343, 590, 470, 746],
-      seguidores: [91, 78, 91, 65, 81],
+      periodos:    ['20 Abr–3 May', '11–24 May', '25 May–7 Jun', '8–21 Jun', '22 Jun–5 Jul'],
+      inversion:   [57.10, 69.73, 70.38, 70.01, 69.20],
+      visitas:     [325, 343, 590, 470, 746],
+      seguidores:  [91, 78, 91, 65, 81],
+      visitas_web: [10, 11, 16, 16, 15],
     },
     reservas: null,
   },
@@ -510,10 +515,11 @@ const RESTAURANTS = [
     label: 'Bangalore Playa',
     color: '#3B9E8C',
     perfil: {
-      periodos:   ['27 Abr–10 May', '4–17 May', '18–31 May', '1–14 Jun', '15–28 Jun'],
-      inversion:  [69.56, 69.97, 70.11, 69.48, 70.28],
-      visitas:    [1636, 1151, 1239, 1037, 554],
-      seguidores: [110, 88, 79, 52, 39],
+      periodos:    ['27 Abr–10 May', '4–17 May', '18–31 May', '1–14 Jun', '15–28 Jun'],
+      inversion:   [69.56, 69.97, 70.11, 69.48, 70.28],
+      visitas:     [1636, 1151, 1239, 1037, 554],
+      seguidores:  [110, 88, 79, 52, 39],
+      visitas_web: [null, null, 4, 7, 4],
     },
     reservas: null,
   },
@@ -522,10 +528,11 @@ const RESTAURANTS = [
     label: 'Viggos',
     color: '#8B5CF6',
     perfil: {
-      periodos:   ['27 Abr–3 May', '4–17 May', '18–31 May', '1–14 Jun', '15–28 Jun', '29 Jun–5 Jul'],
-      inversion:  [35.08, 70.05, 69.99, 69.76, 70.01, 34.91],
-      visitas:    [229, 462, 443, 365, 386, 197],
-      seguidores: [32, 44, 53, 46, 43, 22],
+      periodos:    ['27 Abr–3 May', '4–17 May', '18–31 May', '1–14 Jun', '15–28 Jun', '29 Jun–5 Jul'],
+      inversion:   [35.08, 70.05, 69.99, 69.76, 70.01, 34.91],
+      visitas:     [229, 462, 443, 365, 386, 197],
+      seguidores:  [32, 44, 53, 46, 43, 22],
+      visitas_web: null,
     },
     reservas: null,
   },
@@ -556,6 +563,20 @@ function getRestData(key) {
 
 function getVals(r, metric) {
   if (!r.perfil) return null;
+  if (metric === 'visitas_web') {
+    if (!r.perfil.visitas_web) return null;
+    var hasAny = r.perfil.visitas_web.some(function(v){ return v !== null; });
+    return hasAny ? r.perfil.visitas_web : null;
+  }
+  if (metric === 'coste_visweb') {
+    if (!r.perfil.visitas_web) return null;
+    var hasAny2 = r.perfil.visitas_web.some(function(v){ return v !== null; });
+    if (!hasAny2) return null;
+    return r.perfil.inversion.map(function(inv, i) {
+      var vw = r.perfil.visitas_web[i];
+      return (vw !== null && vw > 0) ? inv / vw : null;
+    });
+  }
   return r.perfil.inversion.map(function(inv, i) {
     if (metric === 'coste_seg') return inv / r.perfil.seguidores[i];
     return r.perfil[metric][i];
@@ -619,8 +640,8 @@ function drawChart() {
     ctx.moveTo(pad.left, ty);
     ctx.lineTo(W - pad.right, ty);
     ctx.stroke();
-    var tlbl = (currentMetric === 'inversion' || currentMetric === 'coste_seg')
-      ? fmt(tv, 0) + ' €' : fmtN(tv);
+    var tlbl = (currentMetric === 'inversion' || currentMetric === 'coste_seg' || currentMetric === 'coste_visweb')
+      ? fmt(tv, currentMetric === 'inversion' ? 0 : 2) + ' €' : fmtN(tv);
     ctx.fillText(tlbl, pad.left - 8, ty + 4);
   }
 
@@ -669,8 +690,9 @@ function drawChart() {
     ctx.font = 'bold 11px system-ui';
     ctx.fillStyle = col;
     ctx.textAlign = 'center';
-    var lbl = (currentMetric === 'inversion' || currentMetric === 'coste_seg')
-      ? fmt(v, currentMetric === 'coste_seg' ? 2 : 0) + ' €'
+    var isEur = currentMetric === 'inversion' || currentMetric === 'coste_seg' || currentMetric === 'coste_visweb';
+    var lbl = isEur
+      ? fmt(v, currentMetric === 'inversion' ? 0 : 2) + ' €'
       : fmtN(v);
     ctx.fillText(lbl, xPos(i), yPos(v) - 11);
   });
@@ -696,12 +718,12 @@ function buildTable() {
   RESTAURANTS.forEach(function(r) {
     var trRest = document.createElement('tr');
     trRest.className = 'rest-header';
-    trRest.innerHTML = '<td colspan="6" style="color:' + r.color + '">' + r.label + '</td>';
+    trRest.innerHTML = '<td colspan="8" style="color:' + r.color + '">' + r.label + '</td>';
     body.appendChild(trRest);
 
     var trCP = document.createElement('tr');
     trCP.className = 'camp-header perfil';
-    trCP.innerHTML = '<td colspan="6">Campaña &middot; Perfil</td>';
+    trCP.innerHTML = '<td colspan="8">Campaña &middot; Perfil</td>';
     body.appendChild(trCP);
 
     if (r.perfil) {
@@ -709,6 +731,13 @@ function buildTable() {
         var inv = r.perfil.inversion[i];
         var vis = r.perfil.visitas[i];
         var seg = r.perfil.seguidores[i];
+        var vw  = (r.perfil.visitas_web && r.perfil.visitas_web[i] !== null && r.perfil.visitas_web[i] !== undefined)
+                  ? r.perfil.visitas_web[i] : null;
+        var webCells = (r.perfil.visitas_web === null)
+          ? '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>'
+          : (vw !== null
+            ? '<td class="num">' + fmtN(vw) + '</td><td class="num">' + fmtEur(inv / vw, 2) + '</td>'
+            : '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>');
         var tr  = document.createElement('tr');
         tr.className = 'data-row';
         tr.innerHTML =
@@ -717,13 +746,23 @@ function buildTable() {
           '<td class="num">' + fmtN(vis) + '</td>' +
           '<td class="num">+' + seg + '</td>' +
           '<td class="num">' + fmtEur(inv / vis, 2) + '</td>' +
-          '<td class="num">' + fmtEur(inv / seg, 2) + '</td>';
+          '<td class="num">' + fmtEur(inv / seg, 2) + '</td>' +
+          webCells;
         body.appendChild(tr);
       });
 
       var totInv = sum(r.perfil.inversion);
       var totVis = sum(r.perfil.visitas);
       var totSeg = sum(r.perfil.seguidores);
+      var totWebCells;
+      if (!r.perfil.visitas_web) {
+        totWebCells = '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>';
+      } else {
+        var totVW = r.perfil.visitas_web.reduce(function(a,b){ return a + (b || 0); }, 0);
+        totWebCells = totVW > 0
+          ? '<td class="num">' + fmtN(totVW) + '</td><td class="num">' + fmtEur(totInv / totVW, 2) + '</td>'
+          : '<td class="num" style="color:var(--muted)">—</td><td class="num" style="color:var(--muted)">—</td>';
+      }
       var trTot  = document.createElement('tr');
       trTot.className = 'total-row';
       trTot.innerHTML =
@@ -732,23 +771,24 @@ function buildTable() {
         '<td class="num">' + fmtN(totVis) + '</td>' +
         '<td class="num">+' + totSeg + '</td>' +
         '<td class="num">' + fmtEur(totInv / totVis, 2) + '</td>' +
-        '<td class="num">' + fmtEur(totInv / totSeg, 2) + '</td>';
+        '<td class="num">' + fmtEur(totInv / totSeg, 2) + '</td>' +
+        totWebCells;
       body.appendChild(trTot);
     } else {
       var trPend = document.createElement('tr');
       trPend.className = 'pending-row';
-      trPend.innerHTML = '<td colspan="6">Datos pendientes</td>';
+      trPend.innerHTML = '<td colspan="8">Datos pendientes</td>';
       body.appendChild(trPend);
     }
 
     var trCR = document.createElement('tr');
     trCR.className = 'camp-header reservas';
-    trCR.innerHTML = '<td colspan="6">Campaña &middot; Reservas</td>';
+    trCR.innerHTML = '<td colspan="8">Campaña &middot; Reservas</td>';
     body.appendChild(trCR);
 
     var trRes = document.createElement('tr');
     trRes.className = 'pending-row';
-    trRes.innerHTML = '<td colspan="6">Datos pendientes</td>';
+    trRes.innerHTML = '<td colspan="8">Datos pendientes</td>';
     body.appendChild(trRes);
   });
 }
