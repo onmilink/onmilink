@@ -182,8 +182,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;background:var(-
     <span class="period-label">Periodo:</span>
     <button class="period-btn" onclick="switchPeriod('M01',this)">M01 · 14 abr – 13 may</button>
     <button class="period-btn" onclick="switchPeriod('M02',this)">M02 · 14 – 27 may</button>
-    <button class="period-btn active" onclick="switchPeriod('M03',this)">M03 · 22 – 25 jun</button>
-    <button class="period-btn" onclick="switchPeriod('TOT',this)">Total · 14 abr – 24 jun</button>
+    <button class="period-btn" onclick="switchPeriod('M03',this)">M03 · 22 – 25 jun</button>
+    <button class="period-btn active" onclick="switchPeriod('M04',this)">M04 · 24 jun – 8 jul</button>
+    <button class="period-btn" onclick="switchPeriod('TOT',this)">Total · 14 abr – 8 jul</button>
   </div>
   <div class="nav-tabs">
     <div class="nav-tab active" onclick="showPage('inversion',this)">📈&nbsp; Inversión Meta</div>
@@ -658,7 +659,7 @@ const fmtEur = n => n != null ? fmtD(n) + ' €' : '—';
 const fmtPct = n => n != null ? fmtD(n) + '%' : '—';
 
 let rFilter       = 'all';
-let currentPeriod = 'M03';
+let currentPeriod = 'M04';
 let charts        = {};
 
 /* ── Header ── */
