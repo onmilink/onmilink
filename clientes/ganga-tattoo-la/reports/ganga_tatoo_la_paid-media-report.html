@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ganga Tattoo LA — Paid Media Report · Mar–Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --ink:      #0e0e0e;
+  --ink2:     #4a4a4a;
+  --ink3:     #9a9a9a;
+  --rule:     #e4e4e4;
+  --rule2:    #f0f0f0;
+  --surface:  #f7f6f4;
+  --white:    #ffffff;
+  --blue:     #1a56db;
+  --blue-bg:  #eef3fd;
+  --pink:     #c0345a;
+  --green:    #1a7a43;
+  --green-bg: #edf7f1;
+  --amber:    #9a5c00;
+  --amber-bg: #fdf4e3;
+  --red:      #b91c1c;
+  --red-bg:   #fef2f2;
+  --gray-bg:  #f4f3f1;
+  --r:        8px;
+  --rl:       12px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--surface); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+.page { max-width: 980px; margin: 0 auto; padding: 48px 32px 80px; }
+
+/* HEADER */
+.rh { display: flex; align-items: center; justify-content: space-between; padding-bottom: 28px; border-bottom: 1px solid var(--rule); margin-bottom: 32px; gap: 24px; }
+.rh-logo { flex-shrink: 0; width: 210px; }
+.rh-logo svg { width: 100%; height: auto; display: block; }
+.rh-meta { text-align: right; }
+.rh-label { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ink3); margin-bottom: 4px; }
+.rh-period { font-size: 22px; font-weight: 300; color: var(--ink); letter-spacing: -.02em; }
+.rh-sub { font-size: 12px; color: var(--ink3); margin-top: 3px; }
+
+/* TABS */
+.tab-bar { display: flex; gap: 2px; background: var(--rule2); border-radius: var(--r); padding: 3px; width: fit-content; margin-bottom: 28px; }
+.tb { padding: 8px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: var(--ink2); background: transparent; border: none; border-radius: 6px; cursor: pointer; transition: background .15s, color .15s; white-space: nowrap; }
+.tb:hover { background: rgba(0,0,0,.04); color: var(--ink); }
+.tb.on { background: var(--white); color: var(--ink); font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+
+/* MONTH SELECTOR */
+.mb-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+.mb-lbl { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3); margin-right: 4px; }
+.mb { padding: 5px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400; color: var(--ink2); background: var(--white); border: 1px solid var(--rule); border-radius: 20px; cursor: pointer; transition: all .15s; }
+.mb:hover { border-color: #bbb; color: var(--ink); }
+.mb.on { background: var(--ink); color: var(--white); border-color: var(--ink); font-weight: 500; }
+
+/* KPI GRID */
+.kg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.kc { background: var(--white); border: 1px solid var(--rule); border-radius: var(--rl); padding: 18px 20px; }
+.kl { font-size: 11px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; }
+.kv { font-size: 26px; font-weight: 300; letter-spacing: -.03em; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+.ks { font-size: 11px; color: var(--ink3); line-height: 1.4; }
+.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 20px; margin-top: 8px; }
+.b-up   { background: var(--green-bg); color: var(--green); }
+.b-dn   { background: var(--red-bg);   color: var(--red); }
+.b-warn { background: var(--amber-bg); color: var(--amber); }
+.b-eq   { background: var(--gray-bg);  color: var(--ink2); }
+
+/* SECTION TITLE */
+.st { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ink3); margin-bottom: 14px; }
+
+/* CARDS */
+.card { background: var(--white); border: 1px solid var(--rule); border-radius: var(--rl); padding: 22px 24px; margin-bottom: 16px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+/* PLATFORM ROWS */
+.pr { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid var(--rule2); }
+.pr:last-of-type { border-bottom: none; padding-bottom: 0; }
+.pn { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 13px; color: var(--ink); }
+.pd { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.ps { display: flex; gap: 24px; }
+.psi { text-align: right; }
+.psi-v { font-size: 13px; font-weight: 500; color: var(--ink); }
+.psi-l { font-size: 10px; color: var(--ink3); margin-top: 1px; }
+
+/* DIST BAR */
+.dbar { display: flex; height: 5px; border-radius: 3px; overflow: hidden; gap: 1px; margin-top: 14px; }
+.dleg { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; font-size: 11px; color: var(--ink3); }
+.dleg span { display: flex; align-items: center; gap: 5px; }
+.dleg i { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; display: inline-block; }
+
+/* TABLE */
+.tscroll { overflow-x: auto; }
+.dt { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.dt thead th { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3); padding: 0 8px 10px; text-align: right; white-space: nowrap; }
+.dt thead th:first-child { text-align: left; padding-left: 0; }
+.dt tbody td { padding: 9px 8px; border-bottom: 1px solid var(--rule2); color: var(--ink); text-align: right; vertical-align: middle; }
+.dt tbody td:first-child { text-align: left; padding-left: 0; }
+.dt tbody tr:last-child td { border-bottom: none; }
+.dt tbody tr.tr-total td { font-weight: 500; border-top: 1px solid var(--rule); border-bottom: none; padding-top: 12px; }
+.cn { font-weight: 500; color: var(--ink); display: block; }
+.cp { font-size: 11px; color: var(--ink3); }
+
+/* PILLS */
+.pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 20px; white-space: nowrap; font-family: 'DM Mono', monospace; }
+.p-hi { background: var(--green-bg); color: var(--green); }
+.p-md { background: var(--amber-bg); color: var(--amber); }
+.p-lo { background: var(--red-bg);   color: var(--red); }
+.p-nd { background: var(--gray-bg);  color: var(--ink3); }
+
+/* NOTICES */
+.notice { display: flex; gap: 10px; background: var(--blue-bg); border: 1px solid #c3d9f9; border-radius: var(--r); padding: 12px 16px; font-size: 12px; color: #1a3e72; line-height: 1.55; margin-bottom: 20px; }
+.notice svg { flex-shrink: 0; margin-top: 1px; }
+.n-warn { background: var(--amber-bg); border-color: #f5d49a; color: #6b3a00; }
+
+/* OBJ ROWS */
+.or { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--rule2); font-size: 13px; }
+.or:last-child { border-bottom: none; }
+.or-l { color: var(--ink2); }
+.or-v { font-weight: 500; color: var(--ink); font-family: 'DM Mono', monospace; font-size: 13px; }
+.or-p { font-size: 11px; color: var(--ink3); font-family: 'DM Sans', sans-serif; font-weight: 400; margin-left: 5px; }
+.or.total { border-top: 1px solid var(--rule); border-bottom: none; padding-top: 12px; margin-top: 2px; }
+.or.total .or-l { font-weight: 500; color: var(--ink); }
+.or.total .or-v { font-size: 15px; }
+
+/* COST BAR */
+.cbar { display: flex; height: 7px; border-radius: 4px; overflow: hidden; gap: 1px; margin-top: 12px; }
+
+/* CONCLUSIONS */
+.concl { background: var(--white); border: 1px solid var(--rule); border-radius: var(--rl); padding: 22px 24px; margin-bottom: 16px; }
+.ci { padding: 16px 0; border-bottom: 1px solid var(--rule2); }
+.ci:first-child { padding-top: 0; }
+.ci:last-child { border-bottom: none; padding-bottom: 0; }
+.ci-head { display: flex; align-items: center; margin-bottom: 10px; }
+.ci-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--white); font-size: 11px; font-weight: 500; flex-shrink: 0; margin-right: 10px; }
+.ci-title { font-size: 13px; font-weight: 500; color: var(--ink); }
+.ci-body { font-size: 13px; color: var(--ink2); line-height: 1.65; padding-left: 32px; }
+.ci-body p { margin-bottom: 7px; }
+.ci-body p:last-child { margin-bottom: 0; }
+.ctag { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 4px; margin-right: 4px; }
+.ct-g { background: var(--green-bg); color: var(--green); }
+.ct-b { background: var(--blue-bg);  color: var(--blue); }
+.ct-a { background: var(--amber-bg); color: var(--amber); }
+.hbox { border-radius: var(--r); padding: 10px 14px; margin-top: 8px; font-size: 12px; line-height: 1.55; }
+.hbox-g { background: var(--green-bg); color: #0f4a28; }
+.hbox-a { background: var(--amber-bg); color: #5a3600; }
+
+/* PANES */
+.tab-pane    { display: none; }
+.tab-pane.on { display: block; }
+.mpane       { display: none; }
+.mpane.on    { display: block; }
+
+/* CHART */
+.chwrap { position: relative; width: 100%; }
+
+
+/* FOOTER */
+.footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; font-size: 11px; color: var(--ink3); }
+
+@media (max-width: 680px) {
+  .page { padding: 24px 16px 60px; }
+  .kg { grid-template-columns: 1fr 1fr; }
+  .two { grid-template-columns: 1fr; }
+  .rh { flex-direction: column; align-items: flex-start; }
+  .rh-meta { text-align: left; }
+  .ps { gap: 12px; }
+}
+
+/* CAMPAIGN ROW COLORS */
+.row-google { background: #f0f4ff; }
+.row-meta   { background: #fff0f5; }
+.dt tbody .row-google td:first-child::before { content:''; display:inline-block; width:6px; height:6px; border-radius:50%; background:#1a56db; margin-right:6px; vertical-align:middle; }
+.dt tbody .row-meta   td:first-child::before { content:''; display:inline-block; width:6px; height:6px; border-radius:50%; background:#c0345a; margin-right:6px; vertical-align:middle; }
+
+/* SECTION TITLE BOLD */
+.st { font-weight: 600; }
+
+/* CLOSER COLORS */
+.closer-willy { background: #eef3fd; border-left: 3px solid #1a56db; padding: 14px 16px; border-radius: var(--r); margin-bottom: 20px; }
+.closer-mike  { background: #edf7f1; border-left: 3px solid #1a7a43; padding: 14px 16px; border-radius: var(--r); margin-bottom: 20px; }
+.closer-piru  { background: #fff8f0; border-left: 3px solid #c8860a; padding: 14px 16px; border-radius: var(--r); margin-bottom: 20px; }
+.closer-willy .closer-header, .closer-mike .closer-header, .closer-piru .closer-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,.08); }
+
+/* PAUSED CAMPAIGN */
+.row-paused td { color: var(--ink3) !important; background: var(--gray-bg) !important; }
+.row-paused .cn { color: var(--ink3) !important; }
+.row-paused td:first-child::before { background: #b3b1a8 !important; }
+.paused-badge { display:inline-block;font-size:9px;font-weight:500;padding:1px 5px;border-radius:3px;background:#e8e6e1;color:#6b6a63;margin-left:4px;letter-spacing:.04em; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="rh">
+  <div class="rh-logo">
+    <svg viewBox="0 0 2312 484" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M482.379 0.461C509.21 0.461 529.638 2.493 543.663 6.559C557.687 10.624 566.631 17.636 570.493 27.596C574.558 37.556 574.659 51.479 570.797 69.365L570.312 71.674C569.884 73.704 568.093 75.157 566.019 75.157H394.291C393.32 75.157 392.582 74.286 392.742 73.328C394.571 64.792 393.656 58.186 389.998 53.511C386.339 48.633 380.546 46.193 372.619 46.193C363.472 46.193 355.748 49.446 349.447 55.950C343.146 62.251 338.877 70.991 336.641 82.170L321.397 153.513C319.161 164.692 319.771 173.534 323.226 180.038C326.885 186.339 333.389 189.489 342.739 189.489C350.666 189.489 357.374 187.151 362.862 182.477C368.350 177.802 372.009 170.993 373.838 162.050L374.145 160.701C374.769 157.956 372.682 155.342 369.867 155.342H349.071C346.281 155.342 344.200 152.772 344.780 150.043L355.416 99.974C355.847 97.948 357.636 96.499 359.708 96.499H559.582C562.374 96.499 564.455 99.072 563.872 101.802L556.488 136.388C555.476 141.132 561.774 143.768 564.442 139.717L652.863 5.479C653.675 4.247 655.052 3.505 656.527 3.505H906.786C908.827 3.505 910.599 4.912 911.060 6.900L941.982 140.182C943.042 144.750 949.567 144.692 950.546 140.105L978.947 6.977C979.379 4.952 981.168 3.505 983.238 3.505H1153.55C1155.50 3.505 1157.21 4.783 1157.76 6.647L1183.33 93.036C1184.62 97.399 1190.88 97.154 1191.83 92.704L1210.06 6.979C1210.49 4.954 1212.28 3.505 1214.35 3.505H1383.63C1385.85 3.505 1387.50 5.549 1387.04 7.717L1380.26 39.504C1379.99 40.750 1382.38 41.526 1382.98 40.400C1388.46 30.441 1395.68 22.515 1404.62 16.620C1413.57 10.726 1424.95 6.558 1438.77 4.119C1452.59 1.680 1469.57 0.461 1489.69 0.461H1692.14C1718.97 0.461 1739.39 2.494 1753.42 6.559C1767.44 10.624 1776.39 17.636 1780.25 27.596C1784.31 37.556 1784.42 51.479 1780.55 69.365L1780.07 71.674C1779.64 73.704 1777.85 75.157 1775.78 75.157H1604.05C1603.08 75.157 1602.34 74.286 1602.50 73.328C1604.33 64.792 1603.41 58.186 1599.75 53.511C1596.09 48.633 1590.30 46.193 1582.38 46.193C1573.23 46.193 1565.50 49.446 1559.20 55.950C1552.90 62.251 1548.63 70.991 1546.40 82.170L1531.15 153.513C1528.92 164.692 1529.53 173.534 1532.98 180.038C1536.64 186.339 1543.15 189.489 1552.50 189.489C1560.42 189.489 1567.13 187.151 1572.62 182.477C1578.11 177.802 1581.76 170.993 1583.59 162.050L1583.90 160.701C1584.52 157.956 1582.44 155.342 1579.62 155.342H1558.83C1556.04 155.342 1553.96 152.772 1554.54 150.043L1565.17 99.974C1565.60 97.948 1567.39 96.499 1569.46 96.499H1769.34C1772.13 96.499 1774.21 99.072 1773.63 101.802L1766.23 136.434C1765.22 141.178 1771.52 143.814 1774.19 139.763L1862.64 5.479C1863.45 4.247 1864.83 3.505 1866.30 3.505H2116.56C2118.60 3.505 2120.38 4.912 2120.84 6.900L2171.85 226.789C2172.49 229.540 2170.40 232.168 2167.58 232.168H1987.77C1985.63 232.168 1983.81 230.625 1983.45 228.516L1979.51 205.332C1979.15 203.223 1977.32 201.680 1975.18 201.680H1892.65C1891.10 201.680 1889.68 202.488 1888.88 203.810L1873.15 230.038C1872.35 231.359 1870.92 232.168 1869.38 232.168H1670.38C1668.17 232.173 1666.31 230.537 1666.03 228.351L1663.61 209.693C1663.53 209.124 1663.05 208.697 1662.47 208.697C1662.14 208.697 1661.83 208.840 1661.61 209.087C1654.72 216.834 1644.97 223.106 1632.38 227.904C1619.78 232.782 1605.85 235.222 1590.61 235.222H1439.69C1413.06 235.222 1392.73 232.986 1378.71 228.515C1364.68 223.840 1355.84 215.912 1352.18 204.733C1351.46 202.475 1345.55 202.170 1345.06 204.490L1339.85 228.915C1339.44 230.812 1337.77 232.168 1335.83 232.168H1165.29C1163.35 232.168 1161.63 230.889 1161.08 229.026L1135.51 142.636C1134.22 138.274 1127.96 138.519 1127.02 142.969L1108.79 228.693C1108.36 230.719 1106.57 232.168 1104.50 232.168H777.995C775.856 232.168 774.028 230.625 773.670 228.516L769.729 205.332C769.370 203.223 767.543 201.680 765.404 201.680H682.868C681.327 201.680 679.899 202.488 679.106 203.810L663.369 230.038C662.576 231.359 661.148 232.168 659.607 232.168H460.622C458.418 232.173 456.556 230.537 456.272 228.351L453.849 209.693C453.775 209.124 453.289 208.697 452.715 208.697C452.384 208.697 452.071 208.840 451.852 209.087C444.959 216.834 435.215 223.106 422.621 227.904C410.018 232.782 396.095 235.222 380.850 235.222H229.929C203.302 235.222 182.977 232.986 168.952 228.515C154.927 223.840 146.084 215.912 142.425 204.733C138.767 193.351 139.072 177.599 143.340 157.477L160.415 78.206C163.667 62.962 167.935 50.360 173.220 40.400C178.708 30.441 185.924 22.514 194.867 16.620C203.810 10.726 215.193 6.558 229.015 4.119C242.837 1.680 259.810 0.461 279.932 0.461H482.379ZM716.666 136.201C714.919 139.125 717.026 142.837 720.432 142.837H756.896C759.614 142.837 761.678 140.391 761.221 137.712L753.117 90.220C752.432 86.202 747.116 85.209 745.026 88.708L716.666 136.201ZM1926.44 136.201C1924.70 139.125 1926.80 142.837 1930.21 142.837H1966.67C1969.39 142.837 1971.46 140.391 1971.00 137.712L1962.89 90.220C1962.21 86.202 1956.89 85.209 1954.80 88.708L1926.44 136.201Z" fill="#0e0e0e"/>
+      <path d="M1818.62 246.695C1845.68 246.695 1866.19 249.258 1880.13 254.385C1894.08 259.511 1902.79 268.020 1906.28 279.913C1906.98 282.124 1907.53 284.494 1907.93 287.021C1908.05 287.777 1909.10 287.966 1909.47 287.295C1915.01 277.043 1922.29 268.944 1931.31 262.997C1940.33 257.051 1951.82 252.846 1965.76 250.386C1979.71 247.925 1996.72 246.695 2016.82 246.695H2221.36C2248.43 246.695 2268.94 249.258 2282.88 254.385C2296.83 259.511 2305.54 268.020 2309.03 279.913C2312.72 291.601 2312.31 307.698 2307.80 328.203L2291.49 405.098C2288.21 420.271 2283.80 432.985 2278.27 443.237C2272.94 453.285 2265.76 461.282 2256.74 467.229C2247.71 473.175 2236.23 477.378 2222.29 479.839C2208.34 482.299 2191.22 483.530 2170.92 483.530H1966.68C1939.82 483.530 1919.32 481.275 1905.17 476.764C1891.02 472.047 1882.10 464.050 1878.41 452.772C1877.49 449.921 1876.82 446.798 1876.40 443.404C1876.34 442.957 1875.73 442.841 1875.52 443.237C1870.19 453.285 1863.01 461.282 1853.99 467.229C1844.97 473.175 1833.48 477.378 1819.54 479.839C1805.59 482.299 1788.47 483.530 1768.17 483.530H1563.94C1537.07 483.530 1516.57 481.275 1502.42 476.764C1488.27 472.047 1479.35 464.050 1475.66 452.772C1471.97 441.290 1472.27 425.398 1476.58 405.098L1493.50 325.128C1494.27 321.567 1495.10 318.148 1495.99 314.869C1496.77 312.009 1494.66 309.134 1491.69 309.134H1394.09C1392.02 309.134 1390.22 310.583 1389.79 312.612L1354.67 476.977C1354.24 479.005 1352.45 480.455 1350.37 480.455H1180.66C1177.86 480.455 1175.78 477.876 1176.36 475.140L1210.69 314.449C1211.28 311.713 1209.19 309.134 1206.39 309.134H997.359C995.285 309.134 993.493 310.583 993.059 312.612L957.943 476.977C957.510 479.005 955.718 480.455 953.643 480.455H783.928C781.130 480.455 779.044 477.876 779.629 475.140L813.960 314.449C814.544 311.713 812.458 309.134 809.660 309.134H713.170C710.341 309.134 708.248 311.768 708.887 314.524L746.133 475.065C746.772 477.821 744.680 480.455 741.850 480.455H560.394C558.250 480.455 556.419 478.909 556.059 476.795L552.074 453.357C551.715 451.244 549.884 449.697 547.740 449.697H464.435C462.890 449.697 461.459 450.508 460.664 451.832L444.771 478.320C443.976 479.645 442.545 480.455 441.001 480.455H291.707C288.206 480.455 286.109 476.563 288.035 473.640L391.903 315.949C393.829 313.026 391.732 309.134 388.231 309.134H292.137C290.062 309.134 288.270 310.583 287.837 312.612L252.720 476.977C252.287 479.005 250.495 480.455 248.421 480.455H78.706C75.908 480.455 73.821 477.876 74.406 475.140L108.737 314.449C109.322 311.713 107.236 309.134 104.437 309.134H4.879C2.083 309.134 0.000 306.558 0.578 303.823L11.320 253.255C11.752 251.224 13.545 249.771 15.621 249.771H406.185C408.981 249.771 411.067 252.347 410.486 255.082L405.086 280.498C404.076 285.251 410.385 287.888 413.058 283.830L434.190 251.750C435.003 250.515 436.383 249.771 437.862 249.771H690.371C692.416 249.771 694.191 251.182 694.654 253.175L701.617 283.190C702.680 287.771 709.223 287.710 710.201 283.110L716.544 253.255C716.975 251.224 718.769 249.771 720.845 249.771H1508.14C1510.93 249.771 1513.02 252.347 1512.44 255.082L1505.68 286.918C1505.55 287.513 1506.43 287.828 1506.72 287.295C1512.26 277.043 1519.54 268.944 1528.56 262.997C1537.59 257.051 1549.07 252.846 1563.01 250.386C1576.96 247.925 1593.98 246.695 1614.07 246.695H1818.62ZM1706.65 292.832C1698.04 292.832 1690.56 296.112 1684.20 302.674C1678.05 309.030 1673.85 317.848 1671.59 329.126L1656.21 401.100C1653.96 412.377 1654.47 421.297 1657.75 427.858C1661.23 434.215 1667.28 437.394 1675.90 437.394C1684.51 437.393 1691.89 434.215 1698.04 427.858C1704.40 421.297 1708.71 412.377 1710.96 401.100L1726.34 329.126C1728.60 317.848 1727.98 309.030 1724.49 302.674C1721.21 296.113 1715.27 292.832 1706.65 292.832ZM2109.40 292.832C2100.79 292.832 2093.31 296.112 2086.95 302.674C2080.80 309.030 2076.59 317.848 2074.34 329.126L2058.96 401.100C2056.70 412.377 2057.22 421.297 2060.50 427.858C2063.98 434.215 2070.03 437.394 2078.65 437.394C2087.26 437.393 2094.64 434.215 2100.79 427.858C2107.15 421.297 2111.45 412.377 2113.71 401.100L2129.09 329.126C2131.34 317.848 2130.73 309.030 2127.24 302.674C2123.96 296.113 2118.02 292.832 2109.40 292.832ZM498.520 383.684C496.770 386.615 498.882 390.335 502.295 390.335H539.167C541.891 390.335 543.959 387.884 543.501 385.199L535.308 337.175C534.621 333.149 529.293 332.153 527.198 335.661L498.520 383.684Z" fill="#0e0e0e"/>
+    </svg>
+  </div>
+  <div class="rh-meta">
+    <div class="rh-label">Paid Media Report</div>
+    <div class="rh-period">Marzo — Junio 2026</div>
+    <div class="rh-sub">Prepared by ONMI Link</div>
+  </div>
+</header>
+
+<!-- ═══════════ TAB BAR ═══════════ -->
+<div class="tab-bar">
+  <button class="tb on" onclick="switchTab('campanas',this)">Rendimiento de campañas</button>
+  <button class="tb" onclick="switchTab('negocio',this)">Rendimiento de negocio</button>
+</div>
+
+<!-- ═══════════════════════════════
+     TAB 1 — CAMPAÑAS
+═══════════════════════════════ -->
+<div id="tab-campanas" class="tab-pane on">
+
+  <div class="mb-bar">
+    <span class="mb-lbl">Mes</span>
+    <button class="mb on" onclick="switchMonthC('abr',this)">Abril</button>
+    <button class="mb" onclick="switchMonthC('may',this)">Mayo</button>
+    <button class="mb" onclick="switchMonthC('jun',this)">Junio</button>
+    <button class="mb" onclick="switchMonthC('acum',this)">Acumulado</button>
+  </div>
+
+  <!-- ── ABRIL ── -->
+  <div id="c-abr" class="mpane on">
+
+    <div class="kg">
+      <div class="kc"><div class="kl">Inversión total</div><div class="kv">$10,275</div><div class="ks">Google $6,540 · Meta $3,735</div></div>
+      <div class="kc"><div class="kl">Facturación bruta</div><div class="kv">$72,000</div><div class="ks">Google $71,300 · Meta $700</div></div>
+      <div class="kc"><div class="kl">ROAS combinado</div><div class="kv">7.01×</div><div class="ks">Google 10.90× · Meta 0.19×</div></div>
+      <div class="kc"><div class="kl">Leads CRM</div><div class="kv">258</div><div class="ks">CPL $39.83</div></div>
+    </div>
+
+    <div class="notice">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>La facturación bruta recoge únicamente leads con UTM atribuida correctamente. Las sesiones cerradas de tráfico orgánico o sin parámetro UTM se reportan de forma separada en la pestaña de rendimiento de negocio.</span>
+    </div>
+
+    <div class="card">
+      <div class="st">Rendimiento por plataforma</div>
+      <div class="pr">
+        <div class="pn"><span class="pd" style="background:#1a56db;"></span>Google Ads</div>
+        <div class="ps">
+          <div class="psi"><div class="psi-v">$6,540</div><div class="psi-l">inversión</div></div>
+          <div class="psi"><div class="psi-v">$71,300</div><div class="psi-l">facturación</div></div>
+          <div class="psi"><div class="psi-v" style="color:#1a7a43;">10.90×</div><div class="psi-l">ROAS</div></div>
+          <div class="psi"><div class="psi-v">251</div><div class="psi-l">leads</div></div>
+          <div class="psi"><div class="psi-v">$26.07</div><div class="psi-l">CPL</div></div>
+        </div>
+      </div>
+      <div class="pr">
+        <div class="pn"><span class="pd" style="background:#c0345a;"></span>Meta Ads</div>
+        <div class="ps">
+          <div class="psi"><div class="psi-v">$3,735</div><div class="psi-l">inversión</div></div>
+          <div class="psi"><div class="psi-v">$700</div><div class="psi-l">facturación</div></div>
+          <div class="psi"><div class="psi-v" style="color:#b91c1c;">0.19×</div><div class="psi-l">ROAS</div></div>
+          <div class="psi"><div class="psi-v">60</div><div class="psi-l">leads</div></div>
+          <div class="psi"><div class="psi-v">$62.25</div><div class="psi-l">CPL</div></div>
+        </div>
+      </div>
+      <div class="dbar"><div style="width:63.7%;background:#1a56db;"></div><div style="width:36.3%;background:#c0345a;"></div></div>
+      <div class="dleg"><span><i style="background:#1a56db;"></i>Google 64% inversión</span><span><i style="background:#c0345a;"></i>Meta 36% inversión</span></div>
+    </div>
+
+    <div class="card">
+      <div class="st">Detalle por campaña — Abril</div>
+      <div class="tscroll">
+        <table class="dt">
+          <thead><tr><th style="width:29%;">Campaña</th><th style="width:8%;">Plat.</th><th>Inversión</th><th>Leads</th><th>CPL</th><th>Facturación</th><th>ROAS</th></tr></thead>
+          <tbody>
+            <tr class="row-google"><td><span class="cn">Search — Marca</span></td><td><span class="cp">Google</span></td><td>$1,520</td><td>110</td><td>$13.82</td><td>$32,500</td><td><span class="pill p-hi">21.4×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">PMax — Home</span></td><td><span class="cp">Google</span></td><td>$2,129</td><td>50</td><td>$42.64</td><td>$18,800</td><td><span class="pill p-md">8.8×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">Search — Test A</span></td><td><span class="cp">Google</span></td><td>$1,521</td><td>45</td><td>$33.77</td><td>$12,500</td><td><span class="pill p-md">8.2×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">PMax — Test A</span></td><td><span class="cp">Google</span></td><td>$1,369</td><td>46</td><td>$29.60</td><td>$7,500</td><td><span class="pill p-md">5.5×</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Home</span></td><td><span class="cp">Meta</span></td><td>$1,300</td><td>31</td><td>$41.94</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Frío Test A</span></td><td><span class="cp">Meta</span></td><td>$1,109</td><td>17</td><td>$65.23</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Home antigua</span></td><td><span class="cp">Meta</span></td><td>$722</td><td>5</td><td>$144.47</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Caliente B</span></td><td><span class="cp">Meta</span></td><td>$306</td><td>7</td><td>$43.66</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Engagement — Perfil</span></td><td><span class="cp">Meta</span></td><td>$298</td><td>—</td><td>—</td><td>$700</td><td><span class="pill p-lo">2.4×</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CONCLUSIONES -->
+    <div class="concl">
+      <div class="st">Conclusiones e insights — Abril</div>
+
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">1</span><span class="ci-title">Rendimiento por campaña</span></div>
+        <div class="ci-body">
+          <p><span class="ctag ct-g">Mejor resultado</span> La campaña de marca sigue siendo la más rentable (ROAS 21.4×, CPL $13.82), algo esperable en Google cuando la empresa ya cuenta con reconocimiento. Es el canal más predecible y de menor coste por lead.</p>
+          <p><span class="ctag ct-g">Sólido</span> Las campañas Performance Max han superado su fase de optimización y arrojan ROAS estables en ambos meses y en ambas landings.</p>
+          <p><span class="ctag ct-g">Buen arranque</span> Las campañas de Search a tráfico frío sobre la nueva landing han rendido muy bien en abril y se mantienen en la misma línea en mayo.</p>
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">2</span><span class="ci-title">Google vs. Meta: desequilibrio en conversiones atribuidas</span></div>
+        <div class="ci-body">
+          <p>Prácticamente la totalidad de las conversiones atribuidas en abril provienen de Google, mientras Meta aparece a cero. La hipótesis principal es la <strong style="font-weight:500;">velocidad de respuesta al lead</strong>.</p>
+          <p>Los leads de Meta no parten de una intención de búsqueda: nacen de un deseo generado por el anuncio. Si la respuesta no llega rápido, el lead se enfría y se pierde. Los de Google llegan con intención previa y toleran mejor tiempos de respuesta más largos.</p>
+          <div class="hbox hbox-g">Como prueba de esta hipótesis: en lo que llevamos de mayo, con tiempos de respuesta más rápidos, ya hay una campaña de Meta con ROAS 8.0×.</div>
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">3</span><span class="ci-title">Recomendación sobre la landing del Test A</span></div>
+        <div class="ci-body">
+          <p>La campaña sobre la landing del Test A no acaba de despegar. Abre dos vías de acción posibles:</p>
+          <p><span class="ctag ct-b">Opción A</span> Reasignar esa inversión a Google, donde la mejora en velocidad de respuesta ya está demostrando resultados.</p>
+          <p><span class="ctag ct-b">Opción B</span> Destinarla a una campaña de alcance, impactando a un volumen mucho mayor de personas a coste considerablemente más bajo.</p>
+          <div class="hbox hbox-a">Hay un test activo a tráfico frío para validar el funcionamiento de esta landing antes de tomar una decisión definitiva.</div>
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">4</span><span class="ci-title">Limitaciones de trackeo</span></div>
+        <div class="ci-body">
+          <p>Actualmente hay más de <strong style="font-weight:500;">$50,000 facturados sin UTM</strong> que no podemos atribuir a ningún canal. Es muy probable que los ROAS reales sean bastante superiores a los reportados.</p>
+          <p>La estructura de trackeo —compleja por la propia configuración del negocio— impide atribuir correctamente esas ventas a su canal de origen. Es un punto prioritario a resolver para tomar decisiones con datos más fiables.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── MAYO ── -->
+  <div id="c-may" class="mpane">
+
+    <div class="kg">
+      <div class="kc"><div class="kl">Inversión total</div><div class="kv">$10,586</div><div class="ks">Google $6,536 · Meta $4,050</div><span class="badge b-dn">+3.0% vs abril</span></div>
+      <div class="kc"><div class="kl">Facturación bruta</div><div class="kv">$81,100</div><div class="ks">Google $59,200 · Meta $21,900</div><span class="badge b-up">+12.6% vs abril</span></div>
+      <div class="kc"><div class="kl">ROAS combinado</div><div class="kv">7.66×</div><div class="ks">Google 9.06× · Meta 5.41×</div><span class="badge b-up">+9.3% vs abril</span></div>
+      <div class="kc"><div class="kl">Leads CRM</div><div class="kv">121</div><div class="ks">CPL $40.59</div></div>
+    </div>
+
+    <div class="notice">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>La facturación bruta recoge únicamente leads con UTM atribuida correctamente. Sesiones cerradas de tráfico orgánico o sin parámetro UTM se reportan de forma separada en la pestaña de rendimiento de negocio.</span>
+    </div>
+
+    <div class="card">
+      <div class="st">Rendimiento por plataforma</div>
+      <div class="pr">
+        <div class="pn"><span class="pd" style="background:#1a56db;"></span>Google Ads</div>
+        <div class="ps">
+          <div class="psi"><div class="psi-v">$6,536</div><div class="psi-l">inversión</div></div>
+          <div class="psi"><div class="psi-v">$59,200</div><div class="psi-l">facturación</div></div>
+          <div class="psi"><div class="psi-v" style="color:#1a7a43;">9.06×</div><div class="psi-l">ROAS</div></div>
+          <div class="psi"><div class="psi-v">271</div><div class="psi-l">leads</div></div>
+          <div class="psi"><div class="psi-v">$24.09</div><div class="psi-l">CPL</div></div>
+        </div>
+      </div>
+      <div class="pr">
+        <div class="pn"><span class="pd" style="background:#c0345a;"></span>Meta Ads</div>
+        <div class="ps">
+          <div class="psi"><div class="psi-v">$4,050</div><div class="psi-l">inversión</div></div>
+          <div class="psi"><div class="psi-v">$21,900</div><div class="psi-l">facturación</div></div>
+          <div class="psi"><div class="psi-v" style="color:#1a7a43;">5.41×</div><div class="psi-l">ROAS</div></div>
+          <div class="psi"><div class="psi-v">79</div><div class="psi-l">leads</div></div>
+          <div class="psi"><div class="psi-v">$51.27</div><div class="psi-l">CPL</div></div>
+        </div>
+      </div>
+      <div class="dbar"><div style="width:61.7%;background:#1a56db;"></div><div style="width:38.3%;background:#c0345a;"></div></div>
+      <div class="dleg"><span><i style="background:#1a56db;"></i>Google 62% inversión</span><span><i style="background:#c0345a;"></i>Meta 38% inversión</span></div>
+    </div>
+
+    <div class="card">
+      <div class="st">Detalle por campaña — Mayo</div>
+      <div class="tscroll">
+        <table class="dt">
+          <thead><tr><th style="width:27%;">Campaña</th><th style="width:7%;">Plat.</th><th>Inversión</th><th>Clics</th><th>CTR</th><th>CPC</th><th>Leads</th><th>CPL</th><th>Facturación</th><th>ROAS</th></tr></thead>
+          <tbody>
+            <tr class="row-google"><td><span class="cn">PMax — Test A</span></td><td><span class="cp">Google</span></td><td>$1,369</td><td>968</td><td>4.0%</td><td>$1.41</td><td>67</td><td>$20.48</td><td>$27,300</td><td><span class="pill p-hi">19.94×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">PMax — Home</span></td><td><span class="cp">Google</span></td><td>$2,129</td><td>1,625</td><td>4.5%</td><td>$1.31</td><td>86</td><td>$24.66</td><td>$17,200</td><td><span class="pill p-hi">8.08×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">Search — Marca</span></td><td><span class="cp">Google</span></td><td>$1,517</td><td>752</td><td>21.4%</td><td>$2.02</td><td>62</td><td>$24.43</td><td>$10,900</td><td><span class="pill p-hi">7.18×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">Search — Test A</span></td><td><span class="cp">Google</span></td><td>$1,521</td><td>882</td><td>4.2%</td><td>$1.72</td><td>56</td><td>$27.14</td><td>$3,800</td><td><span class="pill p-lo">2.50×</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Engagement — Perfil</span></td><td><span class="cp">Meta</span></td><td>$310</td><td>1,057</td><td>8.1%</td><td>$0.30</td><td>—</td><td>—</td><td>$4,100</td><td><span class="pill p-hi">13.21×</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Home</span></td><td><span class="cp">Meta</span></td><td>$1,551</td><td>1,456</td><td>3.3%</td><td>$1.07</td><td>56</td><td>$27.70</td><td>$17,800</td><td><span class="pill p-hi">11.48×</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Caliente B</span></td><td><span class="cp">Meta</span></td><td>$304</td><td>187</td><td>2.7%</td><td>$1.66</td><td>8</td><td>$37.94</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Frío Test A</span></td><td><span class="cp">Meta</span></td><td>$1,162</td><td>635</td><td>3.0%</td><td>$1.83</td><td>10</td><td>$116.20</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Home antigua</span></td><td><span class="cp">Meta</span></td><td>$337</td><td>326</td><td>2.3%</td><td>$1.04</td><td>5</td><td>$67.52</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Home (Test Excl.)</span><span class="cp">Nueva campaña — sin conversiones registradas</span></td><td><span class="cp">Meta</span></td><td>$386</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="concl">
+      <div class="st">Conclusiones e insights — Mayo</div>
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">1</span><span class="ci-title">Meta se reactiva: hipótesis de velocidad confirmada</span></div>
+        <div class="ci-body">
+          <p>El ROAS de Meta salta de <strong style="font-weight:500;">0.19× en abril a 5.41× en mayo</strong>. Con respuesta más rápida a los leads, el tráfico que no convertía ahora genera valor real. La campaña Leads — Home pasa a $17,800 facturados con ROAS 11.48×.</p>
+          <div class="hbox hbox-g">Mismo tráfico, mismo presupuesto, diferente velocidad de respuesta → resultado radicalmente distinto.</div>
+        </div>
+      </div>
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">2</span><span class="ci-title">PMax Test A: de campaña cuestionada a mejor resultado del mes</span></div>
+        <div class="ci-body">
+          <p>ROAS 19.94×, el más alto del periodo. De 5.5× en abril a $27,300 facturados sobre $1,369 invertidos. <span class="ctag ct-a">Prioridad: entender qué lo explica y si es escalable antes de reasignar presupuesto.</span></p>
+        </div>
+      </div>
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">3</span><span class="ci-title">Facturación bruta +12.6% con inversión plana</span></div>
+        <div class="ci-body">
+          <p>$81,100 en mayo vs $72,000 en abril, con inversión ligeramente superior ($10,586 vs $10,275, +3%). ROAS combinado 7.66×. El sistema mantiene eficiencia pese a incluir una nueva campaña de Meta en fase inicial sin conversiones registradas.</p>
+        </div>
+      </div>
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">4</span><span class="ci-title">Search Test A en zona de alerta</span></div>
+        <div class="ci-body">
+          <p>ROAS 2.50×, el peor de Google en mayo. CTR (4.2%) y CPL ($27.14) son aceptables — el problema no está en el tráfico sino en la tasa de cierre. Requiere análisis del proceso post-lead para esta fuente.</p>
+        </div>
+      </div>
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">5</span><span class="ci-title">Search Marca cae de 21.38× a 7.18×: más contable que real</span></div>
+        <div class="ci-body">
+          <p>CTR 21.4% y CPL más bajo de Google ($24.43). La caída en ROAS refleja ciclos de atribución más largos en el CRM, no pérdida de eficacia real.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── JUNIO ── -->
+  <div id="c-jun" class="mpane">
+
+    <div class="kg">
+      <div class="kc"><div class="kl">Inversión total</div><div class="kv">$11,443</div><div class="ks">Google $7,361 · Meta $4,082</div><span class="badge b-dn">+8.1% vs mayo</span></div>
+      <div class="kc"><div class="kl">Facturación bruta</div><div class="kv">$105,800</div><div class="ks">Google $76,800 · Meta $29,000</div><span class="badge b-up">+30.5% vs mayo</span></div>
+      <div class="kc"><div class="kl">ROAS combinado</div><div class="kv">9.25×</div><div class="ks">Google 10.43× · Meta 7.11×</div><span class="badge b-up">+20.8% vs mayo</span></div>
+      <div class="kc"><div class="kl">Leads plataforma</div><div class="kv">~329</div><div class="ks">CPL $34.78 · 3 camp. pausadas</div></div>
+    </div>
+
+    <div class="notice">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>La facturación bruta recoge únicamente leads con UTM atribuida correctamente. Sesiones cerradas de tráfico orgánico o sin parámetro UTM se reportan de forma separada en la pestaña de rendimiento de negocio.</span>
+    </div>
+
+    <div class="notice">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>3 campañas de Meta pausadas en junio: Home Antigua (sin gasto), Home (Test Excl.) y Frío Test A. El gasto de estas dos últimas corresponde a los últimos días activos antes del cierre. Filas en gris = campaña inactiva a cierre de mes.</span>
+    </div>
+
+    <div class="card">
+      <div class="st">Rendimiento por plataforma</div>
+      <div class="pr">
+        <div class="pn"><span class="pd" style="background:#1a56db;"></span>Google Ads</div>
+        <div class="ps">
+          <div class="psi"><div class="psi-v">$7,361</div><div class="psi-l">inversión</div></div>
+          <div class="psi"><div class="psi-v">$76,800</div><div class="psi-l">facturación</div></div>
+          <div class="psi"><div class="psi-v" style="color:#1a7a43;">10.43×</div><div class="psi-l">ROAS</div></div>
+          <div class="psi"><div class="psi-v">~269</div><div class="psi-l">leads</div></div>
+          <div class="psi"><div class="psi-v">$27.36</div><div class="psi-l">CPL</div></div>
+        </div>
+      </div>
+      <div class="pr">
+        <div class="pn"><span class="pd" style="background:#c0345a;"></span>Meta Ads</div>
+        <div class="ps">
+          <div class="psi"><div class="psi-v">$4,082</div><div class="psi-l">inversión</div></div>
+          <div class="psi"><div class="psi-v">$29,000</div><div class="psi-l">facturación</div></div>
+          <div class="psi"><div class="psi-v" style="color:#1a7a43;">7.11×</div><div class="psi-l">ROAS</div></div>
+          <div class="psi"><div class="psi-v">~60</div><div class="psi-l">leads form</div></div>
+          <div class="psi"><div class="psi-v">$68.03</div><div class="psi-l">CPL</div></div>
+        </div>
+      </div>
+      <div class="dbar"><div style="width:64.3%;background:#1a56db;"></div><div style="width:35.7%;background:#c0345a;"></div></div>
+      <div class="dleg"><span><i style="background:#1a56db;"></i>Google 64% inversión</span><span><i style="background:#c0345a;"></i>Meta 36% inversión</span></div>
+    </div>
+
+    <div class="card">
+      <div class="st">Detalle por campaña — Junio</div>
+      <div class="tscroll">
+        <table class="dt">
+          <thead><tr><th style="width:27%;">Campaña</th><th style="width:7%;">Plat.</th><th>Inversión</th><th>Clics</th><th>CTR</th><th>CPC</th><th>Leads</th><th>CPL</th><th>Facturación</th><th>ROAS</th></tr></thead>
+          <tbody>
+            <tr class="row-google"><td><span class="cn">Search — Home</span></td><td><span class="cp">Google</span></td><td>$1,319.80</td><td>751</td><td>3.8%</td><td>$1.76</td><td>54</td><td>$24.56</td><td>$23,900</td><td><span class="pill p-hi">18.11×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">PMax — Test A</span></td><td><span class="cp">Google</span></td><td>$1,707.68</td><td>—</td><td>3.7%</td><td>$1.57</td><td>82</td><td>$20.81</td><td>$24,000</td><td><span class="pill p-hi">14.06×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">PMax — Home</span></td><td><span class="cp">Google</span></td><td>$2,371.60</td><td>1,503</td><td>4.9%</td><td>$1.58</td><td>89</td><td>$26.66</td><td>$26,000</td><td><span class="pill p-hi">10.96×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">Search — Marca</span></td><td><span class="cp">Google</span></td><td>$1,962.00</td><td>751</td><td>20.2%</td><td>$2.61</td><td>44</td><td>$44.43</td><td>$2,900</td><td><span class="pill p-lo">1.48×</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Engagement — Perfil</span></td><td><span class="cp">Meta</span></td><td>$302.51</td><td>1,032</td><td>8.5%</td><td>$0.29</td><td>790</td><td>$0.38</td><td>$6,100</td><td><span class="pill p-hi">20.16×</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Home</span></td><td><span class="cp">Meta</span></td><td>$2,784.07</td><td>1,492</td><td>2.5%</td><td>$1.87</td><td>39</td><td>$71.39</td><td>$8,500</td><td><span class="pill p-md">3.05×</span></td></tr>
+            <tr class="row-meta row-paused"><td><span class="cn">Leads — Home (Test Excl.)<span class="paused-badge">PAUSADA</span></span></td><td><span class="cp">Meta</span></td><td>$313.00</td><td>213</td><td>2.8%</td><td>$1.47</td><td>7</td><td>$44.74</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Caliente B</span></td><td><span class="cp">Meta</span></td><td>$304.31</td><td>133</td><td>2.9%</td><td>$2.29</td><td>7</td><td>$43.47</td><td>$14,400</td><td><span class="pill p-hi">47.32×</span></td></tr>
+            <tr class="row-meta row-paused"><td><span class="cn">Leads — Frío Test A<span class="paused-badge">PAUSADA</span></span></td><td><span class="cp">Meta</span></td><td>$378.06</td><td>140</td><td>2.2%</td><td>$2.70</td><td>7</td><td>$54.01</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta row-paused"><td><span class="cn">Leads — Home Antigua<span class="paused-badge">PAUSADA</span></span></td><td><span class="cp">Meta</span></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="concl">
+      <div class="st">Conclusiones e insights — Junio</div>
+
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">1</span><span class="ci-title">Search — Home: ROAS 18.11× — el mejor rendimiento de Google en el periodo</span></div>
+        <div class="ci-body">
+          <p>Con $1,320 de inversión genera $23,900 de facturación bruta y 54 leads (CPL $24.56). Es la campaña más eficiente de junio y consolida la nueva landing como el destino principal para tráfico de búsqueda frío.</p>
+          <div class="hbox hbox-g">PMax Test A (14.06×) y PMax Home (10.96×) completan un Google sólido: el 97.4% del gasto Google retorna positivo.</div>
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">2</span><span class="ci-title">Search Marca: el ROAS baja a 1.48× este mes</span></div>
+        <div class="ci-body">
+          <p>CTR 20.2% y CPL $44.43 son razonables — el tráfico de marca sigue siendo de calidad. La caída frente al 7.18× de mayo puede tener más de una explicación: por un lado, el <strong style="font-weight:500;">lag de atribución en el CRM</strong> (los cierres se registran semanas después de la captura del lead); por otro, es posible que la competencia esté pujando más fuerte por nuestras palabras de marca al ver los buenos resultados que estamos teniendo. Recomendamos no reducir presupuesto hasta tener datos de cierre completos de junio (4-6 semanas).</p>
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">3</span><span class="ci-title">Meta: consolidación con menos campañas, resultado mixto</span></div>
+        <div class="ci-body">
+          <p>3 campañas pausadas. La inversión se concentra en Leads — Home ($2,784, ROAS 3.05×), que baja del 11.48× de mayo al ampliar el presupuesto. La campaña Engagement — Perfil destaca con ROAS 20.16× ($6,100 sobre $302) — aunque su objetivo es de tráfico/visitas al perfil, está generando conversiones reales a través del link in bio. <span class="ctag ct-a">Prioridad: analizar si la caída de Meta Home es por saturación de audiencia o por calidad del lead recibido.</span></p>
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-head"><span class="ci-num">4</span><span class="ci-title">Retargeting (Leads — Caliente B): ROAS 47.32× con inversión mínima</span></div>
+        <div class="ci-body">
+          <p>Con solo $304.31 de inversión, esta campaña de tráfico caliente cierra 1 cliente y $14,400 de facturación bruta — el mejor ROAS de todo el mes, muy por encima del resto de campañas de Meta. Confirma que el retargeting a audiencia ya conocida sigue siendo altamente rentable incluso con presupuestos pequeños. <span class="ctag ct-a">A valorar: aumentar gradualmente la inversión en esta campaña para comprobar si el ROAS se sostiene a mayor escala.</span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="c-acum" class="mpane">
+    <div class="kg">
+      <div class="kc"><div class="kl">Inversión total</div><div class="kv">$32,303</div><div class="ks">Google $20,436 · Meta $11,867</div></div>
+      <div class="kc"><div class="kl">Facturación bruta</div><div class="kv">$258,900</div><div class="ks">Google $207,300 · Meta $51,600</div></div>
+      <div class="kc"><div class="kl">ROAS combinado</div><div class="kv">8.01×</div><div class="ks">Google 10.14× · Meta 4.35×</div></div>
+      <div class="kc"><div class="kl">Leads plataforma</div><div class="kv">~708</div><div class="ks">CPL medio ~$45.62 · Abr–Jun</div></div>
+    </div>
+    <div class="notice">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Acumulado Abril + Mayo + Junio. Facturación bruta con UTM atribuida correctamente. Leads plataforma sumados de los tres meses; CPL calculado sobre plataforma.</span>
+    </div>
+    <div class="card">
+      <div class="st">Comparativa mensual — Inversión vs. Facturación bruta (Abr–Jun)</div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px;font-size:12px;color:var(--ink3);">
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#0e0e0e;display:inline-block;"></span>Inversión</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#1a56db;display:inline-block;"></span>Facturación Google</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#c0345a;display:inline-block;"></span>Facturación Meta</span>
+      </div>
+      <div class="chwrap" style="height:240px;"><canvas id="chartAcum"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="st">Campañas acumuladas — Abr+May+Jun</div>
+      <div class="tscroll">
+        <table class="dt">
+          <thead><tr><th style="width:30%;">Campaña</th><th style="width:8%;">Plat.</th><th>Inv. total</th><th>Leads</th><th>CPL med.</th><th>Fact. total</th><th>ROAS</th></tr></thead>
+          <tbody>
+            <tr class="row-google"><td><span class="cn">PMax — Home</span></td><td><span class="cp">Google</span></td><td>$6,630</td><td>225</td><td>$29.47</td><td>$62,000</td><td><span class="pill p-hi">9.4×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">PMax — Test A</span></td><td><span class="cp">Google</span></td><td>$4,446</td><td>195</td><td>$22.80</td><td>$58,800</td><td><span class="pill p-hi">13.2×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">Search — Marca</span></td><td><span class="cp">Google</span></td><td>$4,999</td><td>216</td><td>$23.14</td><td>$46,300</td><td><span class="pill p-hi">9.3×</span></td></tr>
+            <tr class="row-google"><td><span class="cn">Search — Home</span></td><td><span class="cp">Google</span></td><td>$4,362</td><td>155</td><td>$28.14</td><td>$40,200</td><td><span class="pill p-hi">9.2×</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Home</span></td><td><span class="cp">Meta</span></td><td>$5,635</td><td>126</td><td>$44.72</td><td>$26,300</td><td><span class="pill p-md">4.7×</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Engagement — Perfil</span></td><td><span class="cp">Meta</span></td><td>$911</td><td>790</td><td>$1.15</td><td>$10,900</td><td><span class="pill p-hi">12.0×</span></td></tr>
+            <tr class="row-meta row-paused"><td><span class="cn">Leads — Home (Test Excl.)<span class="paused-badge">PAUSADA JUN</span></span></td><td><span class="cp">Meta</span></td><td>$699</td><td>7</td><td>—</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta row-paused"><td><span class="cn">Leads — Frío Test A<span class="paused-badge">PAUSADA JUN</span></span></td><td><span class="cp">Meta</span></td><td>$2,649</td><td>34</td><td>$77.91</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+            <tr class="row-meta"><td><span class="cn">Leads — Caliente B</span></td><td><span class="cp">Meta</span></td><td>$914</td><td>22</td><td>$41.55</td><td>$14,400</td><td><span class="pill p-hi">15.76×</span></td></tr>
+            <tr class="row-meta row-paused"><td><span class="cn">Leads — Home Antigua<span class="paused-badge">PAUSADA</span></span></td><td><span class="cp">Meta</span></td><td>$1,059</td><td>10</td><td>$105.90</td><td>—</td><td><span class="pill p-nd">n/d</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════
+     TAB 2 — NEGOCIO
+═══════════════════════════════ -->
+<div id="tab-negocio" class="tab-pane">
+
+  <div class="mb-bar">
+    <span class="mb-lbl">Mes</span>
+    <button class="mb" onclick="switchMonthN('mar',this)">Marzo</button>
+    <button class="mb on" onclick="switchMonthN('abr',this)">Abril</button>
+    <button class="mb" onclick="switchMonthN('may',this)">Mayo</button>
+    <button class="mb" onclick="switchMonthN('jun',this)">Junio</button>
+    <button class="mb" onclick="switchMonthN('acum',this)">Acumulado</button>
+  </div>
+  <div class="notice" style="margin-bottom:20px;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span><strong style="font-weight:600;">Fuentes de atribución incluidas en este report:</strong> Ads — Homepage (Meta + Google), Organic, Ads — Test A/B, Call, Email, Instagram, WhatsApp, Text, ChatGPT/Digital. Los cierres se reportan de forma separada por closer (Willy, Mike, Piru) dado que cada uno opera con CRM propio y estructura de comisión diferente. Datos de junio completos hasta cierre de mes para los tres closers. La facturación bruta de NoPain se reporta al margen por su precio diferencial.</span>
+  </div>
+
+
+  <!-- OBJETIVOS FIJOS -->
+  <div class="card">
+    <div class="st">Objetivos del cliente — referencia fija</div>
+    <div class="two" style="margin-bottom:0;">
+      <div>
+        <div class="or"><span class="or-l">Sesiones / mes objetivo</span><span class="or-v">80</span></div>
+        <div class="or"><span class="or-l">PVP medio por sesión</span><span class="or-v">$1,900</span></div>
+        <div class="or"><span class="or-l">Facturación mensual objetivo</span><span class="or-v">$152,000</span></div>
+        <div class="or"><span class="or-l">Beneficio neto objetivo (25%)</span><span class="or-v">$38,000</span></div>
+      </div>
+      <div>
+        <div class="or"><span class="or-l">Neto antes gastos (40%)</span><span class="or-v">$60,800</span></div>
+        <div class="or"><span class="or-l">Coste total dpto. marketing (15%)</span><span class="or-v">$22,800</span></div>
+        <div class="or"><span class="or-l">Coste / sesión objetivo</span><span class="or-v">$285</span></div>
+        <div class="or"><span class="or-l">Coste / sesión óptimo</span><span class="or-v">$190</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ABRIL NEGOCIO ── -->
+  <div id="n-abr" class="mpane on">
+    <div class="kg">
+      <div class="kc"><div class="kl">Sesiones cerradas</div><div class="kv">47</div><div class="ks">vs objetivo 80</div><span class="badge b-dn">−41%</span></div>
+      <div class="kc"><div class="kl">PVP medio / sesión</div><div class="kv">$1,981</div><div class="ks">vs objetivo $1,900</div><span class="badge b-up">+4.3%</span></div>
+      <div class="kc"><div class="kl">Facturación ads</div><div class="kv">$93,100</div><div class="ks">- NoPain $80,000</div></div>
+      <div class="kc"><div class="kl">Coste / sesión real</div><div class="kv">$434</div><div class="ks">vs objetivo $285</div><span class="badge b-warn">+52%</span></div>
+    </div>
+
+    <div class="two">
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Cuenta de resultados — Abril</div>
+        <div class="or"><span class="or-l">Facturación ads</span><span class="or-v">$93,100<span class="or-p">100%</span></span></div>
+        <div class="or"><span class="or-l">Neto antes gastos (40%)</span><span class="or-v">$37,240<span class="or-p">40.0%</span></span></div>
+        <div class="or"><span class="or-l">Coste total publicidad</span><span class="or-v">$20,396<span class="or-p">21.9%</span></span></div>
+        <div class="or total"><span class="or-l">Neto después de gastos</span><span class="or-v" style="font-size:15px;">$16,844<span class="or-p">18.1%</span></span></div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rule2);">
+          <div style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px;">NoPain — no incluido en ads</div>
+          <div style="font-size:15px;font-weight:300;color:var(--ink);">2 sesiones · <strong style="font-weight:500;">$80,000</strong></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Desglose coste total publicidad</div>
+        <div class="or"><span class="or-l">Inversión Meta Ads</span><span class="or-v">$3,735<span class="or-p">18.3%</span></span></div>
+        <div class="or"><span class="or-l">Inversión Google Ads</span><span class="or-v">$6,540<span class="or-p">32.1%</span></span></div>
+        <div class="or"><span class="or-l">Fee agencia (ONMI Link)</span><span class="or-v">$4,700<span class="or-p">23.0%</span></span></div>
+        <div class="or"><span class="or-l">Comisión closer/setter</span><span class="or-v">$5,421<span class="or-p">26.6%</span></span></div>
+        <div class="or total"><span class="or-l">Total</span><span class="or-v" style="font-size:15px;">$20,396<span class="or-p">21.9% s/fact.</span></span></div>
+        <div class="cbar">
+          <div style="width:18.3%;background:#c0345a;"></div>
+          <div style="width:32.1%;background:#1a56db;"></div>
+          <div style="width:23%;background:#4a4a4a;"></div>
+          <div style="width:26.6%;background:#c8860a;"></div>
+        </div>
+        <div class="dleg" style="margin-top:8px;">
+          <span><i style="background:#c0345a;"></i>Meta 18%</span>
+          <span><i style="background:#1a56db;"></i>Google 32%</span>
+          <span><i style="background:#4a4a4a;"></i>Agencia 23%</span>
+          <span><i style="background:#c8860a;"></i>Comisiones 27%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="st">Fuentes de cierre — Abril</div>
+      <div class="tscroll">
+        <table class="dt">
+          <thead><tr><th style="width:35%;">Fuente</th><th>Clientes</th><th>Sesiones</th><th>Facturado</th><th>Precio / ses.</th></tr></thead>
+          <tbody>
+            <tr><td><span class="cn">Ads — Home nueva</span></td><td>5</td><td>7</td><td>$85,800</td><td><span class="pill p-hi">$12,257</span></td></tr>
+            <tr><td><span class="cn">Organic</span></td><td>14</td><td>24</td><td>$48,700</td><td>$2,029</td></tr>
+            <tr><td><span class="cn">Ads — Home antigua</span></td><td>4</td><td>9</td><td>$18,700</td><td>$2,078</td></tr>
+            <tr><td><span class="cn">Ads — Test A</span></td><td>3</td><td>6</td><td>$15,000</td><td>$2,500</td></tr>
+            <tr><td><span class="cn">Instagram</span></td><td>2</td><td>2</td><td>$2,300</td><td>$1,150</td></tr>
+            <tr><td><span class="cn">Call</span></td><td>1</td><td>1</td><td>$2,600</td><td>$2,600</td></tr>
+            <tr><td style="color:var(--ink3);">Email / Ads Test B</td><td style="color:var(--ink3);">—</td><td style="color:var(--ink3);">—</td><td style="color:var(--ink3);">—</td><td style="color:var(--ink3);">—</td></tr>
+            <tr class="tr-total"><td>Total</td><td>29</td><td>49</td><td>$173,100</td><td>$3,533 prom.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAYO NEGOCIO ── -->
+  <div id="n-may" class="mpane">
+
+    <div class="kg">
+      <div class="kc"><div class="kl">Sesiones cerradas</div><div class="kv">99</div><div class="ks">vs objetivo 80</div><span class="badge b-up">+23.8%</span></div>
+      <div class="kc"><div class="kl">PVP medio / sesión</div><div class="kv">$2,125</div><div class="ks">vs objetivo $1,900</div><span class="badge b-up">+11.8%</span></div>
+      <div class="kc"><div class="kl">Facturación ads</div><div class="kv">$210,400</div><div class="ks">- NoPain $35,000</div></div>
+      <div class="kc"><div class="kl">Coste / sesión real</div><div class="kv">$227.76</div><div class="ks">vs objetivo $285</div><span class="badge b-up">−20%</span></div>
+    </div>
+
+    <div class="two">
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Cuenta de resultados — Mayo</div>
+        <div class="or"><span class="or-l">Facturación ads</span><span class="or-v">$210,400<span class="or-p">100%</span></span></div>
+        <div class="or"><span class="or-l">Neto antes gastos (40%)</span><span class="or-v">$84,160<span class="or-p">40.0%</span></span></div>
+        <div class="or"><span class="or-l">Coste total publicidad</span><span class="or-v">$22,548<span class="or-p">10.7%</span></span></div>
+        <div class="or total"><span class="or-l">Neto después de gastos</span><span class="or-v" style="font-size:15px;">$61,612<span class="or-p">29.3%</span></span></div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rule2);">
+          <div style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px;">NoPain — no incluido en ads</div>
+          <div style="font-size:15px;font-weight:300;color:var(--ink);">1 sesión · <strong style="font-weight:500;">$35,000</strong></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Desglose coste total publicidad</div>
+        <div class="or"><span class="or-l">Inversión Meta Ads</span><span class="or-v">$4,051<span class="or-p">18.0%</span></span></div>
+        <div class="or"><span class="or-l">Inversión Google Ads</span><span class="or-v">$6,536<span class="or-p">29.0%</span></span></div>
+        <div class="or"><span class="or-l">Fee agencia (ONMI Link)</span><span class="or-v">$4,000<span class="or-p">17.7%</span></span></div>
+        <div class="or"><span class="or-l">Comisión closers</span><span class="or-v">$7,962<span class="or-p">35.3%</span></span></div>
+        <div class="or total"><span class="or-l">Total</span><span class="or-v" style="font-size:15px;">$22,548<span class="or-p">10.7% s/fact.</span></span></div>
+        <div class="cbar"><div style="width:18%;background:#c0345a;"></div><div style="width:29%;background:#1a56db;"></div><div style="width:17.7%;background:#4a4a4a;"></div><div style="width:35.3%;background:#c8860a;"></div></div>
+        <div class="dleg" style="margin-top:8px;">
+          <span><i style="background:#c0345a;"></i>Meta 18%</span><span><i style="background:#1a56db;"></i>Google 29%</span><span><i style="background:#4a4a4a;"></i>Agencia 18%</span><span><i style="background:#c8860a;"></i>Comisiones 35%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="st">Desglose por closer y fuente de atribución — Mayo</div>
+      <div class="closer-willy">
+        <div class="closer-header">
+          <span style="font-size:13px;font-weight:600;color:#1a3e8c;">Willy <span style="font-size:11px;font-weight:400;color:var(--ink3);margin-left:6px;">Comisión 3%</span></span>
+          <span style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink2);">67 ses · $147,400 · comisión $4,422</span>
+        </div>
+        <div class="tscroll"><table class="dt" style="font-size:12px;">
+          <thead><tr><th style="width:32%;text-align:left;">Fuente</th><th>Clientes</th><th>Sesiones</th><th>Facturado</th><th>Coste medio sesión</th></tr></thead>
+          <tbody>
+            <tr><td>Ads — Homepage</td><td>13</td><td>21</td><td>$53,800</td><td>$2,562</td></tr>
+            <tr><td>Organic</td><td>18</td><td>43</td><td>$86,100</td><td>$2,002</td></tr>
+            <tr><td>Call</td><td>1</td><td>1</td><td>$2,500</td><td>$2,500</td></tr>
+            <tr><td>Email</td><td>1</td><td>2</td><td>$5,000</td><td>$2,500</td></tr>
+            <tr class="tr-total"><td>Total Willy</td><td>33</td><td>67</td><td>$147,400</td><td>$2,200</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="closer-mike">
+        <div class="closer-header">
+          <span style="font-size:13px;font-weight:600;color:#0f5c32;">Mike <span style="font-size:11px;font-weight:400;color:var(--ink3);margin-left:6px;">Comisión 6%</span></span>
+          <span style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink2);">26 ses · $55,000 · comisión $3,300</span>
+        </div>
+        <div class="tscroll"><table class="dt" style="font-size:12px;">
+          <thead><tr><th style="width:32%;text-align:left;">Fuente</th><th>Clientes</th><th>Sesiones</th><th>Facturado</th><th>Coste medio sesión</th></tr></thead>
+          <tbody>
+            <tr><td>Ads — Homepage</td><td>12</td><td>23</td><td>$47,200</td><td>$2,052</td></tr>
+            <tr><td>Organic</td><td>1</td><td>2</td><td>$6,000</td><td>$3,000</td></tr>
+            <tr><td>Ads — Test A</td><td>1</td><td>1</td><td>$1,800</td><td>$1,800</td></tr>
+            <tr class="tr-total"><td>Total Mike</td><td>14</td><td>26</td><td>$55,000</td><td>$2,115</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="closer-piru">
+        <div class="closer-header">
+          <span style="font-size:13px;font-weight:600;color:#7a4a00;">Piru <span style="font-size:11px;font-weight:400;color:var(--ink3);margin-left:6px;">Comisión 3%</span></span>
+          <span style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink2);">6 ses · $8,000 · comisión $240</span>
+        </div>
+        <div class="tscroll"><table class="dt" style="font-size:12px;">
+          <thead><tr><th style="width:32%;text-align:left;">Fuente</th><th>Clientes</th><th>Sesiones</th><th>Facturado</th><th>Coste medio sesión</th></tr></thead>
+          <tbody>
+            <tr><td>Call</td><td>6</td><td>6</td><td>$8,000</td><td>$1,333</td></tr>
+            <tr class="tr-total"><td>Total Piru</td><td>6</td><td>6</td><td>$8,000</td><td>$1,333</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MARZO NEGOCIO ── -->
+  <div id="n-mar" class="mpane">
+    <div class="kg">
+      <div class="kc"><div class="kl">Sesiones cerradas</div><div class="kv">43</div><div class="ks">vs objetivo 80</div><span class="badge b-dn">−46%</span></div>
+      <div class="kc"><div class="kl">PVP medio / sesión</div><div class="kv">$1,838</div><div class="ks">vs objetivo $1,900</div><span class="badge b-dn">−3.3%</span></div>
+      <div class="kc"><div class="kl">Facturación ads</div><div class="kv">$79,050</div><div class="ks">sin NoPain registrado</div></div>
+      <div class="kc"><div class="kl">Coste / sesión real</div><div class="kv">$389.48</div><div class="ks">vs objetivo $285</div><span class="badge b-warn">+36.7%</span></div>
+    </div>
+    <div class="two">
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Cuenta de resultados — Marzo</div>
+        <div class="or"><span class="or-l">Facturación ads</span><span class="or-v">$79,050<span class="or-p">100%</span></span></div>
+        <div class="or"><span class="or-l">Neto antes gastos (40%)</span><span class="or-v">$31,620<span class="or-p">40.0%</span></span></div>
+        <div class="or"><span class="or-l">Coste total publicidad</span><span class="or-v">$16,748<span class="or-p">21.2%</span></span></div>
+        <div class="or total"><span class="or-l">Neto después de gastos</span><span class="or-v" style="font-size:15px;">$14,872<span class="or-p">18.8%</span></span></div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Desglose coste total publicidad</div>
+        <div class="or"><span class="or-l">Inversión ads (Meta + Google)</span><span class="or-v">$8,691<span class="or-p">51.9%</span></span></div>
+        <div class="or"><span class="or-l">Fee agencia (ONMI Link)</span><span class="or-v">$6,000<span class="or-p">35.8%</span></span></div>
+        <div class="or"><span class="or-l">Comisión closer/setter</span><span class="or-v">$2,057<span class="or-p">12.3%</span></span></div>
+        <div class="or total"><span class="or-l">Total</span><span class="or-v" style="font-size:15px;">$16,748<span class="or-p">21.2% s/fact.</span></span></div>
+        <div class="cbar"><div style="width:51.9%;background:#4a4a4a;"></div><div style="width:35.8%;background:#888780;"></div><div style="width:12.3%;background:#c8860a;"></div></div>
+        <div class="dleg" style="margin-top:8px;"><span><i style="background:#4a4a4a;"></i>Ads 52%</span><span><i style="background:#888780;"></i>Agencia 36%</span><span><i style="background:#c8860a;"></i>Comisiones 12%</span></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:0;">
+      <div class="st">Fuentes de cierre — Marzo</div>
+      <div class="tscroll"><table class="dt">
+        <thead><tr><th style="width:35%;">Fuente</th><th>Clientes</th><th>Sesiones</th><th>Facturado</th><th>Precio / ses.</th></tr></thead>
+        <tbody>
+          <tr><td><span class="cn">Ads — Homepage</span></td><td>12</td><td>18</td><td>$39,150</td><td>$2,175</td></tr>
+          <tr><td><span class="cn">Organic</span></td><td>8</td><td>9</td><td>$17,400</td><td>$1,933</td></tr>
+          <tr><td><span class="cn">Ads — Test A</span></td><td>6</td><td>7</td><td>$8,700</td><td>$1,243</td></tr>
+          <tr><td><span class="cn">Call</span></td><td>2</td><td>4</td><td>$7,600</td><td>$1,900</td></tr>
+          <tr><td><span class="cn">Email</span></td><td>3</td><td>3</td><td>$4,800</td><td>$1,600</td></tr>
+          <tr><td><span class="cn">Instagram</span></td><td>2</td><td>2</td><td>$1,400</td><td>$700</td></tr>
+          <tr class="tr-total"><td>Total</td><td>33</td><td>43</td><td>$79,050</td><td>$1,838</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- ── ACUMULADO NEGOCIO (MAR–MAY) ── -->
+
+  <!-- ── JUNIO NEGOCIO ── -->
+  <div id="n-jun" class="mpane">
+
+    <div class="kg">
+      <div class="kc"><div class="kl">Sesiones cerradas</div><div class="kv">92</div><div class="ks">vs objetivo 80</div><span class="badge b-up">+15.0%</span></div>
+      <div class="kc"><div class="kl">PVP medio / sesión</div><div class="kv">$2,363</div><div class="ks">vs objetivo $1,900</div><span class="badge b-up">+24.4%</span></div>
+      <div class="kc"><div class="kl">Facturación ads</div><div class="kv">$217,400</div><div class="ks">- NoPain $205,000</div></div>
+      <div class="kc"><div class="kl">Coste / sesión real</div><div class="kv">$264.66</div><div class="ks">vs objetivo $285</div><span class="badge b-up">−7.1%</span></div>
+    </div>
+
+    <div class="two">
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Cuenta de resultados — Junio</div>
+        <div class="or"><span class="or-l">Facturación ads</span><span class="or-v">$217,400<span class="or-p">100%</span></span></div>
+        <div class="or"><span class="or-l">Neto antes gastos (40%)</span><span class="or-v">$86,960<span class="or-p">40.0%</span></span></div>
+        <div class="or"><span class="or-l">Coste total publicidad</span><span class="or-v">$24,349<span class="or-p">11.20%</span></span></div>
+        <div class="or total"><span class="or-l">Neto después de gastos</span><span class="or-v" style="font-size:15px;">$62,611<span class="or-p">28.80%</span></span></div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rule2);">
+          <div style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px;">NoPain — no incluido en ads</div>
+          <div style="font-size:15px;font-weight:300;color:var(--ink);margin-bottom:6px;">4 sesiones · <strong style="font-weight:500;">$205,000</strong></div>
+          <div style="font-size:11px;color:var(--ink3);line-height:1.5;">1 sesión atribuida a Ads — Willy, PMax Home (tráfico frío), $35,000. Lead de abril, depósito 26/06 · cliente Shon MacGowan. Las otras 3 no están atribuidas a Ads.</div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Desglose coste total publicidad</div>
+        <div class="or"><span class="or-l">Inversión Meta Ads</span><span class="or-v">$4,082<span class="or-p">16.8%</span></span></div>
+        <div class="or"><span class="or-l">Inversión Google Ads</span><span class="or-v">$7,361<span class="or-p">30.2%</span></span></div>
+        <div class="or"><span class="or-l">Fee agencia (ONMI Link)</span><span class="or-v">$4,200<span class="or-p">17.2%</span></span></div>
+        <div class="or"><span class="or-l">Comisión closers</span><span class="or-v">$8,706<span class="or-p">35.8%</span></span></div>
+        <div class="or total"><span class="or-l">Total</span><span class="or-v" style="font-size:15px;">$24,349<span class="or-p">11.20% s/fact.</span></span></div>
+        <div class="cbar">
+          <div style="width:16.8%;background:#c0345a;"></div>
+          <div style="width:30.2%;background:#1a56db;"></div>
+          <div style="width:17.2%;background:#4a4a4a;"></div>
+          <div style="width:35.8%;background:#c8860a;"></div>
+        </div>
+        <div class="dleg" style="margin-top:8px;">
+          <span><i style="background:#c0345a;"></i>Meta 17%</span>
+          <span><i style="background:#1a56db;"></i>Google 30%</span>
+          <span><i style="background:#4a4a4a;"></i>Agencia 17%</span>
+          <span><i style="background:#c8860a;"></i>Comisiones 36%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="st">Fuentes de cierre — Junio (resumen)</div>
+      <div class="notice n-warn" style="margin-bottom:14px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Mike reporta 1 cierre vía ChatGPT (no categorizado como fuente ad).</span>
+      </div>
+      <div class="tscroll">
+        <table class="dt">
+          <thead><tr><th style="width:35%;">Fuente</th><th>Clientes</th><th>Sesiones</th><th>Facturado</th><th>Coste medio sesión</th></tr></thead>
+          <tbody>
+            <tr><td><span class="cn">Ads — Homepage</span></td><td>21</td><td>41</td><td>$126,800</td><td><span class="pill p-hi">$3,093</span></td></tr>
+            <tr><td><span class="cn">Organic</span></td><td>18</td><td>25</td><td>$46,700</td><td>$1,868</td></tr>
+            <tr><td><span class="cn">Ads — Test A</span></td><td>2</td><td>6</td><td>$11,500</td><td>$1,917</td></tr>
+            <tr><td><span class="cn">Ads — Test B</span></td><td>1</td><td>8</td><td>$14,400</td><td>$1,800</td></tr>
+            <tr><td><span class="cn">Instagram</span></td><td>1</td><td>1</td><td>$1,200</td><td>$1,200</td></tr>
+            <tr><td><span class="cn">ChatGPT / Digital</span></td><td>1</td><td>1</td><td>$1,800</td><td>$1,800</td></tr>
+            <tr><td><span class="cn">Otros (Call / Text / WhatsApp)</span></td><td>8</td><td>10</td><td>$15,000</td><td>$1,500</td></tr>
+            <tr class="tr-total"><td>TOTAL</td><td>52</td><td>92</td><td>$217,400</td><td>$2,363</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="st">Desglose por closer y fuente de atribución — Junio</div>
+
+      <div class="closer-willy">
+        <div class="closer-header">
+          <span style="font-size:13px;font-weight:600;color:#1a3e8c;">Willy <span style="font-size:11px;font-weight:400;color:var(--ink3);margin-left:6px;">Comisión 3%</span></span>
+          <span style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink2);">41 ses · $129,600 · comisión $3,888</span>
+        </div>
+        <div class="tscroll"><table class="dt" style="font-size:12px;">
+          <thead><tr><th style="width:32%;text-align:left;">Fuente</th><th>Clientes</th><th>Sesiones</th><th>Facturado</th><th>Coste medio sesión</th></tr></thead>
+          <tbody>
+            <tr><td>Ads — Homepage*</td><td>8</td><td>26</td><td>$64,400</td><td><span class="pill p-hi">$2,476.92</span></td></tr>
+            <tr><td>Organic</td><td>9</td><td>12</td><td>$26,500</td><td>$2,208</td></tr>
+            <tr><td>Ads — Test A</td><td>1</td><td>1</td><td>$2,500</td><td>$2,500</td></tr>
+            <tr><td>Instagram</td><td>1</td><td>1</td><td>$1,200</td><td>$1,200</td></tr>
+            <tr class="tr-total"><td>Total Willy</td><td>20</td><td>41</td><td>$129,600</td><td>$3,161</td></tr>
+          </tbody>
+        </table></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:6px;line-height:1.4;">*Excluye 1 cliente / 1 sesión / $35,000 de la sesión NoPain atribuida a esta fuente, para no distorsionar el coste medio. El Total Willy sí incluye ese importe.</div>
+      </div>
+
+      <div class="closer-mike">
+        <div class="closer-header">
+          <span style="font-size:13px;font-weight:600;color:#0f5c32;">Mike <span style="font-size:11px;font-weight:400;color:var(--ink3);margin-left:6px;">Comisión 6%</span></span>
+          <span style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink2);">41 ses · $72,800 · comisión $4,368</span>
+        </div>
+        <div class="tscroll"><table class="dt" style="font-size:12px;">
+          <thead><tr><th style="width:32%;text-align:left;">Fuente</th><th>Clientes</th><th>Sesiones</th><th>Facturado</th><th>Coste medio sesión</th></tr></thead>
+          <tbody>
+            <tr><td>Ads — Homepage</td><td>12</td><td>14</td><td>$27,400</td><td>$1,957</td></tr>
+            <tr><td>Organic</td><td>9</td><td>13</td><td>$20,200</td><td>$1,554</td></tr>
+            <tr><td>Ads — Test A</td><td>1</td><td>5</td><td>$9,000</td><td>$1,800</td></tr>
+            <tr><td>Ads — Test B</td><td>1</td><td>8</td><td>$14,400</td><td>$1,800</td></tr>
+            <tr><td>ChatGPT</td><td>1</td><td>1</td><td>$1,800</td><td>$1,800</td></tr>
+            <tr class="tr-total"><td>Total Mike</td><td>24</td><td>41</td><td>$72,800</td><td>$1,776</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="closer-piru">
+        <div class="closer-header">
+          <span style="font-size:13px;font-weight:600;color:#7a4a00;">Piru <span style="font-size:11px;font-weight:400;color:var(--ink3);margin-left:6px;">Comisión 3%</span></span>
+          <span style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink2);">10 ses · $15,000 · comisión $450</span>
+        </div>
+        <div class="tscroll"><table class="dt" style="font-size:12px;">
+          <thead><tr><th style="width:32%;text-align:left;">Fuente</th><th>Clientes</th><th>Sesiones</th><th>Facturado</th><th>Coste medio sesión</th></tr></thead>
+          <tbody>
+            <tr><td>Call</td><td>2</td><td>2</td><td>$5,000</td><td>$2,500</td></tr>
+            <tr><td>Text</td><td>4</td><td>6</td><td>$8,200</td><td>$1,367</td></tr>
+            <tr><td>WhatsApp</td><td>2</td><td>2</td><td>$1,800</td><td>$900</td></tr>
+            <tr class="tr-total"><td>Total Piru</td><td>8</td><td>10</td><td>$15,000</td><td>$1,500</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="n-acum" class="mpane">
+    <div class="kg">
+      <div class="kc"><div class="kl">Sesiones totales</div><div class="kv">281</div><div class="ks">Mar 43 · Abr 47 · May 99 · Jun 92</div></div>
+      <div class="kc"><div class="kl">PVP medio acumulado</div><div class="kv">$2,135</div><div class="ks">$599,950 / 281 ses.</div></div>
+      <div class="kc"><div class="kl">Facturación acumulada</div><div class="kv">$599,950</div><div class="ks">- NoPain $320,000 (7 ses.)</div></div>
+      <div class="kc"><div class="kl">Neto después de gastos</div><div class="kv">$155,939</div><div class="ks">26.0% sobre facturación</div></div>
+    </div>
+    <div class="card">
+      <div class="st">Evolución mensual — KPIs de negocio</div>
+      <div class="tscroll"><table class="dt">
+        <thead><tr><th style="width:18%;text-align:left;">Métrica</th><th>Marzo</th><th>Abril</th><th>Mayo</th><th>Junio</th><th>Acumulado</th></tr></thead>
+        <tbody>
+          <tr><td><span class="cn">Sesiones</span></td><td>43</td><td>47</td><td>99</td><td>92</td><td style="font-weight:500;">281</td></tr>
+          <tr><td><span class="cn">Coste medio sesión</span></td><td>$1,838</td><td>$1,981</td><td>$2,125</td><td>$2,363</td><td style="font-weight:500;">$2,135</td></tr>
+          <tr><td><span class="cn">Facturación ads</span></td><td>$79,050</td><td>$93,100</td><td>$210,400</td><td>$217,400</td><td style="font-weight:500;">$599,950</td></tr>
+          <tr><td><span class="cn">NoPain (extra)</span></td><td style="color:var(--ink3);">—</td><td>$80,000</td><td>$35,000</td><td>$205,000</td><td style="font-weight:500;">$320,000</td></tr>
+          <tr><td><span class="cn">Coste publicidad</span></td><td>$16,748</td><td>$20,396</td><td>$22,548</td><td>$24,349</td><td style="font-weight:500;">$84,041</td></tr>
+          <tr><td><span class="cn">Neto est. gastos</span></td><td>$14,872</td><td>$16,844</td><td>$61,612</td><td>$62,611</td><td style="font-weight:500;">$155,939</td></tr>
+          <tr><td><span class="cn">Coste / sesión</span></td><td><span class="pill p-lo">$389</span></td><td><span class="pill p-lo">$434</span></td><td><span class="pill p-hi">$228</span></td><td><span class="pill p-hi">$265</span></td><td><span class="pill p-md">$299</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="two">
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Cuenta de resultados — Acumulado Mar–Jun</div>
+        <div class="or"><span class="or-l">Facturación total ads</span><span class="or-v">$599,950<span class="or-p">100%</span></span></div>
+        <div class="or"><span class="or-l">Neto antes gastos (40%)</span><span class="or-v">$239,980<span class="or-p">40.0%</span></span></div>
+        <div class="or"><span class="or-l">Coste total publicidad</span><span class="or-v">$84,041<span class="or-p">14.0%</span></span></div>
+        <div class="or total"><span class="or-l">Neto después de gastos</span><span class="or-v" style="font-size:15px;">$155,939<span class="or-p">26.0%</span></span></div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rule2);">
+          <div style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px;">NoPain — acumulado no incluido en ads</div>
+          <div style="font-size:15px;font-weight:300;color:var(--ink);">7 sesiones · <strong style="font-weight:500;">$320,000</strong></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="st">Desglose coste acumulado</div>
+        <div class="or"><span class="or-l">Inversión ads (Meta + Google)</span><span class="or-v">$40,996<span class="or-p">48.8%</span></span></div>
+        <div class="or"><span class="or-l">Fee agencia (ONMI Link)</span><span class="or-v">$18,900<span class="or-p">22.5%</span></span></div>
+        <div class="or"><span class="or-l">Comisiones closers</span><span class="or-v">$24,146<span class="or-p">28.7%</span></span></div>
+        <div class="or total"><span class="or-l">Total</span><span class="or-v" style="font-size:15px;">$84,041<span class="or-p">14.0% s/fact.</span></span></div>
+        <div class="cbar"><div style="width:48.8%;background:#4a4a4a;"></div><div style="width:22.5%;background:#888780;"></div><div style="width:28.7%;background:#c8860a;"></div></div>
+        <div class="dleg" style="margin-top:8px;"><span><i style="background:#4a4a4a;"></i>Ads 49%</span><span><i style="background:#888780;"></i>Agencia 22%</span><span><i style="background:#c8860a;"></i>Comisiones 29%</span></div>
+      </div>
+    </div>
+  </div>
+
+<footer class="footer">
+  <span>Ganga Tattoo Los Angeles · West Hollywood, CA 90046</span>
+  <span>ONMI Link · Growth Marketing Agency · Junio 2026</span>
+</footer>
+
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b => b.classList.remove('on'));
+  document.getElementById('tab-' + id).classList.add('on');
+  btn.classList.add('on');
+}
+function switchMonthC(id, btn) {
+  document.querySelectorAll('#tab-campanas .mpane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('#tab-campanas .mb').forEach(b => b.classList.remove('on'));
+  document.getElementById('c-' + id).classList.add('on');
+  btn.classList.add('on');
+}
+function switchMonthN(id, btn) {
+  document.querySelectorAll('#tab-negocio .mpane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('#tab-negocio .mb').forEach(b => b.classList.remove('on'));
+  document.getElementById('n-' + id).classList.add('on');
+  btn.classList.add('on');
+}
+
+
+
+window.addEventListener('load', function() {
+  var canvas = document.getElementById('chartAcum');
+  if (canvas) {
+    new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: ['Abril', 'Mayo', 'Junio'],
+        datasets: [
+          { label: 'Inversión', data: [10275, 10586, 11443], backgroundColor: '#0e0e0e', borderRadius: 4, borderSkipped: false },
+          { label: 'Facturación Google', data: [71300, 59200, 76800], backgroundColor: '#1a56db', borderRadius: 4, borderSkipped: false },
+          { label: 'Facturación Meta', data: [700, 21900, 29000], backgroundColor: '#c0345a', borderRadius: 4, borderSkipped: false }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx) { return ' ' + ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString('en-US'); } } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 12, family: 'DM Sans, sans-serif' }, color: '#4a4a4a' } },
+          y: { grid: { color: '#f0f0f0' }, ticks: { font: { size: 11, family: 'DM Sans, sans-serif' }, color: '#9a9a9a', callback: function(v) { return '$' + (v/1000).toFixed(0) + 'K'; } } }
+        }
+      }
+    });
+  }
+});
+
+</script>
+</body>
+</html>
