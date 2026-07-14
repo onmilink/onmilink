@@ -319,7 +319,7 @@ function renderMetaSection(d, p) {
       <div class="kpi-cell"><div class="kpi-l">AOV Meta</div><div class="kpi-v">${m.compras?fmtEur(m.valConv/m.compras):'—'}</div><div class="kpi-s">&nbsp;</div></div>
       <div class="kpi-cell"><div class="kpi-l">Coste/compra</div><div class="kpi-v">${fmtEur(m.cpa)}</div><div class="kpi-s">&nbsp;</div></div>
     </div>
-    <div class="kpi-row kpi-row-3">
+    <div class="kpi-row kpi-row-3" style="border-top:1px solid var(--border)">
       <div class="kpi-cell"><div class="kpi-l">ROAS Meta</div><div class="kpi-v">${m.roasMeta!=null?fmt(m.roasMeta):'—'}</div><div class="kpi-s">&nbsp;</div></div>
       <div class="kpi-cell"><div class="kpi-l">ROAS Negocio</div><div class="kpi-v">${fmt(m.roasNeg)}</div><div class="kpi-s">ventas online / inversión</div></div>
       <div class="kpi-cell"><div class="kpi-l">ROAS Neto</div><div class="kpi-v">${fmt(m.roasNeto)}</div><div class="kpi-s">ventas netas / inversión</div></div>
