@@ -194,7 +194,8 @@ const WEEKS = {
         { subject: 'Summer Sales (AUS & NZ)', fecha: '7 jul · 10:00', dest: 1681, apertura: 57.18, clics: 4.69, pedidos: 6, ingresos: 928.58 },
         { subject: 'Woman Collections', fecha: '10 jul · 10:30', dest: 1594, apertura: 53.65, clics: 0.91, pedidos: 2, ingresos: 292.73 },
         { subject: 'Hulu prints + sales (AUS & NZ)', fecha: '12 jul · 20:00', dest: 1267, apertura: 43.04, clics: 1.73, pedidos: 1, ingresos: 81.68 }
-      ]
+      ],
+      popup: { nombre: 'POP UP (ONMI)', ingresos: 2000, tasaEnvio: 2.17, envios: 97, formularioVisto: 4500 }
     },
     ecomm: {
       brutas: 15258.76, descuentos: 1592.82, devoluciones: 1296.92, netas: 12369.02,
@@ -355,6 +356,17 @@ function renderMailSection(d) {
     <div class="mail-total-cell"><div class="mtc-l">Apertura media</div><div class="mtc-v">${fmtPct(avgApertura)}</div><div class="mtc-s">promedio ${mail.envios.length} envíos</div></div>
     <div class="mail-total-cell"><div class="mtc-l">Ingresos por envío</div><div class="mtc-v">${mail.envios.length?fmtEur(totalIngresos/mail.envios.length):'—'}</div><div class="mtc-s">media quincena</div></div>
   </div>`;
+  if (mail.popup) {
+    const p=mail.popup;
+    html+=`<div class="eco-box" style="margin-top:12px"><div class="eco-box-title">Pop-up de registro · ${p.nombre}</div>
+      <div class="mail-total-grid" style="grid-template-columns:repeat(4,1fr);border:none;background:transparent;gap:0">
+        <div class="mail-total-cell" style="border:1px solid var(--border)"><div class="mtc-l">Ingresos atribuidos</div><div class="mtc-v" style="color:var(--green)">${fmtEur(p.ingresos)}</div><div class="mtc-s">&nbsp;</div></div>
+        <div class="mail-total-cell" style="border:1px solid var(--border)"><div class="mtc-l">Tasa de envío</div><div class="mtc-v">${fmtPct(p.tasaEnvio)}</div><div class="mtc-s">Bueno</div></div>
+        <div class="mail-total-cell" style="border:1px solid var(--border)"><div class="mtc-l">Envíos</div><div class="mtc-v">${p.envios}</div><div class="mtc-s">&nbsp;</div></div>
+        <div class="mail-total-cell" style="border:1px solid var(--border)"><div class="mtc-l">Formulario visto</div><div class="mtc-v">${(p.formularioVisto/1000).toFixed(1)}k</div><div class="mtc-s">&nbsp;</div></div>
+      </div>
+    </div>`;
+  }
   html+=`</div></div>`;
   return html;
 }
