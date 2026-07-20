@@ -239,15 +239,28 @@ const WEEKS = {
   q2: {
     label: 'Q2', range: '13–19 jul 2026 · semana 1/2',
     puntos: [
-      { cat: 'Meta Ads', texto: '—' },
+      { cat: 'Meta Ads', texto: 'FLASH_SALES lidera con ROAS 3.19x y 15 compras sobre 923€ de inversión total. WOMAN LAUNCH con ROAS bajo (1.59x) — pendiente revisión de creativos. ROAS negocio 6.96x / ROAS neto 5.51x.' },
       { cat: 'Email', texto: '—' },
       { cat: 'Shopify', texto: 'Datos parciales: primera semana de la quincena (13–19 jul). Pendiente semana 20–26 jul para consolidar.' },
       { cat: 'Próximos pasos', texto: '—' }
     ],
     meta: {
-      inv: null, compras: null, valConv: null, cpa: null,
-      roasMeta: null, roasNeg: null, roasNeto: null,
-      campanas: []
+      inv: 923.33, compras: 19, valConv: 2187.76, cpa: 48.60,
+      roasMeta: 2.37, roasNeg: 6.96, roasNeto: 5.51,
+      campanas: [
+        { nombre: 'FLASH_SALES', tipo: 'main', cat: 'venta',
+          desc: 'Campaña de rebajas. Mejor rendimiento de la cuenta con ROAS 3.19x y 15 compras. Escalada de 20 a 50€ durante la semana.',
+          inv: 505.35, compras: 15, val: 1610.68, roas: 3.19, ctr: 2.09, cpm: 13.89 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
+          desc: 'Campaña de venta Woman Collection. ROAS bajo (1.59x) con CPA elevado. Pendiente revisión de creativos.',
+          inv: 320.00, compras: 3, val: 508.94, roas: 1.59, ctr: 3.01, cpm: 16.58 },
+        { nombre: 'VTA - MMxSN - 28MAYO2026', tipo: 'main', cat: 'venta',
+          desc: 'Campaña colección MM x Sí Noticias. ROAS por debajo de breakeven. Inversión residual.',
+          inv: 69.84, compras: 1, val: 68.14, roas: 0.98, ctr: 2.42, cpm: 9.77 },
+        { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
+          desc: 'Campaña de captación de seguidores en Instagram. Sin objetivo de compra.',
+          inv: 28.14, compras: 0, val: 0, roas: 0, ctr: 7.24, cpm: 3.98 }
+      ]
     },
     creatividades: [],
     mail: {
