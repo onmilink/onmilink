@@ -269,6 +269,12 @@ const WEEKS = {
         { subject: 'Swimwear',          fecha: '16 jul · 10:30', dest: 1620, apertura: 54.29, clics: 1.58, pedidos: 2, ingresos: 145.92 },
         { subject: 'Barcos woman',      fecha: '19 jul · 10:30', dest: 1399, apertura: 46.90, clics: 0.70, pedidos: 0, ingresos: 0 }
       ],
+      flujos: [
+        { nombre: 'Flow Bienvenida Mujer',     estado: 'Activo',   ingresos: 261.00 },
+        { nombre: 'Carrito abandonado',        estado: 'Activo',   ingresos: 204.08 },
+        { nombre: 'Serie bienvenida email',    estado: 'Borrador', ingresos: 68.14 },
+        { nombre: 'Flow Bienvenida Kids',      estado: 'Activo',   ingresos: 0 }
+      ],
       popup: { nombre: 'POP UP (ONMI)', ingresos: 891, tasaEnvio: 1.90, envios: 62, formularioVisto: 3300,
                prev: { rango: '29 jun–12 jul 2026', ingresos: 2000, tasaEnvio: 2.17, envios: 97, formularioVisto: 4500 } }
     },
@@ -440,6 +446,25 @@ function renderMailSection(d) {
         <div class="mail-total-cell" style="border:1px solid var(--border)"><div class="mtc-l">Formulario visto</div><div class="mtc-v">${(p.formularioVisto/1000).toFixed(1)}k</div><div class="mtc-s">${pdelta(p.formularioVisto,pr?.formularioVisto)}</div></div>
       </div>
     </div>`;
+  }
+  if (mail.flujos && mail.flujos.length) {
+    const totalFlujos = mail.flujos.reduce((s,f)=>s+(f.ingresos||0),0);
+    html+=`<div class="eco-box" style="margin-top:12px"><div class="eco-box-title">Flujos automatizados</div>
+      <table class="prod-tbl" style="width:100%">
+        <thead><tr><th style="text-align:left">Flujo</th><th>Estado</th><th style="text-align:right">Ingresos</th></tr></thead>
+        <tbody>`;
+    mail.flujos.forEach(f=>{
+      const estadoColor = f.estado==='Activo' ? 'color:var(--green)' : 'color:var(--muted)';
+      html+=`<tr>
+        <td style="font-size:11px">${f.nombre}</td>
+        <td style="text-align:center;font-size:10px;font-family:'DM Mono',monospace;${estadoColor}">${f.estado}</td>
+        <td style="text-align:right">${f.ingresos>0?fmtEur(f.ingresos):'—'}</td>
+      </tr>`;
+    });
+    html+=`</tbody><tfoot><tr>
+      <td colspan="2" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em">Total flujos</td>
+      <td style="text-align:right;font-weight:600;color:var(--green)">${fmtEur(totalFlujos)}</td>
+    </tr></tfoot></table></div>`;
   }
   html+=`</div></div>`;
   return html;
