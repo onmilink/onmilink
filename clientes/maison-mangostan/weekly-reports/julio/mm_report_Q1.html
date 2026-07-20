@@ -240,7 +240,7 @@ const WEEKS = {
     label: 'Q2', range: '13–19 jul 2026 · semana 1/2',
     puntos: [
       { cat: 'Meta Ads', texto: 'FLASH_SALES lidera con ROAS 3.19x y 15 compras sobre 923€ de inversión total. WOMAN LAUNCH con ROAS bajo (1.59x) — pendiente revisión de creativos. ROAS negocio 6.96x / ROAS neto 5.51x.' },
-      { cat: 'Email', texto: '—' },
+      { cat: 'Email', texto: '3 envíos. Kids Collections lidera en ingresos (704,68€). Apertura media del 51,97%. Barcos woman sin conversiones en las primeras horas.' },
       { cat: 'Shopify', texto: 'Datos parciales: primera semana de la quincena (13–19 jul). Pendiente semana 20–26 jul para consolidar.' },
       { cat: 'Próximos pasos', texto: '—' }
     ],
@@ -264,7 +264,11 @@ const WEEKS = {
     },
     creatividades: [],
     mail: {
-      envios: [],
+      envios: [
+        { subject: 'Kids Collections',  fecha: '14 jul · 10:30', dest: 1626, apertura: 54.71, clics: 1.31, pedidos: 2, ingresos: 704.68 },
+        { subject: 'Swimwear',          fecha: '16 jul · 10:30', dest: 1620, apertura: 54.29, clics: 1.58, pedidos: 2, ingresos: 145.92 },
+        { subject: 'Barcos woman',      fecha: '19 jul · 10:30', dest: 1399, apertura: 46.90, clics: 0.70, pedidos: 0, ingresos: 0 }
+      ],
       popup: { nombre: 'POP UP (ONMI)', ingresos: 891, tasaEnvio: 1.90, envios: 62, formularioVisto: 3300,
                prev: { rango: '29 jun–12 jul 2026', ingresos: 2000, tasaEnvio: 2.17, envios: 97, formularioVisto: 4500 } }
     },
