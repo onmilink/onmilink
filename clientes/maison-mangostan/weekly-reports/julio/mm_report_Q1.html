@@ -235,6 +235,41 @@ const WEEKS = {
         { nombre: 'BARCOS EMBROIDERED SHIRT BLUE',        vistas: 28, uds: 4, conv: 14.3 }
       ]
     }
+  },
+  q2: {
+    label: 'Q2', range: '13–19 jul 2026 · semana 1/2',
+    puntos: [
+      { cat: 'Meta Ads', texto: '—' },
+      { cat: 'Email', texto: '—' },
+      { cat: 'Shopify', texto: 'Datos parciales: primera semana de la quincena (13–19 jul). Pendiente semana 20–26 jul para consolidar.' },
+      { cat: 'Próximos pasos', texto: '—' }
+    ],
+    meta: {
+      inv: null, compras: null, valConv: null, cpa: null,
+      roasMeta: null, roasNeg: null, roasNeto: null,
+      campanas: []
+    },
+    creatividades: [],
+    mail: {
+      envios: [],
+      popup: null
+    },
+    ecomm: {
+      brutas: 6468.61, descuentos: 704.08, devoluciones: 689.76, netas: 5090.77,
+      envio: 395.88, devCargos: 108.00, impuestos: 831.22, totales: 6425.87,
+      pedidos: 46, aov: 127.27,
+      sesiones: 3605, conv: 0.94, carrito: 6.74, pago: 2.35, compra: 0.94,
+      habituales: 36.95, cartSes: 243, pagoSes: 85, compraSes: 34,
+      topVentas: [
+        { nombre: 'BEVERLY FRINGE PANTS DEEP LAVENDER', val: null },
+        { nombre: 'TROPIC STRIPED PANTS PINK', val: null },
+        { nombre: 'VINTAGE FLOWERS PATCHWORK PANTS MINT', val: 210 },
+        { nombre: 'BARCOS SKIRT WHITE', val: 201 },
+        { nombre: 'TROPIC RUFFLES STRIPES TOP PINK', val: 192 }
+      ],
+      topPaginas: [],
+      topProductos: []
+    }
   }
 };
 
@@ -310,6 +345,7 @@ function generateSummary(d, p) {
 // ============================================================
 function renderMetaSection(d, p) {
   const m=d.meta, pm=p?.meta;
+  if (m.inv==null && !m.campanas.length) return `<div class="section-block mb24"><div class="section-block-hdr meta"><div class="section-block-title">Meta Ads · ${d.range}</div></div><div class="section-block-body"><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding:8px 0">Datos pendientes.</div></div></div>`;
   let html=`<div class="section-block mb24"><div class="section-block-hdr meta"><div class="section-block-title">Meta Ads · ${d.range}</div></div><div class="section-block-body">`;
   html+=`<div class="kpi-strip mb16">
     <div class="kpi-row" style="grid-template-columns:repeat(5,minmax(0,1fr))">
