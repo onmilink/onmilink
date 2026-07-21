@@ -352,7 +352,8 @@ const WEEKS = {
         { nombre: 'Flow Bienvenida Kids',   estado: 'Activo',   ingresos: 0      }
       ],
       popup: { nombre: 'POP UP (ONMI)', ingresos: 2891, tasaEnvio: 2.04, envios: 159, formularioVisto: 7800,
-               prev: { rango: '1–15 jun 2026', ingresos: 1400, tasaEnvio: 0.90, envios: 44, formularioVisto: 4900 } }
+               prev: { rango: '1–15 jun 2026', ingresos: 1400, tasaEnvio: 0.90, envios: 44, formularioVisto: 4900 } },
+      soloResumen: true
     },
     ecomm: {
       brutas: 21727.37, descuentos: 2296.90, devoluciones: 1986.68, netas: 17459.79,
@@ -478,6 +479,18 @@ function renderMetaSection(d, p) {
 function renderMailSection(d) {
   const mail=d.mail;
   let html=`<div class="section-block mb24"><div class="section-block-hdr email"><div class="section-block-title">Email Marketing · ${d.range}</div></div><div class="section-block-body">`;
+  if (mail.soloResumen) {
+    const totalIng=mail.envios.reduce((s,e)=>s+(e.ingresos||0),0);
+    const avgAp=mail.envios.length?mail.envios.reduce((s,e)=>s+e.apertura,0)/mail.envios.length:0;
+    const totalFlujos=(mail.flujos||[]).reduce((s,f)=>s+(f.ingresos||0),0);
+    html+=`<div class="mail-total-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="mail-total-cell"><div class="mtc-l">Ingresos newsletter</div><div class="mtc-v" style="color:var(--green)">${fmtEur(totalIng)}</div><div class="mtc-s">${mail.envios.length} envíos · ${mail.envios.reduce((s,e)=>s+(e.pedidos||0),0)} pedidos</div></div>
+      <div class="mail-total-cell"><div class="mtc-l">Apertura media</div><div class="mtc-v">${fmtPct(avgAp)}</div><div class="mtc-s">promedio ${mail.envios.length} envíos</div></div>
+      <div class="mail-total-cell"><div class="mtc-l">Ingresos flujos</div><div class="mtc-v" style="color:var(--green)">${fmtEur(totalFlujos)}</div><div class="mtc-s">${(mail.flujos||[]).filter(f=>f.ingresos>0).length} flujos activos</div></div>
+    </div>`;
+    html+=`</div></div>`;
+    return html;
+  }
   const cols=mail.envios.length===2?'1fr 1fr':mail.envios.length>=3?'1fr 1fr 1fr':'1fr';
   html+=`<div class="mail-cards" style="grid-template-columns:${cols}">`;
   mail.envios.forEach(mv=>{
