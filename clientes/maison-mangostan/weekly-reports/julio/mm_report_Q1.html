@@ -428,7 +428,9 @@ function generateSummary(d, p) {
   if (e.totales>0) {
     const topProd = (e.topVentas||[])[0] || null;
    lines.push(`Ecommerce canal propio: ${fmtEur(e.brutas)} brutas · ${fmtEur(e.netas)} netas.`);
-    if (topProd) lines.push(`Producto más vendido: ${topProd.nombre}${topProd.val!=null?' · '+fmtEur(topProd.val):''}`);\n    const topConv=(e.topProductos||[]).reduce((best,p)=>(!best||(p.uds||0)>(best.uds||0))?p:best,null);\n    if (topConv&&topConv.uds) lines.push(`Mayor tasa de conversión: ${topConv.nombre} · ${topConv.uds} uds. · ${fmtPct(topConv.conv)} conv. rate.`);
+    if (topProd) lines.push(`Producto más vendido: ${topProd.nombre}${topProd.val!=null?' · '+fmtEur(topProd.val):''}`);
+    const topConv=(e.topProductos||[]).reduce((best,p)=>(!best||(p.uds||0)>(best.uds||0))?p:best,null);
+    if (topConv&&topConv.uds) lines.push(`Mayor tasa de conversión: ${topConv.nombre} · ${topConv.uds} uds. · ${fmtPct(topConv.conv)} conv. rate.`);
     if (m.inv>0) lines.push(`ROAS Negocio ${fmt(m.roasNeg)}x · ROAS Neto ${fmt(m.roasNeto)}x.`);
   }
   const totalEmail=(mail.envios||[]).reduce((s,env)=>s+(env.ingresos||0),0);
