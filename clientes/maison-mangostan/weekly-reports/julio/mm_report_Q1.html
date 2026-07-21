@@ -585,14 +585,16 @@ function renderEcommSection(d, p) {
   html+=`<div class="eco-2col" style="align-items:start">
     <div class="eco-box"><div class="eco-box-title">Top ventas por producto</div><table class="prod-tbl" style="table-layout:fixed;width:100%"><thead><tr><th>Producto</th><th class="r" style="width:120px">Ingresos</th></tr></thead><tbody>`;
   (e.topVentas||[]).forEach(tv=>{ html+=`<tr><td>${tv.nombre}</td><td class="r">${tv.val!=null?fmtEur(tv.val):'—'}</td></tr>`; });
-  html+=`</tbody></table></div>
-    <div class="eco-box"><div class="eco-box-title">Top productos · tasa de venta</div><table class="prod-tbl" style="table-layout:fixed;width:100%"><thead><tr><th style="width:52%">Producto</th><th class="r" style="width:14%">Visitas</th><th class="r" style="width:14%">Uds.</th><th class="r" style="width:20%">Conv.</th></tr></thead><tbody>`;
-  (e.topProductos||[]).forEach(tp=>{
-    const cc=tp.conv!=null&&tp.conv>=50?'green-val':tp.conv!=null&&tp.conv<20?'amber-val':'';
-    html+=`<tr><td>${tp.nombre}</td><td class="r">${tp.vistas!=null?tp.vistas:'—'}</td><td class="r">${tp.uds!=null?tp.uds:'—'}</td><td class="r"><span class="${cc}">${tp.conv!=null?fmtPct(tp.conv):'—'}</span></td></tr>`;
-  });
-  html+=`</tbody></table></div>
-  </div>`;
+  html+=`</tbody></table></div>`;
+  if ((e.topProductos||[]).length) {
+    html+=`<div class="eco-box"><div class="eco-box-title">Top productos · tasa de venta</div><table class="prod-tbl" style="table-layout:fixed;width:100%"><thead><tr><th style="width:52%">Producto</th><th class="r" style="width:14%">Visitas</th><th class="r" style="width:14%">Uds.</th><th class="r" style="width:20%">Conv.</th></tr></thead><tbody>`;
+    (e.topProductos||[]).forEach(tp=>{
+      const cc=tp.conv!=null&&tp.conv>=50?'green-val':tp.conv!=null&&tp.conv<20?'amber-val':'';
+      html+=`<tr><td>${tp.nombre}</td><td class="r">${tp.vistas!=null?tp.vistas:'—'}</td><td class="r">${tp.uds!=null?tp.uds:'—'}</td><td class="r"><span class="${cc}">${tp.conv!=null?fmtPct(tp.conv):'—'}</span></td></tr>`;
+    });
+    html+=`</tbody></table></div>`;
+  }
+  html+=`</div>`;
   html+=`</div></div>`;
   return html;
 }
