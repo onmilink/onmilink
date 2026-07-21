@@ -160,7 +160,7 @@ a{color:inherit;text-decoration:none;}
 <script>
 const WEEKS = {
   q1: {
-    label: 'Q1', range: '29 jun–12 jul 2026',
+    label: 'CW1', range: '29 jun–12 jul 2026',
     puntos: [
       { cat: 'Meta Ads', texto: 'Tres campañas activas. WOMAN LAUNCH lidera en ROAS (8.83x) con 14 compras. FLASH SALES incluye creativos de outlet previos al lanzamiento oficial, lo que puede estar diluyendo el rendimiento agregado de los primeros días.' },
       { cat: 'Email', texto: '5 envíos con apertura media del 54,46%. Uvas Mesh Set lidera en ingresos (977 €). Summer Sales (AUS & NZ) con el mayor CTR (4.69%) y más pedidos (6). Último envío con caída notable en apertura (43%).' },
@@ -237,7 +237,7 @@ const WEEKS = {
     }
   },
   q2: {
-    label: 'Q2', range: '13–19 jul 2026 · semana 1/2',
+    label: 'CW2', range: '13–19 jul 2026 · media quincena',
     puntos: [
       { cat: 'Meta Ads', texto: 'FLASH_SALES lidera con ROAS 3.19x y 15 compras sobre 923€ de inversión total. WOMAN LAUNCH con ROAS bajo (1.59x) — pendiente revisión de creativos. ROAS negocio 6.96x / ROAS neto 5.51x.' },
       { cat: 'Email', texto: '3 envíos. Kids Collections lidera en ingresos (704,68€). Apertura media del 51,97%. Barcos woman sin conversiones en las primeras horas.' },
@@ -306,285 +306,69 @@ const WEEKS = {
           { nombre: 'BIRDS EMBROIDERED SHORTS PEACH',        vistas:  1, uds: 0, conv:  0.0 }
         ]
     }
+  },
+  acumulado: {
+    label: 'Acumulado', range: '29 jun–19 jul 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '61 compras sobre 1.732€ de inversión total. FLASH_SALES lidera en volumen (37 compras, ROAS 4.30x). WOMAN LAUNCH mejor ROAS acumulado (5.14x). MMxSN con ROAS 7.10x sobre inversión residual.' },
+      { cat: 'Email', texto: '8 envíos con apertura media del 53,4%. Uvas Mesh Set con mayor ingreso individual (977€). Total newsletter: 3.380€ · Flujos: 533€ (Bienvenida Mujer + Carrito abandonado).' },
+      { cat: 'Shopify', texto: 'Ventas netas acumuladas: 17.459€ sobre 139 pedidos. AOV ponderado: 160,71€. Barcos Skirt White y Beverly Fringe Pants lideran en ingresos acumulados.' },
+      { cat: 'Próximos pasos', texto: 'Consolidar datos segunda semana Q2 (20–26 jul). Revisión de ROAS en Meta y decisión de presupuesto. Activación flujo checkout. Test A/B pop-up.' }
+    ],
+    meta: {
+      inv: 1732.40, compras: 61, valConv: 8389.78, cpa: 28.40,
+      roasMeta: 4.84, roasNeg: 12.90, roasNeto: 10.08,
+      campanas: [
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
+          desc: 'Acumulado CW1 + CW2. Mejor ROAS ponderado de campañas de venta (5.14x).',
+          inv: 627.63, compras: 17, val: 3223.79, roas: 5.14, ctr: 3.40, cpm: 18.18 },
+        { nombre: 'FLASH_SALES', tipo: 'main', cat: 'venta',
+          desc: 'Acumulado CW1 + CW2. Mayor volumen de compras (37). ROAS afectado por bajada en CW2.',
+          inv: 884.63, compras: 37, val: 3802.70, roas: 4.30, ctr: 2.48, cpm: 12.40 },
+        { nombre: 'VTA - MMxSN - 28MAYO2026', tipo: 'main', cat: 'venta',
+          desc: 'Acumulado CW1 + CW2. ROAS 7.10x con inversión residual.',
+          inv: 192.00, compras: 7, val: 1363.29, roas: 7.10, ctr: 2.73, cpm: 9.99 },
+        { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
+          desc: 'Solo CW2. Captación de seguidores sin objetivo de compra.',
+          inv: 28.14, compras: 0, val: 0, roas: 0, ctr: 7.24, cpm: 3.98 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Birds Patchwork',              fecha: '1 jul · 10:30', dest: 1731, apertura: 58.44, clics: 1.72, pedidos: 2, ingresos: 249.68 },
+        { subject: 'Uvas Mesh Set',                fecha: '5 jul · 20:00', dest: 1718, apertura: 58.00, clics: 1.22, pedidos: 3, ingresos: 977.06 },
+        { subject: 'Summer Sales (AUS & NZ)',       fecha: '7 jul · 10:00', dest: 1681, apertura: 57.18, clics: 4.69, pedidos: 6, ingresos: 928.58 },
+        { subject: 'Woman Collections',            fecha: '10 jul · 10:30', dest: 1594, apertura: 53.65, clics: 0.91, pedidos: 2, ingresos: 292.73 },
+        { subject: 'Hulu prints + sales (AUS & NZ)',fecha: '12 jul · 20:00', dest: 1267, apertura: 43.04, clics: 1.73, pedidos: 1, ingresos: 81.68 },
+        { subject: 'Kids Collections',             fecha: '14 jul · 10:30', dest: 1626, apertura: 54.71, clics: 1.31, pedidos: 2, ingresos: 704.68 },
+        { subject: 'Swimwear',                     fecha: '16 jul · 10:30', dest: 1620, apertura: 54.29, clics: 1.58, pedidos: 2, ingresos: 145.92 },
+        { subject: 'Barcos woman',                 fecha: '19 jul · 10:30', dest: 1399, apertura: 46.90, clics: 0.70, pedidos: 0, ingresos: 0 }
+      ],
+      flujos: [
+        { nombre: 'Flow Bienvenida Mujer',  estado: 'Activo',   ingresos: 261.00 },
+        { nombre: 'Carrito abandonado',     estado: 'Activo',   ingresos: 204.08 },
+        { nombre: 'Serie bienvenida email', estado: 'Borrador', ingresos: 68.14 },
+        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo',   ingresos: 0 }
+      ],
+      popup: { nombre: 'POP UP (ONMI)', ingresos: 2891, tasaEnvio: 2.04, envios: 159, formularioVisto: 7800,
+               prev: { rango: '1–15 jun 2026', ingresos: 1400, tasaEnvio: 0.90, envios: 44, formularioVisto: 4900 } }
+    },
+    ecomm: {
+      brutas: 21727.37, descuentos: 2296.90, devoluciones: 1986.68, netas: 17459.79,
+      envio: 1329.33, devCargos: 220.55, impuestos: 3072.56, totales: 22339.09,
+      pedidos: 139, aov: 160.71,
+      sesiones: 9884, conv: 1.08, carrito: 7.16, pago: 2.72, compra: 1.08,
+      habituales: 35.97, cartSes: 708, pagoSes: 269, compraSes: 107,
+      topVentas: [
+        { nombre: 'BARCOS SKIRT WHITE',                     val: 1141 },
+        { nombre: 'BEVERLY FRINGE PANTS DEEP LAVENDER',     val: 1084 },
+        { nombre: 'BARCOS DRESS RED',                       val: 574 },
+        { nombre: 'BARCOS BOW BIKINI RED',                  val: 524 },
+        { nombre: 'BIRDS PATCHWORK SKIRT BLUSH',            val: 510 }
+      ],
+      topPaginas: [],
+      topProductos: []
+    }
   }
 };
-
-// ============================================================
-// UTILS
-// ============================================================
-function fmtEur(v) {
-  if (v == null || v === 0) return '—';
-  return v.toLocaleString('es-ES', {style:'currency',currency:'EUR',minimumFractionDigits:2});
-}
-function fmt(v, dec=2) {
-  if (v == null) return '—';
-  return v.toLocaleString('es-ES', {minimumFractionDigits:dec,maximumFractionDigits:dec});
-}
-function fmtPct(v) { return v == null ? '—' : fmt(v)+'%'; }
-function delta(cur, prev, higherBetter=true) {
-  if (prev == null || prev === 0 || cur == null) return '<span style="color:var(--muted)">—</span>';
-  const d = ((cur-prev)/Math.abs(prev))*100;
-  const pos = higherBetter ? d>=0 : d<=0;
-  return `<span class="${pos?'delta-pos':'delta-neg'}">${d>=0?'+':''}${fmt(d,1)}%</span>`;
-}
-function roasClass(r) {
-  if (r==null) return '';
-  return r>=2?'roas-high':r<1?'roas-low':'';
-}
-
-// ============================================================
-// SUMMARY
-// ============================================================
-function renderProximosPasos(d) {
-  const pt = (d.puntos || []).find(p => p.cat === 'Próximos pasos');
-  if (!pt) return '';
-  const items = pt.texto.split(/(?<=\.)\s+/).filter(Boolean);
-  let html = `<div class="section-block mb24">
-    <div class="section-block-hdr" style="background:#111317;border-bottom-color:rgba(255,255,255,0.08);">
-      <div class="section-block-title" style="color:#fff;">Próximos pasos · ${d.range}</div>
-    </div>
-    <div class="section-block-body">
-      <div style="display:flex;flex-direction:column;gap:8px;">`;
-  items.forEach(item => {
-    html += `<div style="font-size:12px;color:var(--text);line-height:1.6;padding-left:12px;border-left:2px solid var(--border);">${item}</div>`;
-  });
-  html += `</div></div></div>`;
-  return html;
-}
-
-function generateSummary(d, p) {
-  const m=d.meta, e=d.ecomm, mail=d.mail;
-  const tags=[], lines=[];
-  if (m.roasMeta) tags.push({label:`ROAS Meta ${fmt(m.roasMeta)}x`,pos:m.roasMeta>=2});
-  if (m.inv>0) {
-    tags.push({label:`Inv. Meta ${fmtEur(m.inv)}`,pos:true});
-    lines.push(`Inversión Meta: ${fmtEur(m.inv)} · ${m.compras} compras · CPA ${fmtEur(m.cpa)}.`);
-  }
-  if (e.pedidos>0) tags.push({label:`${e.pedidos} pedidos Shopify`,pos:true});
-  if (e.totales>0) {
-    const topProd = (e.topProductos||[]).reduce((best,p) => (!best || (p.uds||0)>(best.uds||0)) ? p : best, null);
-    lines.push(`Ecommerce canal propio: ${fmtEur(e.brutas)} brutas · ${fmtEur(e.netas)} netas.`);
-    if (topProd && topProd.uds) lines.push(`Producto más vendido: ${topProd.nombre} · ${topProd.uds} uds. · ${fmtPct(topProd.conv)} conv. rate.`);
-    if (m.inv>0) lines.push(`ROAS Negocio ${fmt(m.roasNeg)}x · ROAS Neto ${fmt(m.roasNeto)}x.`);
-  }
-  const totalEmail=(mail.envios||[]).reduce((s,env)=>s+(env.ingresos||0),0);
-  if (totalEmail>0) {
-    tags.push({label:`Email ${fmtEur(totalEmail)}`,pos:true});
-    lines.push(`Email Marketing: ${fmtEur(totalEmail)} en ${mail.envios.length} envíos · ${mail.envios.reduce((s,e)=>s+(e.pedidos||0),0)} pedidos.`);
-  }
-  if (!tags.length) return `<div class="summary mb32"><div class="summary-title">Resumen de quincena</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)">Sin datos.</div></div>`;
-  return `<div class="summary mb32"><div class="summary-title">Resumen de quincena</div><div class="summary-tags">${tags.map(t=>`<span class="summary-tag ${t.pos?'pos':'neg'}">${t.label}</span>`).join('')}</div><div class="summary-lines">${lines.map(l=>`<div class="summary-line">${l}</div>`).join('')}</div></div>`;
-}
-
-// ============================================================
-// META ADS
-// ============================================================
-function renderMetaSection(d, p) {
-  const m=d.meta, pm=p?.meta;
-  if (m.inv==null && !m.campanas.length) return `<div class="section-block mb24"><div class="section-block-hdr meta"><div class="section-block-title">Meta Ads · ${d.range}</div></div><div class="section-block-body"><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding:8px 0">Datos pendientes.</div></div></div>`;
-  let html=`<div class="section-block mb24"><div class="section-block-hdr meta"><div class="section-block-title">Meta Ads · ${d.range}</div></div><div class="section-block-body">`;
-  html+=`<div class="kpi-strip mb16">
-    <div class="kpi-row" style="grid-template-columns:repeat(5,minmax(0,1fr))">
-      <div class="kpi-cell"><div class="kpi-l">Inversión</div><div class="kpi-v">${fmtEur(m.inv)}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">Compras</div><div class="kpi-v">${m.compras||'—'}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">Valor conv.</div><div class="kpi-v">${fmtEur(m.valConv)}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">AOV Meta</div><div class="kpi-v">${m.compras?fmtEur(m.valConv/m.compras):'—'}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">Coste/compra</div><div class="kpi-v">${fmtEur(m.cpa)}</div><div class="kpi-s">&nbsp;</div></div>
-    </div>
-    <div class="kpi-row kpi-row-3" style="border-top:1px solid var(--border)">
-      <div class="kpi-cell"><div class="kpi-l">ROAS Meta</div><div class="kpi-v">${m.roasMeta!=null?fmt(m.roasMeta):'—'}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">ROAS Negocio</div><div class="kpi-v">${fmt(m.roasNeg)}</div><div class="kpi-s">ventas online / inversión</div></div>
-      <div class="kpi-cell"><div class="kpi-l">ROAS Neto</div><div class="kpi-v">${fmt(m.roasNeto)}</div><div class="kpi-s">ventas netas / inversión</div></div>
-    </div>
-  </div>`;
-  if (m.campanas.length) {
-    html+=`<div class="sec-label mb12">Campañas activas</div><table class="camp-table"><thead><tr><th>Campaña</th><th class="r">Inversión</th><th class="r">Compras</th><th class="r">Valor conv.</th><th class="r">ROAS</th><th class="r">CTR</th><th class="r">CPM</th></tr></thead><tbody>`;
-    m.campanas.forEach(c=>{
-      html+=`<tr><td><div class="camp-name">${c.nombre}</div>${c.desc?`<div class="camp-desc">${c.desc}</div>`:''}<div style="margin-top:5px"><span class="pill pill-main">venta</span></div></td><td class="r">${fmtEur(c.inv)}</td><td class="r">${c.compras!=null?c.compras:'—'}</td><td class="r">${c.val!=null?fmtEur(c.val):'—'}</td><td class="r"><span class="${roasClass(c.roas)}">${c.roas!=null?fmt(c.roas):'—'}</span></td><td class="r">${c.ctr!=null?fmtPct(c.ctr):'—'}</td><td class="r">${c.cpm!=null?fmtEur(c.cpm):'—'}</td></tr>`;
-    });
-    html+=`</tbody></table>`;
-  }
-  html+=`</div></div>`;
-  return html;
-}
-
-// ============================================================
-// EMAIL — solo newsletter
-// ============================================================
-function renderMailSection(d) {
-  const mail=d.mail;
-  let html=`<div class="section-block mb24"><div class="section-block-hdr email"><div class="section-block-title">Email Marketing · ${d.range}</div></div><div class="section-block-body">`;
-  const cols=mail.envios.length===2?'1fr 1fr':mail.envios.length>=3?'1fr 1fr 1fr':'1fr';
-  html+=`<div class="mail-cards" style="grid-template-columns:${cols}">`;
-  mail.envios.forEach(mv=>{
-    html+=`<div class="mail-card"><div class="mail-subject">${mv.subject}</div><div class="mail-from">${mv.fecha} · ${mv.dest.toLocaleString('es-ES')} dest.</div><div class="mail-metrics"><div><div class="mail-met-l">Apertura</div><div class="mail-met-v">${fmtPct(mv.apertura)}</div></div><div><div class="mail-met-l">Clics</div><div class="mail-met-v">${fmtPct(mv.clics)}</div></div><div><div class="mail-met-l">Pedidos</div><div class="mail-met-v">${mv.pedidos||'—'}</div></div><div><div class="mail-met-l">Ingresos</div><div class="mail-met-v">${fmtEur(mv.ingresos)}</div></div></div></div>`;
-  });
-  if (!mail.envios.length) html+=`<div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding:20px 0">Sin envíos en esta quincena.</div>`;
-  html+=`</div>`;
-  const totalIngresos=mail.envios.reduce((s,e)=>s+(e.ingresos||0),0);
-  const totalPedidos=mail.envios.reduce((s,e)=>s+(e.pedidos||0),0);
-  const avgApertura=mail.envios.length?mail.envios.reduce((s,e)=>s+e.apertura,0)/mail.envios.length:0;
-  html+=`<div class="mail-total-grid" style="margin-top:12px">
-    <div class="mail-total-cell"><div class="mtc-l">Total ingresos newsletter</div><div class="mtc-v" style="color:var(--green)">${fmtEur(totalIngresos)}</div><div class="mtc-s">${mail.envios.length} envíos · ${totalPedidos} pedidos</div></div>
-    <div class="mail-total-cell"><div class="mtc-l">Apertura media</div><div class="mtc-v">${fmtPct(avgApertura)}</div><div class="mtc-s">promedio ${mail.envios.length} envíos</div></div>
-    <div class="mail-total-cell"><div class="mtc-l">Ingresos por envío</div><div class="mtc-v">${mail.envios.length?fmtEur(totalIngresos/mail.envios.length):'—'}</div><div class="mtc-s">media quincena</div></div>
-  </div>`;
-  if (mail.popup) {
-    const p=mail.popup, pr=p.prev;
-    const pdelta=(cur,prv)=>{
-      if(!prv) return '';
-      const pct=((cur-prv)/Math.abs(prv)*100);
-      const sign=pct>=0?'+':'';
-      const cls=pct>=0?'color:var(--green)':'color:var(--red)';
-      return `<span style="${cls};font-size:10px">${sign}${pct.toFixed(0)}% vs ${pr.rango}</span>`;
-    };
-    html+=`<div class="eco-box" style="margin-top:12px"><div class="eco-box-title">Pop-up de registro · ${p.nombre}</div>
-      <div class="mail-total-grid" style="grid-template-columns:repeat(4,1fr);border:none;background:transparent;gap:0">
-        <div class="mail-total-cell" style="border:1px solid var(--border)"><div class="mtc-l">Ingresos atribuidos</div><div class="mtc-v" style="color:var(--green)">${fmtEur(p.ingresos)}</div><div class="mtc-s">${pdelta(p.ingresos,pr?.ingresos)}</div></div>
-        <div class="mail-total-cell" style="border:1px solid var(--border)"><div class="mtc-l">Tasa de envío</div><div class="mtc-v">${fmtPct(p.tasaEnvio)}</div><div class="mtc-s">${pdelta(p.tasaEnvio,pr?.tasaEnvio)}</div></div>
-        <div class="mail-total-cell" style="border:1px solid var(--border)"><div class="mtc-l">Envíos</div><div class="mtc-v">${p.envios}</div><div class="mtc-s">${pdelta(p.envios,pr?.envios)}</div></div>
-        <div class="mail-total-cell" style="border:1px solid var(--border)"><div class="mtc-l">Formulario visto</div><div class="mtc-v">${(p.formularioVisto/1000).toFixed(1)}k</div><div class="mtc-s">${pdelta(p.formularioVisto,pr?.formularioVisto)}</div></div>
-      </div>
-    </div>`;
-  }
-  if (mail.flujos && mail.flujos.length) {
-    const totalFlujos = mail.flujos.reduce((s,f)=>s+(f.ingresos||0),0);
-    html+=`<div class="eco-box" style="margin-top:12px"><div class="eco-box-title">Flujos automatizados</div>
-      <table class="prod-tbl" style="width:100%">
-        <thead><tr><th style="text-align:left">Flujo</th><th>Estado</th><th style="text-align:right">Ingresos</th></tr></thead>
-        <tbody>`;
-    mail.flujos.forEach(f=>{
-      const estadoColor = f.estado==='Activo' ? 'color:var(--green)' : 'color:var(--muted)';
-      html+=`<tr>
-        <td style="font-size:11px">${f.nombre}</td>
-        <td style="text-align:center;font-size:10px;font-family:'DM Mono',monospace;${estadoColor}">${f.estado}</td>
-        <td style="text-align:right">${f.ingresos>0?fmtEur(f.ingresos):'—'}</td>
-      </tr>`;
-    });
-    html+=`</tbody><tfoot><tr>
-      <td colspan="2" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em">Total flujos</td>
-      <td style="text-align:right;font-weight:600;color:var(--green)">${fmtEur(totalFlujos)}</td>
-    </tr></tfoot></table></div>`;
-  }
-  html+=`</div></div>`;
-  return html;
-}
-
-// ============================================================
-// ECOMMERCE
-// ============================================================
-function renderEcommSection(d, p) {
-  const e=d.ecomm, pe=p?.ecomm;
-  let html=`<div class="section-block mb24"><div class="section-block-hdr ecomm"><div class="section-block-title">Ecommerce · ${d.range}</div></div><div class="section-block-body">`;
-  html+=`<div class="eco-kpi-row mb12">
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas netas</div><div class="kpi-v">${fmtEur(e.netas)}</div><div class="kpi-s">${delta(e.netas,pe?.netas)} vs per. ant.</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas totales</div><div class="kpi-v">${fmtEur(e.totales)}</div><div class="kpi-s">${delta(e.totales,pe?.totales)} vs per. ant.</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Pedidos</div><div class="kpi-v">${e.pedidos||'—'}</div><div class="kpi-s">${delta(e.pedidos,pe?.pedidos)} vs per. ant.</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">AOV</div><div class="kpi-v">${fmtEur(e.aov)}</div><div class="kpi-s">${delta(e.aov,pe?.aov)} vs per. ant.</div></div>
-  </div>`;
-  html+=`<div class="eco-2col mb12">
-    <div class="eco-box"><div class="eco-box-title">Desglose facturación · excl. marketplace</div>
-      <table class="rev-table">
-        <tr><td>Ventas brutas</td><td>${fmtEur(e.brutas)}</td></tr>
-        <tr><td>Descuentos</td><td class="rev-neg">-${fmtEur(e.descuentos)}</td></tr>
-        <tr><td>Devoluciones</td><td class="rev-neg">-${fmtEur(e.devoluciones)}</td></tr>
-        <tr><td>Ventas netas</td><td>${fmtEur(e.netas)}</td></tr>
-        <tr><td>Cargos de envío</td><td>${fmtEur(e.envio)}</td></tr>
-        <tr><td>Cargos por devolución</td><td>${fmtEur(e.devCargos)}</td></tr>
-        <tr><td>Impuestos</td><td>${fmtEur(e.impuestos)}</td></tr>
-        <tr><td style="padding-top:8px">Ventas totales</td><td style="padding-top:8px">${fmtEur(e.totales)}</td></tr>
-      </table>
-    </div>
-    <div class="eco-box"><div class="eco-box-title">Datos de conversión</div>
-      <div class="conv-grid">
-        <div><div class="conv-l">Sesiones</div><div class="conv-v">${e.sesiones?e.sesiones.toLocaleString('es-ES'):'—'}</div><div class="conv-s">&nbsp;</div></div>
-        <div><div class="conv-l">Tasa conversión</div><div class="conv-v">${fmtPct(e.conv)}</div><div class="conv-s">&nbsp;</div></div>
-        <div><div class="conv-l">Añadido carrito</div><div class="conv-v">${fmtPct(e.carrito)}</div><div class="conv-s">${e.cartSes||'—'} ses.</div></div>
-        <div><div class="conv-l">Llegaron a pago</div><div class="conv-v">${fmtPct(e.pago)}</div><div class="conv-s">${e.pagoSes||'—'} ses.</div></div>
-        <div><div class="conv-l">Completaron compra</div><div class="conv-v">${fmtPct(e.compra)}</div><div class="conv-s">${e.compraSes||'—'} ses.</div></div>
-        <div><div class="conv-l">Clientes habituales</div><div class="conv-v">${fmtPct(e.habituales)}</div><div class="conv-s">&nbsp;</div></div>
-      </div>
-    </div>
-  </div>`;
-  html+=`<div class="eco-2col" style="align-items:start">
-    <div class="eco-box"><div class="eco-box-title">Top ventas por producto</div><table class="prod-tbl" style="table-layout:fixed;width:100%"><thead><tr><th>Producto</th><th class="r" style="width:120px">Ingresos</th></tr></thead><tbody>`;
-  (e.topVentas||[]).forEach(tv=>{ html+=`<tr><td>${tv.nombre}</td><td class="r">${tv.val!=null?fmtEur(tv.val):'—'}</td></tr>`; });
-  html+=`</tbody></table></div>
-    <div class="eco-box"><div class="eco-box-title">Top productos · tasa de venta</div><table class="prod-tbl" style="table-layout:fixed;width:100%"><thead><tr><th style="width:52%">Producto</th><th class="r" style="width:14%">Visitas</th><th class="r" style="width:14%">Uds.</th><th class="r" style="width:20%">Conv.</th></tr></thead><tbody>`;
-  (e.topProductos||[]).forEach(tp=>{
-    const cc=tp.conv!=null&&tp.conv>=50?'green-val':tp.conv!=null&&tp.conv<20?'amber-val':'';
-    html+=`<tr><td>${tp.nombre}</td><td class="r">${tp.vistas!=null?tp.vistas:'—'}</td><td class="r">${tp.uds!=null?tp.uds:'—'}</td><td class="r"><span class="${cc}">${tp.conv!=null?fmtPct(tp.conv):'—'}</span></td></tr>`;
-  });
-  html+=`</tbody></table></div>
-  </div>`;
-  html+=`</div></div>`;
-  return html;
-}
-
-// ============================================================
-// CREATIVIDADES
-// ============================================================
-function renderCreativasSection(d) {
-  const crs = d.creatividades || [];
-  if (!crs.length) return '';
-  let html = `<div class="section-block mb24">
-    <div class="section-block-hdr meta">
-      <div class="section-block-title">Rendimiento creativo · ${d.range}</div>
-      <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.5);letter-spacing:0.06em;">Solo campaña FLASH SALES · Summer Sale</div>
-    </div>
-    <div class="section-block-body">`;
-  // KPI summary row
-
-  html += `<div class="cr-grid">`;
-  crs.forEach((cr,i) => {
-    html += `<div class="cr-card">
-      <img class="cr-img" src="${cr.img}" alt="${cr.nombre}">
-      <div class="cr-body">
-        <div class="cr-name">${cr.nombre}</div>
-        <div class="cr-stats">
-          <div><div class="cr-s-l">Compras</div><div class="cr-s-v">${cr.compras}</div></div>
-          <div><div class="cr-s-l">Valor</div><div class="cr-s-v">${fmtEur(cr.val)}</div></div>
-          <div><div class="cr-s-l">ROAS</div><div class="cr-s-v ${roasClass(cr.roas)}">${fmt(cr.roas)}</div></div>
-          <div><div class="cr-s-l">Gasto</div><div class="cr-s-v">${fmtEur(cr.gasto)}</div></div>
-          <div><div class="cr-s-l">CPA</div><div class="cr-s-v">${fmtEur(cr.cpa)}</div></div>
-          <div><div class="cr-s-l">CTR único</div><div class="cr-s-v">${fmtPct(cr.ctr)}</div></div>
-        </div>
-      </div>
-    </div>`;
-  });
-  html += `</div></div></div>`;
-  return html;
-}
-
-// ============================================================
-// RENDER
-// ============================================================
-function renderWeek(wk, prevWk) {
-  const d=WEEKS[wk], p=prevWk?WEEKS[prevWk]:null;
-  document.getElementById('hdr-range').textContent=`Maison Mangostan · ${d.range}`;
-  let html=generateSummary(d,p);
-  html+=renderMetaSection(d,p);
-  html+=renderCreativasSection(d);
-  html+=renderMailSection(d);
-  html+=renderEcommSection(d,p);
-  html+=renderProximosPasos(d);
-  html+=`<div class="footer"><div class="footer-note">META ADS + SHOPIFY + KLAVIYO · ${d.range.toUpperCase()} · CANAL ONLINE EXCL. MARKETPLACE</div><div class="footer-onmi"><div class="footer-onmi-label">Prepared by</div><img src="data:image/png;base64,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" alt="Onmi Link" style="height:22px;width:auto;opacity:0.75;"></div></div>`;
-  document.getElementById('main-content').innerHTML=html;
-}
-
-const weekKeys=Object.keys(WEEKS);
-let currentWeek=weekKeys[weekKeys.length-1];
-function buildSelector(){
-  document.getElementById('week-selector').innerHTML=weekKeys.map(wk=>`<button class="week-btn ${wk===currentWeek?'active':''}" onclick="selectWeek('${wk}')">${WEEKS[wk].label}</button>`).join('');
-}
-function selectWeek(wk){
-  currentWeek=wk;
-  const idx=weekKeys.indexOf(wk);
-  buildSelector();
-  renderWeek(wk,idx>0?weekKeys[idx-1]:null);
-}
-buildSelector();
-renderWeek(currentWeek,weekKeys.indexOf(currentWeek)>0?weekKeys[weekKeys.indexOf(currentWeek)-1]:null);
-</script>
-</body>
-</html>
