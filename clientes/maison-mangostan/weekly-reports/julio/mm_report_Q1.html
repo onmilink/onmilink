@@ -464,7 +464,7 @@ function renderMetaSection(d, p) {
   if (m.campanas.length) {
     html+=`<div class="sec-label mb12">Campañas activas</div><table class="camp-table"><thead><tr><th>Campaña</th><th class="r">Inversión</th><th class="r">Compras</th><th class="r">Valor conv.</th><th class="r">ROAS</th><th class="r">CTR</th><th class="r">CPM</th></tr></thead><tbody>`;
     m.campanas.forEach(c=>{
-      html+=`<tr><td><div class="camp-name">${c.nombre}</div>${c.desc?`<div class="camp-desc">${c.desc}</div>`:''}<div style="margin-top:5px"><span class="pill pill-main">venta</span></div></td><td class="r">${fmtEur(c.inv)}</td><td class="r">${c.compras!=null?c.compras:'—'}</td><td class="r">${c.val!=null?fmtEur(c.val):'—'}</td><td class="r"><span class="${roasClass(c.roas)}">${c.roas!=null?fmt(c.roas):'—'}</span></td><td class="r">${c.ctr!=null?fmtPct(c.ctr):'—'}</td><td class="r">${c.cpm!=null?fmtEur(c.cpm):'—'}</td></tr>`;
+      html+=`<tr><td><div class="camp-name">${c.nombre}</div><div style="margin-top:5px"><span class="pill pill-main">venta</span></div></td><td class="r">${fmtEur(c.inv)}</td><td class="r">${c.compras!=null?c.compras:'—'}</td><td class="r">${c.val!=null?fmtEur(c.val):'—'}</td><td class="r"><span class="${roasClass(c.roas)}">${c.roas!=null?fmt(c.roas):'—'}</span></td><td class="r">${c.ctr!=null?fmtPct(c.ctr):'—'}</td><td class="r">${c.cpm!=null?fmtEur(c.cpm):'—'}</td></tr>`;
     });
     html+=`</tbody></table>`;
   }
