@@ -104,7 +104,8 @@
 
     <!-- TAB BUTTONS -->
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('sem6', this)">Semana 6 — 22–28 Jun 2026</button>
+        <button class="tab-btn active" onclick="switchTab('sem7', this)">Semana 7 — 16–22 Jul 2026</button>
+        <button class="tab-btn" onclick="switchTab('sem6', this)">Semana 6 — 22–28 Jun 2026</button>
         <button class="tab-btn" onclick="switchTab('sem5', this)">Semana 5 — 15–21 Jun 2026</button>
         <button class="tab-btn" onclick="switchTab('sem4', this)">Semana 4 — 8–14 Jun 2026</button>
         <button class="tab-btn" onclick="switchTab('sem3', this)">Semana 3 — 1–7 Jun 2026</button>
@@ -118,7 +119,230 @@
     <!-- ═══════════════════════════════════════════════ -->
     <!-- TAB SEMANA 6                                    -->
     <!-- ═══════════════════════════════════════════════ -->
-    <div id="sem6" class="tab-content active">
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TAB SEMANA 7                                    -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="sem7" class="tab-content active">
+
+        <!-- E-COMMERCE SEM 7 -->
+        <div class="section section-ecommerce">
+            <h2 class="section-title"><span class="section-icon">🛍️</span>E-commerce</h2>
+
+            <div style="background:#d1fae5;border:1px solid #10b981;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1.5rem;font-size:13px;color:#065f46;">
+                🏷️ <strong>Semana de rebajas (15 jul):</strong> Nuevas creatividades de verano activadas. Mejor semana del período en sesiones, pedidos y ROAS.
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Sesiones</div>
+                    <div class="metric-value">888</div>
+                    <div class="metric-subtext">Visitas totales</div>
+                    <span class="metric-delta delta-good">▲ +129% vs sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Pedidos totales</div>
+                    <div class="metric-value">14</div>
+                    <div class="metric-subtext">Órdenes finalizadas</div>
+                    <span class="metric-delta delta-good">▲ +180% vs sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Tasa de conversión</div>
+                    <div class="metric-value">1,57%</div>
+                    <div class="metric-subtext">14 pedidos / 888 ses.</div>
+                    <span class="metric-delta delta-good">▲ +0,28pp vs sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Ventas netas</div>
+                    <div class="metric-value">€839,86</div>
+                    <div class="metric-subtext">Sin devoluciones</div>
+                    <span class="metric-delta delta-good">▲ +110% vs sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Ventas totales</div>
+                    <div class="metric-value">€916,86</div>
+                    <div class="metric-subtext">Incluye envío €77</div>
+                    <span class="metric-delta delta-good">▲ +129% vs sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">ROAS Negocio</div>
+                    <div class="metric-value">5,28x</div>
+                    <div class="metric-subtext">Ventas / Inversión Meta</div>
+                    <span class="metric-delta delta-good">▲ vs 1,76x sem. 6</span>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Funnel de conversión</div>
+                    <div class="chart-wrapper"><canvas id="s7_funnelChart"></canvas></div>
+                    <div class="funnel-breakdown">
+                        <div class="funnel-step"><span class="funnel-label">Sesiones</span><span class="funnel-value">888 <span class="funnel-percentage">(100%)</span></span></div>
+                        <div class="funnel-step"><span class="funnel-label">Sesiones con carrito</span><span class="funnel-value">75 <span class="funnel-percentage">(8,44%)</span></span></div>
+                        <div class="funnel-step"><span class="funnel-label">Pagos iniciados</span><span class="funnel-value">23 <span class="funnel-percentage">(2,59%)</span></span></div>
+                        <div class="funnel-step"><span class="funnel-label">Compras completadas</span><span class="funnel-value">10 <span class="funnel-percentage">(1,12%)</span></span></div>
+                    </div>
+                    <p class="note">Shopify registra 14 pedidos totales; funnel online trackea 10. CVR real: 1,57%.</p>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Ventas por producto</div>
+                    <div class="chart-wrapper"><canvas id="s7_prodChart"></canvas></div>
+                    <ul class="product-list">
+                        <li class="product-item"><span class="product-name">Camiseta 1200 Essentia</span><span class="product-value">~€560,86</span></li>
+                        <li class="product-item"><span class="product-name">Camiseta 1200 Origo</span><span class="product-value">€279,00</span></li>
+                        <li class="product-item"><span class="product-name">Camiseta 1200 Horizon</span><span class="product-value">€0,00</span></li>
+                    </ul>
+                    <p class="note">23,07% clientes habituales — máximo del período.</p>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Sesiones por dispositivo</div>
+                    <div class="chart-wrapper"><canvas id="s7_deviceChart"></canvas></div>
+                    <ul class="device-list">
+                        <li class="device-item"><span class="product-name">Móvil</span><span class="product-value">~92% est.</span></li>
+                        <li class="device-item"><span class="product-name">Escritorio</span><span class="product-value">~7% est.</span></li>
+                        <li class="device-item"><span class="product-name">Tableta</span><span class="product-value">~1% est.</span></li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Sesiones por ubicación (top 5)</div>
+                    <div class="chart-wrapper"><canvas id="s7_locChart"></canvas></div>
+                    <ul class="location-list">
+                        <li class="location-item"><span class="product-name">Murcia</span><span class="product-value">1ª</span></li>
+                        <li class="location-item"><span class="product-name">Sin ubicación</span><span class="product-value">2ª</span></li>
+                        <li class="location-item"><span class="product-name">Instagram · Murcia</span><span class="product-value">78 refs.</span></li>
+                        <li class="location-item"><span class="product-name">Instagram · Ninguno</span><span class="product-value">52 refs.</span></li>
+                        <li class="location-item"><span class="product-name">Instagram · Madrid</span><span class="product-value">49 refs.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Desglose de ventas totales</div>
+                <table class="comparison-table">
+                    <thead><tr><th>Concepto</th><th>Importe</th></tr></thead>
+                    <tbody>
+                        <tr><td class="value-cell">Ventas brutas</td><td>€839,86</td></tr>
+                        <tr><td class="value-cell">Descuentos</td><td>€0,00</td></tr>
+                        <tr><td class="value-cell">Devoluciones</td><td>€0,00</td></tr>
+                        <tr><td class="value-cell">Ventas netas</td><td>€839,86</td></tr>
+                        <tr><td class="value-cell">Cargos de envío</td><td>€77,00</td></tr>
+                        <tr><td class="value-cell">Cargos por devolución</td><td>€0,00</td></tr>
+                        <tr><td class="value-cell">Impuestos</td><td>€0,00</td></tr>
+                        <tr style="background:#f9f9f9;font-weight:600;"><td>VENTAS TOTALES</td><td>€916,86</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- META ADS SEM 7 -->
+        <div class="section section-meta">
+            <h2 class="section-title"><span class="section-icon">📱</span>Meta Ads</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Inversión total</div>
+                    <div class="metric-value">€173,74</div>
+                    <div class="metric-subtext">Gasto en campaña</div>
+                    <span class="metric-delta delta-good">▼ −23,5% vs sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Compras atribuidas</div>
+                    <div class="metric-value">10</div>
+                    <div class="metric-subtext">Conversiones Meta</div>
+                    <span class="metric-delta delta-good">▲ +900% vs sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">CPA medio</div>
+                    <div class="metric-value">€17,37</div>
+                    <div class="metric-subtext">Mejor del período</div>
+                    <span class="metric-delta delta-good">▼ vs €71,11 sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">CPM Murcia</div>
+                    <div class="metric-value">€2,16</div>
+                    <div class="metric-subtext">Prosp/Murcia</div>
+                    <span class="metric-delta delta-good">▼ −23,1% vs sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Clics en enlace</div>
+                    <div class="metric-value">929</div>
+                    <div class="metric-subtext">Total período</div>
+                    <span class="metric-delta delta-good">▲ +109% vs sem. 6</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">ROAS Meta</div>
+                    <div class="metric-value">3,74x</div>
+                    <div class="metric-subtext">Val. conv. / Inversión</div>
+                    <span class="metric-delta delta-good">▲ vs sem. anteriores</span>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Distribución de gasto</div>
+                    <div class="chart-wrapper"><canvas id="s7_adsetChart"></canvas></div>
+                    <div class="breakdown-3">
+                        <div class="breakdown-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                            <span class="breakdown-label">Prosp/Murcia</span>
+                            <span class="breakdown-value">€67,18 (38,7%)</span>
+                        </div>
+                        <div class="breakdown-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                            <span class="breakdown-label">Ret/DPA</span>
+                            <span class="breakdown-value">€72,13 (41,5%)</span>
+                        </div>
+                        <div class="breakdown-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                            <span class="breakdown-label">Prosp/Esp</span>
+                            <span class="breakdown-value">€34,43 (19,8%)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">CPA por conjunto de anuncios</div>
+                    <div class="chart-wrapper"><canvas id="s7_cpaChart"></canvas></div>
+                    <div class="note">Ad ganador: "VID | producto + fondo | rebajas" — 8 de 10 compras. CPM Murcia €1,84.</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Detalle conjuntos de anuncios</div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Conjunto</th><th>Gasto</th><th>CPM</th><th>Clics</th><th>Compras</th><th>CPA</th><th>Val. conv.</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="value-cell">Prosp/Murcia</td>
+                            <td>€67,18</td><td>€2,16</td><td>601</td><td>7</td>
+                            <td class="value-cell">€9,60</td>
+                            <td>€450,93</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Prosp/Esp</td>
+                            <td>€34,43</td><td>€2,25</td><td>205</td><td>2</td>
+                            <td class="value-cell">€17,22</td>
+                            <td>€129,98</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Ret/DPA</td>
+                            <td>€72,13</td><td>€4,07</td><td>123</td><td>1</td>
+                            <td class="value-cell">€72,13</td>
+                            <td>€68,99</td>
+                        </tr>
+                        <tr style="background:#f9f9f9;font-weight:600;">
+                            <td>TOTAL</td>
+                            <td>€173,74</td><td>—</td><td>929</td><td>10</td><td>€17,37</td>
+                            <td style="color:#065f46;">€649,90 atribuido</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div><!-- /sem7 -->
+
+    <div id="sem6" class="tab-content">
 
         <!-- E-COMMERCE SEM 6 -->
         <div class="section section-ecommerce">
@@ -1395,7 +1619,7 @@
     </div><!-- /sem1 -->
 
     <div class="footer">
-        <p>Dashboard actualizado el 1 de julio de 2026 &nbsp;·&nbsp; Sem1: 18–25 may · Sem2: 26 may–1 jun · Sem3: 1–7 jun · Sem4: 8–14 jun · Sem5: 15–21 jun · Sem6: 22–28 jun</p>
+        <p>Dashboard actualizado el 23 de julio de 2026 &nbsp;·&nbsp; Sem1: 18–25 may · Sem2: 26 may–1 jun · Sem3: 1–7 jun · Sem4: 8–14 jun · Sem5: 15–21 jun · Sem6: 22–28 jun · Sem7: 16–22 jul</p>
         <p>Documento confidencial — Solo para uso autorizado</p>
     </div>
 
@@ -1410,6 +1634,44 @@
         document.getElementById(id).classList.add('active');
         btn.classList.add('active');
     }
+
+    /* ── SEMANA 7 ── */
+    new Chart(document.getElementById('s7_funnelChart'), {
+        type: 'bar',
+        data: { labels: ['Sesiones', 'Con carrito', 'Pagos iniciados', 'Compras'], datasets: [{ data: [888, 75, 23, 10], backgroundColor: [C.primary, C.primary+'CC', C.primary+'99', C.primary+'55'], borderRadius: 6, borderSkipped: false }] },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('s7_prodChart'), {
+        type: 'bar',
+        data: { labels: ['Essentia', 'Origo', 'Horizon'], datasets: [{ data: [560.86, 279.00, 0], backgroundColor: [C.primary, C.success, '#d1d5db'], borderRadius: 6, borderSkipped: false }] },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('s7_deviceChart'), {
+        type: 'doughnut',
+        data: { labels: ['Móvil (~92%)', 'Escritorio (~7%)', 'Tableta (~1%)'], datasets: [{ data: [817, 62, 9], backgroundColor: [C.primary, C.primary+'80', C.primary+'40'] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } } }
+    });
+    new Chart(document.getElementById('s7_locChart'), {
+        type: 'bar',
+        data: { labels: ['IG · Murcia', 'IG · Ninguno', 'IG · Madrid', 'IG · Torrevieja', 'Directo · Ning.'], datasets: [{ data: [78, 52, 49, 42, 40], backgroundColor: C.primary, borderRadius: 6 }] },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('s7_adsetChart'), {
+        type: 'doughnut',
+        data: { labels: ['Ret/DPA', 'Prosp/Murcia', 'Prosp/Esp'], datasets: [{ data: [72.13, 67.18, 34.43], backgroundColor: [C.accent, C.primary, C.warning] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } } }
+    });
+    new Chart(document.getElementById('s7_cpaChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Prosp/Murcia', 'Prosp/Esp', 'Ret/DPA'],
+            datasets: [
+                { label: 'CPA sem. 7', data: [9.60, 17.22, 72.13], backgroundColor: [C.primary, C.warning, C.accent], borderRadius: 6 },
+                { label: 'CPA sem. 6 (ref.)', data: [null, null, 71.11], backgroundColor: [C.primary+'33', C.warning+'33', C.accent+'33'], borderWidth: 2, borderRadius: 6 }
+            ]
+        },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } }, scales: { x: { beginAtZero: true } } }
+    });
 
     /* ── SEMANA 6 ── */
     new Chart(document.getElementById('s6_funnelChart'), {
