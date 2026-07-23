@@ -1,0 +1,987 @@
+<meta charset="UTF-8">
+<title>Grupo Gastronómico · Meta Ads · 16–22 Jul 2026</title>
+<style>
+/* ── TOKENS ─────────────────────────────────────────────────────────────── */
+:root {
+  --page:    #f9f9f7;
+  --surf:    #fcfcfb;
+  --surf-2:  #eeede8;
+  --border:  #e1e0d9;
+  --ink-1:   #0b0b0b;
+  --ink-2:   #52514e;
+  --ink-3:   #898781;
+  --playa:   #2a78d6;
+  --pillo:   #eb6834;
+  --viggos:  #1baf7a;
+  --warn:    #d03b3b;
+  --good:    #006300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --page:   #0d0d0d;
+    --surf:   #1a1a19;
+    --surf-2: #242422;
+    --border: #2c2c2a;
+    --ink-1:  #ffffff;
+    --ink-2:  #c3c2b7;
+    --ink-3:  #898781;
+    --playa:  #3987e5;
+    --pillo:  #d95926;
+    --viggos: #199e70;
+    --warn:   #e66767;
+    --good:   #0ca30c;
+  }
+}
+:root[data-theme="dark"] {
+  --page:   #0d0d0d;
+  --surf:   #1a1a19;
+  --surf-2: #242422;
+  --border: #2c2c2a;
+  --ink-1:  #ffffff;
+  --ink-2:  #c3c2b7;
+  --ink-3:  #898781;
+  --playa:  #3987e5;
+  --pillo:  #d95926;
+  --viggos: #199e70;
+  --warn:   #e66767;
+  --good:   #0ca30c;
+}
+:root[data-theme="light"] {
+  --page:    #f9f9f7;
+  --surf:    #fcfcfb;
+  --surf-2:  #eeede8;
+  --border:  #e1e0d9;
+  --ink-1:   #0b0b0b;
+  --ink-2:   #52514e;
+  --ink-3:   #898781;
+  --playa:   #2a78d6;
+  --pillo:   #eb6834;
+  --viggos:  #1baf7a;
+  --warn:    #d03b3b;
+  --good:    #006300;
+}
+
+/* ── BASE ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--page);
+  color: var(--ink-1);
+  padding: 2.5rem 1.25rem 4rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 920px; margin: 0 auto; }
+
+/* ── HEADER ─────────────────────────────────────────────────────────────── */
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+.report-meta {}
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.4rem;
+}
+.report-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink-1);
+  line-height: 1.1;
+}
+.report-period {
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  margin-top: 0.35rem;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  align-items: flex-end;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.legend-swatch {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.legend-swatch.playa  { background: var(--playa); }
+.legend-swatch.pillo  { background: var(--pillo); }
+.legend-swatch.viggos { background: var(--viggos); }
+
+/* ── TOTALS STRIP ───────────────────────────────────────────────────────── */
+.totals-strip {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  background: var(--surf);
+}
+.total-cell {
+  flex: 1;
+  padding: 0.9rem 1rem;
+  border-right: 1px solid var(--border);
+  min-width: 0;
+}
+.total-cell:last-child { border-right: none; }
+.total-cell-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.2rem;
+}
+.total-cell-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-1);
+  white-space: nowrap;
+}
+@media (max-width: 580px) {
+  .totals-strip { flex-wrap: wrap; }
+  .total-cell { flex: 1 1 50%; border-bottom: 1px solid var(--border); }
+  .total-cell:nth-child(2) { border-right: none; }
+  .total-cell:nth-last-child(-n+2) { border-bottom: none; }
+}
+
+/* ── SECTION TITLE ──────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── KPI CARDS ──────────────────────────────────────────────────────────── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 640px) {
+  .kpi-row { grid-template-columns: 1fr; }
+}
+
+.kpi-card {
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.kpi-card.playa::before  { background: var(--playa); }
+.kpi-card.pillo::before  { background: var(--pillo); }
+.kpi-card.viggos::before { background: var(--viggos); }
+
+.kpi-card-name {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.kpi-card-name.playa  { color: var(--playa); }
+.kpi-card-name.pillo  { color: var(--pillo); }
+.kpi-card-name.viggos { color: var(--viggos); }
+
+/* Hero metric */
+.kpi-hero-val {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-1);
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+.kpi-hero-label {
+  font-size: 0.68rem;
+  color: var(--ink-3);
+  margin-bottom: 1rem;
+}
+
+/* Secondary metrics */
+.kpi-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 0.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.85rem;
+}
+.kpi-metric {}
+.kpi-metric-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.1rem;
+}
+.kpi-metric-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-1);
+}
+.kpi-metric-value.alert { color: var(--warn); }
+
+/* ── CHARTS ─────────────────────────────────────────────────────────────── */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 580px) {
+  .charts-grid { grid-template-columns: 1fr; }
+}
+
+.chart-panel {
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+.chart-panel-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-1);
+  margin-bottom: 0.15rem;
+}
+.chart-panel-sub {
+  font-size: 0.65rem;
+  color: var(--ink-3);
+  margin-bottom: 1.1rem;
+}
+
+.bar-group { display: flex; flex-direction: column; gap: 0.85rem; }
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+}
+.bar-name {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  width: 52px;
+  flex-shrink: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+.bar-track {
+  flex: 1;
+  height: 22px;
+  background: var(--surf-2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  position: relative;
+}
+.bar-fill.playa  { background: var(--playa); }
+.bar-fill.pillo  { background: var(--pillo); }
+.bar-fill.viggos { background: var(--viggos); }
+
+.bar-val {
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+  width: 48px;
+  flex-shrink: 0;
+  text-align: right;
+}
+.bar-val.alert { color: var(--warn); }
+
+/* Hover tooltip on bar rows */
+.bar-row {
+  cursor: default;
+}
+.bar-tooltip {
+  display: none;
+  position: absolute;
+  left: 60px;
+  bottom: calc(100% + 6px);
+  background: var(--ink-1);
+  color: var(--page);
+  font-size: 0.68rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+.bar-row:hover .bar-tooltip { display: block; }
+
+/* ── TABLE ──────────────────────────────────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  background: var(--surf);
+  border-radius: 8px;
+  overflow: hidden;
+}
+thead th {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 0.7rem 0.9rem;
+  text-align: right;
+  background: var(--surf-2);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+thead th:first-child { text-align: left; }
+
+tbody td {
+  padding: 0.65rem 0.9rem;
+  text-align: right;
+  color: var(--ink-1);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+tbody td:first-child { text-align: left; }
+tbody tr:last-child td { border-bottom: none; }
+
+/* Total row */
+.total-row td {
+  border-top: 2px solid var(--border);
+  font-weight: 700;
+  color: var(--ink-2);
+  background: var(--surf-2);
+}
+.total-row td:first-child { color: var(--ink-1); }
+
+.rest-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+}
+.rest-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.rest-dot.playa  { background: var(--playa); }
+.rest-dot.pillo  { background: var(--pillo); }
+.rest-dot.viggos { background: var(--viggos); }
+.td-alert { color: var(--warn); font-weight: 700; }
+
+/* ── INSIGHTS ───────────────────────────────────────────────────────────── */
+.insights {
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.insights-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.insights-list li {
+  font-size: 0.83rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+  padding-left: 1.2rem;
+  position: relative;
+}
+.insights-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--ink-3);
+}
+.insights-list strong { color: var(--ink-1); font-weight: 600; }
+
+/* ── FOOTNOTE ───────────────────────────────────────────────────────────── */
+.footnote {
+  font-size: 0.67rem;
+  color: var(--ink-3);
+  line-height: 1.65;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+/* ── CREATIVE SECTION ───────────────────────────────────────────────────── */
+.creative-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 680px) {
+  .creative-grid { grid-template-columns: 1fr; }
+}
+.creative-card {
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.creative-card-header {
+  padding: 0.6rem 0.8rem;
+  background: var(--surf-2);
+  border-bottom: 1px solid var(--border);
+}
+.creative-card-name {
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.creative-card-name.playa  { color: var(--playa); }
+.creative-card-name.pillo  { color: var(--pillo); }
+.creative-card-name.viggos { color: var(--viggos); }
+.creative-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.71rem;
+  font-variant-numeric: tabular-nums;
+}
+.creative-table thead th {
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 0.38rem 0.6rem;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.creative-table thead th:first-child { text-align: left; }
+.creative-table tbody td {
+  padding: 0.42rem 0.6rem;
+  text-align: right;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--border);
+}
+.creative-table tbody td:first-child {
+  text-align: left;
+  max-width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.creative-table tbody tr:last-child td { border-bottom: none; }
+.row-winner { background: var(--surf-2); }
+.row-winner td { color: var(--ink-1); font-weight: 600; }
+.row-inactive td { color: var(--ink-3); }
+.fmt-tag {
+  display: inline-block;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.08rem 0.26rem;
+  border-radius: 2px;
+  margin-right: 0.22rem;
+  vertical-align: middle;
+  background: var(--surf-2);
+  color: var(--ink-3);
+}
+.fmt-tag.vid { background: var(--playa); color: #fff; }
+.fmt-tag.car { background: var(--pillo); color: #fff; opacity: 0.75; }
+.winner-arrow {
+  font-size: 0.6rem;
+  font-weight: 700;
+  margin-right: 0.15rem;
+  vertical-align: middle;
+}
+.winner-arrow.playa  { color: var(--playa); }
+.winner-arrow.pillo  { color: var(--pillo); }
+.winner-arrow.viggos { color: var(--viggos); }
+.inact-tag {
+  display: inline-block;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.05rem 0.22rem;
+  border-radius: 2px;
+  background: var(--border);
+  color: var(--ink-3);
+  margin-left: 0.15rem;
+  vertical-align: middle;
+}
+</style>
+
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="report-header">
+    <div class="report-meta">
+      <div class="eyebrow">Meta Ads &nbsp;·&nbsp; Grupo Gastronómico</div>
+      <div class="report-title">16 – 22 Jul 2026</div>
+      <div class="report-period">Informe semanal de rendimiento</div>
+    </div>
+    <div class="legend">
+      <div class="legend-item">
+        <span class="legend-swatch playa"></span>Bangalore Playa
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch pillo"></span>Arooces El Pillo
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch viggos"></span>Viggos
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TOTALS STRIP ═══ -->
+  <div class="totals-strip">
+    <div class="total-cell">
+      <div class="total-cell-label">Inversión total</div>
+      <div class="total-cell-value">€203.42</div>
+    </div>
+    <div class="total-cell">
+      <div class="total-cell-label">Visitas al perfil</div>
+      <div class="total-cell-value">2,837</div>
+    </div>
+    <div class="total-cell">
+      <div class="total-cell-label">Seguidores captados</div>
+      <div class="total-cell-value">252</div>
+    </div>
+    <div class="total-cell">
+      <div class="total-cell-label">Impresiones</div>
+      <div class="total-cell-value">120,279</div>
+    </div>
+  </div>
+
+  <!-- ═══ KPI CARDS ═══ -->
+  <div class="section-label">Rendimiento por restaurante</div>
+  <div class="kpi-row">
+
+    <div class="kpi-card playa">
+      <div class="kpi-card-name playa">Bangalore Playa</div>
+      <div class="kpi-hero-val">1,252</div>
+      <div class="kpi-hero-label">visitas al perfil &nbsp;(IG)</div>
+      <div class="kpi-metrics">
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Inversión</div>
+          <div class="kpi-metric-value">€67.08</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Coste/visita</div>
+          <div class="kpi-metric-value">€0.054</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Seguidores</div>
+          <div class="kpi-metric-value">139</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Coste/seg.</div>
+          <div class="kpi-metric-value">€0.48</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Alcance</div>
+          <div class="kpi-metric-value">19,837</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">CTR</div>
+          <div class="kpi-metric-value">3.65%</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">CPM</div>
+          <div class="kpi-metric-value">€1.95</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-card pillo">
+      <div class="kpi-card-name pillo">Arooces El Pillo</div>
+      <div class="kpi-hero-val">949</div>
+      <div class="kpi-hero-label">visitas al perfil &nbsp;(IG)</div>
+      <div class="kpi-metrics">
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Inversión</div>
+          <div class="kpi-metric-value">€69.25</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Coste/visita</div>
+          <div class="kpi-metric-value">€0.073</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Seguidores</div>
+          <div class="kpi-metric-value">95</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Coste/seg.</div>
+          <div class="kpi-metric-value">€0.73</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Alcance</div>
+          <div class="kpi-metric-value">36,835</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">CTR</div>
+          <div class="kpi-metric-value">2.03%</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">CPM</div>
+          <div class="kpi-metric-value">€1.48</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-card viggos">
+      <div class="kpi-card-name viggos">Viggos</div>
+      <div class="kpi-hero-val">636</div>
+      <div class="kpi-hero-label">visitas al perfil &nbsp;(IG)</div>
+      <div class="kpi-metrics">
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Inversión</div>
+          <div class="kpi-metric-value">€67.09</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Coste/visita</div>
+          <div class="kpi-metric-value">€0.105</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Seguidores</div>
+          <div class="kpi-metric-value">18</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Coste/seg.</div>
+          <div class="kpi-metric-value alert">€3.73 !</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">Alcance</div>
+          <div class="kpi-metric-value">23,054</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">CTR</div>
+          <div class="kpi-metric-value">1.72%</div>
+        </div>
+        <div class="kpi-metric">
+          <div class="kpi-metric-label">CPM</div>
+          <div class="kpi-metric-value">€1.71</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ CHARTS ═══ -->
+  <div class="section-label">Comparativa visual</div>
+  <div class="charts-grid">
+
+    <div class="chart-panel">
+      <div class="chart-panel-title">Visitas al perfil</div>
+      <div class="chart-panel-sub">Visitas al perfil de Instagram · Jul 16–22</div>
+      <div class="bar-group">
+
+        <div class="bar-row">
+          <span class="bar-name">Playa</span>
+          <div class="bar-track">
+            <div class="bar-fill playa" style="width:100%"></div>
+          </div>
+          <span class="bar-val">1,252</span>
+          <div class="bar-tooltip">Inversión €67.08 · Alcance 19,837</div>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">El Pillo</span>
+          <div class="bar-track">
+            <div class="bar-fill pillo" style="width:75.8%"></div>
+          </div>
+          <span class="bar-val">949</span>
+          <div class="bar-tooltip">Inversión €69.25 · Alcance 36,835</div>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">Viggos</span>
+          <div class="bar-track">
+            <div class="bar-fill viggos" style="width:50.8%"></div>
+          </div>
+          <span class="bar-val">636</span>
+          <div class="bar-tooltip">Inversión €67.09 · Alcance 23,054</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="chart-panel">
+      <div class="chart-panel-title">Eficiencia en captación de seguidores</div>
+      <div class="chart-panel-sub">Barra más larga = menor coste por seguidor</div>
+      <div class="bar-group">
+
+        <div class="bar-row">
+          <span class="bar-name">Playa</span>
+          <div class="bar-track">
+            <div class="bar-fill playa" style="width:100%"></div>
+          </div>
+          <span class="bar-val">€0.48</span>
+          <div class="bar-tooltip">139 seguidores · €0.483/seg.</div>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">El Pillo</span>
+          <div class="bar-track">
+            <div class="bar-fill pillo" style="width:66%"></div>
+          </div>
+          <span class="bar-val">€0.73</span>
+          <div class="bar-tooltip">95 seguidores · €0.729/seg.</div>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">Viggos</span>
+          <div class="bar-track">
+            <div class="bar-fill viggos" style="width:13%"></div>
+          </div>
+          <span class="bar-val alert">€3.73</span>
+          <div class="bar-tooltip">18 seguidores · €3.727/seg.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ DATA TABLE ═══ -->
+  <div class="section-label">Datos detallados</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Restaurante</th>
+          <th>Inversión</th>
+          <th>Visitas perfil</th>
+          <th>Coste/visita</th>
+          <th>CTR</th>
+          <th>Seguidores</th>
+          <th>Coste/seg.</th>
+          <th>Alcance</th>
+          <th>Impresiones</th>
+          <th>CPM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rest-badge"><span class="rest-dot playa"></span>Bangalore Playa</span></td>
+          <td>€67.08</td>
+          <td>1,252</td>
+          <td>€0.054</td>
+          <td>3.65%</td>
+          <td>139</td>
+          <td>€0.48</td>
+          <td>19,837</td>
+          <td>34,332</td>
+          <td>€1.95</td>
+        </tr>
+        <tr>
+          <td><span class="rest-badge"><span class="rest-dot pillo"></span>Arooces El Pillo</span></td>
+          <td>€69.25</td>
+          <td>949</td>
+          <td>€0.073</td>
+          <td>2.03%</td>
+          <td>95</td>
+          <td>€0.73</td>
+          <td>36,835</td>
+          <td>46,822</td>
+          <td>€1.48</td>
+        </tr>
+        <tr>
+          <td><span class="rest-badge"><span class="rest-dot viggos"></span>Viggos</span></td>
+          <td>€67.09</td>
+          <td>636 *</td>
+          <td>€0.105</td>
+          <td>1.72% †</td>
+          <td>18</td>
+          <td class="td-alert">€3.73</td>
+          <td>23,054</td>
+          <td>39,125</td>
+          <td>€1.71</td>
+        </tr>
+        <tr class="total-row">
+          <td>Total semana</td>
+          <td>€203.42</td>
+          <td>2,837</td>
+          <td>€0.072</td>
+          <td>2.36%</td>
+          <td>252</td>
+          <td>€0.81</td>
+          <td>—</td>
+          <td>120,279</td>
+          <td>€1.69</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══ CREATIVE PERFORMANCE ═══ -->
+  <div class="section-label">Rendimiento por creativo</div>
+  <div class="creative-grid">
+
+    <!-- Bangalore Playa -->
+    <div class="creative-card">
+      <div class="creative-card-header">
+        <div class="creative-card-name playa">Bangalore Playa</div>
+      </div>
+      <table class="creative-table">
+        <thead>
+          <tr><th>Creativo</th><th>Vis.</th><th>CPV</th><th>Seg.</th></tr>
+        </thead>
+        <tbody>
+          <tr class="row-winner">
+            <td><span class="winner-arrow playa">↑</span><span class="fmt-tag img">IMG</span>Cenas 1a línea</td>
+            <td>675</td><td>€0.042</td><td>45</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag vid">VID</span>Veraneas en el puerto</td>
+            <td>495</td><td>€0.072</td><td>94</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag img">IMG</span>Monólogos</td>
+            <td>69</td><td>€0.045</td><td>—</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag car">CAR</span>Mensajes cenas</td>
+            <td>13</td><td>€0.022</td><td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Arooces El Pillo -->
+    <div class="creative-card">
+      <div class="creative-card-header">
+        <div class="creative-card-name pillo">Arooces El Pillo</div>
+      </div>
+      <table class="creative-table">
+        <thead>
+          <tr><th>Creativo</th><th>Vis.</th><th>CPV</th><th>Seg.</th></tr>
+        </thead>
+        <tbody>
+          <tr class="row-winner">
+            <td><span class="winner-arrow pillo">↑</span><span class="fmt-tag vid">VID</span>Abiertos en verano AD01</td>
+            <td>859</td><td>€0.073</td><td>90</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag vid">VID</span>Arroz sarmiento</td>
+            <td>73</td><td>€0.071</td><td>4</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag vid">VID</span>Abiertos en verano AD02</td>
+            <td>17</td><td>€0.058</td><td>1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Viggos -->
+    <div class="creative-card">
+      <div class="creative-card-header">
+        <div class="creative-card-name viggos">Viggos</div>
+      </div>
+      <table class="creative-table">
+        <thead>
+          <tr><th>Creativo</th><th>Vis.</th><th>CPV</th><th>Seg.</th></tr>
+        </thead>
+        <tbody>
+          <tr class="row-winner">
+            <td><span class="winner-arrow viggos">↑</span><span class="fmt-tag img">IMG</span>Arroz - inglés</td>
+            <td>252</td><td>€0.106</td><td>2</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag img">IMG</span>Ensalada - español</td>
+            <td>152</td><td>€0.110</td><td>7</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag vid">VID</span>Comer bien<span class="inact-tag">OFF</span></td>
+            <td>113</td><td>€0.094</td><td>6</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag img">IMG</span>Ensalada - inglés</td>
+            <td>46</td><td>€0.114</td><td>2</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag img">IMG</span>Pizza - español</td>
+            <td>34</td><td>€0.124</td><td>—</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag img">IMG</span>Pizza - inglés</td>
+            <td>36</td><td>€0.090</td><td>—</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag img">IMG</span>Terraza Viggos<span class="inact-tag">OFF</span></td>
+            <td>3</td><td>€0.150</td><td>1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ═══ INSIGHTS ═══ -->
+  <div class="section-label">Puntos clave</div>
+  <div class="insights">
+    <ul class="insights-list">
+      <li>
+        <strong>Bangalore Playa, mejor rendimiento global</strong> — mayor volumen de visitas (1,252) y mejor coste por visita (€0.054) con inversión prácticamente igual a los otros dos restaurantes. El vídeo "Veraneas en el puerto" concentra el 40% de las visitas.
+      </li>
+      <li>
+        <strong>El Pillo alcanza al mayor número de personas (36,835)</strong> — casi el doble que Playa, pero con una tasa de conversión a visita de perfil menor. Alta visibilidad, menor engagement. Oportunidad de reforzar la creatividad para activar más clics al perfil.
+      </li>
+    </ul>
+  </div>
+
+  <!-- ═══ FOOTNOTE ═══ -->
+  <p class="footnote">
+    * Datos de Meta Ads, 16–22 jul 2026. "Visitas al perfil" en Bangalore Playa y Arooces El Pillo incluye perfil de Instagram + página web del anuncio; en Viggos, solo perfil de Instagram. Sesiones web (Google Analytics) no incluidas en este export.<br>
+    CTR en Playa y Pillo calculado como resultados ÷ impresiones (campo CTR no exportado en sus informes). † CTR de Viggos exportado directamente de Meta (clics en enlace ÷ impresiones = 673 / 39,125). CTR fila "Total" = suma resultados ÷ suma impresiones. Coste por seguidor fila "Total" = inversión total ÷ seguidores totales.
+  </p>
+
+</div>
