@@ -310,14 +310,14 @@ const WEEKS = {
   cw3: {
     label: 'CW3', range: '27 jul–9 ago 2026 · semana 1/2',
     puntos: [
-      { cat: 'Meta Ads', texto: 'Mejor semana de la cuenta: FLASH_SALES 5.49x y 9 compras, WOMAN 5.89x y 8 compras. Inversión total 696,54€ · ROAS Meta 4.82x · 17 compras.' },
-      { cat: 'Email', texto: '3 envíos. Woman - Descuentos lidera con 765€ y 3 pedidos (56,86% apertura). Colección Niño: 99€. Apertura media 45,7%.' },
-      { cat: 'Shopify', texto: 'Datos pendientes de cierre de semana.' },
-      { cat: 'Próximos pasos', texto: 'Pendiente de definir al cierre de la quincena.' }
+      { cat: 'Meta Ads', texto: 'Mejor semana de la cuenta: FLASH_SALES 5.49x y 9 compras, WOMAN 5.89x y 8 compras. Inversión 696,54€ · 17 compras · ROAS Meta 4.82x · ROAS negocio 12.89x.' },
+      { cat: 'Email', texto: '3 envíos. Woman-Descuentos lidera con 765€ y 3 pedidos (56,86% apertura). Colección Niño: 99€. Flujos: 423€ — Kids 154€, Ambos 123€, Mujer 104€, Checkout 42€.' },
+      { cat: 'Shopify', texto: 'Ventas netas 7.188€ sobre 39 pedidos. AOV 210,79€ · conv 1,17%. BARCOS SKIRT WHITE y BIRDS PATCHWORK PANTS lideran.' },
+      { cat: 'Próximos pasos', texto: 'Mantener presupuesto Meta y optimizar creativo WOMAN — semana excepcional. Planificar envíos newsletter segunda semana CW3. Seguimiento AOV elevado.' }
     ],
     meta: {
       inv: 696.54, compras: 17, valConv: 3354.63, cpa: 40.97,
-      roasMeta: 4.82, roasNeg: 0, roasNeto: 0,
+      roasMeta: 4.82, roasNeg: 12.89, roasNeto: 10.32,
       campanas: [
         { nombre: 'FLASH_SALES', tipo: 'main', cat: 'venta',
           inv: 321.78, compras:  9, val: 1766.22, roas: 5.49, ctr: 3.57, cpm: 16.45 },
@@ -346,12 +346,26 @@ const WEEKS = {
                prev: { rango: '13–26 jul 2026', ingresos: 1421, tasaEnvio: 1.89, envios: 102, formularioVisto: 5400 } }
     },
     ecomm: {
-      brutas: 0, descuentos: 0, devoluciones: 0, netas: 0,
-      envio: 0, devCargos: 0, impuestos: 0, totales: 0,
-      pedidos: 0, aov: 0,
-      sesiones: 0, conv: 0.0, carrito: 0.0, pago: 0.0, compra: 0.0,
-      habituales: 0, cartSes: 0, pagoSes: 0, compraSes: 0,
-      topVentas: [], topPaginas: [], topProductos: []
+      brutas: 7611.64, descuentos: 189.59, devoluciones: 233.70, netas: 7188.35,
+      envio: 309.28, devCargos: 0.00, impuestos: 1152.19, totales: 8977.81,
+      pedidos: 39, aov: 210.79,
+      sesiones: 2557, conv: 1.17, carrito: 5.98, pago: 2.62, compra: 1.17,
+      habituales: 29.41, cartSes: 153, pagoSes: 67, compraSes: 30,
+      topVentas: [
+        { nombre: 'BARCOS SKIRT WHITE',             val: null },
+        { nombre: 'BIRDS PATCHWORK PANTS BLUSH',    val: null },
+        { nombre: 'BARCOS EMBROIDERED DRESS BLUSH', val: null },
+        { nombre: 'LOROS SOCKS WHITE',              val: null },
+        { nombre: 'BARCOS CROPPED SHIRT WHITE',     val: null }
+      ],
+      topPaginas: [],
+      topProductos: [
+        { nombre: 'SWEETHEART BOOT PINK',       vistas: 30, uds: 25, conv: 83.3 },
+        { nombre: 'BLOSSOM BIRDS SWIMSUIT WHITE',vistas:  0, uds:  0, conv:  0.0 },
+        { nombre: 'BIRDS PATCHWORK SHORTS BLUSH',vistas: 0, uds:  0, conv:  0.0 },
+        { nombre: 'UVAS RUFFLES TOP',            vistas:  8, uds:  0, conv:  0.0 },
+        { nombre: 'BARCOS LEGGINGS RED',         vistas:  4, uds:  0, conv:  0.0 }
+      ]
     }
   },
   acumulado: {
