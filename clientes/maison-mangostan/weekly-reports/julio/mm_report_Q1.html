@@ -39,6 +39,8 @@ a{color:inherit;text-decoration:none;}
 .summary-lines{display:flex;flex-direction:column;gap:6px;}
 .summary-line{font-size:12px;color:#444;padding-left:12px;border-left:2px solid var(--border);}
 .section-block{border:1px solid var(--border);margin-bottom:24px;}
+.yoy-toggle{background:transparent;border:1px solid var(--muted);border-radius:4px;color:var(--muted);font-size:11px;padding:3px 9px;cursor:pointer;margin-left:auto;transition:all .15s;white-space:nowrap}
+.yoy-toggle.active{background:var(--accent);border-color:var(--accent);color:#fff}
 .section-block-hdr{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;}
 .section-block-title{font-family:'TimesTen',serif;font-size:16px;font-weight:normal;flex:1;letter-spacing:0.01em;}
 .section-block-hdr.meta{background:#1a0a2e;border-bottom-color:rgba(255,255,255,0.08);}
@@ -234,7 +236,10 @@ const WEEKS = {
         { nombre: 'VINTAGE FLOWERS PATCHWORK PANTS MINT', vistas: 13, uds: 3, conv: 23.1 },
         { nombre: 'BARCOS EMBROIDERED SHIRT BLUE',        vistas: 28, uds: 4, conv: 14.3 }
       ]
-    }
+    },
+    ecommYoY: { rango: '29 jun–12 jul 2025',
+      netas: 9692.27, totales: 11690.98, pedidos: 80, aov: 146.36,
+      sesiones: 3823, conv: 1.36, carrito: 10.0, pago: 3.70, compra: 1.36, habituales: 42.42 }
   },
   q2: {
     label: 'CW2', range: '13–26 jul 2026',
@@ -369,7 +374,10 @@ const WEEKS = {
         { nombre: 'BEVERLY FLOWERS CROP TOP DEEP LAVENDER', vistas: 5, uds: 1, conv: 20.0 },
         { nombre: 'LOROS WAVY SHIRT BLUE',               vistas:  5, uds: 1, conv:  20.0 }
       ]
-    }
+    },
+    ecommYoY: { rango: '27 jul–2 ago 2025',
+      netas: 5580.58, totales: 6862.63, pedidos: 34, aov: 195.90,
+      sesiones: 2868, conv: 0.73, carrito: 8.79, pago: 2.86, compra: 0.73, habituales: 48.38 }
   },
   acumulado: {
     label: 'Acumulado', range: '29 jun–26 jul 2026',
@@ -616,13 +624,16 @@ function renderMailSection(d) {
 // ECOMMERCE
 // ============================================================
 function renderEcommSection(d, p) {
-  const e=d.ecomm, pe=p?.ecomm;
-  let html=`<div class="section-block mb24"><div class="section-block-hdr ecomm"><div class="section-block-title">Ecommerce · ${d.range}</div></div><div class="section-block-body">`;
+  const e=d.ecomm;
+  const useYoY=!!(yoyState[currentWeek]&&d.ecommYoY);
+  const pe=useYoY?d.ecommYoY:p?.ecomm;
+  const compLbl=useYoY?'vs año ant.':'vs per. ant.';
+  let html=`<div class="section-block mb24"><div class="section-block-hdr ecomm"><div class="section-block-title">Ecommerce · ${d.range}</div>${d.ecommYoY?`<button class="yoy-toggle${useYoY?' active':''}" onclick="toggleYoY()">${useYoY?'📅 vs año ant.':'📅 vs per. ant.'}</button>`:''}</div><div class="section-block-body">`;
   html+=`<div class="eco-kpi-row mb12">
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas netas</div><div class="kpi-v">${fmtEur(e.netas)}</div><div class="kpi-s">${delta(e.netas,pe?.netas)} vs per. ant.</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas totales</div><div class="kpi-v">${fmtEur(e.totales)}</div><div class="kpi-s">${delta(e.totales,pe?.totales)} vs per. ant.</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Pedidos</div><div class="kpi-v">${e.pedidos||'—'}</div><div class="kpi-s">${delta(e.pedidos,pe?.pedidos)} vs per. ant.</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">AOV</div><div class="kpi-v">${fmtEur(e.aov)}</div><div class="kpi-s">${delta(e.aov,pe?.aov)} vs per. ant.</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Ventas netas</div><div class="kpi-v">${fmtEur(e.netas)}</div><div class="kpi-s">${delta(e.netas,pe?.netas)} ${compLbl}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Ventas totales</div><div class="kpi-v">${fmtEur(e.totales)}</div><div class="kpi-s">${delta(e.totales,pe?.totales)} ${compLbl}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Pedidos</div><div class="kpi-v">${e.pedidos||'—'}</div><div class="kpi-s">${delta(e.pedidos,pe?.pedidos)} ${compLbl}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">AOV</div><div class="kpi-v">${fmtEur(e.aov)}</div><div class="kpi-s">${delta(e.aov,pe?.aov)} ${compLbl}</div></div>
   </div>`;
   html+=`<div class="eco-2col mb12">
     <div class="eco-box"><div class="eco-box-title">Desglose facturación · excl. marketplace</div>
@@ -717,6 +728,11 @@ function renderWeek(wk, prevWk) {
 }
 
 const weekKeys=Object.keys(WEEKS);
+const yoyState={};
+function toggleYoY(){
+  yoyState[currentWeek]=!yoyState[currentWeek];
+  selectWeek(currentWeek);
+}
 let currentWeek=weekKeys[weekKeys.length-1];
 function buildSelector(){
   document.getElementById('week-selector').innerHTML=weekKeys.map(wk=>`<button class="week-btn ${wk===currentWeek?'active':''}" onclick="selectWeek('${wk}')">${WEEKS[wk].label}</button>`).join('');
