@@ -308,23 +308,41 @@ const WEEKS = {
     }
   },
   cw3: {
-    label: 'CW3', range: '27 jul–9 ago 2026 · media quincena',
+    label: 'CW3', range: '27 jul–9 ago 2026 · semana 1/2',
     puntos: [
-      { cat: 'Meta Ads', texto: 'Datos en recogida — quincena en curso.' },
-      { cat: 'Email', texto: 'Datos en recogida — quincena en curso.' },
-      { cat: 'Shopify', texto: 'Datos en recogida — quincena en curso.' },
-      { cat: 'Próximos pasos', texto: 'Pendiente de definir.' }
+      { cat: 'Meta Ads', texto: 'Mejor semana de la cuenta: FLASH_SALES 5.49x y 9 compras, WOMAN 5.89x y 8 compras. Inversión total 696,54€ · ROAS Meta 4.82x · 17 compras.' },
+      { cat: 'Email', texto: '3 envíos. Woman - Descuentos lidera con 765€ y 3 pedidos (56,86% apertura). Colección Niño: 99€. Apertura media 45,7%.' },
+      { cat: 'Shopify', texto: 'Datos pendientes de cierre de semana.' },
+      { cat: 'Próximos pasos', texto: 'Pendiente de definir al cierre de la quincena.' }
     ],
     meta: {
-      inv: null, compras: 0, valConv: 0, cpa: 0,
-      roasMeta: 0, roasNeg: 0, roasNeto: 0,
-      campanas: []
+      inv: 696.54, compras: 17, valConv: 3354.63, cpa: 40.97,
+      roasMeta: 4.82, roasNeg: 0, roasNeto: 0,
+      campanas: [
+        { nombre: 'FLASH_SALES', tipo: 'main', cat: 'venta',
+          inv: 321.78, compras:  9, val: 1766.22, roas: 5.49, ctr: 3.57, cpm: 16.45 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
+          inv: 269.90, compras:  8, val: 1588.41, roas: 5.89, ctr: 6.74, cpm: 20.47 },
+        { nombre: 'VTA - MMxSN - 28MAYO2026', tipo: 'main', cat: 'venta',
+          inv:  69.61, compras:  0, val:    0,    roas: 0,    ctr: 1.80, cpm: 11.12 },
+        { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
+          inv:  35.25, compras:  0, val:    0,    roas: 0,    ctr: 7.04, cpm:  3.83 }
+      ]
     },
     creatividades: [],
     mail: {
-      envios: [],
-      flujos: [],
-      popup: { nombre: 'POP UP (ONMI)', ingresos: 0, tasaEnvio: 0, envios: 0, formularioVisto: 0,
+      envios: [
+        { subject: 'Woman - Descuentos',  fecha: '28 jul · 19:00', dest: 1638, apertura: 56.86, clics: 2.19, pedidos: 3, ingresos: 765.04 },
+        { subject: 'Colección Niño', fecha: '30 jul · 10:00', dest: 1596, apertura: 52.76, clics: 1.79, pedidos: 1, ingresos:  99.68 },
+        { subject: 'Hype FW26',           fecha: '3 ago · 10:00',  dest:  828, apertura: 27.35, clics: 1.42, pedidos: 0, ingresos:   0    }
+      ],
+      flujos: [
+        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo', ingresos: 154.40 },
+        { nombre: 'Flow Bienvenida Ambos',  estado: 'Activo', ingresos: 123.08 },
+        { nombre: 'Flow Bienvenida Mujer',  estado: 'Activo', ingresos: 104.18 },
+        { nombre: 'CHECK OUT STARTED',      estado: 'Activo', ingresos:  42.08 }
+      ],
+      popup: { nombre: 'POP UP (ONMI)', ingresos: 2200, tasaEnvio: 1.74, envios: 33, formularioVisto: 1900,
                prev: { rango: '13–26 jul 2026', ingresos: 1421, tasaEnvio: 1.89, envios: 102, formularioVisto: 5400 } }
     },
     ecomm: {
