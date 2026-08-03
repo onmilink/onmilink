@@ -39,6 +39,7 @@ a{color:inherit;text-decoration:none;}
 .summary-lines{display:flex;flex-direction:column;gap:6px;}
 .summary-line{font-size:12px;color:#444;padding-left:12px;border-left:2px solid var(--border);}
 .section-block{border:1px solid var(--border);margin-bottom:24px;}
+.kpi-v-prev{font-size:.6em;color:var(--muted);margin-left:10px;font-weight:400;vertical-align:middle}
 .yoy-toggle{background:transparent;border:1px solid var(--muted);border-radius:4px;color:var(--muted);font-size:11px;padding:3px 9px;cursor:pointer;margin-left:auto;transition:all .15s;white-space:nowrap}
 .yoy-toggle.active{background:var(--accent);border-color:var(--accent);color:#fff}
 .section-block-hdr{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;}
@@ -633,10 +634,10 @@ function renderEcommSection(d, p) {
   const compLbl=useYoY?'vs año ant.':'vs per. ant.';
   let html=`<div class="section-block mb24"><div class="section-block-hdr ecomm"><div class="section-block-title">Ecommerce · ${d.range}</div>${d.ecommYoY?`<button class="yoy-toggle${useYoY?' active':''}" onclick="toggleYoY()">${useYoY?'📅 vs año ant.':'📅 vs per. ant.'}</button>`:''}</div><div class="section-block-body">`;
   html+=`<div class="eco-kpi-row mb12">
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas netas</div><div class="kpi-v">${fmtEur(e.netas)}</div><div class="kpi-s">${pe?.netas!=null?fmtEur(pe.netas)+' · ':'—  '}${delta(e.netas,pe?.netas)} ${compLbl}</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas totales</div><div class="kpi-v">${fmtEur(e.totales)}</div><div class="kpi-s">${pe?.totales!=null?fmtEur(pe.totales)+' · ':'—  '}${delta(e.totales,pe?.totales)} ${compLbl}</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Pedidos</div><div class="kpi-v">${e.pedidos||'—'}</div><div class="kpi-s">${pe?.pedidos!=null?pe.pedidos+' · ':'—  '}${delta(e.pedidos,pe?.pedidos)} ${compLbl}</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">AOV</div><div class="kpi-v">${fmtEur(e.aov)}</div><div class="kpi-s">${pe?.aov!=null?fmtEur(pe.aov)+' · ':'—  '}${delta(e.aov,pe?.aov)} ${compLbl}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Ventas netas</div><div class="kpi-v">${fmtEur(e.netas)}${useYoY&&pe?.netas!=null?' <span class="kpi-v-prev">'+fmtEur(pe.netas)+'</span>':''}</div><div class="kpi-s">${useYoY?'':(pe?.netas!=null?fmtEur(pe.netas)+' · ':'—  ')}${delta(e.netas,pe?.netas)} ${compLbl}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Ventas totales</div><div class="kpi-v">${fmtEur(e.totales)}${useYoY&&pe?.totales!=null?' <span class="kpi-v-prev">'+fmtEur(pe.totales)+'</span>':''}</div><div class="kpi-s">${useYoY?'':(pe?.totales!=null?fmtEur(pe.totales)+' · ':'—  ')}${delta(e.totales,pe?.totales)} ${compLbl}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Pedidos</div><div class="kpi-v">${e.pedidos||'—'}${useYoY&&pe?.pedidos!=null?' <span class="kpi-v-prev">'+pe.pedidos+'</span>':''}</div><div class="kpi-s">${useYoY?'':(pe?.pedidos!=null?pe.pedidos+' · ':'—  ')}${delta(e.pedidos,pe?.pedidos)} ${compLbl}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">AOV</div><div class="kpi-v">${fmtEur(e.aov)}${useYoY&&pe?.aov!=null?' <span class="kpi-v-prev">'+fmtEur(pe.aov)+'</span>':''}</div><div class="kpi-s">${useYoY?'':(pe?.aov!=null?fmtEur(pe.aov)+' · ':'—  ')}${delta(e.aov,pe?.aov)} ${compLbl}</div></div>
   </div>`;
   html+=`<div class="eco-2col mb12">
     <div class="eco-box"><div class="eco-box-title">Desglose facturación · excl. marketplace</div>
