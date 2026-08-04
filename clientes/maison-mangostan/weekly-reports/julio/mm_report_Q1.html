@@ -772,10 +772,10 @@ function selectWeek(wk){
   currentWeek=wk;
   const idx=weekKeys.indexOf(wk);
   buildSelector();
-  renderWeek(wk,idx>0?weekKeys[idx-1]:null);
+  renderWeek(wk,wk==='acumulado'?null:(idx>0?weekKeys[idx-1]:null));
 }
 buildSelector();
-renderWeek(currentWeek,weekKeys.indexOf(currentWeek)>0?weekKeys[weekKeys.indexOf(currentWeek)-1]:null);
+renderWeek(currentWeek,currentWeek==='acumulado'?null:(weekKeys.indexOf(currentWeek)>0?weekKeys[weekKeys.indexOf(currentWeek)-1]:null));
 </script>
 </body>
 </html>
