@@ -978,7 +978,7 @@ function buildCreatividades(period) {
   sec.style.display = "";
   if (div) div.style.display = "";
   document.getElementById("r-creat").innerHTML = list.map(c => {
-    const cpl = (c.inversion / c.leads).toFixed(1);
+    const cpl = c.leads > 0 ? (c.inversion / c.leads).toFixed(1) : "—";
     return `<div class="creat-card">${c.imagen ? `<img class="creat-img" src="${c.imagen}" alt="${c.titulo}">` : ""}<div class="creat-body"><div class="creat-title">${c.titulo}</div><div class="creat-stats"><div class="creat-stat"><div class="creat-stat-label">Leads</div><div class="creat-stat-val">${c.leads}</div></div><div class="creat-stat"><div class="creat-stat-label">Inversi&oacute;n</div><div class="creat-stat-val">${c.inversion}$</div></div><div class="creat-stat"><div class="creat-stat-label">CPL</div><div class="creat-stat-val">${cpl}$</div></div></div></div></div>`;
   }).join("");
 }
