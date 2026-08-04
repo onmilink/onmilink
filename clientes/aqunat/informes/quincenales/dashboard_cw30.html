@@ -471,21 +471,21 @@ const CONFIG = {
       leadsCanal: { WhatsApp:0, Landing:14, Home:0, Testing:3 }
     },
     cw2930: {
-      leads: 18, cotizados: 8, ventasUSD: 0,
-      fuente: { WhatsApp: 0, Landing: 18, Web: 0 },
-      estado: {},
+      leads: 29, cotizados: 10, ventasUSD: 0,
+      fuente: { WhatsApp: 11, Landing: 18, Web: 0 },
+      estado: { Equivocado: 5, Buzón: 3, Cotizado: 2, Cotizando: 1 },
       quot: [],
       gastoCanal: { WhatsApp:70.70, Landing:277.68, Home:69.48, Testing:150.02 },
-      leadsCanal: { WhatsApp:0, Landing:14, Home:0, Testing:4 }
+      leadsCanal: { WhatsApp:11, Landing:14, Home:0, Testing:4 }
     },
     total: {
-      leads: 454, cotizados: 107, ventasUSD: 599440,
-      fuente: { WhatsApp: 151, Landing: 287, Web: 16 },
+      leads: 465, cotizados: 109, ventasUSD: 599440,
+      fuente: { WhatsApp: 162, Landing: 287, Web: 16 },
       estado: { "Puebla":38,"Michoacán":25,"Guanajuato":23,"Jalisco":21,"Veracruz":18,"Oaxaca":14,"Sonora":13,"Estado de México":10,"Querétaro":9,"San Luis Potosí":9,"Nayarit":8,"Hidalgo":8,"Tlaxcala":3 },
       quot: [{ canal:"Landing", usd:437586 }, { canal:"Web", usd:84891 }, { canal:"WhatsApp", usd:76962 }],
       gastoCanal: { WhatsApp:1651.02, Landing:4369.42, Home:779.28, Testing:1037.52 },
       /* leadsCanal: TESTING (atribución Meta) se separa del Landing CRM para evitar doble conteo */
-      leadsCanal: { WhatsApp:151, Landing:254, Home:16, Testing:33 }
+      leadsCanal: { WhatsApp:162, Landing:254, Home:16, Testing:33 }
     }
 
   },
@@ -571,51 +571,60 @@ const fmt  = n => (+n).toLocaleString("es-MX",{maximumFractionDigits:0});
 const fmtD = n => (+n).toFixed(2);
 const col  = k => CANAL_COLORS[k] || "#888";
 let RCH = {};
-let evolFilter = null;
+let evolActive = new Set(); // vacío = todos visibles
 function applyEvolFilter(idx) {
-  evolFilter = idx;
+  if (idx === null) { evolActive.clear(); }
+  else { if (evolActive.has(idx)) { evolActive.delete(idx); } else { evolActive.add(idx); } }
+  const showAll = evolActive.size === 0;
   [RCH["inv-evol"], RCH["cpl-evol"]].forEach(ch => {
     if (!ch) return;
-    ch.data.datasets.forEach((ds, i) => { ds.hidden = (idx !== null && i !== idx); });
+    ch.data.datasets.forEach((ds, i) => { ds.hidden = !showAll && !evolActive.has(i); });
     ch.update();
   });
   ["r-leg-inv-evol","r-leg-cpl-evol"].forEach(legId => {
     document.querySelectorAll("#"+legId+" .leg-chip").forEach((c, i) => {
-      c.classList.toggle("active", idx === i);
-      c.classList.toggle("dimmed", idx !== null && idx !== i);
+      c.classList.toggle("active", evolActive.has(i));
+      c.classList.toggle("dimmed", !showAll && !evolActive.has(i));
     });
     const allBtn = document.querySelector("#"+legId+" .leg-chip-all");
-    if (allBtn) allBtn.classList.toggle("active", idx === null);
+    if (allBtn) allBtn.classList.toggle("active", showAll);
   });
 }
-let evolFilterFull = null;
+let evolActiveFull = new Set(); // vacío = todos visibles
 function applyEvolFilterFull(idx) {
-  evolFilterFull = idx;
+  if (idx === null) {
+    evolActiveFull.clear();
+  } else {
+    if (evolActiveFull.has(idx)) { evolActiveFull.delete(idx); }
+    else { evolActiveFull.add(idx); }
+  }
   const ch = RCH["inv-evol-full"];
   if (!ch) return;
+  const showAll = evolActiveFull.size === 0;
   ch.data.datasets.forEach((ds, i) => {
-    ds.borderColor = (evolFilterFull === null || evolFilterFull === i) ? ds._origColor : ds._origColor + "33";
+    const visible = showAll || evolActiveFull.has(i);
+    ds.borderColor = visible ? ds._origColor : ds._origColor + "33";
     ds.pointBackgroundColor = ds.borderColor;
-    ds.borderWidth = (evolFilterFull === null || evolFilterFull === i) ? 2.5 : 1;
+    ds.borderWidth = visible ? 2.5 : 1;
   });
   ch.update();
   document.querySelectorAll("#r-leg-inv-full .leg-chip").forEach((btn, i) => {
-    btn.classList.toggle("active", evolFilterFull === i);
+    btn.classList.toggle("active", evolActiveFull.has(i));
   });
-  document.querySelector("#r-leg-inv-full .leg-chip-all")?.classList.toggle("active", evolFilterFull === null);
+  document.querySelector("#r-leg-inv-full .leg-chip-all")?.classList.toggle("active", showAll);
 }
 function buildFullLegend(containerId, camps) {
   const el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = '<button class="leg-chip-all active" onclick="applyEvolFilterFull(null)">Todos</button>'
-    + camps.map((k, i) => `<button class="leg-chip" style="color:${col(k)}" onclick="applyEvolFilterFull(evolFilterFull===${i}?null:${i})"><span class="ldot" style="background:${col(k)}"></span>${k}</button>`).join("");
+    + camps.map((k, i) => `<button class="leg-chip" style="color:${col(k)}" onclick="applyEvolFilterFull(${i})"><span class="ldot" style="background:${col(k)}"></span>${k}</button>`).join("");
 }
 function buildEvolLegend(containerId, campsDisplay, campsKeys) {
   const c = document.getElementById(containerId);
   if (!c) return;
   const keys = campsKeys || CAMPS;
   c.innerHTML = '<button class="leg-chip-all active" onclick="applyEvolFilter(null)">Todos</button>'
-    + keys.map((k, i) => `<button class="leg-chip" style="color:${col(k)}" onclick="applyEvolFilter(evolFilter===${i}?null:${i})"><span class="ldot" style="background:${col(k)}"></span>${campsDisplay[i]}</button>`).join("");
+    + keys.map((k, i) => `<button class="leg-chip" style="color:${col(k)}" onclick="applyEvolFilter(${i})"><span class="ldot" style="background:${col(k)}"></span>${campsDisplay[i]}</button>`).join("");
 }
 let rView = CONFIG.periodos[0].key;
 
@@ -1016,7 +1025,7 @@ function renderRendimiento() {
   RCH["estado"]=new Chart(document.getElementById("r-estado"),{type:"bar",data:{labels:elabels,datasets:[{data:evals,backgroundColor:"#00693ECC",borderWidth:0,borderRadius:3}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:11,family:'Rational,sans-serif'}}},y:{ticks:{font:{size:12,family:'Rational,sans-serif'}}}}}});
   // --- Inversión y CPL por canal y periodo (evolución) ---
   const CAMPS_DISPLAY = CAMPS.map(k => k === "Testing" ? "Testing (Guanajuato)" : k);
-  const EVOL_CAMPS = ["Landing", "Home"];
+  const EVOL_CAMPS = ["Landing", "Home", "Testing"];
   const allPeriodos = CONFIG.periodos.filter(p => p.key !== "total");
   const periodoLabels = allPeriodos.map(p => p.label.split(" ")[0]); // e.g. "CW11–CW12"
   // Build series: Landing y Home
@@ -1038,7 +1047,7 @@ function renderRendimiento() {
     return { label: k, data, borderColor: col(k), backgroundColor: col(k) + "33", pointBackgroundColor: col(k), borderWidth: 2, pointRadius: 5, tension: 0.35, fill: false };
   });
   const chartFont = { size: 12, family: "Rational,sans-serif" };
-  evolFilter = null;
+  evolActive.clear();
   rdc("inv-evol");
   RCH["inv-evol"] = new Chart(document.getElementById("r-inv-evol"), {
     type: "line",
@@ -1053,7 +1062,7 @@ function renderRendimiento() {
   });
   buildEvolLegend("r-leg-inv-evol", EVOL_CAMPS, EVOL_CAMPS);
   buildEvolLegend("r-leg-cpl-evol", EVOL_CAMPS, EVOL_CAMPS);
-  if (evolFilter !== null) applyEvolFilter(evolFilter);
+  if (evolActive.size > 0) applyEvolFilter(null); // reset visual al redibujar
   // Build cotizaciones by canal lookup
   const quotByCanal = {};
   (d.quot || []).forEach(q => { quotByCanal[q.canal] = q.usd; });
