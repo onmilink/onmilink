@@ -183,8 +183,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;background:var(-
     <button class="period-btn" onclick="switchPeriod('M01',this)">M01 · 14 abr – 13 may</button>
     <button class="period-btn" onclick="switchPeriod('M02',this)">M02 · 14 – 27 may</button>
     <button class="period-btn" onclick="switchPeriod('M03',this)">M03 · 22 – 25 jun</button>
-    <button class="period-btn active" onclick="switchPeriod('M04',this)">M04 · 24 jun – 8 jul</button>
-    <button class="period-btn" onclick="switchPeriod('TOT',this)">Total · 14 abr – 8 jul</button>
+    <button class="period-btn" onclick="switchPeriod('M04',this)">M04 · 24 jun – 8 jul</button>
+    <button class="period-btn" onclick="switchPeriod('M05',this)">M05 · 9 – 22 jul</button>
+    <button class="period-btn active" onclick="switchPeriod('M06',this)">M06 · 23 jul – 4 ago</button>
+    <button class="period-btn" onclick="switchPeriod('TOT',this)">Total · 14 abr – 4 ago</button>
   </div>
   <div class="nav-tabs">
     <div class="nav-tab active" onclick="showPage('inversion',this)">📈&nbsp; Inversión Meta</div>
@@ -327,14 +329,16 @@ body{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;background:var(-
    DATOS — actualizar aquí en cada informe
    ============================================================ */
 const CFG = {
-  fechaActualizacion: '8 de julio de 2026',
+  fechaActualizacion: '4 de agosto de 2026',
 
   periodos: [
     { key: 'M01', label: 'M01 · 14 abr – 13 may',  range: '14 abr – 13 may 2026' },
     { key: 'M02', label: 'M02 · 14 – 27 may',      range: '14 – 27 may 2026' },
     { key: 'M03', label: 'M03 · 22 – 25 jun',       range: '22 – 25 jun 2026' },
-    { key: 'M04', label: 'M04 · 24 jun – 8 jul',   range: '24 jun – 8 jul 2026' },
-    { key: 'TOT', label: 'Total · 14 abr – 8 jul',  range: '14 abr – 8 jul 2026' }
+    { key: 'M04', label: 'M04 · 24 jun – 8 jul',    range: '24 jun – 8 jul 2026' },
+    { key: 'M05', label: 'M05 · 9 – 22 jul',         range: '9 – 22 jul 2026' },
+    { key: 'M06', label: 'M06 · 23 jul – 4 ago',     range: '23 jul – 4 ago 2026' },
+    { key: 'TOT', label: 'Total · 14 abr – 4 ago',   range: '14 abr – 4 ago 2026' }
   ],
 
   campanas: {
@@ -362,11 +366,22 @@ const CFG = {
       { nombre: 'TRÁFICO Cantoneras · ESP', tipo: 'tofu',  prod: 'cant', inv: 74.53,  leads: null, lpv: 797,   ctr: 5.531, cpm: 3.06,  impr: 24333,  alcance: 14139 },
       { nombre: 'TRÁFICO Cintas · ECU',     tipo: 'tofu',  prod: 'cint', inv: 74.65,  leads: null, lpv: 2279,  ctr: 4.735, cpm: 0.55,  impr: 136175, alcance: 65741 },
     ],
+    M05: [
+      { nombre: 'LEADS Cantoneras · ESP',   tipo: 'leads', prod: 'cant', inv: 418.87, leads: 24,   cpl: 17.45, ctr: 1.548, cpm: 5.18,  impr: 80833,  alcance: 50567 },
+      { nombre: 'LEADS Cintas · LATAM',     tipo: 'leads', prod: 'cint', inv: 18.20,  leads: 7,    cpl: 2.60,  ctr: 2.872, cpm: 3.40,  impr: 5355,   alcance: 3656  },
+      { nombre: 'TRÁFICO Cantoneras · ESP', tipo: 'tofu',  prod: 'cant', inv: 69.67,  leads: null, lpv: 873,   ctr: 5.167, cpm: 2.46,  impr: 28272,  alcance: 15987 },
+      { nombre: 'TRÁFICO Cintas · ECU',     tipo: 'tofu',  prod: 'cint', inv: 28.61,  leads: null, lpv: 929,   ctr: 4.279, cpm: 0.54,  impr: 53424,  alcance: 28538 },
+    ],
+    M06: [
+      { nombre: 'LEADS Cantoneras · ESP',   tipo: 'leads', prod: 'cant', inv: 382.88, leads: 14,   cpl: 27.35, ctr: 1.301, cpm: 4.08,  impr: 93731,  alcance: 60050  },
+      { nombre: 'LEADS Cintas · LATAM',     tipo: 'leads', prod: 'cint', inv: 249.45, leads: 56,   cpl: 4.45,  ctr: 4.512, cpm: 2.19,  impr: 113844, alcance: 37009  },
+      { nombre: 'TRÁFICO Cantoneras · ESP', tipo: 'tofu',  prod: 'cant', inv: 65.73,  leads: null, lpv: 933,   ctr: 5.330, cpm: 2.36,  impr: 27863,  alcance: 18855  },
+    ],
     TOT: [
-      { nombre: 'LEADS Cantoneras · ESP',   tipo: 'leads', prod: 'cant', inv: 1316.96, leads: 75,   cpl: 17.56, ctr: 1.326, cpm: 5.92, impr: 222422, alcance: 97451  },
-      { nombre: 'LEADS Cintas Riego · ECU', tipo: 'leads', prod: 'cint', inv: 1152.39, leads: 58,   cpl: 19.87, ctr: 3.483, cpm: 3.57, impr: 322613, alcance: 93844  },
-      { nombre: 'TRÁFICO Cantoneras · ESP', tipo: 'tofu',  prod: 'cant', inv: 357.29,  leads: null, lpv: 4018,  ctr: 5.543, cpm: 4.00, impr: 89391,  alcance: 54850  },
-      { nombre: 'TRÁFICO Cintas · ECU',     tipo: 'tofu',  prod: 'cint', inv: 356.66,  leads: null, lpv: 10949, ctr: 3.166, cpm: 0.60, impr: 597810, alcance: 284771 },
+      { nombre: 'LEADS Cantoneras · ESP',   tipo: 'leads', prod: 'cant', inv: 2118.71, leads: 113,  cpl: 18.75, ctr: 1.365, cpm: 5.34, impr: 396986, alcance: 208068 },
+      { nombre: 'LEADS Cintas · LATAM',     tipo: 'leads', prod: 'cint', inv: 1420.04, leads: 121,  cpl: 11.74, ctr: 3.742, cpm: 3.21, impr: 441812, alcance: 134509 },
+      { nombre: 'TRÁFICO Cantoneras · ESP', tipo: 'tofu',  prod: 'cant', inv: 492.69,  leads: null, lpv: 5824,  ctr: 5.428, cpm: 3.39, impr: 145526, alcance: 89692  },
+      { nombre: 'TRÁFICO Cintas · ECU',     tipo: 'tofu',  prod: 'cint', inv: 385.27,  leads: null, lpv: 11878, ctr: 3.257, cpm: 0.59, impr: 651234, alcance: 313309 },
     ]
   },
 
@@ -427,18 +442,46 @@ const CFG = {
         comerciales: { Salva: 7, 'Sin asignar': 1 }
       }
     },
+    M05: {
+      cant: {
+        nombre: 'Cantoneras', mercado: 'España',
+        total: 33,
+        pipeline: { nuevo: 20, buzon: 5, cotizando: 4, cotizado: 4 },
+        comerciales: { Salva: 33 }
+      },
+      cint: {
+        nombre: 'Cintas Riego', mercado: 'LATAM',
+        total: 17,
+        pipeline: { nuevo: 14, buzon: 0, cotizando: 3, cotizado: 0 },
+        comerciales: { Salva: 17 }
+      }
+    },
+    M06: {
+      cant: {
+        nombre: 'Cantoneras', mercado: 'España',
+        total: 27,
+        pipeline: { nuevo: 18, buzon: 4, cotizando: 5, cotizado: 0 },
+        comerciales: { Salva: 26, 'Sin asignar': 1 }
+      },
+      cint: {
+        nombre: 'Cintas Riego', mercado: 'LATAM',
+        total: 71,
+        pipeline: { nuevo: 58, buzon: 2, cotizando: 11, cotizado: 0 },
+        comerciales: { Salva: 66, 'Sin asignar': 5 }
+      }
+    },
     TOT: {
       cant: {
         nombre: 'Cantoneras', mercado: 'España',
-        total: 8,
-        pipeline: { nuevo: 5, buzon: 0, cotizando: 2, cotizado: 1 },
-        comerciales: { Salva: 4, 'Sin asignar': 4 }
+        total: 144,
+        pipeline: { nuevo: 77, buzon: 27, cotizando: 28, cotizado: 11 },
+        comerciales: { Salva: 132, 'Sin asignar': 12 }
       },
       cint: {
-        nombre: 'Cintas Riego', mercado: 'Ecuador',
-        total: 4,
-        pipeline: { nuevo: 2, buzon: 0, cotizando: 1, cotizado: 0 },
-        comerciales: { Juan: 1, Salva: 1, 'Sin asignar': 2 }
+        nombre: 'Cintas Riego', mercado: 'LATAM',
+        total: 145,
+        pipeline: { nuevo: 102, buzon: 28, cotizando: 15, cotizado: 0 },
+        comerciales: { Juan: 16, Salva: 118, 'Sin asignar': 11 }
       }
     }
   },
@@ -474,6 +517,30 @@ const CFG = {
         { nombre: 'Volumen',         id: '[IMG]_[volumen]_[V3]',          tipo: 'imagen', inv: 11.89,  leads: 0,  cpl: null,  ctr: 2.023, cpm: 3.11, impr: 3829,  alcance: 2669  },
         { nombre: 'At. cliente',     id: '[IMG]_[At. cliente]_[V3]',     tipo: 'imagen', inv: 8.61,   leads: 1,  cpl: 8.61,  ctr: 10.883, cpm: 7.45, impr: 1155, alcance: 634   },
         { nombre: 'Ahorro',          id: '[IMG]_[ahorro]_[V3]',           tipo: 'imagen', inv: 3.63,   leads: 0,  cpl: null,  ctr: 0.797, cpm: 5.24, impr: 693,   alcance: 502   },
+      ]
+    },
+    M05: {
+      cant: [
+        { nombre: 'Sobrepago',     id: '[VID]_[sobrepago]_[V3]',    tipo: 'video',  inv: 260.33, leads: 22, cpl: 11.83, ctr: 1.402, cpm: 3.93,  impr: 66326, alcance: 47060 },
+        { nombre: 'Volumen',       id: '[IMG]_[volumen]_[V3]',      tipo: 'imagen', inv: 63.07,  leads: 2,  cpl: 31.54, ctr: 1.654, cpm: 21.47, impr: 2938,  alcance: 1874  },
+        { nombre: 'Dos Palets',    id: '[VID]_[dos palets]_[V3]',  tipo: 'video',  inv: 44.28,  leads: 0,  cpl: null,  ctr: 1.893, cpm: 5.20,  impr: 8510,  alcance: 5493  },
+        { nombre: 'Sobrepago IMG', id: '[IMG]_[sobrepago]_[V3]',   tipo: 'imagen', inv: 42.63,  leads: 0,  cpl: null,  ctr: 1.802, cpm: 17.61, impr: 2421,  alcance: 1554  },
+        { nombre: 'Ahorro',        id: '[IMG]_[Ahorro]_[V3]',       tipo: 'imagen', inv: 8.56,   leads: 0,  cpl: null,  ctr: 0.691, cpm: 13.42, impr: 638,   alcance: 434   },
+      ],
+      cint: [
+        { nombre: 'Volumen',         id: '[IMG]_[volumen]',         tipo: 'imagen', inv: 11.52, leads: 6, cpl: 1.92, ctr: 2.454, cpm: 2.99, impr: 3848, alcance: 3015 },
+        { nombre: 'Compara precios', id: '[VID]_[compara precios]', tipo: 'video',  inv: 3.34,  leads: 1, cpl: 3.34, ctr: 5.273, cpm: 4.82, impr: 693,  alcance: 531  },
+      ]
+    },
+    M06: {
+      cant: [
+        { nombre: 'Sobrepago',  id: '[VID]_[sobrepago]_[V3]',  tipo: 'video',  inv: 284.29, leads: 8, cpl: 35.54, ctr: 1.130, cpm: 3.74, impr: 76042, alcance: 55728 },
+        { nombre: 'Dos Palets', id: '[VID]_[dos palets]_[V3]', tipo: 'video',  inv: 56.09,  leads: 5, cpl: 11.22, ctr: 1.406, cpm: 4.11, impr: 13643, alcance: 9887  },
+        { nombre: 'Ahorro',     id: '[IMG]_[Ahorro]_[V3]',     tipo: 'imagen', inv: 42.50,  leads: 1, cpl: 42.50, ctr: 1.145, cpm: 10.50, impr: 4046, alcance: 2358  },
+      ],
+      cint: [
+        { nombre: 'Compara precios', id: '[VID]_[compara precios]', tipo: 'video',  inv: 182.76, leads: 44, cpl: 4.15, ctr: 5.363, cpm: 2.45, impr: 74464, alcance: 26032 },
+        { nombre: 'Volumen',         id: '[IMG]_[volumen]',         tipo: 'imagen', inv: 64.23,  leads: 12, cpl: 5.35, ctr: 2.182, cpm: 1.66, impr: 38747, alcance: 19525 },
       ]
     }
   },
@@ -640,6 +707,156 @@ const CFG = {
     { nombre: 'Fahd zaidi · Fahd zaidi', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-07', adId: '[IMG]_[volumen]_[V3]' },
     { nombre: 'Jorge Alberola · Tubular Confort,s.l', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-07', adId: '[VID]_[dos palets]_[V3]' },
     { nombre: 'Javier Sánchez · Javier Sánchez', prod: 'cant', situacion: 'Sin gestionar', fecha: '2026-07-07', adId: null },
+    /* ── M05 (9 – 22 jul) ── */
+    { nombre: 'BAYA LAHAT TOURE · Almacén', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-09', adId: '[IMG]_[volumen]_[V3]' },
+    { nombre: 'Eduardo Martínez · BEST FRUIT', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-09', adId: null },
+    { nombre: 'Almudena Rodríguez · Pórtico Gestión e Ingeniería SL', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-09', adId: null },
+    { nombre: 'Alassane ndoye · Trabajo', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-11', adId: '[IMG]_[volumen]_[V3]' },
+    { nombre: 'Andrés Martín Garzón · Deleite gran', prod: 'cant', situacion: 'No llegamos en precio', fecha: '2026-07-13', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Juan Antonio MUÑUMEL · Lonypack Global', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-13', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Eduardo porras · Lania Visuals', prod: 'cant', situacion: 'No llegamos en precio', fecha: '2026-07-13', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Javier jaime · Brafim mecplast', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-14', adId: null },
+    { nombre: 'Tomás Aranda · Euromolduras SL', prod: 'cant', situacion: 'Envio de Muestra', fecha: '2026-07-14', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Ya6ouba78konate@gmail.com · Yacouba', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-14', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Vicente · Global macho export sl', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Mario Santa Cruz · Valquimia', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'José Federico BELANDO Martínez · Frutas BELANDO SL', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: null },
+    { nombre: 'Sergio cabrero · Montaje y Barnices de Iscar', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'José Manuel Rubio · Mondisen', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Guillermo · Barna', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-17', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'david fuentes · STAC', prod: 'cant', situacion: 'Envio de Muestra', fecha: '2026-07-17', adId: null },
+    { nombre: 'Alessio Areni · LAF SRL', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-17', adId: null },
+    { nombre: 'Juan Antonio Gómez Limón · Productos Villa Andévalo', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-19', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Alejandro Marín · Borneo', prod: 'cant', situacion: 'Compra', fecha: '2026-07-20', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Jesús Sánchez torres · Jecris', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-20', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Muebles rudeca · Rudeca', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: null },
+    { nombre: 'Philippe · Rombeau', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Aceites utica sl · Aceites utica sl', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'David Llorach · Inteco', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: null },
+    { nombre: 'Marcial Badía · Campelo proyectos s l', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Juan clemente Sánchez · Gastroworld', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Pedro Gonez · Iregua Iluminacion', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Francisco Javier Gutiérrez Padilla · Lujovi', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Felipe Berna · Agricola Marvic sl', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'José · ecoinver export', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Silviano Duque · CartonJerte S.L', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-22', adId: null },
+    { nombre: 'David Tirado · Body Nutrition SL', prod: 'cant', situacion: 'Compra', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Frank patiño · Servimagro sas', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: null },
+    { nombre: 'Alirio castelblanco · C.i.enalgro@gmail.com', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
+    { nombre: 'heriberto ponce · heriberto juan ponce la rosa', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
+    { nombre: 'Alberto Gómez · Técnico agricola', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'Maria nieves ventura Quispe · Agro mining SOLUTIONS QUISPE', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
+    { nombre: 'Segundo Roncal · Inka Gold Farm', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
+    { nombre: 'Moisés Salcedo · Moshe RE EIRL', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'Yulian Jose Ayca Tapia · Agroinversiones almida scrl', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
+    { nombre: 'Manuel Jorquera · AGROSERVICES LTDA', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: null },
+    { nombre: 'Limberg · Agro servicios spa', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'Juliy · Free Lance Agro', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'Carlos Espinosa · EyZ agro', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'Sebastián · Riegotec', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: null },
+    { nombre: 'Roger Espinoza · Tecnofilm sac', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'Jorge Helard Beltran Bravo · El arenal', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'Róger Ramírez Velásquez · Agrocampo del norte SRL', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'JOEL Coaquira · Joel Coaquira', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    /* ── M06 (23 jul – 4 ago) ── */
+    { nombre: 'Pascual Aguilar · José María Nadador e Hijo SL', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[dos palets]_[V3]' },
+    { nombre: 'Juan Francisco · Versan Avicola', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Julio · Creativefood', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-23', adId: null },
+    { nombre: 'Rufino Quispe Llanque · O4426812', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Segundo Roncal Lopez · Inka Gold Farm', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Luis Alberto barboza · Barcor peru', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Erlis Mendoza Saavedra · Agroinverciones E&G sac', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Ronal Barturen Aguinaga · Grupo coppse soluciones', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Luis · Luis Carrillo', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-23', adId: null },
+    { nombre: 'Jorge Mario Martinez fuentes · Agricultura', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Bolivar jurado · Err', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Deybi paredes · Agrícola L&F', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Alexis Pasten Vega · Agricolachilecito', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Antonio Garrido · Las coloraitas de mazagon sl', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-24', adId: null },
+    { nombre: 'Manuel · Import Interbalear', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Alonso · Veganic', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Feank patiño · Servimagrosas', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-24', adId: '[IMG]_[volumen]' },
+    { nombre: 'Exon Navarro · Grupo lexo', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[compara precios]' },
+    { nombre: 'Pedro luis Peña · Global agricultural business', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-24', adId: null },
+    { nombre: 'Evelin Torres · Tilmex la casa del riego', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[compara precios]' },
+    { nombre: 'Mauricio chaparro · Rancho don Cristóbal', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[compara precios]' },
+    { nombre: 'Alberto Campo · Riegos y Suministros de la Costa SAS', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[compara precios]' },
+    { nombre: 'German rafael reyes · German reyes', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[compara precios]' },
+    { nombre: 'Jaime · Comercializadora hidroquillon', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-24', adId: '[IMG]_[volumen]' },
+    { nombre: 'Jaime Ernesto Moreno Parra · Comercializadora13A', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-25', adId: '[VID]_[compara precios]' },
+    { nombre: 'Leonardo Cisternas · Cisgo SPA', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-25', adId: '[IMG]_[volumen]' },
+    { nombre: 'Génesis lisette luza illanes · Agroinsumos', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-25', adId: '[IMG]_[volumen]' },
+    { nombre: 'HENRY TORRES CACERES · PAKARI CENTERPACK SAC', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-25', adId: '[IMG]_[volumen]' },
+    { nombre: 'Juan José · Ferretería industrial', prod: 'cint', situacion: 'Sin contestacion', fecha: '2026-07-25', adId: '[IMG]_[volumen]' },
+    { nombre: 'Alfredo · Grupo tilmex', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-25', adId: '[IMG]_[volumen]' },
+    { nombre: 'Carlos Sanchez · Agrifrut', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-25', adId: '[IMG]_[volumen]' },
+    { nombre: 'Andrés Santa · SOLUCIONES DE ANTIOQUIA SAS', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-25', adId: '[IMG]_[volumen]' },
+    { nombre: 'Reinaldo Bernal · Finca el eden', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-25', adId: '[VID]_[compara precios]' },
+    { nombre: 'Fidel Tobias Eustaquio Salvatierra · AGRICULTURA Y RIEGO DEL VALLE PERU EIRL', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-25', adId: '[VID]_[compara precios]' },
+    { nombre: 'Mounasse sako · Mali', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-26', adId: null },
+    { nombre: 'Maximiliano Olivos · Olivos', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-26', adId: null },
+    { nombre: 'Luis salinas carrasco · Luis salinas', prod: 'cint', situacion: 'Equivocado', fecha: '2026-07-26', adId: '[VID]_[compara precios]' },
+    { nombre: 'Fraank · Agrotec', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-26', adId: '[VID]_[compara precios]' },
+    { nombre: 'David Alonso · Cambridge Energy', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-27', adId: null },
+    { nombre: 'Carlos · EMBOTITS NIETO,S.L', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-27', adId: null },
+    { nombre: 'Jaime Alban · Agro servicios alban', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-27', adId: '[VID]_[compara precios]' },
+    { nombre: 'Yeferson · MATIFLEX', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-27', adId: null },
+    { nombre: 'Iris Sánchez · Jertezas', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-28', adId: '[VID]_[dos palets]_[V3]' },
+    { nombre: 'Angel Diaz · Aloba', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-28', adId: null },
+    { nombre: 'GUILLERMO · GOYVAL', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-28', adId: 'link_in_bio' },
+    { nombre: 'Mateo londoño · Llamo agro', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-28', adId: null },
+    { nombre: 'Javier Quintana · Quintariegos', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-28', adId: null },
+    { nombre: 'Luis · Kdena de transportes sac', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-28', adId: '[VID]_[compara precios]' },
+    { nombre: 'Kelly · Grupo gelyx sac', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-28', adId: '[VID]_[compara precios]' },
+    { nombre: 'Gerson Garayar navarro · ..', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-28', adId: null },
+    { nombre: 'Vicente Marquina · Rikel', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-28', adId: '[VID]_[compara precios]' },
+    { nombre: 'Jose Espadafor · Espadafor', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-29', adId: null },
+    { nombre: 'José Manuel alloza · Imaz sl', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-29', adId: null },
+    { nombre: 'Jose morales · Jose morales', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-29', adId: '[VID]_[compara precios]' },
+    { nombre: 'Jimmy Sotero Zeta · Ferryagro', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-29', adId: null },
+    { nombre: 'Hernando Bernal A · Agricola Bamboo SAS', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-29', adId: null },
+    { nombre: 'Michel · Riegosolarinteligente', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-29', adId: '[VID]_[compara precios]' },
+    { nombre: 'Manuel Martin Esteves Montero · Adonis Contratistas Generales eirl', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-29', adId: '[VID]_[compara precios]' },
+    { nombre: 'david ledesma · surtiempaques', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-30', adId: '[VID]_[compara precios]' },
+    { nombre: 'Luis Felipe Bocanegra · Aprocol', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-30', adId: '[IMG]_[volumen]' },
+    { nombre: 'Marcos larianco · Hidro Agro Perú', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-30', adId: '[VID]_[compara precios]' },
+    { nombre: 'Jaime · Comercializadora Hidroquillon spa', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-30', adId: '[IMG]_[volumen]' },
+    { nombre: 'Pablo Neyra · Sociedad Agrícola C&M', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-30', adId: null },
+    { nombre: 'Cristián Talma · Captal', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-30', adId: '[VID]_[compara precios]' },
+    { nombre: 'Sufyan Nadeem · No tago', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-31', adId: '[VID]_[dos palets]_[V3]' },
+    { nombre: 'Manuel Jorquera · AGROSERVICES LTDA', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-31', adId: '[VID]_[compara precios]' },
+    { nombre: 'Aldo · Inversiones export huanta sac', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-31', adId: '[VID]_[compara precios]' },
+    { nombre: 'Ingrid portilla Bejarano · Agromax group srl', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-31', adId: null },
+    { nombre: 'Benci Morocco · Mayte cía SAC', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-31', adId: '[VID]_[compara precios]' },
+    { nombre: 'Jordi Poyo · Frutas Hnos Espax', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-01', adId: null },
+    { nombre: 'José López · Muebles Bróker sl', prod: 'cant', situacion: 'Cotizando', fecha: '2026-08-01', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Jose Blas · Solid Interiors, S.L.', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-01', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Raúl González conde · Etiquetas gráficas Sur de Galicia, S.L', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-01', adId: '[VID]_[dos palets]_[V3]' },
+    { nombre: 'Javier · Llaurant la lluna', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-01', adId: '[VID]_[dos palets]_[V3]' },
+    { nombre: 'rgproyectoselectricos@gmail.com · Cooperativa agrícola frutos de la Araucanía', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-01', adId: '[VID]_[compara precios]' },
+    { nombre: 'Felipe Werchez · Agrocomecial stc', prod: 'cint', situacion: 'Cotizando', fecha: '2026-08-01', adId: '[VID]_[compara precios]' },
+    { nombre: 'Blas uribe · Sat frutas el botas', prod: 'cant', situacion: 'Cotizando', fecha: '2026-08-02', adId: '[VID]_[dos palets]_[V3]' },
+    { nombre: 'Mario Pérez · Riegos san isidro', prod: 'cint', situacion: 'Cotizando', fecha: '2026-08-02', adId: '[VID]_[compara precios]' },
+    { nombre: 'Lukas Zambrano Vega · Ingebio', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-02', adId: null },
+    { nombre: 'FRANCISCO · Agro San Francisco', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-02', adId: '[VID]_[compara precios]' },
+    { nombre: 'luis eduardo borrero · reycol', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-02', adId: '[VID]_[compara precios]' },
+    { nombre: 'Alberto romero · Origen food', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-03', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Ignacio cabañas ramirez · GRANJAS CABAÑAS RAMIREZ', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-03', adId: null },
+    { nombre: 'Juan Hernández · ALLTECH CROP SCIENCE SLU', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-03', adId: null },
+    { nombre: 'FRANCISCO MANUEL · P.ESPEJO S.L.U.', prod: 'cant', situacion: 'Cotizando', fecha: '2026-08-03', adId: null },
+    { nombre: 'Jennifer Tapiero · Agrovive ingeniería sas', prod: 'cint', situacion: 'Cotizando', fecha: '2026-08-03', adId: '[VID]_[compara precios]' },
+    { nombre: 'Sebastian Reyes · Topflange', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-03', adId: '[VID]_[compara precios]' },
+    { nombre: 'Arturo · Agronegocios Cubes EIRL', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-03', adId: '[VID]_[compara precios]' },
+    { nombre: 'Manuel Quito Chicloté · Acuífero Casma S.A', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-03', adId: '[VID]_[compara precios]' },
+    { nombre: 'Juan chacon · Fundo Leticia', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-03', adId: '[VID]_[compara precios]' },
+    { nombre: 'José Manuel salido cantarero · Grupo mayoral', prod: 'cant', situacion: 'Equivocado', fecha: '2026-08-04', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Cesar Guerrero · Cristaleria y decoración Hnos Guerrero', prod: 'cant', situacion: 'Sin gestionar', fecha: '2026-08-04', adId: null },
+    { nombre: 'Gonzalo · SEMA SpA', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-04', adId: '[VID]_[compara precios]' },
+    { nombre: 'Comercial agro asca spa · Agroasca', prod: 'cint', situacion: 'Sin gestionar', fecha: '2026-08-04', adId: '[IMG]_[volumen]' },
+    { nombre: 'Eick · Decerva', prod: 'cint', situacion: 'Sin gestionar', fecha: '2026-08-04', adId: '[VID]_[compara precios]' },
+    { nombre: 'Dario Núñez · Dario Núñez', prod: 'cint', situacion: 'Sin gestionar', fecha: '2026-08-04', adId: '[VID]_[compara precios]' },
+    { nombre: 'Wilder · Inversiones Rocío', prod: 'cint', situacion: 'Sin gestionar', fecha: '2026-08-04', adId: '[VID]_[compara precios]' },
+    { nombre: 'Emerzon Santiago Bazán · Consorcio integral EIRL.', prod: 'cint', situacion: 'Sin gestionar', fecha: '2026-08-04', adId: '[VID]_[compara precios]' },
   ],
 
   cplQualificado: {
@@ -659,7 +876,7 @@ const fmtEur = n => n != null ? fmtD(n) + ' €' : '—';
 const fmtPct = n => n != null ? fmtD(n) + '%' : '—';
 
 let rFilter       = 'all';
-let currentPeriod = 'M04';
+let currentPeriod = 'M06';
 let charts        = {};
 
 /* ── Header ── */
@@ -980,7 +1197,7 @@ function renderRendimiento() {
    TAB 3: RENDIMIENTO CREATIVO
    ============================================================ */
 let creatFilter = 'cant';
-let creatPeriod  = 'M03';
+let creatPeriod  = 'M06';
 
 /* Rangos de fecha por periodo para filtrar UTM */
 const PERIODO_FECHAS = {
@@ -988,6 +1205,8 @@ const PERIODO_FECHAS = {
   M02: { desde: '2026-05-14', hasta: '2026-05-27' },
   M03: { desde: '2026-06-22', hasta: '2026-06-25' },
   M04: { desde: '2026-06-24', hasta: '2026-07-08' },
+  M05: { desde: '2026-07-09', hasta: '2026-07-22' },
+  M06: { desde: '2026-07-23', hasta: '2026-08-04' },
   TOT: { desde: '2000-01-01', hasta: '2099-12-31' }
 };
 
