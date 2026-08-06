@@ -585,6 +585,31 @@ tbody tr:last-child td { border-bottom: none; }
   margin-left: 0.15rem;
   vertical-align: middle;
 }
+/* Period tabs */
+.period-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 2rem 0 2.5rem;
+}
+.period-tab {
+  padding: 0.55rem 1.5rem;
+  border-radius: 99px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.period-tab:hover { border-color: var(--ink-2); color: var(--ink-1); }
+.period-tab.active { background: var(--ink-1); color: var(--surface); border-color: var(--ink-1); }
+.period-section { display: none; }
+.period-section.active { display: block; }
 </style>
 
 <div class="page">
@@ -593,8 +618,8 @@ tbody tr:last-child td { border-bottom: none; }
   <div class="report-header">
     <div class="report-meta">
       <div class="eyebrow">Meta Ads &nbsp;·&nbsp; Grupo Gastronómico</div>
-      <div class="report-title">16 – 22 Jul 2026</div>
-      <div class="report-period">Informe semanal de rendimiento</div>
+      <div class="report-title">Jul – Ago 2026</div>
+      <div class="report-period">Informe de rendimiento · 2 períodos</div>
     </div>
     <div class="legend">
       <div class="legend-item">
@@ -608,6 +633,14 @@ tbody tr:last-child td { border-bottom: none; }
       </div>
     </div>
   </div>
+
+  <!-- ═══ PERIOD SELECTOR ═══ -->
+  <div class="period-tabs">
+    <button class="period-tab" onclick="switchPeriod(0)">16–22 Jul · Semana</button>
+    <button class="period-tab" onclick="switchPeriod(1)">22 Jul–5 Ago · Quincena</button>
+  </div>
+
+  <div class="period-section" id="period-1">
 
   <!-- ═══ TOTALS STRIP ═══ -->
   <div class="totals-strip">
@@ -1007,14 +1040,9 @@ tbody tr:last-child td { border-bottom: none; }
     </ul>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!-- ═══ QUINCENA 22 JUL – 5 AGO ═══════════════════════════════════════ -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  </div><!-- /period-1 -->
 
-  <div class="period-divider">
-    <div class="period-divider-label">22 Jul – 5 Ago 2026</div>
-  </div>
-  <p class="period-divider-sub">Quincena · 14 días · datos Meta Ads</p>
+  <div class="period-section" id="period-2">
 
   <!-- Totals strip Q2 -->
   <div class="totals-strip">
@@ -1239,9 +1267,19 @@ tbody tr:last-child td { border-bottom: none; }
     </ul>
   </div>
 
+  </div><!-- /period-2 -->
+
   <!-- ═══ FOOTNOTE ═══ -->
   <p class="footnote">
     * Datos de Meta Ads. Sem. 16–22 jul: "Visitas al perfil" incluye IG + web para Playa y Pillo; solo IG para Viggos. Quincena 22 jul–5 ago: visitas al perfil de Instagram únicamente para los tres. CPM de Playa (ambos períodos) no disponible en el export; CPM de Viggos quincena estimado (~€1.37) como media ponderada de los anuncios activos. Seguidores totales y CPF "Total" calculados como suma y ratio globales respectivamente. Datos de sesiones web (Google Analytics) no incluidos.
   </p>
 
 </div>
+
+<script>
+function switchPeriod(n) {
+  document.querySelectorAll('.period-tab').forEach((t, i) => t.classList.toggle('active', i === n));
+  document.querySelectorAll('.period-section').forEach((s, i) => s.classList.toggle('active', i === n));
+}
+switchPeriod(0);
+</script>
