@@ -210,25 +210,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;background:var(-
         <table class="inv-table" id="inv-tabla"></table>
       </div>
 
-      <div class="section-title">Distribución de inversión</div>
-      <div class="chart-grid">
-        <div class="chart-box">
-          <div class="chart-title">Inversión por campaña</div>
-          <div class="chart-wrap"><canvas id="c-inv-bar"></canvas></div>
-        </div>
-        <div class="chart-box">
-          <div class="chart-title">% Distribución · LEADS vs TOFU</div>
-          <div class="chart-wrap"><canvas id="c-inv-pie"></canvas></div>
-        </div>
-        <div class="chart-box">
-          <div class="chart-title">Leads Meta por producto</div>
-          <div class="chart-wrap"><canvas id="c-leads-bar"></canvas></div>
-        </div>
-        <div class="chart-box">
-          <div class="chart-title">CPL Meta por campaña (€)</div>
-          <div class="chart-wrap"><canvas id="c-cpl-bar"></canvas></div>
-        </div>
-      </div>
+      <div class="section-title" id="inv-geo-title" style="display:none">Distribución geográfica · inversión</div>
+      <div id="inv-geo"></div>
     </div>
 
     <!-- ══ TAB 2: RENDIMIENTO ══ -->
@@ -862,6 +845,25 @@ const CFG = {
   cplQualificado: {
     cant: { metaLeads: 53, crmQualif: 3, invTotal: 887.39 },
     cint: { metaLeads: 47, crmQualif: 1, invTotal: 874.62 }
+  },
+
+  geoData: {
+    M06: {
+      cant: [
+        { zona: 'Andalucía',            inv: 98.18 },
+        { zona: 'Comunidad Valenciana', inv: 55.96 },
+        { zona: 'Cataluña',             inv: 54.92 },
+        { zona: 'Comunidad de Madrid',  inv: 30.14 },
+        { zona: 'Región de Murcia',     inv: 24.40 },
+        { zona: 'Castilla-La Mancha',   inv: 23.36 },
+        { zona: 'Otras regiones',       inv: 95.92 },
+      ],
+      cint: [
+        { zona: 'Perú',     inv: 124.84 },
+        { zona: 'Colombia', inv: 86.57  },
+        { zona: 'Chile',    inv: 38.07  },
+      ]
+    }
   }
 };
 /* ============================================================ */
@@ -992,45 +994,41 @@ function buildInversion() {
 
   document.getElementById('inv-tabla').innerHTML = thead + '<tbody>' + rows.join('') + '</tbody>';
 
-  /* Charts */
-  setTimeout(() => {
-    mkChart('c-inv-bar', 'bar', {
-      labels: camps.map(c => c.nombre),
-      datasets: [{ label: 'Inversión (€)', data: camps.map(c=>c.inv),
-        backgroundColor: camps.map(c=>c.prod==='cant'?'rgba(217,119,6,.75)':'rgba(26,122,110,.75)'),
-        borderRadius: 4 }]
-    }, { plugins:{ legend:{display:false} }, scales:{ y:{ticks:{callback:v=>v+'€'},grid:{color:'rgba(0,0,0,.05)'}} } });
-
-    mkChart('c-inv-pie', 'doughnut', {
-      labels: camps.map(c=>c.nombre),
-      datasets: [{
-        data: camps.map(c=>c.inv),
-        backgroundColor: camps.map(c=>c.prod==='cant'
-          ? (c.tipo==='leads'?'rgba(217,119,6,.8)':'rgba(217,119,6,.35)')
-          : (c.tipo==='leads'?'rgba(26,122,110,.8)':'rgba(26,122,110,.35)')),
-        borderWidth: 1, borderColor: '#fff'
-      }]
-    }, { plugins:{ legend:{position:'right',labels:{font:{size:11}}} }, cutout:'55%' });
-
-    const leadsData = [
-      camps.find(c=>c.prod==='cant'&&c.tipo==='leads')?.leads||0,
-      camps.find(c=>c.prod==='cint'&&c.tipo==='leads')?.leads||0
-    ];
-    mkChart('c-leads-bar', 'bar', {
-      labels: ['Cantoneras · ESP', 'Cintas · ECU'],
-      datasets: [{ label: 'Leads', data: leadsData,
-        backgroundColor: ['rgba(217,119,6,.75)','rgba(26,122,110,.75)'],
-        borderRadius: 4 }]
-    }, { plugins:{ legend:{display:false} }, scales:{ y:{beginAtZero:true,ticks:{stepSize:5}} } });
-
-    const lc = camps.filter(c=>c.tipo==='leads');
-    mkChart('c-cpl-bar', 'bar', {
-      labels: lc.map(c=>c.nombre),
-      datasets: [{ label: 'CPL (€)', data: lc.map(c=>c.cpl),
-        backgroundColor: lc.map(c=>c.prod==='cant'?'rgba(217,119,6,.75)':'rgba(26,122,110,.75)'),
-        borderRadius: 4 }]
-    }, { plugins:{ legend:{display:false} }, scales:{ y:{ticks:{callback:v=>v+'€'},beginAtZero:true} } });
-  }, 50);
+  /* Geo tables */
+  const geo = CFG.geoData && CFG.geoData[currentPeriod];
+  const geoTitle = document.getElementById('inv-geo-title');
+  const geoEl    = document.getElementById('inv-geo');
+  if (!geo) {
+    geoTitle.style.display = 'none';
+    geoEl.innerHTML = '';
+  } else {
+    geoTitle.style.display = '';
+    const makeTable = (rows, color, totalLabel) => {
+      const tot = rows.reduce((s,r)=>s+r.inv, 0);
+      const trs = rows.map(r => {
+        const pct = (r.inv/tot*100).toFixed(1);
+        const bar = `<div style="height:6px;border-radius:3px;background:${color};width:${pct}%;opacity:.6;margin-top:3px"></div>`;
+        return `<tr>
+          <td>${r.zona}</td>
+          <td style="text-align:right;font-variant-numeric:tabular-nums">${fmtD(r.inv)} €</td>
+          <td style="text-align:right;font-variant-numeric:tabular-nums;color:var(--txt-2)">${pct}%${bar}</td>
+        </tr>`;
+      });
+      trs.push(`<tr class="total-row"><td><strong>${totalLabel}</strong></td><td style="text-align:right"><strong>${fmtD(tot)} €</strong></td><td style="text-align:right"><strong>100%</strong></td></tr>`);
+      return `<thead><tr><th>Territorio</th><th style="text-align:right">Inversión</th><th style="text-align:right">% dist.</th></tr></thead><tbody>${trs.join('')}</tbody>`;
+    };
+    geoEl.innerHTML = `
+      <div class="chart-grid" style="grid-template-columns:1fr 1fr">
+        <div class="chart-box">
+          <div class="chart-title"><span style="color:var(--cant)">●</span> Distribución por región · <strong>España</strong> (Cantoneras)</div>
+          <div style="overflow-x:auto"><table class="inv-table" style="margin-top:8px">${makeTable(geo.cant,'var(--cant)','Total ESP')}</table></div>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title"><span style="color:var(--cint)">●</span> Distribución por país · <strong>LATAM</strong> (Cintas Riego)</div>
+          <div style="overflow-x:auto"><table class="inv-table" style="margin-top:8px">${makeTable(geo.cint,'var(--cint)','Total LATAM')}</table></div>
+        </div>
+      </div>`;
+  }
 }
 
 /* ============================================================
