@@ -522,8 +522,10 @@ const CFG = {
         { nombre: 'Ahorro',     id: '[IMG]_[Ahorro]_[V3]',     tipo: 'imagen', inv: 42.50,  leads: 1, cpl: 42.50, ctr: 1.145, cpm: 10.50, impr: 4046, alcance: 2358  },
       ],
       cint: [
-        { nombre: 'Compara precios', id: '[VID]_[compara precios]', tipo: 'video',  inv: 182.76, leads: 44, cpl: 4.15, ctr: 5.363, cpm: 2.45, impr: 74464, alcance: 26032 },
-        { nombre: 'Volumen',         id: '[IMG]_[volumen]',         tipo: 'imagen', inv: 64.23,  leads: 12, cpl: 5.35, ctr: 2.182, cpm: 1.66, impr: 38747, alcance: 19525 },
+        { nombre: 'Compara precios',  id: '[VID]_[compara precios]',    tipo: 'video',  inv: 182.79, leads: 44, cpl: 4.15, ctr: 5.360, cpm: 2.45, impr: 74467, alcance: 26032 },
+        { nombre: 'Volumen',          id: '[IMG]_[volumen]',             tipo: 'imagen', inv: 64.23,  leads: 12, cpl: 5.35, ctr: 2.180, cpm: 1.66, impr: 38747, alcance: 19525 },
+        { nombre: 'Margen',           id: '[IMG]_[margen]',              tipo: 'imagen', inv: 1.32,   leads: 0,  cpl: null, ctr: 3.550, cpm: 4.18, impr: 316,   alcance: 197   },
+        { nombre: 'Compara y ahorra', id: '[IMG]_[compara y ahorra]',    tipo: 'imagen', inv: 0.87,   leads: 0,  cpl: null, ctr: 2.100, cpm: 3.94, impr: 221,   alcance: 143   },
       ]
     }
   },
@@ -698,11 +700,11 @@ const CFG = {
     { nombre: 'Andrés Martín Garzón · Deleite gran', prod: 'cant', situacion: 'No llegamos en precio', fecha: '2026-07-13', adId: '[VID]_[sobrepago]_[V3]' },
     { nombre: 'Juan Antonio MUÑUMEL · Lonypack Global', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-13', adId: '[VID]_[sobrepago]_[V3]' },
     { nombre: 'Eduardo porras · Lania Visuals', prod: 'cant', situacion: 'No llegamos en precio', fecha: '2026-07-13', adId: '[VID]_[sobrepago]_[V3]' },
-    { nombre: 'Javier jaime · Brafim mecplast', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-14', adId: null },
+    { nombre: 'Javier jaime · Brafim mecplast', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-14', adId: null, resp: true },
     { nombre: 'Tomás Aranda · Euromolduras SL', prod: 'cant', situacion: 'Envio de Muestra', fecha: '2026-07-14', adId: '[VID]_[sobrepago]_[V3]' },
     { nombre: 'Ya6ouba78konate@gmail.com · Yacouba', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-14', adId: '[VID]_[sobrepago]_[V3]' },
     { nombre: 'Vicente · Global macho export sl', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: '[VID]_[sobrepago]_[V3]' },
-    { nombre: 'Mario Santa Cruz · Valquimia', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Mario Santa Cruz · Valquimia', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: '[VID]_[sobrepago]_[V3]', resp: true },
     { nombre: 'José Federico BELANDO Martínez · Frutas BELANDO SL', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: null },
     { nombre: 'Sergio cabrero · Montaje y Barnices de Iscar', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: '[VID]_[sobrepago]_[V3]' },
     { nombre: 'José Manuel Rubio · Mondisen', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-16', adId: '[VID]_[sobrepago]_[V3]' },
@@ -710,7 +712,7 @@ const CFG = {
     { nombre: 'david fuentes · STAC', prod: 'cant', situacion: 'Envio de Muestra', fecha: '2026-07-17', adId: null },
     { nombre: 'Alessio Areni · LAF SRL', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-17', adId: null },
     { nombre: 'Juan Antonio Gómez Limón · Productos Villa Andévalo', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-19', adId: '[VID]_[sobrepago]_[V3]' },
-    { nombre: 'Alejandro Marín · Borneo', prod: 'cant', situacion: 'Compra', fecha: '2026-07-20', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Alejandro Marín · Borneo', prod: 'cant', situacion: 'Compra', fecha: '2026-07-20', adId: '[VID]_[sobrepago]_[V3]', resp: true },
     { nombre: 'Jesús Sánchez torres · Jecris', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-20', adId: '[VID]_[sobrepago]_[V3]' },
     { nombre: 'Muebles rudeca · Rudeca', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: null },
     { nombre: 'Philippe · Rombeau', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]' },
@@ -718,47 +720,47 @@ const CFG = {
     { nombre: 'David Llorach · Inteco', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: null },
     { nombre: 'Marcial Badía · Campelo proyectos s l', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]' },
     { nombre: 'Juan clemente Sánchez · Gastroworld', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]' },
-    { nombre: 'Pedro Gonez · Iregua Iluminacion', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Pedro Gonez · Iregua Iluminacion', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-21', adId: '[VID]_[sobrepago]_[V3]', resp: true },
     { nombre: 'Francisco Javier Gutiérrez Padilla · Lujovi', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]' },
-    { nombre: 'Felipe Berna · Agricola Marvic sl', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Felipe Berna · Agricola Marvic sl', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]', resp: true },
     { nombre: 'José · ecoinver export', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]' },
-    { nombre: 'Silviano Duque · CartonJerte S.L', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-22', adId: null },
-    { nombre: 'David Tirado · Body Nutrition SL', prod: 'cant', situacion: 'Compra', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Silviano Duque · CartonJerte S.L', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-22', adId: null, resp: true },
+    { nombre: 'David Tirado · Body Nutrition SL', prod: 'cant', situacion: 'Compra', fecha: '2026-07-22', adId: '[VID]_[sobrepago]_[V3]', resp: true },
     { nombre: 'Frank patiño · Servimagro sas', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: null },
     { nombre: 'Alirio castelblanco · C.i.enalgro@gmail.com', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
     { nombre: 'heriberto ponce · heriberto juan ponce la rosa', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
     { nombre: 'Alberto Gómez · Técnico agricola', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
-    { nombre: 'Maria nieves ventura Quispe · Agro mining SOLUTIONS QUISPE', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
-    { nombre: 'Segundo Roncal · Inka Gold Farm', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
-    { nombre: 'Moisés Salcedo · Moshe RE EIRL', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'Maria nieves ventura Quispe · Agro mining SOLUTIONS QUISPE', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]', resp: true },
+    { nombre: 'Segundo Roncal · Inka Gold Farm', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]', resp: true },
+    { nombre: 'Moisés Salcedo · Moshe RE EIRL', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[compara precios]', resp: true },
     { nombre: 'Yulian Jose Ayca Tapia · Agroinversiones almida scrl', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[IMG]_[volumen]' },
     { nombre: 'Manuel Jorquera · AGROSERVICES LTDA', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: null },
     { nombre: 'Limberg · Agro servicios spa', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
     { nombre: 'Juliy · Free Lance Agro', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
-    { nombre: 'Carlos Espinosa · EyZ agro', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'Carlos Espinosa · EyZ agro', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[compara precios]', resp: true },
     { nombre: 'Sebastián · Riegotec', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: null },
     { nombre: 'Roger Espinoza · Tecnofilm sac', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
     { nombre: 'Jorge Helard Beltran Bravo · El arenal', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
     { nombre: 'Róger Ramírez Velásquez · Agrocampo del norte SRL', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
-    { nombre: 'JOEL Coaquira · Joel Coaquira', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[compara precios]' },
+    { nombre: 'JOEL Coaquira · Joel Coaquira', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-22', adId: '[VID]_[compara precios]', resp: true },
     /* ── M06 (23 jul – 4 ago) ── */
     { nombre: 'Pascual Aguilar · José María Nadador e Hijo SL', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[dos palets]_[V3]' },
-    { nombre: 'Juan Francisco · Versan Avicola', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'Juan Francisco · Versan Avicola', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[sobrepago]_[V3]', resp: true },
     { nombre: 'Julio · Creativefood', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-23', adId: null },
     { nombre: 'Rufino Quispe Llanque · O4426812', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
     { nombre: 'Segundo Roncal Lopez · Inka Gold Farm', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
     { nombre: 'Luis Alberto barboza · Barcor peru', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
     { nombre: 'Erlis Mendoza Saavedra · Agroinverciones E&G sac', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
     { nombre: 'Ronal Barturen Aguinaga · Grupo coppse soluciones', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
-    { nombre: 'Luis · Luis Carrillo', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-23', adId: null },
+    { nombre: 'Luis · Luis Carrillo', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-23', adId: null, resp: true },
     { nombre: 'Jorge Mario Martinez fuentes · Agricultura', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
     { nombre: 'Bolivar jurado · Err', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
-    { nombre: 'Deybi paredes · Agrícola L&F', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
+    { nombre: 'Deybi paredes · Agrícola L&F', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]', resp: true },
     { nombre: 'Alexis Pasten Vega · Agricolachilecito', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-23', adId: '[VID]_[compara precios]' },
     { nombre: 'Antonio Garrido · Las coloraitas de mazagon sl', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-24', adId: null },
     { nombre: 'Manuel · Import Interbalear', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[sobrepago]_[V3]' },
     { nombre: 'Alonso · Veganic', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[sobrepago]_[V3]' },
-    { nombre: 'Feank patiño · Servimagrosas', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-24', adId: '[IMG]_[volumen]' },
+    { nombre: 'Feank patiño · Servimagrosas', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-24', adId: '[IMG]_[volumen]', resp: true },
     { nombre: 'Exon Navarro · Grupo lexo', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[compara precios]' },
     { nombre: 'Pedro luis Peña · Global agricultural business', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-24', adId: null },
     { nombre: 'Evelin Torres · Tilmex la casa del riego', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-24', adId: '[VID]_[compara precios]' },
@@ -784,8 +786,8 @@ const CFG = {
     { nombre: 'Carlos · EMBOTITS NIETO,S.L', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-27', adId: null },
     { nombre: 'Jaime Alban · Agro servicios alban', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-27', adId: '[VID]_[compara precios]' },
     { nombre: 'Yeferson · MATIFLEX', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-27', adId: null },
-    { nombre: 'Iris Sánchez · Jertezas', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-28', adId: '[VID]_[dos palets]_[V3]' },
-    { nombre: 'Angel Diaz · Aloba', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-28', adId: null },
+    { nombre: 'Iris Sánchez · Jertezas', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-28', adId: '[VID]_[dos palets]_[V3]', resp: true },
+    { nombre: 'Angel Diaz · Aloba', prod: 'cant', situacion: 'En proceso', fecha: '2026-07-28', adId: null, resp: true },
     { nombre: 'GUILLERMO · GOYVAL', prod: 'cant', situacion: 'Cotizando', fecha: '2026-07-28', adId: 'link_in_bio' },
     { nombre: 'Mateo londoño · Llamo agro', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-28', adId: null },
     { nombre: 'Javier Quintana · Quintariegos', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-28', adId: null },
@@ -804,22 +806,22 @@ const CFG = {
     { nombre: 'Luis Felipe Bocanegra · Aprocol', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-30', adId: '[IMG]_[volumen]' },
     { nombre: 'Marcos larianco · Hidro Agro Perú', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-30', adId: '[VID]_[compara precios]' },
     { nombre: 'Jaime · Comercializadora Hidroquillon spa', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-30', adId: '[IMG]_[volumen]' },
-    { nombre: 'Pablo Neyra · Sociedad Agrícola C&M', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-30', adId: null },
-    { nombre: 'Cristián Talma · Captal', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-30', adId: '[VID]_[compara precios]' },
+    { nombre: 'Pablo Neyra · Sociedad Agrícola C&M', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-30', adId: null, resp: true },
+    { nombre: 'Cristián Talma · Captal', prod: 'cint', situacion: 'Cotizando', fecha: '2026-07-30', adId: '[VID]_[compara precios]', resp: true },
     { nombre: 'Sufyan Nadeem · No tago', prod: 'cant', situacion: 'Equivocado', fecha: '2026-07-31', adId: '[VID]_[dos palets]_[V3]' },
     { nombre: 'Manuel Jorquera · AGROSERVICES LTDA', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-31', adId: '[VID]_[compara precios]' },
     { nombre: 'Aldo · Inversiones export huanta sac', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-31', adId: '[VID]_[compara precios]' },
     { nombre: 'Ingrid portilla Bejarano · Agromax group srl', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-31', adId: null },
     { nombre: 'Benci Morocco · Mayte cía SAC', prod: 'cint', situacion: 'En proceso', fecha: '2026-07-31', adId: '[VID]_[compara precios]' },
     { nombre: 'Jordi Poyo · Frutas Hnos Espax', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-01', adId: null },
-    { nombre: 'José López · Muebles Bróker sl', prod: 'cant', situacion: 'Cotizando', fecha: '2026-08-01', adId: '[VID]_[sobrepago]_[V3]' },
+    { nombre: 'José López · Muebles Bróker sl', prod: 'cant', situacion: 'Cotizando', fecha: '2026-08-01', adId: '[VID]_[sobrepago]_[V3]', resp: true },
     { nombre: 'Jose Blas · Solid Interiors, S.L.', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-01', adId: '[VID]_[sobrepago]_[V3]' },
     { nombre: 'Raúl González conde · Etiquetas gráficas Sur de Galicia, S.L', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-01', adId: '[VID]_[dos palets]_[V3]' },
     { nombre: 'Javier · Llaurant la lluna', prod: 'cant', situacion: 'En proceso', fecha: '2026-08-01', adId: '[VID]_[dos palets]_[V3]' },
     { nombre: 'rgproyectoselectricos@gmail.com · Cooperativa agrícola frutos de la Araucanía', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-01', adId: '[VID]_[compara precios]' },
-    { nombre: 'Felipe Werchez · Agrocomecial stc', prod: 'cint', situacion: 'Cotizando', fecha: '2026-08-01', adId: '[VID]_[compara precios]' },
+    { nombre: 'Felipe Werchez · Agrocomecial stc', prod: 'cint', situacion: 'Cotizando', fecha: '2026-08-01', adId: '[VID]_[compara precios]', resp: true },
     { nombre: 'Blas uribe · Sat frutas el botas', prod: 'cant', situacion: 'Cotizando', fecha: '2026-08-02', adId: '[VID]_[dos palets]_[V3]' },
-    { nombre: 'Mario Pérez · Riegos san isidro', prod: 'cint', situacion: 'Cotizando', fecha: '2026-08-02', adId: '[VID]_[compara precios]' },
+    { nombre: 'Mario Pérez · Riegos san isidro', prod: 'cint', situacion: 'Cotizando', fecha: '2026-08-02', adId: '[VID]_[compara precios]', resp: true },
     { nombre: 'Lukas Zambrano Vega · Ingebio', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-02', adId: null },
     { nombre: 'FRANCISCO · Agro San Francisco', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-02', adId: '[VID]_[compara precios]' },
     { nombre: 'luis eduardo borrero · reycol', prod: 'cint', situacion: 'En proceso', fecha: '2026-08-02', adId: '[VID]_[compara precios]' },
@@ -849,19 +851,19 @@ const CFG = {
 
   geoData: {
     M06: {
-      cant: [
-        { zona: 'Andalucía',            inv: 98.18 },
-        { zona: 'Comunidad Valenciana', inv: 55.96 },
-        { zona: 'Cataluña',             inv: 54.92 },
-        { zona: 'Comunidad de Madrid',  inv: 30.14 },
-        { zona: 'Región de Murcia',     inv: 24.40 },
-        { zona: 'Castilla-La Mancha',   inv: 23.36 },
-        { zona: 'Otras regiones',       inv: 95.92 },
-      ],
       cint: [
-        { zona: 'Perú',     inv: 124.84 },
-        { zona: 'Colombia', inv: 86.57  },
-        { zona: 'Chile',    inv: 38.07  },
+        { zona: 'Perú',     inv: 124.84, leads: 32, cot: 3 },
+        { zona: 'Colombia', inv: 86.57,  leads: 18, cot: 3 },
+        { zona: 'Chile',    inv: 38.07,  leads: 21, cot: 5 },
+      ],
+      cant: [
+        { zona: 'Andalucía',            inv: 98.18,  leads: 6, cot: 3 },
+        { zona: 'Comunidad Valenciana', inv: 55.96,  leads: 2, cot: 0 },
+        { zona: 'Cataluña',             inv: 54.92,  leads: 4, cot: 0 },
+        { zona: 'Comunidad de Madrid',  inv: 30.14,  leads: 0, cot: 0 },
+        { zona: 'Región de Murcia',     inv: 24.40,  leads: 3, cot: 0 },
+        { zona: 'Castilla-La Mancha',   inv: 23.36,  leads: 3, cot: 1 },
+        { zona: 'Otras regiones',       inv: 95.92,  leads: 9, cot: 1 },
       ]
     }
   }
@@ -1004,29 +1006,37 @@ function buildInversion() {
   } else {
     geoTitle.style.display = '';
     const makeTable = (rows, color, totalLabel) => {
-      const tot = rows.reduce((s,r)=>s+r.inv, 0);
+      const tot  = rows.reduce((s,r)=>s+r.inv, 0);
+      const totL = rows.reduce((s,r)=>s+(r.leads||0), 0);
+      const totC = rows.reduce((s,r)=>s+(r.cot||0), 0);
       const trs = rows.map(r => {
-        const pct = (r.inv/tot*100).toFixed(1);
-        const bar = `<div style="height:6px;border-radius:3px;background:${color};width:${pct}%;opacity:.6;margin-top:3px"></div>`;
+        const pct  = (r.inv/tot*100).toFixed(1);
+        const cplT = (r.leads > 0) ? fmtD(r.inv/r.leads)+' €' : '—';
+        const bar  = `<div style="height:5px;border-radius:3px;background:${color};width:${pct}%;opacity:.55;margin-top:4px"></div>`;
+        const cotCell = r.cot > 0
+          ? `<strong style="color:var(--green,#16a34a)">${r.cot}</strong>`
+          : `<span style="color:var(--txt-2)">—</span>`;
         return `<tr>
           <td>${r.zona}</td>
-          <td style="text-align:right;font-variant-numeric:tabular-nums">${fmtD(r.inv)} €</td>
-          <td style="text-align:right;font-variant-numeric:tabular-nums;color:var(--txt-2)">${pct}%${bar}</td>
+          <td style="text-align:right;font-variant-numeric:tabular-nums">${fmtD(r.inv)} €${bar}</td>
+          <td style="text-align:right;font-variant-numeric:tabular-nums">${pct}%</td>
+          <td style="text-align:right;font-variant-numeric:tabular-nums">${r.leads != null ? r.leads : '—'}</td>
+          <td style="text-align:right">${cotCell}</td>
+          <td style="text-align:right;font-variant-numeric:tabular-nums;color:var(--txt-2)">${cplT}</td>
         </tr>`;
       });
-      trs.push(`<tr class="total-row"><td><strong>${totalLabel}</strong></td><td style="text-align:right"><strong>${fmtD(tot)} €</strong></td><td style="text-align:right"><strong>100%</strong></td></tr>`);
-      return `<thead><tr><th>Territorio</th><th style="text-align:right">Inversión</th><th style="text-align:right">% dist.</th></tr></thead><tbody>${trs.join('')}</tbody>`;
+      const cplTot = totL > 0 ? fmtD(tot/totL)+' €' : '—';
+      trs.push(`<tr class="total-row"><td><strong>${totalLabel}</strong></td><td style="text-align:right"><strong>${fmtD(tot)} €</strong></td><td style="text-align:right"><strong>100%</strong></td><td style="text-align:right"><strong>${totL}</strong></td><td style="text-align:right"><strong>${totC}</strong></td><td style="text-align:right"><strong>${cplTot}</strong></td></tr>`);
+      return `<thead><tr><th>Territorio</th><th style="text-align:right">Inversión</th><th style="text-align:right">% dist.</th><th style="text-align:right">Leads CRM</th><th style="text-align:right">Cotizando</th><th style="text-align:right">CPL</th></tr></thead><tbody>${trs.join('')}</tbody>`;
     };
     geoEl.innerHTML = `
-      <div class="chart-grid" style="grid-template-columns:1fr 1fr">
-        <div class="chart-box">
-          <div class="chart-title"><span style="color:var(--cant)">●</span> Distribución por región · <strong>España</strong> (Cantoneras)</div>
-          <div style="overflow-x:auto"><table class="inv-table" style="margin-top:8px">${makeTable(geo.cant,'var(--cant)','Total ESP')}</table></div>
-        </div>
-        <div class="chart-box">
-          <div class="chart-title"><span style="color:var(--cint)">●</span> Distribución por país · <strong>LATAM</strong> (Cintas Riego)</div>
-          <div style="overflow-x:auto"><table class="inv-table" style="margin-top:8px">${makeTable(geo.cint,'var(--cint)','Total LATAM')}</table></div>
-        </div>
+      <div class="chart-box" style="margin-bottom:12px">
+        <div class="chart-title"><span style="color:var(--cint)">●</span> Distribución por país · <strong>LATAM</strong> (Cintas Riego)</div>
+        <div style="overflow-x:auto"><table class="inv-table" style="margin-top:8px">${makeTable(geo.cint,'var(--cint)','Total LATAM')}</table></div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-title"><span style="color:var(--cant)">●</span> Distribución por región · <strong>España</strong> (Cantoneras)</div>
+        <div style="overflow-x:auto"><table class="inv-table" style="margin-top:8px">${makeTable(geo.cant,'var(--cant)','Total ESP')}</table></div>
       </div>`;
   }
 }
@@ -1321,18 +1331,23 @@ function buildCreativoTabla() {
 
   const rango2 = PERIODO_FECHAS[creatPeriod] || PERIODO_FECHAS.TOT;
   const crmById = {};
+  const respById = {};
+  const cotById  = {};
   CFG.crmLeads.filter(r => r.fecha >= rango2.desde && r.fecha <= rango2.hasta)
-    .forEach(r => { if (r.adId) crmById[r.adId] = (crmById[r.adId] || 0) + 1; });
+    .forEach(r => {
+      if (!r.adId) return;
+      crmById[r.adId] = (crmById[r.adId] || 0) + 1;
+      const haRespondido = r.resp === true || ['Cotizando','Cotizado','Compra','Envio de Muestra'].includes(r.situacion);
+      if (haRespondido)                  respById[r.adId] = (respById[r.adId] || 0) + 1;
+      if (r.situacion === 'Cotizando')  cotById[r.adId]  = (cotById[r.adId]  || 0) + 1;
+    });
 
   const thead = `<thead><tr>
     <th>Anuncio</th><th>Tipo</th><th>Producto</th>
     <th style="text-align:right">Inversión</th>
-    <th style="text-align:right">Alcance</th>
-    <th style="text-align:right">CPM</th>
-    <th style="text-align:right">CTR</th>
-    <th style="text-align:right">Leads Meta</th>
-    <th style="text-align:right">Leads CRM</th>
-    <th style="text-align:right">CPL</th>
+    <th style="text-align:right">Leads</th>
+    <th style="text-align:right">Respondido</th>
+    <th style="text-align:right">Cotizando</th>
   </tr></thead>`;
 
   const rows = data.map(c => {
@@ -1346,18 +1361,20 @@ function buildCreativoTabla() {
     const nombreCell = isWinner
       ? `<strong>${c.nombre}</strong> <span class="badge-winner badge-tipo">WINNER</span>`
       : `<strong>${c.nombre}</strong><br><span style="font-size:10px;color:var(--subtle)">${c.id}</span>`;
-    const crmL = crmById[c.id] || 0;
+    const crmL  = crmById[c.id] || 0;
+    const respL = respById[c.id] || 0;
+    const cotL  = cotById[c.id]  || 0;
+    const cell = (n, highlight) => n > 0
+      ? `<span style="font-weight:700;color:${highlight}">${n}</span>`
+      : `<span style="color:var(--txt-2)">—</span>`;
     return `<tr>
       <td>${nombreCell}</td>
       <td>${tipoBadge}</td>
       <td>${prodPill}</td>
       <td style="text-align:right">${fmtEur(c.inv)}</td>
-      <td style="text-align:right">${fmt(c.alcance)}</td>
-      <td style="text-align:right">${fmtEur(c.cpm)}</td>
-      <td style="text-align:right">${fmtPct(c.ctr)}</td>
-      <td style="text-align:right;font-weight:${c.leads>0?'700':'300'}">${c.leads}</td>
-      <td style="text-align:right;font-weight:${crmL>0?'700':'300'};color:${crmL>0?'var(--g-dark)':'inherit'}">${crmL}</td>
-      <td style="text-align:right">${c.cpl != null ? fmtEur(c.cpl) : '<span class=\"val-null\">—</span>'}</td>
+      <td style="text-align:right">${cell(crmL, 'var(--g-dark)')}</td>
+      <td style="text-align:right">${cell(respL, 'var(--blue,#2563eb)')}</td>
+      <td style="text-align:right">${cell(cotL,  'var(--green,#16a34a)')}</td>
     </tr>`;
   });
 
