@@ -104,7 +104,8 @@
 
     <!-- TAB BUTTONS -->
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('sem7', this)">Semana 7 — 16–22 Jul 2026</button>
+        <button class="tab-btn active" onclick="switchTab('ago1', this)">Agosto — 1–17 Ago 2026</button>
+        <button class="tab-btn" onclick="switchTab('sem7', this)">Semana 7 — 16–22 Jul 2026</button>
         <button class="tab-btn" onclick="switchTab('sem6', this)">Semana 6 — 22–28 Jun 2026</button>
         <button class="tab-btn" onclick="switchTab('sem5', this)">Semana 5 — 15–21 Jun 2026</button>
         <button class="tab-btn" onclick="switchTab('sem4', this)">Semana 4 — 8–14 Jun 2026</button>
@@ -120,9 +121,215 @@
     <!-- TAB SEMANA 6                                    -->
     <!-- ═══════════════════════════════════════════════ -->
     <!-- ═══════════════════════════════════════════════ -->
+    <!-- TAB AGOSTO 1–17                                 -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="ago1" class="tab-content active">
+
+        <!-- E-COMMERCE AGOSTO -->
+        <div class="section section-ecommerce">
+            <h2 class="section-title"><span class="section-icon">🛍️</span>E-commerce</h2>
+
+            <div style="background:#eff6ff;border:1px solid #667eea;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1.5rem;font-size:13px;color:#1e40af;">
+                📅 <strong>Período: 1–17 agosto (17 días).</strong> Las métricas no son directamente comparables semana a semana — se muestran como referencia acumulada del mes.
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Sesiones</div>
+                    <div class="metric-value">1.198</div>
+                    <div class="metric-subtext">17 días</div>
+                    <span class="metric-delta delta-neutral">~70/día media</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Pedidos totales</div>
+                    <div class="metric-value">27</div>
+                    <div class="metric-subtext">Órdenes finalizadas</div>
+                    <span class="metric-delta delta-neutral">~1,6/día media</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Tasa de conversión</div>
+                    <div class="metric-value">2,25%</div>
+                    <div class="metric-subtext">27 pedidos / 1.198 ses.</div>
+                    <span class="metric-delta delta-good">19,23% clientes habituales</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Ventas netas</div>
+                    <div class="metric-value">€1.663,72</div>
+                    <div class="metric-subtext">Sin devoluciones</div>
+                    <span class="metric-delta delta-neutral">AOV €61,62</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Ventas totales</div>
+                    <div class="metric-value">€1.819,72</div>
+                    <div class="metric-subtext">Incluye envío €156</div>
+                    <span class="metric-delta delta-neutral">Mejor mes hasta la fecha</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">ROAS Negocio</div>
+                    <div class="metric-value">4,36x</div>
+                    <div class="metric-subtext">Ventas / Inversión Meta</div>
+                    <span class="metric-delta delta-good">Sólido sobre período largo</span>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Funnel de conversión</div>
+                    <div class="chart-wrapper"><canvas id="ago1_funnelChart"></canvas></div>
+                    <div class="funnel-breakdown">
+                        <div class="funnel-step"><span class="funnel-label">Sesiones</span><span class="funnel-value">1.198 <span class="funnel-percentage">(100%)</span></span></div>
+                        <div class="funnel-step"><span class="funnel-label">Sesiones con carrito</span><span class="funnel-value">106 <span class="funnel-percentage">(8,84%)</span></span></div>
+                        <div class="funnel-step"><span class="funnel-label">Pagos iniciados</span><span class="funnel-value">38 <span class="funnel-percentage">(3,17%)</span></span></div>
+                        <div class="funnel-step"><span class="funnel-label">Compras completadas</span><span class="funnel-value">18 <span class="funnel-percentage">(1,50%)</span></span></div>
+                    </div>
+                    <p class="note">Shopify registra 27 pedidos totales; funnel online trackea 18. CVR real: 2,25%.</p>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Ventas por producto</div>
+                    <div class="chart-wrapper"><canvas id="ago1_prodChart"></canvas></div>
+                    <ul class="product-list">
+                        <li class="product-item"><span class="product-name">Camiseta 1200 Essentia</span><span class="product-value">~€1.104,72</span></li>
+                        <li class="product-item"><span class="product-name">Camiseta 1200 Horizon</span><span class="product-value">€559,00</span></li>
+                        <li class="product-item"><span class="product-name">Camiseta 1200 Origo</span><span class="product-value">incl. en est.</span></li>
+                    </ul>
+                    <p class="note">Desglose Essentia/Origo estimado. Total verificado: €1.663,72.</p>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Sesiones por dispositivo</div>
+                    <div class="chart-wrapper"><canvas id="ago1_deviceChart"></canvas></div>
+                    <ul class="device-list">
+                        <li class="device-item"><span class="product-name">Móvil</span><span class="product-value">~92% est.</span></li>
+                        <li class="device-item"><span class="product-name">Escritorio</span><span class="product-value">~7% est.</span></li>
+                        <li class="device-item"><span class="product-name">Tableta</span><span class="product-value">~1% est.</span></li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Tráfico por referente social</div>
+                    <div class="chart-wrapper"><canvas id="ago1_locChart"></canvas></div>
+                    <ul class="location-list">
+                        <li class="location-item"><span class="product-name">IG · Sin ubicación</span><span class="product-value">71 ses.</span></li>
+                        <li class="location-item"><span class="product-name">Directo · Madrid</span><span class="product-value">71 ses.</span></li>
+                        <li class="location-item"><span class="product-name">IG · Madrid</span><span class="product-value">70 ses.</span></li>
+                        <li class="location-item"><span class="product-name">IG · Murcia</span><span class="product-value">50 ses.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Desglose de ventas totales</div>
+                <table class="comparison-table">
+                    <thead><tr><th>Concepto</th><th>Importe</th></tr></thead>
+                    <tbody>
+                        <tr><td class="value-cell">Ventas brutas</td><td>€1.663,72</td></tr>
+                        <tr><td class="value-cell">Descuentos</td><td>€0,00</td></tr>
+                        <tr><td class="value-cell">Devoluciones</td><td>€0,00</td></tr>
+                        <tr><td class="value-cell">Ventas netas</td><td>€1.663,72</td></tr>
+                        <tr><td class="value-cell">Cargos de envío</td><td>€156,00</td></tr>
+                        <tr><td class="value-cell">Cargos por devolución</td><td>€0,00</td></tr>
+                        <tr><td class="value-cell">Impuestos</td><td>€0,00</td></tr>
+                        <tr style="background:#f9f9f9;font-weight:600;"><td>VENTAS TOTALES</td><td>€1.819,72</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- META ADS AGOSTO -->
+        <div class="section section-meta">
+            <h2 class="section-title"><span class="section-icon">📱</span>Meta Ads</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Inversión total</div>
+                    <div class="metric-value">€417,20</div>
+                    <div class="metric-subtext">17 días (1–17 ago)</div>
+                    <span class="metric-delta delta-neutral">~€24,5/día</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Compras atribuidas</div>
+                    <div class="metric-value">13</div>
+                    <div class="metric-subtext">Meta conversiones</div>
+                    <span class="metric-delta delta-neutral">27 reales en Shopify</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">CPA medio</div>
+                    <div class="metric-value">€32,09</div>
+                    <div class="metric-subtext">Sobre compras atribuidas</div>
+                    <span class="metric-delta delta-good">Prosp €30,27 · Ret €42,12</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">CPM Prosp</div>
+                    <div class="metric-value">€2,00</div>
+                    <div class="metric-subtext">Campaña prospección</div>
+                    <span class="metric-delta delta-good">Mínimo del período</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">ROAS Meta (Prosp)</div>
+                    <div class="metric-value">2,16x</div>
+                    <div class="metric-subtext">Val. conv. / Inversión</div>
+                    <span class="metric-delta delta-neutral">Ret/DPA: 1,72x</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">ROAS Negocio</div>
+                    <div class="metric-value">4,36x</div>
+                    <div class="metric-subtext">Ventas totales / Meta</div>
+                    <span class="metric-delta delta-good">Sólido en 17 días</span>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Distribución de gasto</div>
+                    <div class="chart-wrapper"><canvas id="ago1_adsetChart"></canvas></div>
+                    <div class="breakdown">
+                        <div class="breakdown-item"><span class="breakdown-label">Prosp/Adv+/Lanzamiento</span><span class="breakdown-value">€332,97 (79,8%)</span></div>
+                        <div class="breakdown-item"><span class="breakdown-label">Ret/ES/DPA</span><span class="breakdown-value">€84,23 (20,2%)</span></div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Compras y CPA por campaña</div>
+                    <div class="chart-wrapper"><canvas id="ago1_cpaChart"></canvas></div>
+                    <div class="note">Val. conv. total atribuido a Meta: €862,87 — 13 compras sobre 27 reales.</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Detalle por campaña</div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Campaña</th><th>Gasto</th><th>CPM</th><th>Compras</th><th>CPA</th><th>Val. conv.</th><th>ROAS Meta</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="value-cell">Prosp/Adv+/Lanzamiento</td>
+                            <td>€332,97</td><td>€2,00</td><td>11</td>
+                            <td class="value-cell">€30,27</td>
+                            <td>€717,89</td><td class="value-cell">2,16x</td>
+                        </tr>
+                        <tr>
+                            <td class="value-cell">Ret/ES/DPA</td>
+                            <td>€84,23</td><td>€3,32</td><td>2</td>
+                            <td class="value-cell">€42,12</td>
+                            <td>€144,98</td><td class="value-cell">1,72x</td>
+                        </tr>
+                        <tr style="background:#f9f9f9;font-weight:600;">
+                            <td>TOTAL</td>
+                            <td>€417,20</td><td>—</td><td>13</td><td>€32,09</td>
+                            <td style="color:#065f46;">€862,87</td><td>2,07x</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div><!-- /ago1 -->
+
+    <!-- ═══════════════════════════════════════════════ -->
     <!-- TAB SEMANA 7                                    -->
     <!-- ═══════════════════════════════════════════════ -->
-    <div id="sem7" class="tab-content active">
+    <div id="sem7" class="tab-content">
 
         <!-- E-COMMERCE SEM 7 -->
         <div class="section section-ecommerce">
@@ -1619,7 +1826,7 @@
     </div><!-- /sem1 -->
 
     <div class="footer">
-        <p>Dashboard actualizado el 23 de julio de 2026 &nbsp;·&nbsp; Sem1: 18–25 may · Sem2: 26 may–1 jun · Sem3: 1–7 jun · Sem4: 8–14 jun · Sem5: 15–21 jun · Sem6: 22–28 jun · Sem7: 16–22 jul</p>
+        <p>Dashboard actualizado el 18 de agosto de 2026 &nbsp;·&nbsp; Sem1–7: 18 may–22 jul · Agosto: 1–17 ago</p>
         <p>Documento confidencial — Solo para uso autorizado</p>
     </div>
 
@@ -1634,6 +1841,44 @@
         document.getElementById(id).classList.add('active');
         btn.classList.add('active');
     }
+
+    /* ── AGOSTO 1–17 ── */
+    new Chart(document.getElementById('ago1_funnelChart'), {
+        type: 'bar',
+        data: { labels: ['Sesiones', 'Con carrito', 'Pagos iniciados', 'Compras'], datasets: [{ data: [1198, 106, 38, 18], backgroundColor: [C.primary, C.primary+'CC', C.primary+'99', C.primary+'55'], borderRadius: 6, borderSkipped: false }] },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('ago1_prodChart'), {
+        type: 'bar',
+        data: { labels: ['Essentia', 'Horizon', 'Origo'], datasets: [{ data: [1104.72, 559.00, 0], backgroundColor: [C.primary, C.success, C.warning], borderRadius: 6, borderSkipped: false }] },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('ago1_deviceChart'), {
+        type: 'doughnut',
+        data: { labels: ['Móvil (~92%)', 'Escritorio (~7%)', 'Tableta (~1%)'], datasets: [{ data: [1102, 84, 12], backgroundColor: [C.primary, C.primary+'80', C.primary+'40'] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } } }
+    });
+    new Chart(document.getElementById('ago1_locChart'), {
+        type: 'bar',
+        data: { labels: ['IG · Sin ubic.', 'Directo · Madrid', 'IG · Madrid', 'IG · Murcia'], datasets: [{ data: [71, 71, 70, 50], backgroundColor: C.primary, borderRadius: 6 }] },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('ago1_adsetChart'), {
+        type: 'doughnut',
+        data: { labels: ['Prosp/Adv+/Lanzamiento', 'Ret/ES/DPA'], datasets: [{ data: [332.97, 84.23], backgroundColor: [C.primary, C.accent] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } } }
+    });
+    new Chart(document.getElementById('ago1_cpaChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Prosp/Adv+', 'Ret/DPA'],
+            datasets: [
+                { label: 'CPA (€)', data: [30.27, 42.12], backgroundColor: [C.primary, C.accent], borderRadius: 6 },
+                { label: 'Compras', data: [11, 2], backgroundColor: [C.primary+'55', C.accent+'55'], borderRadius: 6, yAxisID: 'y2' }
+            ]
+        },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } } }, scales: { x: { beginAtZero: true }, y2: { position: 'right', beginAtZero: true, display: false } } }
+    });
 
     /* ── SEMANA 7 ── */
     new Chart(document.getElementById('s7_funnelChart'), {
