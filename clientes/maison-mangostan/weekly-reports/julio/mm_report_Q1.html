@@ -391,16 +391,26 @@ const WEEKS = {
   fw26: {
     label: 'Lanzamiento FW26', range: '13–17 ago 2026',
     puntos: [
-      { cat: 'Meta Ads', texto: '4 compras sobre 23,79€ — retargeting CAT. ROAS Meta 46,14x · CPA 5,95€. Inversión mínima con alta eficiencia de captación.' },
+      { cat: 'Meta Ads', texto: '15 compras sobre 512,11€. FW26-KIDS lidera: 11 compras · ROAS 10,70x · CPA 32,10€. Retargeting CAT: 4 compras · ROAS 46,14x. ROAS Meta 9,52x.' },
       { cat: 'Email', texto: 'FW26 (13 ago): 1.303€ · 5 ped · 56,30% ap · 4,57% clic. FW26 not grey (16 ago): 461€ · 2 ped · 50,33% ap. Total: 1.764€ · 7 pedidos.' },
       { cat: 'Flujos', texto: 'Checkout 932€ · Kids 396€ · Ambos 298€. Total flujos: 1.626€.' }
     ],
     meta: {
-      inv: 23.79, compras: 4, valConv: 1097.68, cpa: 5.95,
-      roasMeta: 46.14, roasNeg: null, roasNeto: null,
+      inv: 512.11, compras: 15, valConv: 4874.89, cpa: 34.14,
+      roasMeta: 9.52, roasNeg: null, roasNeto: null,
       campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS', tipo: 'main', cat: 'venta',
+          inv: 353.11, compras: 11, val: 3777.21, roas: 10.70, ctr: 6.92, cpm: 16.64 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
+          inv:  77.35, compras:  0, val:    0,    roas:  0,    ctr: 4.46, cpm: 19.59 },
+        { nombre: 'IG - FOLLOW - KIDS', tipo: 'awareness', cat: 'awareness',
+          inv:  26.65, compras:  0, val:    0,    roas:  0,    ctr: 6.15, cpm:  3.21 },
         { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main', cat: 'venta',
-          inv: 23.79, compras: 4, val: 1097.68, roas: 46.14, ctr: null, cpm: null }
+          inv:  23.79, compras:  4, val: 1097.68, roas: 46.14, ctr: 3.35, cpm:  4.12 },
+        { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
+          inv:  23.38, compras:  0, val:    0,    roas:  0,    ctr: 5.52, cpm:  2.97 },
+        { nombre: 'FLASH_SALES (inactiva)', tipo: 'main', cat: 'venta',
+          inv:   7.83, compras:  0, val:    0,    roas:  0,    ctr: 0.71, cpm: 15.82 }
       ]
     },
     creatividades: [],
