@@ -391,13 +391,14 @@ const WEEKS = {
   fw26: {
     label: 'Lanzamiento FW26', range: '13–17 ago 2026',
     puntos: [
-      { cat: 'Meta Ads', texto: '15 compras sobre 512,11€. FW26-KIDS lidera: 11 compras · ROAS 10,70x · CPA 32,10€. Retargeting CAT: 4 compras · ROAS 46,14x. ROAS Meta 9,52x.' },
+      { cat: 'Meta Ads', texto: '15 compras sobre 512,11€. FW26-KIDS lidera: 11 compras · ROAS 10,70x · CPA 32,10€. Retargeting CAT: 4 compras · ROAS 46,14x. ROAS Meta 9,52x · ROAS Negocio 16,72x · ROAS Neto 14,35x.' },
       { cat: 'Email', texto: 'FW26 (13 ago): 1.303€ · 5 ped · 56,30% ap · 4,57% clic. FW26 not grey (16 ago): 461€ · 2 ped · 50,33% ap. Total: 1.764€ · 7 pedidos.' },
-      { cat: 'Flujos', texto: 'Checkout 932€ · Kids 396€ · Ambos 298€. Total flujos: 1.626€.' }
+      { cat: 'Flujos', texto: 'Checkout 932€ · Kids 396€ · Ambos 298€. Total flujos: 1.626€.' },
+      { cat: 'Shopify', texto: 'Ventas netas 7.350€ sobre 32 pedidos. AOV 229,69€ · conv 0,78%. RUFFLES NYLON JACKET BLACK lidera con 460€.' }
     ],
     meta: {
       inv: 512.11, compras: 15, valConv: 4874.89, cpa: 34.14,
-      roasMeta: 9.52, roasNeg: null, roasNeto: null,
+      roasMeta: 9.52, roasNeg: 16.72, roasNeto: 14.35,
       campanas: [
         { nombre: 'FW26 - KIDS - VENTAS', tipo: 'main', cat: 'venta',
           inv: 353.11, compras: 11, val: 3777.21, roas: 10.70, ctr: 6.92, cpm: 16.64 },
@@ -427,7 +428,19 @@ const WEEKS = {
       ],
       popup: null
     },
-    ecomm: null
+    ecomm: {
+      brutas: 7718.60, descuentos: 273.04, devoluciones: 96.54, netas: 7349.02,
+      envio: 239.03, devCargos: 11.04, impuestos: 962.67, totales: 8561.76,
+      pedidos: 32, aov: 229.69,
+      sesiones: 3427, conv: 0.78, carrito: 6.85, pago: 2.62, compra: 0.78,
+      habituales: 48.48, cartSes: 235, pagoSes: 90, compraSes: 27,
+      topVentas: [
+        { nombre: 'RUFFLES NYLON JACKET BLACK', val: 460 },
+        { nombre: 'RUFFLES NYLON JACKET PINK',  val: 378 },
+        { nombre: 'PETAL BOOT (pre-order)',      val: 376 },
+        { nombre: 'LITCHY PINK (pre-order)',     val: 357 }
+      ]
+    }
   },
   acumulado: {
     label: 'Acumulado', range: '29 jun–9 ago 2026',
