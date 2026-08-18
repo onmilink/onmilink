@@ -548,17 +548,17 @@ function renderProximosPasos(d) {
 }
 
 function generateSummary(d, p) {
-  const m=d.meta, e=d.ecomm, mail=d.mail;
+  const m=d.meta, e=d.ecomm||null, mail=d.mail;
   const tags=[], lines=[];
   if (m.roasMeta) tags.push({label:`ROAS Meta ${fmt(m.roasMeta)}x`,pos:m.roasMeta>=2});
   if (m.inv>0) {
     tags.push({label:`Inv. Meta ${fmtEur(m.inv)}`,pos:true});
     lines.push(`Inversión Meta: ${fmtEur(m.inv)} · ${m.compras} compras · CPA ${fmtEur(m.cpa)}.`);
   }
-  if (e.pedidos>0) tags.push({label:`${e.pedidos} pedidos Shopify`,pos:true});
-  if (e.totales>0) {
+  if (e&&e.pedidos>0) tags.push({label:`${e.pedidos} pedidos Shopify`,pos:true});
+  if (e&&e.totales>0) {
     const topProd = (e.topVentas||[])[0] || null;
-   lines.push(`Ecommerce canal propio: ${fmtEur(e.brutas)} brutas · ${fmtEur(e.netas)} netas.`);
+    lines.push(`Ecommerce canal propio: ${fmtEur(e.brutas)} brutas · ${fmtEur(e.netas)} netas.`);
     if (topProd) lines.push(`Producto más vendido: ${topProd.nombre}${topProd.val!=null?' · '+fmtEur(topProd.val):''}`);
     const topConv=(e.topProductos||[]).reduce((best,p)=>(!best||(p.uds||0)>(best.uds||0))?p:best,null);
     if (topConv&&topConv.uds) lines.push(`Mayor tasa de conversión: ${topConv.nombre} · ${topConv.uds} uds. · ${fmtPct(topConv.conv)} conv. rate.`);
