@@ -496,24 +496,30 @@ const WEEKS = {
     }
   },
   acumulado: {
-    label: 'Acumulado', range: '29 jun–9 ago 2026',
+    label: 'Acumulado', range: '29 jun–23 ago 2026',
     puntos: [
-      { cat: 'Meta Ads', texto: '100 compras sobre 3.908€ de inversión (Q1 completo). FLASH_SALES 63 compras (ROAS 4.23x) · WOMAN 29 compras (ROAS 3.85x). ROAS negocio 10.25x / neto 8.06x.' },
-      { cat: 'Email', texto: '17 envíos. Shorts & skirts (1.049€) y Extra discount (784€) lideran cierre quincena. Newsletter: 6.820€ · Flujos: 2.449€.' },
-      { cat: 'Shopify', texto: 'Ventas netas acumuladas: 31.504€ sobre 233 pedidos. AOV 172,00€. Barcos Skirt lidera con 1.879€ acumulados.' }
+      { cat: 'Meta Ads', texto: '135 compras sobre 5.077€ de inversión. FW26-KIDS acumula 24 compras (ROAS 9,44x) · Retargeting CAT 9 compras (ROAS 34,45x). ROAS Meta 5,07x · ROAS Negocio 11,60x · ROAS Neto 9,30x.' },
+      { cat: 'Email', texto: '22 envíos. FW26 Lanzamiento (1.303€) y Pink ruffles jacket (839€) lideran agosto. Newsletter: 9.936€ · Flujos: 5.949€. Total email: 15.885€.' },
+      { cat: 'Shopify', texto: 'Ventas netas acumuladas: 47.239€ sobre 295 pedidos. AOV 199,66€. BARCOS SKIRT WHITE lidera SS26 con 1.879€.' }
     ],
     meta: {
-      inv: 3908.35, compras: 100, valConv: 15196.95, cpa: 39.08,
-      roasMeta: 3.89, roasNeg: 10.25, roasNeto: 8.06,
+      inv: 5077.36, compras: 135, valConv: 25719.90, cpa: 37.61,
+      roasMeta: 5.07, roasNeg: 11.60, roasNeto: 9.30,
       campanas: [
         { nombre: 'FLASH_SALES', tipo: 'main', cat: 'venta',
-          inv: 1895.06, compras: 63, val: 8016.33, roas: 4.23, ctr: 2.67, cpm: 14.04 },
+          inv: 1902.89, compras: 63, val: 8016.33, roas: 4.21, ctr: 2.67, cpm: 14.04 },
         { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
-          inv: 1495.08, compras: 29, val: 5760.65, roas: 3.85, ctr: 4.68, cpm: 19.03 },
+          inv: 1674.60, compras: 31, val: 6290.49, roas: 3.76, ctr: 4.24, cpm: 18.20 },
+        { nombre: 'FW26 - KIDS - VENTAS', tipo: 'main', cat: 'venta',
+          inv:  789.82, compras: 24, val: 7454.25, roas: 9.44, ctr: 5.18, cpm: 17.66 },
         { nombre: 'VTA - MMxSN - 28MAYO2026', tipo: 'main', cat: 'venta',
           inv:  390.92, compras:  8, val: 1420.97, roas: 3.63, ctr: 2.41, cpm: 10.61 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main', cat: 'venta',
+          inv:   73.70, compras:  9, val: 2538.86, roas: 34.45, ctr: 5.22, cpm:  3.87 },
         { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
-          inv:  127.29, compras:  0, val:    0,    roas:  0,   ctr: 6.80, cpm:  3.78 }
+          inv:  185.70, compras:  0, val:    0,    roas:  0,    ctr: 6.80, cpm:  3.78 },
+        { nombre: 'IG - FOLLOW - KIDS', tipo: 'awareness', cat: 'awareness',
+          inv:   59.73, compras:  0, val:    0,    roas:  0,    ctr: 6.24, cpm:  3.24 }
       ]
     },
     creatividades: [],
@@ -535,34 +541,39 @@ const WEEKS = {
         { subject: 'Hype FW26',                      fecha: '3 ago · 10:00',  dest: 1687, apertura: 55.73, clics: 2.08, pedidos: 0, ingresos:    0    },
         { subject: 'Extra discount · Rebajas',       fecha: '5 ago · 10:00',  dest: 1569, apertura: 51.95, clics: 1.79, pedidos: 4, ingresos:  783.76 },
         { subject: 'Shorts and skirts',              fecha: '7 ago · 10:30',  dest: 1512, apertura: 52.50, clics: 3.13, pedidos: 4, ingresos: 1048.79 },
-        { subject: 'Birds + sale',                   fecha: '9 ago · 10:00',  dest: 1306, apertura: 45.41, clics: 1.57, pedidos: 2, ingresos:  325.08 }
+        { subject: 'Birds + sale',                   fecha: '9 ago · 10:00',  dest: 1306, apertura: 45.41, clics: 1.57, pedidos: 2, ingresos:  325.08 },
+        { subject: 'FW26 · Lanzamiento',             fecha: '13 ago · 10:00', dest: 1614, apertura: 56.30, clics: 4.57, pedidos: 5, ingresos: 1303.32 },
+        { subject: 'FW26 · Not grey',                fecha: '16 ago · 10:30', dest: 1445, apertura: 50.33, clics: 1.88, pedidos: 2, ingresos:  461.03 },
+        { subject: 'Back to school',                 fecha: '18 ago · 10:00', dest: 1652, apertura: 57.48, clics: 1.71, pedidos: 2, ingresos:  283.36 },
+        { subject: 'Pink ruffles jacket',            fecha: '20 ago · 10:00', dest: 1702, apertura: 59.22, clics: 2.61, pedidos: 3, ingresos:  838.68 },
+        { subject: 'Animal Prints',                  fecha: '23 ago · 10:00', dest: 1589, apertura: 55.31, clics: 1.32, pedidos: 1, ingresos:  230.00 }
       ],
       flujos: [
-        { nombre: 'CHECK OUT STARTED',      estado: 'Activo',   ingresos: 912.10 },
-        { nombre: 'Flow Bienvenida Mujer',  estado: 'Activo',   ingresos: 637.00 },
-        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo',   ingresos: 504.28 },
-        { nombre: 'Flow Bienvenida Ambos',  estado: 'Activo',   ingresos: 123.08 },
-        { nombre: 'Carrito abandonado',     estado: 'Activo',   ingresos: 204.08 },
-        { nombre: 'Serie bienvenida email', estado: 'Borrador', ingresos:  68.14 }
+        { nombre: 'CHECK OUT STARTED',      estado: 'Activo',   ingresos: 2723.38 },
+        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo',   ingresos: 1165.28 },
+        { nombre: 'Flow Bienvenida Ambos',  estado: 'Activo',   ingresos: 1151.20 },
+        { nombre: 'Flow Bienvenida Mujer',  estado: 'Activo',   ingresos:  637.00 },
+        { nombre: 'Carrito abandonado',     estado: 'Activo',   ingresos:  204.08 },
+        { nombre: 'Serie bienvenida email', estado: 'Borrador', ingresos:   68.14 }
       ],
       popup: { nombre: 'POP UP (ONMI)', ingresos: 5963, tasaEnvio: 1.88, envios: 263, formularioVisto: 14000,
                prev: { rango: '1–15 jun 2026', ingresos: 1400, tasaEnvio: 0.90, envios: 44, formularioVisto: 4900 } },
       soloResumen: true
     },
     ecomm: {
-      brutas: 37696.20, descuentos: 3323.69, devoluciones: 2884.97, netas: 31503.54,
-      envio: 2109.97, devCargos: 262.05, impuestos: 5541.10, totales: 40073.06,
-      pedidos: 233, aov: 172.00,
-      sesiones: 18246, conv: 0.97, carrito: 6.46, pago: 2.52, compra: 0.97,
-      habituales: 36.00, cartSes: 1178, pagoSes: 460, compraSes: 177,
+      brutas: 54923.08, descuentos: 4328.33, devoluciones: 3371.32, netas: 47239.43,
+      envio: 2797.53, devCargos: 278.09, impuestos: 7398.82, totales: 58898.53,
+      pedidos: 295, aov: 199.66,
+      sesiones: 25633, conv: 0.91, carrito: 6.38, pago: 2.56, compra: 0.91,
+      habituales: 37.80, cartSes: 1636, pagoSes: 655, compraSes: 234,
       topVentas: [
         { nombre: 'BARCOS SKIRT WHITE',                 val: 1879 },
         { nombre: 'BEVERLY FRINGE PANTS DEEP LAVENDER', val: 1084 },
+        { nombre: 'LITCHY PINK (pre-order)',             val:  722 },
         { nombre: 'BARCOS DRESS RED',                   val:  574 },
         { nombre: 'BARCOS BOW BIKINI RED',              val:  524 },
         { nombre: 'BIRDS PATCHWORK SKIRT BLUSH',        val:  510 },
-        { nombre: 'BIRDS PATCHWORK PANTS BLUSH',        val:  475 },
-        { nombre: 'BARCOS EMBROIDERED DRESS BLUE',      val:  426 }
+        { nombre: 'BIRDS PATCHWORK PANTS BLUSH',        val:  475 }
       ],
       topPaginas: [],
       topProductos: []
