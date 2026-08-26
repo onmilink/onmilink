@@ -442,6 +442,59 @@ const WEEKS = {
       ]
     }
   },
+  cw4: {
+    label: 'CW4', range: '17–23 ago 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '20 compras sobre 656,90€. FW26-KIDS lidera: 13 compras · ROAS 8,42x · CPA 33,59€. Retargeting CAT: 5 compras · ROAS 28,88x · CPA 9,98€. ROAS Meta 8,60x · ROAS Negocio 15,62x · ROAS Neto 12,77x.' },
+      { cat: 'Email', texto: 'Back to school (18 ago): 283€ · 2 ped · 57,48% ap. Pink ruffles jacket (20 ago): 839€ · 3 ped · 59,22% ap. Animal Prints (23 ago): 230€ · 1 ped · 55,31% ap. Total: 1.352€ · 6 pedidos.' },
+      { cat: 'Flujos', texto: 'Checkout 879€ · Bienvenida Ambos 730€ · Kids 265€. Total flujos: 1.874€.' },
+      { cat: 'Shopify', texto: 'Ventas netas 8.387€ sobre 30 pedidos. AOV 219,41€ · conv 0,75%. LITCHY PINK (pre-order) lidera con 722€.' }
+    ],
+    meta: {
+      inv: 656.90, compras: 20, valConv: 5648.06, cpa: 32.84,
+      roasMeta: 8.60, roasNeg: 15.62, roasNeto: 12.77,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS', tipo: 'main', cat: 'venta',
+          inv: 436.71, compras: 13, val: 3677.04, roas:  8.42, ctr: 5.18, cpm: 17.66 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
+          inv: 102.17, compras:  2, val:  529.84, roas:  5.19, ctr: 4.24, cpm: 17.44 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main', cat: 'venta',
+          inv:  49.91, compras:  5, val: 1441.18, roas: 28.88, ctr: 5.22, cpm:  3.87 },
+        { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
+          inv:  35.03, compras:  0, val:     0,   roas:  0,    ctr: 5.76, cpm:  3.14 },
+        { nombre: 'IG - FOLLOW - KIDS', tipo: 'awareness', cat: 'awareness',
+          inv:  33.08, compras:  0, val:     0,   roas:  0,    ctr: 6.24, cpm:  3.24 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Back to school',      fecha: '18 ago · 10:00', dest: 1652, apertura: 57.48, clics: 1.71, pedidos: 2, ingresos:  283.36 },
+        { subject: 'Pink ruffles jacket', fecha: '20 ago · 10:00', dest: 1702, apertura: 59.22, clics: 2.61, pedidos: 3, ingresos:  838.68 },
+        { subject: 'Animal Prints',       fecha: '23 ago · 10:00', dest: 1589, apertura: 55.31, clics: 1.32, pedidos: 1, ingresos:  230.00 }
+      ],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',      estado: 'Activo', ingresos: 878.94 },
+        { nombre: 'Flow Bienvenida Ambos',  estado: 'Activo', ingresos: 730.44 },
+        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo', ingresos: 265.00 },
+        { nombre: 'Flow Bienvenida Mujer',  estado: 'Activo', ingresos:   0    }
+      ],
+      popup: null
+    },
+    ecomm: {
+      brutas: 9508.28, descuentos: 731.60, devoluciones: 389.81, netas: 8386.87,
+      envio: 448.53, devCargos: 5.00, impuestos: 895.05, totales: 10263.71,
+      pedidos: 30, aov: 219.41,
+      sesiones: 3960, conv: 0.75, carrito: 5.63, pago: 2.65, compra: 0.75,
+      habituales: 36.84, cartSes: 223, pagoSes: 105, compraSes: 30,
+      topVentas: [
+        { nombre: 'LITCHY PINK (pre-order)',  val: 722 },
+        { nombre: 'COW FUR JACKET BEIGE',     val: 378 },
+        { nombre: 'ANIMAL PRINT DRESS BLUE',  val: 370 },
+        { nombre: 'SWEETHEART BOOT PINK',     val: 361 }
+      ]
+    }
+  },
   acumulado: {
     label: 'Acumulado', range: '29 jun–9 ago 2026',
     puntos: [
