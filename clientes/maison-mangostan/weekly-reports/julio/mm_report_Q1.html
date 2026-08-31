@@ -495,31 +495,89 @@ const WEEKS = {
       ]
     }
   },
-  acumulado: {
-    label: 'Acumulado', range: '29 jun–23 ago 2026',
+  cw5: {
+    label: 'CW5', range: '24–30 ago 2026',
     puntos: [
-      { cat: 'Meta Ads', texto: '135 compras sobre 5.077€ de inversión. FW26-KIDS acumula 24 compras (ROAS 9,44x) · Retargeting CAT 9 compras (ROAS 34,45x). ROAS Meta 5,07x · ROAS Negocio 11,60x · ROAS Neto 9,30x.' },
-      { cat: 'Email', texto: '22 envíos. FW26 Lanzamiento (1.303€) y Pink ruffles jacket (839€) lideran agosto. Newsletter: 9.936€ · Flujos: 5.949€. Total email: 15.885€.' },
-      { cat: 'Shopify', texto: 'Ventas netas acumuladas: 47.239€ sobre 295 pedidos. AOV 199,66€. BARCOS SKIRT WHITE lidera SS26 con 1.879€.' }
+      { cat: 'Meta Ads', texto: '10 compras sobre 793,19€. FW26-KIDS semana débil: 2 compras · ROAS 0,85x · CPA 246,46€. Retargeting CAT resiste: 7 compras · ROAS 28,46x · CPA 7,66€. ROAS Meta 2,65x · ROAS Negocio 6,58x · ROAS Neto 5,02x.' },
+      { cat: 'Email', texto: 'Cow fur (25 ago): 495€ · 2 ped · 60,30% ap. Woman Sales (28 ago): 1.160€ · 4 ped · 54,11% ap. Hoodies (30 ago): 0€ · 50,18% ap. Total: 1.655€ · 6 pedidos.' },
+      { cat: 'Flujos', texto: 'Checkout 504€ · Viewed Product 237€ · Kids 179€ · Ambos 95€. Total flujos: 1.015€.' },
+      { cat: 'Shopify', texto: 'Ventas netas 3.978€ sobre 23 pedidos. AOV 165,37€ · conv 0,35%. EARLY BIRD BOOT lidera con 401€. Semana con alto volumen de devoluciones (1.314€).' }
     ],
     meta: {
-      inv: 5077.36, compras: 135, valConv: 25719.90, cpa: 37.61,
-      roasMeta: 5.07, roasNeg: 11.60, roasNeto: 9.30,
+      inv: 793.19, compras: 10, valConv: 2099.73, cpa: 79.32,
+      roasMeta: 2.65, roasNeg: 6.58, roasNeto: 5.02,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS', tipo: 'main', cat: 'venta',
+          inv: 492.92, compras:  2, val:  420.36, roas:  0.85, ctr: 3.94, cpm: 21.95 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
+          inv: 109.47, compras:  1, val:  153.68, roas:  1.40, ctr: 5.14, cpm: 17.86 },
+        { nombre: '[VENTAS]_[KIDS]_[JAPON]_[ADV+]', tipo: 'main', cat: 'venta',
+          inv:  66.89, compras:  0, val:    0,    roas:  0,    ctr: 2.99, cpm:  8.20 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main', cat: 'venta',
+          inv:  53.60, compras:  7, val: 1525.69, roas: 28.46, ctr: 4.29, cpm:  3.00 },
+        { nombre: 'IG - FOLLOW - KIDS', tipo: 'awareness', cat: 'awareness',
+          inv:  35.34, compras:  0, val:    0,    roas:  0,    ctr: 6.87, cpm:  3.54 },
+        { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
+          inv:  34.97, compras:  0, val:    0,    roas:  0,    ctr: 6.27, cpm:  3.67 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Cow fur',     fecha: '25 ago · 10:00', dest: 1724, apertura: 60.30, clics: 1.71, pedidos: 2, ingresos:  495.15 },
+        { subject: 'Woman Sales', fecha: '28 ago · 10:30', dest: 1621, apertura: 54.11, clics: 3.54, pedidos: 4, ingresos: 1160.30 },
+        { subject: 'Hoodies',     fecha: '30 ago · 10:30', dest: 1433, apertura: 50.18, clics: 1.51, pedidos: 0, ingresos:    0    }
+      ],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',      estado: 'Activo', ingresos: 504.00 },
+        { nombre: 'Viewed Product',         estado: 'Activo', ingresos: 236.97 },
+        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo', ingresos: 178.88 },
+        { nombre: 'Flow Bienvenida Ambos',  estado: 'Activo', ingresos:  94.96 },
+        { nombre: 'Flow Bienvenida Mujer',  estado: 'Activo', ingresos:   0    }
+      ],
+      popup: null
+    },
+    ecomm: {
+      brutas: 5680.50, descuentos: 388.42, devoluciones: 1313.61, netas: 3978.46,
+      envio: 290.23, devCargos: 60.00, impuestos: 676.21, totales: 5222.53,
+      pedidos: 23, aov: 165.37,
+      sesiones: 6637, conv: 0.35, carrito: 2.97, pago: 1.04, compra: 0.35,
+      habituales: 46.66, cartSes: 197, pagoSes: 69, compraSes: 23,
+      topVentas: [
+        { nombre: 'EARLY BIRD BOOT',          val: 401 },
+        { nombre: 'LITCHY PINK BOOT',         val: 382 },
+        { nombre: 'COW FUR JACKET BEIGE',     val: 360 },
+        { nombre: 'NYLON QUILTED DRESS BLACK',val: 360 }
+      ]
+    }
+  },
+  acumulado: {
+    label: 'Acumulado', range: '29 jun–30 ago 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '145 compras sobre 5.871€ de inversión. Retargeting CAT acumula 16 compras (ROAS 34,45x) · FW26-KIDS 24 compras desde lanzamiento. ROAS Meta 4,74x · ROAS Negocio 10,92x · ROAS Neto 8,72x.' },
+      { cat: 'Email', texto: '25 envíos. Woman Sales (1.160€) y FW26 Lanzamiento (1.303€) lideran agosto. Newsletter: 11.592€ · Flujos: 6.964€. Total email: 18.556€.' },
+      { cat: 'Shopify', texto: 'Ventas netas acumuladas: 51.218€ sobre 318 pedidos. AOV 201,64€. BARCOS SKIRT WHITE lidera SS26 con 1.879€.' }
+    ],
+    meta: {
+      inv: 5870.55, compras: 145, valConv: 27819.63, cpa: 40.49,
+      roasMeta: 4.74, roasNeg: 10.92, roasNeto: 8.72,
       campanas: [
         { nombre: 'FLASH_SALES', tipo: 'main', cat: 'venta',
           inv: 1902.89, compras: 63, val: 8016.33, roas: 4.21, ctr: 2.67, cpm: 14.04 },
         { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
-          inv: 1674.60, compras: 31, val: 6290.49, roas: 3.76, ctr: 4.24, cpm: 18.20 },
+          inv: 1784.07, compras: 32, val: 6444.17, roas: 3.61, ctr: 4.60, cpm: 18.10 },
         { nombre: 'FW26 - KIDS - VENTAS', tipo: 'main', cat: 'venta',
-          inv:  789.82, compras: 24, val: 7454.25, roas: 9.44, ctr: 5.18, cpm: 17.66 },
+          inv: 1282.74, compras: 26, val: 7874.61, roas: 6.14, ctr: 4.56, cpm: 19.81 },
         { nombre: 'VTA - MMxSN - 28MAYO2026', tipo: 'main', cat: 'venta',
           inv:  390.92, compras:  8, val: 1420.97, roas: 3.63, ctr: 2.41, cpm: 10.61 },
         { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main', cat: 'venta',
-          inv:   73.70, compras:  9, val: 2538.86, roas: 34.45, ctr: 5.22, cpm:  3.87 },
+          inv:  127.30, compras: 16, val: 4064.55, roas: 31.93, ctr: 4.79, cpm:  3.44 },
+        { nombre: '[VENTAS]_[KIDS]_[JAPON]_[ADV+]', tipo: 'main', cat: 'venta',
+          inv:   66.89, compras:  0, val:    0,    roas:  0,    ctr: 2.99, cpm:  8.20 },
         { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
-          inv:  185.70, compras:  0, val:    0,    roas:  0,    ctr: 6.80, cpm:  3.78 },
+          inv:  220.67, compras:  0, val:    0,    roas:  0,    ctr: 6.54, cpm:  3.73 },
         { nombre: 'IG - FOLLOW - KIDS', tipo: 'awareness', cat: 'awareness',
-          inv:   59.73, compras:  0, val:    0,    roas:  0,    ctr: 6.24, cpm:  3.24 }
+          inv:   95.07, compras:  0, val:    0,    roas:  0,    ctr: 6.56, cpm:  3.39 }
       ]
     },
     creatividades: [],
@@ -546,13 +604,17 @@ const WEEKS = {
         { subject: 'FW26 · Not grey',                fecha: '16 ago · 10:30', dest: 1445, apertura: 50.33, clics: 1.88, pedidos: 2, ingresos:  461.03 },
         { subject: 'Back to school',                 fecha: '18 ago · 10:00', dest: 1652, apertura: 57.48, clics: 1.71, pedidos: 2, ingresos:  283.36 },
         { subject: 'Pink ruffles jacket',            fecha: '20 ago · 10:00', dest: 1702, apertura: 59.22, clics: 2.61, pedidos: 3, ingresos:  838.68 },
-        { subject: 'Animal Prints',                  fecha: '23 ago · 10:00', dest: 1589, apertura: 55.31, clics: 1.32, pedidos: 1, ingresos:  230.00 }
+        { subject: 'Animal Prints',                  fecha: '23 ago · 10:00', dest: 1589, apertura: 55.31, clics: 1.32, pedidos: 1, ingresos:  230.00 },
+        { subject: 'Cow fur',                        fecha: '25 ago · 10:00', dest: 1724, apertura: 60.30, clics: 1.71, pedidos: 2, ingresos:  495.15 },
+        { subject: 'Woman Sales',                    fecha: '28 ago · 10:30', dest: 1621, apertura: 54.11, clics: 3.54, pedidos: 4, ingresos: 1160.30 },
+        { subject: 'Hoodies',                        fecha: '30 ago · 10:30', dest: 1433, apertura: 50.18, clics: 1.51, pedidos: 0, ingresos:    0    }
       ],
       flujos: [
-        { nombre: 'CHECK OUT STARTED',      estado: 'Activo',   ingresos: 2723.38 },
-        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo',   ingresos: 1165.28 },
-        { nombre: 'Flow Bienvenida Ambos',  estado: 'Activo',   ingresos: 1151.20 },
+        { nombre: 'CHECK OUT STARTED',      estado: 'Activo',   ingresos: 3227.38 },
+        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo',   ingresos: 1344.16 },
+        { nombre: 'Flow Bienvenida Ambos',  estado: 'Activo',   ingresos: 1246.16 },
         { nombre: 'Flow Bienvenida Mujer',  estado: 'Activo',   ingresos:  637.00 },
+        { nombre: 'Viewed Product',         estado: 'Activo',   ingresos:  236.97 },
         { nombre: 'Carrito abandonado',     estado: 'Activo',   ingresos:  204.08 },
         { nombre: 'Serie bienvenida email', estado: 'Borrador', ingresos:   68.14 }
       ],
@@ -561,19 +623,19 @@ const WEEKS = {
       soloResumen: true
     },
     ecomm: {
-      brutas: 54923.08, descuentos: 4328.33, devoluciones: 3371.32, netas: 47239.43,
-      envio: 2797.53, devCargos: 278.09, impuestos: 7398.82, totales: 58898.53,
-      pedidos: 295, aov: 199.66,
-      sesiones: 25633, conv: 0.91, carrito: 6.38, pago: 2.56, compra: 0.91,
-      habituales: 37.80, cartSes: 1636, pagoSes: 655, compraSes: 234,
+      brutas: 60603.58, descuentos: 4716.75, devoluciones: 4684.93, netas: 51217.89,
+      envio: 3087.76, devCargos: 338.09, impuestos: 8075.03, totales: 64121.06,
+      pedidos: 318, aov: 201.64,
+      sesiones: 32270, conv: 0.80, carrito: 5.68, pago: 2.24, compra: 0.80,
+      habituales: 39.62, cartSes: 1833, pagoSes: 724, compraSes: 257,
       topVentas: [
         { nombre: 'BARCOS SKIRT WHITE',                 val: 1879 },
         { nombre: 'BEVERLY FRINGE PANTS DEEP LAVENDER', val: 1084 },
         { nombre: 'LITCHY PINK (pre-order)',             val:  722 },
+        { nombre: 'EARLY BIRD BOOT',                    val:  401 },
         { nombre: 'BARCOS DRESS RED',                   val:  574 },
         { nombre: 'BARCOS BOW BIKINI RED',              val:  524 },
-        { nombre: 'BIRDS PATCHWORK SKIRT BLUSH',        val:  510 },
-        { nombre: 'BIRDS PATCHWORK PANTS BLUSH',        val:  475 }
+        { nombre: 'BIRDS PATCHWORK SKIRT BLUSH',        val:  510 }
       ],
       topPaginas: [],
       topProductos: []
