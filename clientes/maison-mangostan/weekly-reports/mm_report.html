@@ -550,7 +550,10 @@ const WEEKS = {
       envios: [
         { subject: 'Cow fur',     fecha: '25 ago · 10:00', dest: 1724, apertura: 60.30, clics: 1.71, pedidos: 2, ingresos:  495.15 },
         { subject: 'Woman Sales', fecha: '28 ago · 10:30', dest: 1621, apertura: 54.11, clics: 3.54, pedidos: 4, ingresos: 1160.30 },
-        { subject: 'Hoodies',     fecha: '30 ago · 10:30', dest: 1433, apertura: 50.18, clics: 1.51, pedidos: 0, ingresos:    0    }
+        { subject: 'Hoodies',       fecha: '30 ago · 10:30', dest: 1433, apertura: 50.18, clics: 1.51, pedidos: 0, ingresos:    0    },
+        { subject: 'Ovejas Set',     fecha: '1 sept · 10:30', dest: 1723, apertura: 60.37, clics: 0.95, pedidos: 1, ingresos:  213.00 },
+        { subject: 'Boots',          fecha: '3 sept · 10:30', dest: 1727, apertura: 60.53, clics: 2.63, pedidos: 0, ingresos:    0    },
+        { subject: 'Back to school', fecha: '6 sept · 10:00', dest: 1498, apertura: 52.27, clics: 1.92, pedidos: 0, ingresos:    0    }
       ],
       flujos: [
         { nombre: 'CHECK OUT STARTED',      estado: 'Activo', ingresos: 504.00 },
@@ -577,33 +580,90 @@ const WEEKS = {
       woman: { totales: 864.88,  vsPrev: 372 }
     }
   },
-  acumulado: {
-    label: 'Acumulado', month: 'acumulado', range: '29 jun–30 ago 2026',
+  cw6: {
+    label: '31 ago–6 sep', month: 'sep', range: '31 ago–6 sep 2026',
     puntos: [
-      { cat: 'Meta Ads', texto: '145 compras sobre 6.043€ de inversión. Retargeting CAT acumula 16 compras (ROAS 31,93x) · FW26-KIDS 24 compras desde lanzamiento. ROAS Meta 4,58x · ROAS Negocio 10,77x · ROAS Neto 8,58x.' },
-      { cat: 'Email', texto: '26 envíos (Last hours sale añadido a FW26). Newsletter: 12.306€ · Flujos: 7.114€. Total email: 19.420€.' },
-      { cat: 'Shopify', texto: 'Ventas netas acumuladas: 51.859€ sobre 319 pedidos. AOV 204,06€. BARCOS SKIRT WHITE lidera SS26 con 1.879€.' }
+      { cat: 'Meta Ads', texto: '24 compras sobre 847€ · Retargeting CAT: 10 compras ROAS 23,62x · Prospecting CAT: 4 compras ROAS 47,81x (ticket ~960€) · FW26-KIDS: 8 compras ROAS 5,20x. ROAS Meta 10,61x · ROAS Negocio 14,60x · ROAS Neto 11,91x.' },
+      { cat: 'Email', texto: 'Ovejas Set (1 sept): 213€ · 1 pedido · 60,37% ap. Boots (3 sept): 60,53% ap · sin conv. Back to school (6 sept): 52,27% ap · sin conv. Total newsletter: 213€.' },
+      { cat: 'Shopify', texto: 'Ventas netas 10.087€ sobre 24 pedidos. AOV 287,47€. EARLY BIRD BOOT PINK 718€. Kids 9.552€ · Woman+SN 1.138€.' }
     ],
     meta: {
-      inv: 6042.60, compras: 145, valConv: 27679.43, cpa: 41.67,
-      roasMeta: 4.58, roasNeg: 10.77, roasNeto: 8.58,
+      inv: 846.97, compras: 24, valConv: 8984.94, cpa: 35.29,
+      roasMeta: 10.61, roasNeg: 14.60, roasNeto: 11.91,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',              tipo: 'main',      cat: 'venta',
+          inv: 401.99, compras:  8, val: 2090.52, roas:  5.20, ctr: 5.00, cpm: 27.16 },
+        { nombre: '[VENTAS]_[KIDS]_[JAPON]_[ADV+]',    tipo: 'main',      cat: 'venta',
+          inv: 102.27, compras:  0, val:    0,    roas:  0,    ctr: 3.42, cpm: 11.06 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS',       tipo: 'main',      cat: 'venta',
+          inv: 100.35, compras:  2, val:  824.62, roas:  8.22, ctr: 4.06, cpm: 19.50 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main',     cat: 'venta',
+          inv:  94.54, compras: 10, val: 2233.34, roas: 23.62, ctr: 4.01, cpm:  3.22 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',  tipo: 'main',     cat: 'venta',
+          inv:  80.25, compras:  4, val: 3836.46, roas: 47.81, ctr: 6.13, cpm: 18.86 },
+        { nombre: 'IG - FOLLOW - WOMAN',                tipo: 'awareness', cat: 'awareness',
+          inv:  34.04, compras:  0, val:    0,    roas:  0,    ctr: 5.70, cpm:  4.75 },
+        { nombre: 'IG - FOLLOW - KIDS',                 tipo: 'awareness', cat: 'awareness',
+          inv:  33.53, compras:  0, val:    0,    roas:  0,    ctr: 8.64, cpm:  3.40 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Ovejas Set',     fecha: '1 sept · 10:30', dest: 1723, apertura: 60.37, clics: 0.95, pedidos: 1, ingresos: 213.00 },
+        { subject: 'Boots',          fecha: '3 sept · 10:30', dest: 1727, apertura: 60.53, clics: 2.63, pedidos: 0, ingresos:   0    },
+        { subject: 'Back to school', fecha: '6 sept · 10:00', dest: 1498, apertura: 52.27, clics: 1.92, pedidos: 0, ingresos:   0    }
+      ],
+      flujos: [],
+      popup: { nombre: 'POP UP (ONMI)', ingresos: 616, tasaEnvio: 1.57, envios: 55, formularioVisto: 3500 }
+    },
+    ecomm: {
+      brutas: 11145.89, descuentos: 509.19, devoluciones: 549.29, netas: 10087.41,
+      envio: 310.37, devCargos: 38.00, impuestos: 1569.07, totales: 12367.28,
+      pedidos: 24, aov: 287.47,
+      sesiones: 3866, conv: 0.62, carrito: 5.74, pago: 2.04, compra: 0.62,
+      habituales: 36.11, cartSes: 222, pagoSes: 79, compraSes: 24,
+      topVentas: [
+        { nombre: 'EARLY BIRD BOOT PINK',     val: 718 },
+        { nombre: 'COW FUR SKIRT BEIGE',      val: 535 },
+        { nombre: 'RUFFLES NYLON JACKET PINK',val: 503 },
+        { nombre: 'FRINGES BOOT BLUE',        val: 414 }
+      ],
+      topPaginas: [],
+      topProductos: [],
+      kids:  { totales: 9552.15, vsPrev: 119 },
+      woman: { totales: 1138.17, vsPrev:  32 }
+    }
+  },
+  acumulado: {
+    label: 'Acumulado', month: 'acumulado', range: '29 jun–6 sep 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '169 compras sobre 6.890€ de inversión. Retargeting+Prospecting CAT: 28 compras · Prospecting ROAS 47,81x (ticket ~960€). FW26-KIDS 33 compras acumuladas · ROAS 5,92x. ROAS Meta 5,32x · ROAS Negocio 11,24x · ROAS Neto 8,99x.' },
+      { cat: 'Email', texto: '29 envíos. Newsletter: 12.519€ · Flujos: 7.114€ (CW6 pendiente). Total email: 19.633€+.' },
+      { cat: 'Shopify', texto: 'Ventas netas acumuladas: 61.947€ sobre 343 pedidos. AOV 225,83€. BARCOS SKIRT WHITE lidera SS26 con 1.879€.' }
+    ],
+    meta: {
+      inv: 6889.57, compras: 169, valConv: 36664.37, cpa: 40.77,
+      roasMeta: 5.32, roasNeg: 11.24, roasNeto: 8.99,
       campanas: [
         { nombre: 'FLASH_SALES', tipo: 'main', cat: 'venta',
           inv: 2012.77, compras: 64, val: 8352.93, roas: 4.15, ctr: 2.67, cpm: 14.04 },
         { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
-          inv: 1875.44, compras: 34, val: 7174.75, roas: 3.83, ctr: 4.60, cpm: 18.10 },
+          inv: 1975.79, compras: 36, val: 7999.37, roas: 4.05, ctr: 4.60, cpm: 18.10 },
         { nombre: 'FW26 - KIDS - VENTAS', tipo: 'main', cat: 'venta',
-          inv: 1228.20, compras: 25, val: 7557.73, roas: 6.15, ctr: 4.56, cpm: 19.81 },
+          inv: 1630.19, compras: 33, val: 9648.25, roas: 5.92, ctr: 4.56, cpm: 19.81 },
         { nombre: 'VTA - MMxSN - 28MAYO2026', tipo: 'main', cat: 'venta',
           inv:  413.10, compras:  8, val: 1420.97, roas: 3.44, ctr: 2.41, cpm: 10.61 },
         { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main', cat: 'venta',
-          inv:  122.69, compras: 14, val: 3174.05, roas: 25.87, ctr: 4.79, cpm:  3.44 },
+          inv:  217.23, compras: 24, val: 5407.39, roas: 24.89, ctr: 4.79, cpm:  3.44 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]', tipo: 'main', cat: 'venta',
+          inv:   80.25, compras:  4, val: 3836.46, roas: 47.81, ctr: 6.13, cpm: 18.86 },
         { nombre: '[VENTAS]_[KIDS]_[JAPON]_[ADV+]', tipo: 'main', cat: 'venta',
-          inv:   66.89, compras:  0, val:    0,    roas:  0,    ctr: 2.99, cpm:  8.20 },
+          inv:  169.16, compras:  0, val:    0,    roas:  0,    ctr: 2.99, cpm:  8.20 },
         { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
-          inv:  231.26, compras:  0, val:    0,    roas:  0,    ctr: 6.54, cpm:  3.73 },
+          inv:  265.30, compras:  0, val:    0,    roas:  0,    ctr: 6.54, cpm:  3.73 },
         { nombre: 'IG - FOLLOW - KIDS', tipo: 'awareness', cat: 'awareness',
-          inv:   92.25, compras:  0, val:    0,    roas:  0,    ctr: 6.56, cpm:  3.39 }
+          inv:  125.78, compras:  0, val:    0,    roas:  0,    ctr: 6.56, cpm:  3.39 }
       ]
     },
     creatividades: [],
@@ -650,9 +710,9 @@ const WEEKS = {
       soloResumen: true
     },
     ecomm: {
-      brutas: 62537.01, descuentos: 4820.80, devoluciones: 5872.78, netas: 51859.42,
-      envio: 3117.11, devCargos: 363.55, impuestos: 8120.09, totales: 65095.60,
-      pedidos: 319, aov: 204.06,
+      brutas: 73682.90, descuentos: 5329.99, devoluciones: 6422.07, netas: 61946.83,
+      envio: 3427.48, devCargos: 401.55, impuestos: 9689.16, totales: 77462.88,
+      pedidos: 343, aov: 225.83,
       sesiones: 33258, conv: 0.78, carrito: 5.60, pago: 2.19, compra: 0.78,
       habituales: 39.62, cartSes: 1861, pagoSes: 727, compraSes: 259,
       topVentas: [
@@ -666,8 +726,8 @@ const WEEKS = {
       ],
       topPaginas: [],
       topProductos: [],
-      kids:  { totales: 48718.16 },
-      woman: { totales: 10647.95 }
+      kids:  { totales: 58270.31 },
+      woman: { totales: 11786.12 }
     }
   }
 };
@@ -990,7 +1050,7 @@ let currentWeek=weekKeys[weekKeys.length-1];
 currentMonth=WEEKS[currentWeek].month;
 
 function buildMonthSelector(){
-  const labels={jul:'Jul',ago:'Ago',acumulado:'Acumulado'};
+  const labels={jul:'Jul',ago:'Ago',sep:'Sep',acumulado:'Acumulado'};
   document.getElementById('month-selector').innerHTML=months.map(m=>`<button class="month-btn ${m===currentMonth?'active':''}" onclick="selectMonth('${m}')">${labels[m]||m}</button>`).join('');
 }
 function buildWeekSelector(){
