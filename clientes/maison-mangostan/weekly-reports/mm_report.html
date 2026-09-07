@@ -584,7 +584,7 @@ const WEEKS = {
     label: '31 ago–6 sep', month: 'sep', range: '31 ago–6 sep 2026',
     puntos: [
       { cat: 'Meta Ads', texto: '24 compras sobre 847€ · Retargeting CAT: 10 compras ROAS 23,62x · Prospecting CAT: 4 compras ROAS 47,81x (ticket ~960€) · FW26-KIDS: 8 compras ROAS 5,20x. ROAS Meta 10,61x · ROAS Negocio 14,60x · ROAS Neto 11,91x.' },
-      { cat: 'Email', texto: 'Ovejas Set (1 sept): 213€ · 1 pedido · 60,37% ap. Boots (3 sept): 60,53% ap · sin conv. Back to school (6 sept): 52,27% ap · sin conv. Total newsletter: 213€.' },
+      { cat: 'Email', texto: 'Ovejas Set (1 sept): 213€ · 1 pedido · 60,37% ap. Boots (3 sept): 60,53% ap · sin conv. Back to school (6 sept): 52,27% ap · sin conv. Newsletter: 213€ · Flujos: 1.959€. Total email: 2.172€.' },
       { cat: 'Shopify', texto: 'Ventas netas 10.087€ sobre 24 pedidos. AOV 287,47€. EARLY BIRD BOOT PINK 718€. Kids 9.552€ · Woman+SN 1.138€.' }
     ],
     meta: {
@@ -614,7 +614,13 @@ const WEEKS = {
         { subject: 'Boots',          fecha: '3 sept · 10:30', dest: 1727, apertura: 60.53, clics: 2.63, pedidos: 0, ingresos:   0    },
         { subject: 'Back to school', fecha: '6 sept · 10:00', dest: 1498, apertura: 52.27, clics: 1.92, pedidos: 0, ingresos:   0    }
       ],
-      flujos: [],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos: 1642.80 },
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos:  315.78 },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Activo', ingresos:    0    },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos:    0    },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos:    0    }
+      ],
       popup: { nombre: 'POP UP (ONMI)', ingresos: 616, tasaEnvio: 1.57, envios: 55, formularioVisto: 3500 }
     },
     ecomm: {
@@ -639,7 +645,7 @@ const WEEKS = {
     label: 'Acumulado', month: 'acumulado', range: '29 jun–6 sep 2026',
     puntos: [
       { cat: 'Meta Ads', texto: '169 compras sobre 6.890€ de inversión. Retargeting+Prospecting CAT: 28 compras · Prospecting ROAS 47,81x (ticket ~960€). FW26-KIDS 33 compras acumuladas · ROAS 5,92x. ROAS Meta 5,32x · ROAS Negocio 11,24x · ROAS Neto 8,99x.' },
-      { cat: 'Email', texto: '29 envíos. Newsletter: 12.519€ · Flujos: 7.114€ (CW6 pendiente). Total email: 19.633€+.' },
+      { cat: 'Email', texto: '29 envíos. Newsletter: 12.519€ · Flujos: 9.073€. Total email: 21.592€.' },
       { cat: 'Shopify', texto: 'Ventas netas acumuladas: 61.947€ sobre 343 pedidos. AOV 225,83€. BARCOS SKIRT WHITE lidera SS26 con 1.879€.' }
     ],
     meta: {
@@ -697,8 +703,8 @@ const WEEKS = {
         { subject: 'Hoodies',                        fecha: '30 ago · 10:30', dest: 1433, apertura: 50.18, clics: 1.51, pedidos: 0, ingresos:    0    }
       ],
       flujos: [
-        { nombre: 'CHECK OUT STARTED',      estado: 'Activo',   ingresos: 2911.90 },
-        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo',   ingresos: 1344.16 },
+        { nombre: 'CHECK OUT STARTED',      estado: 'Activo',   ingresos: 4554.70 },
+        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo',   ingresos: 1659.94 },
         { nombre: 'Flow Bienvenida Ambos',  estado: 'Activo',   ingresos: 1582.76 },
         { nombre: 'Flow Bienvenida Mujer',  estado: 'Activo',   ingresos:  765.40 },
         { nombre: 'Viewed Product',         estado: 'Activo',   ingresos:  236.97 },
