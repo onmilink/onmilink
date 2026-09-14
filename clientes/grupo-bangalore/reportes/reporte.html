@@ -15,6 +15,7 @@
   --viggos:  #1baf7a;
   --warn:    #d03b3b;
   --good:    #006300;
+  --lorca:   #7c3aed;
 }
 @media (prefers-color-scheme: dark) {
   :root:where(:not([data-theme="light"])) {
@@ -30,6 +31,7 @@
     --viggos: #199e70;
     --warn:   #e66767;
     --good:   #0ca30c;
+    --lorca:  #9060f5;
   }
 }
 :root[data-theme="dark"] {
@@ -45,6 +47,7 @@
   --viggos: #199e70;
   --warn:   #e66767;
   --good:   #0ca30c;
+  --lorca:  #9060f5;
 }
 :root[data-theme="light"] {
   --page:    #f9f9f7;
@@ -59,6 +62,7 @@
   --viggos:  #1baf7a;
   --warn:    #d03b3b;
   --good:    #006300;
+  --lorca:   #7c3aed;
 }
 
 /* ── BASE ───────────────────────────────────────────────────────────────── */
@@ -127,6 +131,7 @@ body {
 .legend-swatch.playa  { background: var(--playa); }
 .legend-swatch.pillo  { background: var(--pillo); }
 .legend-swatch.viggos { background: var(--viggos); }
+.legend-swatch.lorca  { background: var(--lorca); }
 
 /* ── TOTALS STRIP ───────────────────────────────────────────────────────── */
 .totals-strip {
@@ -207,6 +212,7 @@ body {
 .kpi-card.playa::before  { background: var(--playa); }
 .kpi-card.pillo::before  { background: var(--pillo); }
 .kpi-card.viggos::before { background: var(--viggos); }
+.kpi-card.lorca::before  { background: var(--lorca); }
 
 .kpi-card-name {
   font-size: 0.68rem;
@@ -218,6 +224,7 @@ body {
 .kpi-card-name.playa  { color: var(--playa); }
 .kpi-card-name.pillo  { color: var(--pillo); }
 .kpi-card-name.viggos { color: var(--viggos); }
+.kpi-card-name.lorca  { color: var(--lorca); }
 
 /* Hero metric */
 .kpi-hero-val {
@@ -320,6 +327,7 @@ body {
 .bar-fill.playa  { background: var(--playa); }
 .bar-fill.pillo  { background: var(--pillo); }
 .bar-fill.viggos { background: var(--viggos); }
+.bar-fill.lorca  { background: var(--lorca); }
 
 .bar-val {
   font-size: 0.72rem;
@@ -416,6 +424,7 @@ tbody tr:last-child td { border-bottom: none; }
 .rest-dot.playa  { background: var(--playa); }
 .rest-dot.pillo  { background: var(--pillo); }
 .rest-dot.viggos { background: var(--viggos); }
+.rest-dot.lorca  { background: var(--lorca); }
 .td-alert { color: var(--warn); font-weight: 700; }
 
 /* ── INSIGHTS ───────────────────────────────────────────────────────────── */
@@ -515,6 +524,7 @@ tbody tr:last-child td { border-bottom: none; }
 .creative-card-name.playa  { color: var(--playa); }
 .creative-card-name.pillo  { color: var(--pillo); }
 .creative-card-name.viggos { color: var(--viggos); }
+.creative-card-name.lorca  { color: var(--lorca); }
 .creative-table {
   width: 100%;
   border-collapse: collapse;
@@ -573,6 +583,7 @@ tbody tr:last-child td { border-bottom: none; }
 .winner-arrow.playa  { color: var(--playa); }
 .winner-arrow.pillo  { color: var(--pillo); }
 .winner-arrow.viggos { color: var(--viggos); }
+.winner-arrow.lorca  { color: var(--lorca); }
 .inact-tag {
   display: inline-block;
   font-size: 0.5rem;
@@ -585,6 +596,11 @@ tbody tr:last-child td { border-bottom: none; }
   margin-left: 0.15rem;
   vertical-align: middle;
 }
+.kpi-row.four { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 860px) { .kpi-row.four { grid-template-columns: repeat(2, 1fr); } }
+.creative-grid.four { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 680px) { .creative-grid.four { grid-template-columns: 1fr; } }
+
 /* Period tabs */
 .period-tabs {
   display: flex;
@@ -618,8 +634,8 @@ tbody tr:last-child td { border-bottom: none; }
   <div class="report-header">
     <div class="report-meta">
       <div class="eyebrow">Meta Ads &nbsp;·&nbsp; Grupo Bangalore</div>
-      <div class="report-title">Jul – Ago 2026</div>
-      <div class="report-period">Informe de rendimiento · 2 períodos</div>
+      <div class="report-title">Jul – Sep 2026</div>
+      <div class="report-period">Informe de rendimiento · 4 períodos</div>
     </div>
     <div class="legend">
       <div class="legend-item">
@@ -631,6 +647,9 @@ tbody tr:last-child td { border-bottom: none; }
       <div class="legend-item">
         <span class="legend-swatch viggos"></span>Viggos
       </div>
+      <div class="legend-item">
+        <span class="legend-swatch lorca"></span>Lorca
+      </div>
     </div>
   </div>
 
@@ -639,6 +658,7 @@ tbody tr:last-child td { border-bottom: none; }
     <button class="period-tab" onclick="switchPeriod(0)">16–22 Jul · Semana</button>
     <button class="period-tab" onclick="switchPeriod(1)">22 Jul–5 Ago · Quincena</button>
     <button class="period-tab" onclick="switchPeriod(2)">6–16 Ago · 11 días</button>
+    <button class="period-tab" onclick="switchPeriod(3)">30 Ago–13 Sep · 15 días</button>
   </div>
 
   <div class="period-section" id="period-1">
@@ -1178,6 +1198,7 @@ tbody tr:last-child td { border-bottom: none; }
           <th>Restaurante</th>
           <th>Inversión</th>
           <th>Visitas IG</th>
+          <th>Visitas web</th>
           <th>Coste/visita</th>
           <th>CTR</th>
           <th>Seguidores</th>
@@ -1448,6 +1469,7 @@ tbody tr:last-child td { border-bottom: none; }
           <th>Restaurante</th>
           <th>Inversión</th>
           <th>Visitas IG</th>
+          <th>Visitas web</th>
           <th>Coste/visita</th>
           <th>CTR</th>
           <th>Seguidores</th>
@@ -1459,19 +1481,19 @@ tbody tr:last-child td { border-bottom: none; }
       <tbody>
         <tr>
           <td><span class="rest-badge"><span class="rest-dot playa"></span>Bangalore Playa</span></td>
-          <td>€111.38</td><td>1,475</td><td>€0.075</td><td>4.18%</td><td>122</td><td>€0.91</td><td>38,915</td><td>€1.87</td>
+          <td>€111.38</td><td>1,475</td><td>—</td><td>€0.075</td><td>4.18%</td><td>122</td><td>€0.91</td><td>38,915</td><td>€1.87</td>
         </tr>
         <tr>
           <td><span class="rest-badge"><span class="rest-dot pillo"></span>Arooces El Pillo</span></td>
-          <td>€110.00</td><td>921</td><td>€0.119</td><td>2.71%</td><td>164</td><td>€0.67</td><td>53,994</td><td>€1.38</td>
+          <td>€110.00</td><td>921</td><td>—</td><td>€0.119</td><td>2.71%</td><td>164</td><td>€0.67</td><td>53,994</td><td>€1.38</td>
         </tr>
         <tr>
           <td><span class="rest-badge"><span class="rest-dot viggos"></span>Viggos</span></td>
-          <td>€108.66</td><td>1,111</td><td>€0.098</td><td>2.67%</td><td>38</td><td class="td-alert">€2.86</td><td>—</td><td>€1.17</td>
+          <td>€108.66</td><td>1,111</td><td>—</td><td>€0.098</td><td>2.67%</td><td>38</td><td class="td-alert">€2.86</td><td>—</td><td>€1.17</td>
         </tr>
         <tr class="total-row">
           <td>Total período</td>
-          <td>€330.04</td><td>3,507</td><td>€0.094</td><td>—</td><td>324</td><td>€1.02</td><td>—</td><td>—</td>
+          <td>€330.04</td><td>3,507</td><td>—</td><td>€0.094</td><td>—</td><td>324</td><td>€1.02</td><td>—</td><td>—</td>
         </tr>
       </tbody>
     </table>
@@ -1597,6 +1619,325 @@ tbody tr:last-child td { border-bottom: none; }
   </div>
 
   </div><!-- /period-3 -->
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ═══ 30 AGO–13 SEP ══════════════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+
+  <div class="period-section" id="period-4">
+
+  <!-- Totals strip -->
+  <div class="totals-strip">
+    <div class="total-cell">
+      <div class="total-cell-label">Inversión total</div>
+      <div class="total-cell-value">€549.98</div>
+    </div>
+    <div class="total-cell">
+      <div class="total-cell-label">Visitas al perfil (IG)</div>
+      <div class="total-cell-value">6,491</div>
+    </div>
+    <div class="total-cell">
+      <div class="total-cell-label">Seguidores captados</div>
+      <div class="total-cell-value">280</div>
+    </div>
+    <div class="total-cell">
+      <div class="total-cell-label">CPF medio</div>
+      <div class="total-cell-value">€1.96</div>
+    </div>
+  </div>
+
+  <!-- KPI cards -->
+  <div class="section-label">Rendimiento por restaurante</div>
+  <div class="kpi-row four">
+
+    <div class="kpi-card pillo">
+      <div class="kpi-card-name pillo">Arooces El Pillo</div>
+      <div class="kpi-hero-val">2,384</div>
+      <div class="kpi-hero-label">visitas al perfil &nbsp;(IG)</div>
+      <div class="kpi-metrics">
+        <div class="kpi-metric"><div class="kpi-metric-label">Inversión</div><div class="kpi-metric-value">€152.30</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Visitas web</div><div class="kpi-metric-value">67</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Coste/visita IG</div><div class="kpi-metric-value">€0.064</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Seguidores</div><div class="kpi-metric-value">141</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Coste/seg.</div><div class="kpi-metric-value">€1.08</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Alcance</div><div class="kpi-metric-value">71,354</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">CTR</div><div class="kpi-metric-value">3.49%</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">CPM</div><div class="kpi-metric-value">€1.75</div></div>
+      </div>
+    </div>
+
+    <div class="kpi-card playa">
+      <div class="kpi-card-name playa">Bangalore Playa</div>
+      <div class="kpi-hero-val">2,141</div>
+      <div class="kpi-hero-label">visitas al perfil &nbsp;(IG)</div>
+      <div class="kpi-metrics">
+        <div class="kpi-metric"><div class="kpi-metric-label">Inversión</div><div class="kpi-metric-value">€150.28</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Visitas web</div><div class="kpi-metric-value">14</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Coste/visita IG</div><div class="kpi-metric-value">€0.070</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Seguidores</div><div class="kpi-metric-value">40</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Coste/seg.</div><div class="kpi-metric-value alert">€3.76</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Alcance</div><div class="kpi-metric-value">35,211</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">CTR</div><div class="kpi-metric-value">3.87%</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">CPM</div><div class="kpi-metric-value">€2.44</div></div>
+      </div>
+    </div>
+
+    <div class="kpi-card viggos">
+      <div class="kpi-card-name viggos">Viggos</div>
+      <div class="kpi-hero-val">1,453</div>
+      <div class="kpi-hero-label">visitas al perfil &nbsp;(IG)</div>
+      <div class="kpi-metrics">
+        <div class="kpi-metric"><div class="kpi-metric-label">Inversión</div><div class="kpi-metric-value">€151.04</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Visitas web</div><div class="kpi-metric-value">—</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Coste/visita IG</div><div class="kpi-metric-value">€0.104</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Seguidores</div><div class="kpi-metric-value">52</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Coste/seg.</div><div class="kpi-metric-value alert">€2.90</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Alcance</div><div class="kpi-metric-value">—</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">CTR</div><div class="kpi-metric-value">3.31%</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">CPM</div><div class="kpi-metric-value">€1.42</div></div>
+      </div>
+    </div>
+
+    <div class="kpi-card lorca">
+      <div class="kpi-card-name lorca">Lorca</div>
+      <div class="kpi-hero-val">513</div>
+      <div class="kpi-hero-label">visitas al perfil &nbsp;(IG)</div>
+      <div class="kpi-metrics">
+        <div class="kpi-metric"><div class="kpi-metric-label">Inversión</div><div class="kpi-metric-value">€96.36</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Visitas web</div><div class="kpi-metric-value">25</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Coste/visita IG</div><div class="kpi-metric-value">€0.188</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Seguidores</div><div class="kpi-metric-value">47</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Coste/seg.</div><div class="kpi-metric-value">€2.05</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">Alcance</div><div class="kpi-metric-value">—</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">CTR</div><div class="kpi-metric-value">5.54%</div></div>
+        <div class="kpi-metric"><div class="kpi-metric-label">CPM</div><div class="kpi-metric-value">€1.63</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Charts -->
+  <div class="section-label">Comparativa visual</div>
+  <div class="charts-grid">
+
+    <div class="chart-panel">
+      <div class="chart-panel-title">Visitas al perfil (IG)</div>
+      <div class="chart-panel-sub">30 Ago–13 Sep · solo perfil Instagram</div>
+      <div class="bar-group">
+        <div class="bar-row">
+          <span class="bar-name">El Pillo</span>
+          <div class="bar-track"><div class="bar-fill pillo" style="width:100%"></div></div>
+          <span class="bar-val">2,384</span>
+          <div class="bar-tooltip">Inversión €152.30 · Alcance 71,354</div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Playa</span>
+          <div class="bar-track"><div class="bar-fill playa" style="width:89.8%"></div></div>
+          <span class="bar-val">2,141</span>
+          <div class="bar-tooltip">Inversión €150.28 · Alcance 35,211</div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Viggos</span>
+          <div class="bar-track"><div class="bar-fill viggos" style="width:61.0%"></div></div>
+          <span class="bar-val">1,453</span>
+          <div class="bar-tooltip">Inversión €151.04</div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Lorca</span>
+          <div class="bar-track"><div class="bar-fill lorca" style="width:21.5%"></div></div>
+          <span class="bar-val">513</span>
+          <div class="bar-tooltip">Inversión €96.36 · 1er período</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-panel">
+      <div class="chart-panel-title">Eficiencia en captación de seguidores</div>
+      <div class="chart-panel-sub">Barra más larga = menor coste por seguidor</div>
+      <div class="bar-group">
+        <div class="bar-row">
+          <span class="bar-name">El Pillo</span>
+          <div class="bar-track"><div class="bar-fill pillo" style="width:100%"></div></div>
+          <span class="bar-val">€1.08</span>
+          <div class="bar-tooltip">141 seguidores · €1.08/seg.</div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Lorca</span>
+          <div class="bar-track"><div class="bar-fill lorca" style="width:52.7%"></div></div>
+          <span class="bar-val">€2.05</span>
+          <div class="bar-tooltip">47 seguidores · €2.05/seg. · 1er período</div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Viggos</span>
+          <div class="bar-track"><div class="bar-fill viggos" style="width:37.2%"></div></div>
+          <span class="bar-val alert">€2.90</span>
+          <div class="bar-tooltip">52 seguidores · €2.90/seg.</div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Playa</span>
+          <div class="bar-track"><div class="bar-fill playa" style="width:28.7%"></div></div>
+          <span class="bar-val alert">€3.76</span>
+          <div class="bar-tooltip">40 seguidores · €3.76/seg.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Table -->
+  <div class="section-label">Datos detallados</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Restaurante</th>
+          <th>Inversión</th>
+          <th>Visitas IG</th>
+          <th>Visitas web</th>
+          <th>Coste/visita</th>
+          <th>CTR</th>
+          <th>Seguidores</th>
+          <th>Coste/seg.</th>
+          <th>Alcance</th>
+          <th>CPM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rest-badge"><span class="rest-dot pillo"></span>Arooces El Pillo</span></td>
+          <td>€152.30</td><td>2,384</td><td>67</td><td>€0.064</td><td>3.49%</td><td>141</td><td>€1.08</td><td>71,354</td><td>€1.75</td>
+        </tr>
+        <tr>
+          <td><span class="rest-badge"><span class="rest-dot playa"></span>Bangalore Playa</span></td>
+          <td>€150.28</td><td>2,141</td><td>14</td><td>€0.070</td><td>3.87%</td><td>40</td><td class="td-alert">€3.76</td><td>35,211</td><td>€2.44</td>
+        </tr>
+        <tr>
+          <td><span class="rest-badge"><span class="rest-dot viggos"></span>Viggos</span></td>
+          <td>€151.04</td><td>1,453</td><td>—</td><td>€0.104</td><td>3.31%</td><td>52</td><td class="td-alert">€2.90</td><td>—</td><td>€1.42</td>
+        </tr>
+        <tr>
+          <td><span class="rest-badge"><span class="rest-dot lorca"></span>Lorca</span></td>
+          <td>€96.36</td><td>513</td><td>25</td><td>€0.188</td><td>5.54%</td><td>47</td><td>€2.05</td><td>—</td><td>€1.63</td>
+        </tr>
+        <tr class="total-row">
+          <td>Total período</td>
+          <td>€549.98</td><td>6,491</td><td>106</td><td>€0.085</td><td>—</td><td>280</td><td>€1.96</td><td>—</td><td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Creativos -->
+  <div class="section-label">Rendimiento por creativo</div>
+  <div class="creative-grid four">
+
+    <div class="creative-card">
+      <div class="creative-card-header"><div class="creative-card-name pillo">Arooces El Pillo</div></div>
+      <table class="creative-table">
+        <thead><tr><th>Creativo</th><th>Inversión</th><th>Seg.</th><th>CPF</th><th>CTR</th></tr></thead>
+        <tbody>
+          <tr class="row-winner">
+            <td><span class="winner-arrow pillo">↑</span><span class="fmt-tag vid">VID</span>Arroz (nov 25)</td>
+            <td>€98.05</td><td>102</td><td>€0.96</td><td>3.86%</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag vid">VID</span>Preparación arroz</td>
+            <td>€21.85</td><td>6</td><td>€3.64</td><td>7.04%</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag vid">VID</span>Menú especial 3/9</td>
+            <td>€12.89</td><td>7</td><td>€1.84</td><td>3.39%</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag vid">VID</span>Verano AD04<span class="inact-tag">OFF</span></td>
+            <td>€8.43</td><td>15</td><td>€0.56</td><td>2.92%</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag vid">VID</span>Verano AD06<span class="inact-tag">OFF</span></td>
+            <td>€7.95</td><td>8</td><td>€0.99</td><td>2.18%</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag vid">VID</span>Arroz sarmiento</td>
+            <td>€3.10</td><td>3</td><td>€1.03</td><td>1.75%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="creative-card">
+      <div class="creative-card-header"><div class="creative-card-name playa">Bangalore Playa</div></div>
+      <table class="creative-table">
+        <thead><tr><th>Creativo</th><th>Inversión</th><th>Seg.</th><th>CPF</th><th>CTR</th></tr></thead>
+        <tbody>
+          <tr class="row-winner">
+            <td><span class="winner-arrow playa">↑</span><span class="fmt-tag img">IMG</span>Cenas 1ª línea</td>
+            <td>€113.17</td><td>27</td><td>€4.19</td><td>7.73%</td>
+          </tr>
+          <tr>
+            <td><span class="fmt-tag img">IMG</span>Diseño + Bogavante</td>
+            <td>€36.92</td><td>13</td><td>€2.84</td><td>2.53%</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag car">CAR</span>Mensajes cenas<span class="inact-tag">OFF</span></td>
+            <td>€0.19</td><td>—</td><td>—</td><td>1.30%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="creative-card">
+      <div class="creative-card-header"><div class="creative-card-name viggos">Viggos</div></div>
+      <table class="creative-table">
+        <thead><tr><th>Creativo</th><th>Inversión</th><th>Seg.</th><th>CPF</th><th>CTR</th></tr></thead>
+        <tbody>
+          <tr class="row-winner">
+            <td><span class="winner-arrow viggos">↑</span><span class="fmt-tag vid">VID</span>Puerto menú</td>
+            <td>€37.94</td><td>39</td><td>€0.97</td><td>5.55%</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag img">IMG</span>Ad 2<span class="inact-tag">OFF</span></td>
+            <td>€91.30</td><td>10</td><td>€9.13</td><td>3.22%</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag img">IMG</span>Ad 3<span class="inact-tag">OFF</span></td>
+            <td>€14.20</td><td>2</td><td>€7.10</td><td>1.67%</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag img">IMG</span>Ad 1<span class="inact-tag">OFF</span></td>
+            <td>€4.02</td><td>—</td><td>—</td><td>1.19%</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag img">IMG</span>Ad 4<span class="inact-tag">OFF</span></td>
+            <td>€3.58</td><td>1</td><td>€3.58</td><td>1.21%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="creative-card">
+      <div class="creative-card-header"><div class="creative-card-name lorca">Lorca</div></div>
+      <table class="creative-table">
+        <thead><tr><th>Creativo</th><th>Inversión</th><th>Seg.</th><th>CPF</th><th>CTR</th></tr></thead>
+        <tbody>
+          <tr class="row-winner">
+            <td><span class="winner-arrow lorca">↑</span><span class="fmt-tag car">CAR</span>Menú</td>
+            <td>€65.16</td><td>24</td><td>€2.72</td><td>6.40%</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag vid">VID</span>Reapertura<span class="inact-tag">OFF</span></td>
+            <td>€22.97</td><td>5</td><td>€4.59</td><td>2.35%</td>
+          </tr>
+          <tr class="row-inactive">
+            <td><span class="fmt-tag vid">VID</span>De vuelta<span class="inact-tag">OFF</span></td>
+            <td>€8.23</td><td>18</td><td>€0.46</td><td>3.03%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  </div><!-- /period-4 -->
 
   <!-- ═══ FOOTNOTE ═══ -->
   <p class="footnote">
