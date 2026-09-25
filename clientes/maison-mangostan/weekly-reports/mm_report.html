@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="robots" content="noindex, nofollow, noarchive">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
 <title>Maison Mangostan x ONMI — Dashboard</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
@@ -581,6 +581,76 @@ const WEEKS = {
       woman: { netas: 864.88,  vsPrev: 372 }
     }
   },
+  acum_ago: {
+    label: 'Acumulado ago', month: 'ago', range: '1–31 ago 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '66 compras sobre 3.089€ · CPA 46,80€. FW26-KIDS tira del mes: 26 compras · ROAS 6,02x con el 41% de la inversión. Retargeting CAT: 18 compras · ROAS 29,93x · CPA 7,47€. Woman Launch: 11 compras · ROAS 3,92x. Flash Sales cierra con 10 compras · ROAS 5,04x. IG Follow: 746 seguidores a 0,34€. ROAS Meta 5,55x · ROAS Negocio 11,65x · ROAS Neto 9,37x.' },
+      { cat: 'Email', texto: '13 envíos · 8.237€ · 33 pedidos · apertura media 60,31%. Top: FW26 Lanzamiento (1.303€ · 4,71% CTR), Woman Sales (1.160€) y Shorts and skirts (1.049€). Flujos: 6.545€, liderados por Checkout Started (2.854€) y Bienvenida Kids (1.762€). Total email: 14.782€.' },
+      { cat: 'Shopify', texto: 'Sin Marketplacer: ventas brutas ~34.112€ · netas 28.936€ · totales ~35.995€. 119 compras online · AOV 202,25€ (+34%). Sesiones 13.633 (+17%) con conversión 0,87% (-24%). El lanzamiento FW26 marca el top: Ruffles Nylon Jacket Black (~2,6k€), Litchy Pink Boot (~1,8k€), Early Bird Boot y Ruffles Nylon Jacket Pink (~1,3k€ cada uno).' }
+    ],
+    meta: {
+      inv: 3088.59, compras: 66, valConv: 17136.10, cpa: 46.80,
+      roasMeta: 5.55, roasNeg: 11.65, roasNeto: 9.37,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',               tipo: 'main',      cat: 'venta',     inv: 1279.97, compras: 26, val: 7711.28, roas:  6.02, ctr: 6.51, cpm: 19.10 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS',        tipo: 'main',      cat: 'venta',     inv:  752.13, compras: 11, val: 2948.42, roas:  3.92, ctr: 7.64, cpm: 18.34 },
+        { nombre: 'FLASH_SALES',                         tipo: 'main',      cat: 'venta',     inv:  474.43, compras: 10, val: 2392.54, roas:  5.04, ctr: 4.40, cpm: 15.05 },
+        { nombre: 'IG - FOLLOW - WOMAN',                 tipo: 'awareness', cat: 'awareness', inv:  153.58, compras:  0, val:    0,    roas:  0,    ctr: 8.02, cpm:  3.43 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main',      cat: 'venta',     inv:  134.50, compras: 18, val: 4026.18, roas: 29.93, ctr: 4.90, cpm:  3.46 },
+        { nombre: 'VTA - MMxSN - 28MAYO2026',            tipo: 'main',      cat: 'venta',     inv:  113.76, compras:  1, val:   57.68, roas:  0.51, ctr: 2.70, cpm: 10.52 },
+        { nombre: 'IG - FOLLOW - KIDS',                  tipo: 'awareness', cat: 'awareness', inv:   97.10, compras:  0, val:    0,    roas:  0,    ctr: 7.46, cpm:  3.32 },
+        { nombre: '[VENTAS]_[KIDS]_[JAPON]_[ADV+]',     tipo: 'main',      cat: 'venta',     inv:   83.12, compras:  0, val:    0,    roas:  0,    ctr: 3.06, cpm:  8.38 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Hype FW26',                fecha: '3 ago · 10:00',  dest: 1797, apertura: 59.37, clics: 2.08, pedidos: 0, ingresos:    0    },
+        { subject: 'Extra discount · Rebajas', fecha: '5 ago · 10:00',  dest: 1684, apertura: 55.76, clics: 1.85, pedidos: 4, ingresos:  783.76 },
+        { subject: 'Shorts and skirts',        fecha: '7 ago · 10:30',  dest: 1709, apertura: 59.34, clics: 3.19, pedidos: 4, ingresos: 1048.79 },
+        { subject: 'Birds + sale',             fecha: '9 ago · 10:00',  dest: 1774, apertura: 61.68, clics: 1.81, pedidos: 2, ingresos:  325.08 },
+        { subject: 'Last hours sale',          fecha: '11 ago · 10:00', dest: 1754, apertura: 58.14, clics: 3.08, pedidos: 3, ingresos:  714.00 },
+        { subject: 'FW26 · Lanzamiento',       fecha: '13 ago · 10:00', dest: 1759, apertura: 61.35, clics: 4.71, pedidos: 5, ingresos: 1303.32 },
+        { subject: 'FW26 · Not grey',          fecha: '16 ago · 10:30', dest: 1763, apertura: 61.41, clics: 1.95, pedidos: 2, ingresos:  461.03 },
+        { subject: 'Back to school',           fecha: '18 ago · 10:00', dest: 1733, apertura: 60.30, clics: 1.74, pedidos: 2, ingresos:  283.36 },
+        { subject: 'Pink ruffles jacket',      fecha: '20 ago · 10:00', dest: 1790, apertura: 62.28, clics: 2.61, pedidos: 3, ingresos:  838.68 },
+        { subject: 'Animal Prints',            fecha: '23 ago · 10:00', dest: 1761, apertura: 61.30, clics: 1.39, pedidos: 1, ingresos:  230.00 },
+        { subject: 'Cow fur',                  fecha: '25 ago · 10:00', dest: 1799, apertura: 62.92, clics: 1.71, pedidos: 2, ingresos:  495.15 },
+        { subject: 'Woman Sales',              fecha: '28 ago · 10:30', dest: 1764, apertura: 58.88, clics: 3.61, pedidos: 4, ingresos: 1160.30 },
+        { subject: 'Hoodies',                  fecha: '30 ago · 10:30', dest: 1751, apertura: 61.31, clics: 1.51, pedidos: 1, ingresos:  594.00 }
+      ],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos: 2853.62 },
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos: 1762.16 },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Activo', ingresos: 1459.68 },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos:  236.97 },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos:  232.58 }
+      ]
+    },
+    ecomm: {
+      // Desglose de ventas totales Shopify 1–31 ago 2026 EXCLUYENDO Marketplacer 2026-3.
+      // Marketplacer ago: netas 758 € · brutas ≈1,2 mil € (Shopify solo lo muestra redondeado).
+      // brutas = 35.312,46 − 1.200 · netas = 29.693,77 − 758 · totales = 36.753,23 − 758 · devoluciones = brutas − descuentos − netas.
+      // Envío, cargos por devolución e impuestos: total tienda.
+      brutas: 34112.46, descuentos: 1982.40, devoluciones: 3194.29, netas: 28935.77,
+      envio: 1449.30, devCargos: 139.50, impuestos: 4259.80, totales: 35995.23,
+      pedidos: 119, aov: 202.25,
+      sesiones: 13633, conv: 0.87, carrito: 6.40, pago: 2.60, compra: 0.87,
+      habituales: 43.53, cartSes: 872, pagoSes: 355, compraSes: 119,
+      // Shopify solo muestra los importes redondeados en el widget de productos
+      topVentas: [
+        { nombre: 'RUFFLES NYLON JACKET BLACK', val: '≈2,6 mil €' },
+        { nombre: 'LITCHY PINK BOOT',           val: '≈1,8 mil €' },
+        { nombre: 'EARLY BIRD BOOT',            val: '≈1,3 mil €' },
+        { nombre: 'RUFFLES NYLON JACKET PINK',  val: '≈1,3 mil €' }
+      ],
+      topPaginas: [], topProductos: [],
+      // Ventas totales Online Store por país de facturación
+      topPaises: [ { pais: 'Estados Unidos', val: 8066.29 }, { pais: 'Japón', val: 5524.22 }, { pais: 'Bélgica', val: 4469.33 } ],
+      kids:  null,
+      woman: null
+    }
+  },
   cw6: {
     label: '31 ago–6 sep', month: 'sep', range: '31 ago–6 sep 2026',
     puntos: [
@@ -693,6 +763,62 @@ const WEEKS = {
       topPaginas: [], topProductos: [],
       kids:  { netas: 3815.15, vsPrev: -58 },
       woman: { netas:  620.24, vsPrev: -24 }
+    }
+  },
+  cw8: {
+    label: '14–20 sep', month: 'sep', range: '14–20 sep 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '15 compras sobre 805€ (vs 11 la semana anterior). CPA baja de 76,85€ a 53,67€. Retargeting CAT: 10 compras ROAS 16,36x · CPA 14,32€. Woman Launch reactiva: 2 compras ROAS 2,82x. FW26-KIDS: 2 compras ROAS 0,90x, segunda semana por debajo de 1x. Testing ABO sin compras (32 añadidos al carrito). ROAS Meta 3,86x · ROAS Negocio 8,02x · ROAS Neto 6,21x.' },
+      { cat: 'Email', texto: 'Blue postcard (15 sept): 1.019€ · 2 pedidos · 62,44% ap. Woman FW (17 sept): 198€ · 1 pedido · 61,13% ap. Vegetables set (20 sept): 295€ · 2 pedidos · 58,43% ap. Newsletter: 1.511€ (+67% vs semana anterior) · Flujos: 632€. Total: 2.143€.' },
+      { cat: 'Shopify', texto: 'Ventas netas sin Marketplacer ~4.999€ (+12% vs semana anterior) · 29 compras online. AOV 191,09€. Conversión sube al 0,90% (0,49% la semana anterior). Boots siguen dominando: Litchy Pink Boot ~1.323€ (+82%) · Early Bird Boot 940€ (+20%) · EB Boot Pink 733€ (+95%). Clientes habituales 47,05%.' }
+    ],
+    meta: {
+      inv: 805.04, compras: 15, valConv: 3109.40, cpa: 53.67,
+      roasMeta: 3.86, roasNeg: 8.02, roasNeto: 6.21,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',               tipo: 'main',      cat: 'venta',     inv: 299.44, compras:  2, val:  270.36, roas:  0.90, ctr: 6.52, cpm: 24.00 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main',      cat: 'venta',     inv: 143.19, compras: 10, val: 2343.08, roas: 16.36, ctr: 4.32, cpm:  4.66 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[OPEN]',    tipo: 'main',      cat: 'venta',     inv: 120.58, compras:  0, val:    0,    roas:  0,    ctr: 2.63, cpm: 28.82 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS',        tipo: 'main',      cat: 'venta',     inv: 105.91, compras:  2, val:  298.28, roas:  2.82, ctr: 5.09, cpm: 25.28 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',  tipo: 'main',      cat: 'venta',     inv: 101.19, compras:  1, val:  197.68, roas:  1.95, ctr: 6.24, cpm: 31.58 },
+        { nombre: 'IG - FOLLOW - KIDS',                  tipo: 'awareness', cat: 'awareness', inv:  34.73, compras:  0, val:    0,    roas:  0,    ctr: 7.86, cpm:  4.05 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Blue postcard',  fecha: '15 sept · 10:30', dest: 1782, apertura: 62.44, clics: 1.12, pedidos: 2, ingresos: 1019.00 },
+        { subject: 'Woman FW',       fecha: '17 sept · 10:00', dest: 1744, apertura: 61.13, clics: 2.38, pedidos: 1, ingresos:  197.68 },
+        { subject: 'Vegetables set', fecha: '20 sept · 10:00', dest: 1664, apertura: 58.43, clics: 0.67, pedidos: 2, ingresos:  294.59 }
+      ],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos: 331.88 },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos: 300.00 },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Activo', ingresos:   0    },
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos:   0    },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos:   0    }
+      ]
+    },
+    ecomm: {
+      // Desglose de ventas totales Shopify 14–20 sep 2026 EXCLUYENDO Marketplacer 2026-3.
+      // Marketplacer: "1 mil € · +968% vs 99 €" (Shopify lo muestra redondeado) → ≈1.057 € en brutas y netas.
+      // brutas = 7.461,80 − 1.057 · netas = 6.056,43 − 1.057 · totales = 7.509,72 − 1.057 · envío/cargos/impuestos: total tienda.
+      brutas: 6404.8, descuentos: 62.46, devoluciones: 1342.91, netas: 4999.43,
+      envio: 375.08, devCargos: 45.00, impuestos: 860.70, totales: 6452.72,
+      pedidos: 29, aov: 191.09,
+      sesiones: 3206, conv: 0.90, carrito: 5.33, pago: 1.74, compra: 0.90,
+      habituales: 47.05, cartSes: 171, pagoSes: 56, compraSes: 29,
+      topVentas: [
+        { nombre: 'LITCHY PINK BOOT',         val: 1323 },
+        { nombre: 'EARLY BIRD BOOT',          val: 940 },
+        { nombre: 'EARLY BIRD BOOT PINK',     val: 733 },
+        { nombre: 'RUFFLES KNITTED CARDIGAN MUSTARD', val: 395 }
+      ],
+      topPaginas: [], topProductos: [],
+      // Ventas totales Online Store por país de facturación
+      topPaises: [ { pais: 'Estados Unidos', val: 1308.75 }, { pais: 'España', val: 972.84 }, { pais: 'Polonia', val: 708.00 } ],
+      kids:  null,
+      woman: null
     }
   },
   acumulado: {
@@ -1076,8 +1202,19 @@ function renderWeek(wk, prevWk) {
   html+=renderMailSection(d);
   html+=renderCreativosSection(d);
   if(d.ecomm) html+=renderEcommSection(d,p);
+  if(d.ecomm&&(d.ecomm.topPaises||[]).length) html+=renderPaisesSection(d);
   html+=`<div class="footer"><div class="footer-note">META ADS + SHOPIFY + KLAVIYO · ${d.range.toUpperCase()} · CANAL ONLINE EXCL. MARKETPLACE</div><div class="footer-onmi"><div class="footer-onmi-label">Prepared by</div><img src="data:image/png;base64,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" alt="Onmi Link" style="height:22px;width:auto;opacity:0.75;"></div></div>`;
   document.getElementById('main-content').innerHTML=html;
+}
+
+function renderPaisesSection(d){
+  const ps=d.ecomm.topPaises, max=Math.max(...ps.map(x=>x.val));
+  let h=`<div class="section-block mb24"><div class="section-block-hdr ecomm"><div class="section-block-title">Top países · Online Store · ${d.range}</div></div><div class="section-block-body"><div class="eco-box"><div class="eco-box-title">Ventas totales por país de facturación</div><div style="display:flex;flex-direction:column;gap:12px;margin-top:4px">`;
+  ps.forEach((x,i)=>{
+    h+=`<div><div style="display:flex;justify-content:space-between;align-items:baseline;font-size:12px;margin-bottom:5px"><span><span style="font-family:'DM Mono',monospace;color:var(--muted);margin-right:8px">${i+1}</span>${x.pais}</span><span style="font-weight:600">${fmtEur(x.val)}</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:${(x.val/max*100).toFixed(1)}%;background:var(--text);border-radius:3px"></div></div></div>`;
+  });
+  h+=`</div></div></div></div>`;
+  return h;
 }
 
 function renderCreativosSection(d){
@@ -1091,6 +1228,9 @@ function renderCreativosSection(d){
 }
 
 const weekKeys=Object.keys(WEEKS);
+// Los acumulados (general y mensuales) no se comparan ni sirven de referencia a la semana siguiente
+function isAcum(k){ return k.startsWith('acum'); }
+function prevOf(k){ if(isAcum(k)) return null; let i=weekKeys.indexOf(k)-1; while(i>=0&&isAcum(weekKeys[i])) i--; return i>=0?weekKeys[i]:null; }
 const yoyState={};
 function toggleYoY(){
   yoyState[currentWeek]=!yoyState[currentWeek];
@@ -1117,7 +1257,7 @@ function selectMonth(m){
   buildMonthSelector();
   buildWeekSelector();
   const idx=weekKeys.indexOf(currentWeek);
-  renderWeek(currentWeek,currentWeek==='acumulado'?null:(idx>0?weekKeys[idx-1]:null));
+  renderWeek(currentWeek,prevOf(currentWeek));
 }
 function selectWeek(wk){
   currentWeek=wk;
@@ -1125,11 +1265,11 @@ function selectWeek(wk){
   const idx=weekKeys.indexOf(wk);
   buildMonthSelector();
   buildWeekSelector();
-  renderWeek(wk,wk==='acumulado'?null:(idx>0?weekKeys[idx-1]:null));
+  renderWeek(wk,prevOf(wk));
 }
 buildMonthSelector();
 buildWeekSelector();
-renderWeek(currentWeek,currentWeek==='acumulado'?null:(weekKeys.indexOf(currentWeek)>0?weekKeys[weekKeys.indexOf(currentWeek)-1]:null));
+renderWeek(currentWeek,prevOf(currentWeek));
 </script>
 </body>
 </html>
