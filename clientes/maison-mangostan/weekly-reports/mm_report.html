@@ -821,6 +821,63 @@ const WEEKS = {
       woman: null
     }
   },
+  cw9: {
+    label: '21–27 sep', month: 'sep', range: '21–27 sep 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '14 compras sobre 794€ (vs 15 la semana anterior). CPA sube ligeramente de 53,67€ a 56,71€, pero el valor de conversión crece a 3.329€ (+7%). Retargeting CAT sigue siendo el motor: 8 compras ROAS 11,61x · CPA 22,73€. FW26-KIDS se recupera: 5 compras ROAS 3,77x (0,90x la semana anterior), con AD1 carrusel de fotos a ROAS 64x. Testing Open y Testing EEUU sin compras. Arranca TRAF_WEB_EUROPA_FRIO: 457 visitas a web con CPC 0,04€. ROAS Meta 4,19x · ROAS Negocio 7,72x · ROAS Neto 6,99x.' },
+      { cat: 'Email', texto: 'Ovejas set (22 sept): 0€ · 61,78% ap. Outwear (24 sept): 169€ · 1 pedido · 60,26% ap. Denim (27 sept): 0€ · 57,08% ap. Newsletter: 169€ (-89% vs semana anterior) · Flujos: 1.741€ (+175%), liderados por Bienvenida Kids con 728€. Total: 1.910€.' },
+      { cat: 'Shopify', texto: 'Ventas online (Online Store): 6.126€ brutas · 5.546€ netas · 27 pedidos. AOV sube a 225,85€ (+18%). Conversión baja al 0,69% (0,90% la semana anterior) con más sesiones (3.464, +8%). Boots siguen liderando: Early Bird Boot Pink 733€ · Litchy Pink Boot 699€. Porcelain Dress Blue entra en el top con 390€. Clientes habituales 20,83%.' }
+    ],
+    meta: {
+      inv: 793.90, compras: 14, valConv: 3328.99, cpa: 56.71,
+      roasMeta: 4.19, roasNeg: 7.72, roasNeto: 6.99,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',               tipo: 'main',      cat: 'venta',     inv: 323.23, compras:  5, val: 1217.99, roas:  3.77, ctr: 5.29, cpm: 25.93 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main',      cat: 'venta',     inv: 181.87, compras:  8, val: 2111.00, roas: 11.61, ctr: 4.97, cpm:  4.55 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[OPEN]',    tipo: 'main',      cat: 'venta',     inv:  78.97, compras:  0, val:    0,    roas:  0,    ctr: 2.80, cpm: 25.17 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',  tipo: 'main',      cat: 'venta',     inv:  61.73, compras:  0, val:    0,    roas:  0,    ctr: 5.14, cpm: 23.14 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS',        tipo: 'main',      cat: 'venta',     inv:  53.50, compras:  1, val:    0,    roas:  0,    ctr: 3.95, cpm: 22.43 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[EEUU]',    tipo: 'main',      cat: 'venta',     inv:  35.68, compras:  0, val:    0,    roas:  0,    ctr: 6.06, cpm: 69.69 },
+        { nombre: 'IG - FOLLOW - KIDS',                  tipo: 'awareness', cat: 'awareness', inv:  35.38, compras:  0, val:    0,    roas:  0,    ctr: 7.02, cpm:  4.60 },
+        { nombre: 'TRAF_WEB_EUROPA_FRIO',                tipo: 'awareness', cat: 'awareness', inv:  23.54, compras:  0, val:    0,    roas:  0,    ctr: 5.60, cpm:  2.38 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Ovejas set', fecha: '22 sept · 10:00', dest: 1752, apertura: 61.78, clics: 1.31, pedidos: 0, ingresos:    0    },
+        { subject: 'Outwear',    fecha: '24 sept · 10:00', dest: 1704, apertura: 60.26, clics: 1.27, pedidos: 1, ingresos:  169.20 },
+        { subject: 'Denim',      fecha: '27 sept · 10:00', dest: 1613, apertura: 57.08, clics: 0.78, pedidos: 0, ingresos:    0    }
+      ],
+      flujos: [
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos: 728.15 },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos: 385.51 },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos: 281.00 },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Activo', ingresos: 223.68 },
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos: 122.18 }
+      ]
+    },
+    ecomm: {
+      // Solo canal Online Store (excluye Marketplacer 249 €, REVER 126 € y resto de canales).
+      // brutas/netas/totales = tarjeta "ONMI Link - Ventas online" (6.125,91 / 5.545,80). Descuentos, devoluciones, envío, cargos e impuestos: total tienda (no se muestran).
+      // pedidos = pedidos Shopify (27); sesiones que completaron la compra = 24.
+      brutas: 6125.91, descuentos: 248.52, devoluciones: 383.78, netas: 5545.80,
+      envio: 217.52, devCargos: 41.50, impuestos: 834.27, totales: 6125.91,
+      pedidos: 27, aov: 225.85,
+      sesiones: 3464, conv: 0.69, carrito: 4.71, pago: 1.96, compra: 0.69,
+      habituales: 20.83, cartSes: 163, pagoSes: 68, compraSes: 24,
+      topVentas: [
+        { nombre: 'EARLY BIRD BOOT PINK',  val: 733 },
+        { nombre: 'LITCHY PINK BOOT',      val: 699 },
+        { nombre: 'PORCELAIN DRESS BLUE',  val: 390 }
+      ],
+      topPaginas: [], topProductos: [],
+      // El export de Shopify de esta semana no incluye ventas por país de facturación
+      topPaises: [],
+      kids:  null,
+      woman: null
+    }
+  },
   acumulado: {
     label: 'Acumulado', month: 'acumulado', range: '29 jun–13 sep 2026',
     puntos: [
