@@ -1001,6 +1001,114 @@ const WEEKS = {
       woman: null
     }
   },
+  cw11: {
+    label: '5–11 oct', month: 'oct', range: '5–11 oct 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: 'Campañas no outlet (las de outlet van en su pestaña): 23 compras sobre 648€ (13 la semana anterior). CPA baja de 63,12€ a 28,19€ y el valor de conversión sube a 6.120€. Retargeting CAT: 14 compras ROAS 25,62x · CPA 12,80€. FW26-KIDS se recupera: 9 compras ROAS 5,14x. Testing EEUU sigue sin compras con CPM de 90,20€. ROAS Meta 9,44x · ROAS Negocio 9,98x (ventas no outlet) · ROAS Neto 9,67x.' },
+      { cat: 'Email', texto: 'Carpet Print (6 oct): 565€ · 3 pedidos · 62,67% ap. Outlet (8 oct): 1.946€ · 12 pedidos · 6,13% clics. Influencer Yin (11 oct): 1.022€ · 4 pedidos · 58,91% ap. Newsletter: 3.533€ · Flujos: 2.304€ (Checkout Started 2.119€ · Bienvenida Ambos 185€). Total: 5.837€.' },
+      { cat: 'Shopify', texto: 'Ventas online (Online Store): 12.600€ brutas (x2,1 vs semana anterior) · 83 pedidos. Mitad outlet (6.483€) y mitad no outlet (6.468€, tienda completa). AOV baja a 154,48€ por el peso del outlet. Sesiones 7.057 (+76%) y la conversión sube del 0,49% al 0,92%. Clientes habituales 52,43%. Top: Litchy Pink Boot 1.300€ · Early Bird Boot Pink 376€ · Bear Bomber Green 375€.' }
+    ],
+    meta: {
+      // Solo campañas NO outlet. ROAS Negocio = "Ventas brutas no outlet" Shopify 6.468,25 / inversión;
+      // ROAS Neto estimado aplicando la proporción netas/brutas de la semana (12.218,35 / 12.599,57).
+      inv: 648.33, compras: 23, valConv: 6119.86, cpa: 28.19,
+      roasMeta: 9.44, roasNeg: 9.98, roasNeto: 9.67,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',               tipo: 'main',      cat: 'venta',     inv: 297.08, compras:  9, val: 1527.27, roas:  5.14, ctr:  5.37, cpm: 26.43 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main',      cat: 'venta',     inv: 179.24, compras: 14, val: 4592.59, roas: 25.62, ctr:  4.69, cpm:  1.83 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[EEUU]',    tipo: 'main',      cat: 'venta',     inv:  85.42, compras:  0, val:    0,    roas:  0,    ctr:  5.97, cpm: 90.20 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',  tipo: 'main',      cat: 'venta',     inv:  46.46, compras:  0, val:    0,    roas:  0,    ctr:  3.55, cpm: 18.55 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[OPEN]',    tipo: 'main',      cat: 'venta',     inv:   6.50, compras:  0, val:    0,    roas:  0,    ctr:  2.14, cpm: 43.62 },
+        { nombre: 'TRAF_WEB_EUROPA_FRIO',                tipo: 'awareness', cat: 'awareness', inv:  19.94, compras:  0, val:    0,    roas:  0,    ctr:  7.02, cpm:  3.02 },
+        { nombre: 'IG - FOLLOW - KIDS',                  tipo: 'awareness', cat: 'awareness', inv:  13.69, compras:  0, val:    0,    roas:  0,    ctr:  6.80, cpm:  4.69 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Carpet Print',      fecha: '6 oct · 10:30',  dest: 1766, apertura: 62.67, clics: 1.03, pedidos:  3, ingresos:  565.44 },
+        { subject: 'Outlet',            fecha: '8 oct · 10:00',  dest: 1852, apertura: 42.06, clics: 6.13, pedidos: 12, ingresos: 1946.19 },
+        { subject: 'Influencer Yin',    fecha: '11 oct · 10:00', dest: 1683, apertura: 58.91, clics: 1.37, pedidos:  4, ingresos: 1021.50 }
+      ],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos: 2118.92 },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Activo', ingresos:  185.20 },
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos:    0    },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos:    0    },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos:    0    }
+      ]
+    },
+    ecomm: {
+      // Solo canal Online Store: tienda 12.950,75 − Shop 249 − Marketplacer 102.
+      // La tarjeta "Ventas online totales" (12.848,57) esta semana incluye Shop: 12.848,57 − 249 = 12.599,57.
+      // netas = 12.569,35 − Shop 249 − Marketplacer 102.
+      brutas: 12599.57, descuentos: 128.34, devoluciones: 253.06, netas: 12218.35,
+      envio: 712.60, devCargos: 15.00, impuestos: 2037.39, totales: 12599.57,
+      pedidos: 83, aov: 154.48,
+      sesiones: 7057, conv: 0.92, carrito: 9.19, pago: 2.66, compra: 0.92,
+      habituales: 52.43, cartSes: 649, pagoSes: 188, compraSes: 65,
+      topVentas: [
+        { nombre: 'LITCHY PINK BOOT',     val: 1300 },
+        { nombre: 'EARLY BIRD BOOT PINK', val: 376 },
+        { nombre: 'BEAR BOMBER GREEN',    val: 375 }
+      ],
+      topPaginas: [], topProductos: [],
+      topPaises: [],
+      kids:  null,
+      woman: null
+    }
+  },
+  acum_outlet: {
+    label: 'Outlet 8–13 oct', month: 'oct', range: '8–13 oct 2026 · Outlet',
+    puntos: [
+      { cat: 'Meta Ads', texto: 'Campañas outlet (ADV+ y Retargeting): 306€ · 29 compras · 4.380€ · CPA 10,54€ · ROAS Meta 14,32x · ROAS Negocio 28,04x (ventas outlet). [OUTLET]_2026_ADV+: 23 compras ROAS 12,13x. Retargeting Outlet: 6 compras ROAS 34,04x.' },
+      { cat: 'Email', texto: 'Outlet (8 oct): 1.946€ · 12 pedidos · 6,13% clics. Influencer Yin (11 oct, no es de outlet): 1.022€ · 4 pedidos. Outlet V2 (13 oct): 304€ · 3 pedidos · 33,41% ap. Newsletter: 3.272€ · Flujos: 2.359€ (Checkout Started). Total: 5.631€.' },
+      { cat: 'Shopify', texto: 'Ventas online (Online Store): 13.845€ brutas · 103 pedidos · AOV 135,73€. Productos outlet: 8.574€ (61% de las ventas) · no outlet: 5.520€. Sesiones 6.724 y conversión 1,2%, la más alta de las últimas semanas (añadido al carrito 11,31%). Las páginas de outlet concentran las visitas: /collections/outlet en sus versiones ja-jp, es, en-es y fr-fr suman 2.321 sesiones. Japón es el primer país en ventas del outlet.' }
+    ],
+    meta: {
+      // Solo campañas outlet. ROAS Negocio = "Ventas brutas outlet" Shopify 8.573,76 / inversión;
+      // ROAS Neto estimado aplicando la proporción netas/brutas del periodo (13.571,21 / 13.844,82).
+      inv: 305.79, compras: 29, valConv: 4379.50, cpa: 10.54,
+      roasMeta: 14.32, roasNeg: 28.04, roasNeto: 27.48,
+      campanas: [
+        { nombre: '[OUTLET]_2026_ADV+',                 tipo: 'main', cat: 'venta', inv: 275.18, compras: 23, val: 3337.56, roas: 12.13, ctr: 13.78, cpm:  8.77 },
+        { nombre: 'RETARGETTIN_OUTLET_2026',            tipo: 'main', cat: 'venta', inv:  30.61, compras:  6, val: 1041.94, roas: 34.04, ctr: 10.14, cpm: 10.76 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Outlet',            fecha: '8 oct · 10:00',  dest: 1852, apertura: 42.06, clics: 6.13, pedidos: 12, ingresos: 1946.19 },
+        { subject: 'Influencer Yin',    fecha: '11 oct · 10:00', dest: 1683, apertura: 58.91, clics: 1.37, pedidos:  4, ingresos: 1021.50 },
+        { subject: 'Outlet V2',         fecha: '13 oct · 10:00', dest: 1464, apertura: 33.41, clics: 2.56, pedidos:  3, ingresos:  304.30 }
+      ],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos: 2359.00 },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Apagado', ingresos:    0    },
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos:    0    },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos:    0    },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos:    0    }
+      ]
+    },
+    ecomm: {
+      // Solo canal Online Store: tienda 14.093,82 − Shop 249 (sin Marketplacer).
+      // netas = 13.820,21 − Shop 249. Outlet 8.573,76 / no outlet 5.520,06 (tienda completa).
+      brutas: 13844.82, descuentos: 113.30, devoluciones: 160.31, netas: 13571.21,
+      envio: 920.30, devCargos: 15.00, impuestos: 2410.87, totales: 13844.82,
+      pedidos: 103, aov: 135.73,
+      sesiones: 6724, conv: 1.20, carrito: 11.31, pago: 3.40, compra: 1.20,
+      habituales: 47.52, cartSes: 761, pagoSes: 229, compraSes: 81,
+      topVentas: [
+        { nombre: 'LITCHY PINK BOOT',           val: 1100 },
+        { nombre: 'BEAR BOMBER GREEN',          val: 486 },
+        { nombre: 'BANDANA PADDED PARKA GREEN', val: 375 }
+      ],
+      topPaginas: [], topProductos: [],
+      topPaises: [],
+      kids:  null,
+      woman: null
+    }
+  },
   acumulado: {
     label: 'Acumulado', month: 'acumulado', range: '29 jun–13 sep 2026',
     puntos: [
@@ -1121,6 +1229,13 @@ function delta(cur, prev, higherBetter=true) {
   const pos = higherBetter ? d>=0 : d<=0;
   return `<span class="${pos?'delta-pos':'delta-neg'}">${d>=0?'+':''}${fmt(d,1)}%</span>`;
 }
+// Variación vs semana anterior; vacío si no hay semana con la que comparar (acumulados)
+function vsAnt(cur, prev, higherBetter=true) {
+  if (prev == null || prev === 0 || cur == null) return '';
+  const d = ((cur-prev)/Math.abs(prev))*100;
+  const cls = higherBetter===null ? '' : ((higherBetter ? d>=0 : d<=0) ? 'delta-pos' : 'delta-neg');
+  return `<span class="${cls}">${d>=0?'+':''}${fmt(d,1)}%</span> vs ant.`;
+}
 function roasClass(r) {
   if (r==null) return '';
   return r>=2?'roas-high':r<1?'roas-low':'';
@@ -1181,16 +1296,16 @@ function renderMetaSection(d, p) {
   let html=`<div class="section-block mb24"><div class="section-block-hdr meta"><div class="section-block-title">Meta Ads · ${d.range}</div></div><div class="section-block-body">`;
   html+=`<div class="kpi-strip mb16">
     <div class="kpi-row" style="grid-template-columns:repeat(5,minmax(0,1fr))">
-      <div class="kpi-cell"><div class="kpi-l">Inversión</div><div class="kpi-v">${fmtEur(m.inv)}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">Compras</div><div class="kpi-v">${m.compras||'—'}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">Valor conv.</div><div class="kpi-v">${fmtEur(m.valConv)}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">AOV Meta</div><div class="kpi-v">${m.compras?fmtEur(m.valConv/m.compras):'—'}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">Coste/compra</div><div class="kpi-v">${fmtEur(m.cpa)}</div><div class="kpi-s">&nbsp;</div></div>
+      <div class="kpi-cell"><div class="kpi-l">Inversión</div><div class="kpi-v">${fmtEur(m.inv)}</div><div class="kpi-s">${vsAnt(m.inv,pm?.inv,null)||'&nbsp;'}</div></div>
+      <div class="kpi-cell"><div class="kpi-l">Compras</div><div class="kpi-v">${m.compras||'—'}</div><div class="kpi-s">${vsAnt(m.compras,pm?.compras)||'&nbsp;'}</div></div>
+      <div class="kpi-cell"><div class="kpi-l">Valor conv.</div><div class="kpi-v">${fmtEur(m.valConv)}</div><div class="kpi-s">${vsAnt(m.valConv,pm?.valConv)||'&nbsp;'}</div></div>
+      <div class="kpi-cell"><div class="kpi-l">AOV Meta</div><div class="kpi-v">${m.compras?fmtEur(m.valConv/m.compras):'—'}</div><div class="kpi-s">${(m.compras&&pm?.compras&&vsAnt(m.valConv/m.compras,pm.valConv/pm.compras))||'&nbsp;'}</div></div>
+      <div class="kpi-cell"><div class="kpi-l">Coste/compra</div><div class="kpi-v">${fmtEur(m.cpa)}</div><div class="kpi-s">${vsAnt(m.cpa,pm?.cpa,false)||'&nbsp;'}</div></div>
     </div>
     <div class="kpi-row kpi-row-3" style="border-top:1px solid var(--border)">
-      <div class="kpi-cell"><div class="kpi-l">ROAS Meta</div><div class="kpi-v">${m.roasMeta!=null?fmt(m.roasMeta):'—'}</div><div class="kpi-s">&nbsp;</div></div>
-      <div class="kpi-cell"><div class="kpi-l">ROAS Negocio</div><div class="kpi-v">${fmt(m.roasNeg)}</div><div class="kpi-s">ventas online / inversión</div></div>
-      <div class="kpi-cell"><div class="kpi-l">ROAS Neto</div><div class="kpi-v">${fmt(m.roasNeto)}</div><div class="kpi-s">ventas netas / inversión</div></div>
+      <div class="kpi-cell"><div class="kpi-l">ROAS Meta</div><div class="kpi-v">${m.roasMeta!=null?fmt(m.roasMeta):'—'}</div><div class="kpi-s">${vsAnt(m.roasMeta,pm?.roasMeta)||'&nbsp;'}</div></div>
+      <div class="kpi-cell"><div class="kpi-l">ROAS Negocio</div><div class="kpi-v">${fmt(m.roasNeg)}</div><div class="kpi-s">ventas online / inversión${vsAnt(m.roasNeg,pm?.roasNeg)?' · '+vsAnt(m.roasNeg,pm?.roasNeg):''}</div></div>
+      <div class="kpi-cell"><div class="kpi-l">ROAS Neto</div><div class="kpi-v">${fmt(m.roasNeto)}</div><div class="kpi-s">ventas netas / inversión${vsAnt(m.roasNeto,pm?.roasNeto)?' · '+vsAnt(m.roasNeto,pm?.roasNeto):''}</div></div>
     </div>
   </div>`;
   if (m.campanas.length) {
@@ -1207,8 +1322,12 @@ function renderMetaSection(d, p) {
 // ============================================================
 // EMAIL — solo newsletter
 // ============================================================
-function renderMailSection(d) {
-  const mail=d.mail;
+function renderMailSection(d, p) {
+  const mail=d.mail, pmail=p?.mail;
+  const pEnv=pmail?.envios||[];
+  const pIng=pEnv.length?pEnv.reduce((s,e)=>s+(e.ingresos||0),0):null;
+  const pAp=pEnv.length?pEnv.reduce((s,e)=>s+e.apertura,0)/pEnv.length:null;
+  const pFlu=pmail?(pmail.flujos||[]).reduce((s,f)=>s+(f.ingresos||0),0):null;
   let html=`<div class="section-block mb24"><div class="section-block-hdr email"><div class="section-block-title">Email Marketing · ${d.range}</div></div><div class="section-block-body">`;
   if (mail.soloResumen) {
     const totalIng=mail.envios.reduce((s,e)=>s+(e.ingresos||0),0);
@@ -1233,8 +1352,8 @@ function renderMailSection(d) {
   const totalPedidos=mail.envios.reduce((s,e)=>s+(e.pedidos||0),0);
   const avgApertura=mail.envios.length?mail.envios.reduce((s,e)=>s+e.apertura,0)/mail.envios.length:0;
   html+=`<div class="mail-total-grid" style="margin-top:12px">
-    <div class="mail-total-cell"><div class="mtc-l">Total ingresos newsletter</div><div class="mtc-v" style="color:var(--green)">${fmtEur(totalIngresos)}</div><div class="mtc-s">${mail.envios.length} envíos · ${totalPedidos} pedidos</div></div>
-    <div class="mail-total-cell"><div class="mtc-l">Apertura media</div><div class="mtc-v">${fmtPct(avgApertura)}</div><div class="mtc-s">promedio ${mail.envios.length} envíos</div></div>
+    <div class="mail-total-cell"><div class="mtc-l">Total ingresos newsletter</div><div class="mtc-v" style="color:var(--green)">${fmtEur(totalIngresos)}</div><div class="mtc-s">${mail.envios.length} envíos · ${totalPedidos} pedidos${vsAnt(totalIngresos,pIng)?' · '+vsAnt(totalIngresos,pIng):''}</div></div>
+    <div class="mail-total-cell"><div class="mtc-l">Apertura media</div><div class="mtc-v">${fmtPct(avgApertura)}</div><div class="mtc-s">promedio ${mail.envios.length} envíos${vsAnt(avgApertura,pAp)?' · '+vsAnt(avgApertura,pAp):''}</div></div>
     <div class="mail-total-cell"><div class="mtc-l">Ingresos por envío</div><div class="mtc-v">${mail.envios.length?fmtEur(totalIngresos/mail.envios.length):'—'}</div><div class="mtc-s">media quincena</div></div>
   </div>`;
   if (mail.popup) {
@@ -1271,7 +1390,7 @@ function renderMailSection(d) {
     });
     html+=`</tbody><tfoot><tr>
       <td colspan="2" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em">Total flujos</td>
-      <td style="text-align:right;font-weight:600;color:var(--green)">${fmtEur(totalFlujos)}</td>
+      <td style="text-align:right;font-weight:600;color:var(--green)">${fmtEur(totalFlujos)}${vsAnt(totalFlujos,pFlu)?`<div style="font-family:'DM Mono',monospace;font-size:9px;font-weight:400;color:var(--muted)">${vsAnt(totalFlujos,pFlu)}</div>`:''}</td>
     </tr></tfoot></table></div>`;
   }
   html+=`</div></div>`;
@@ -1282,13 +1401,13 @@ function renderMailSection(d) {
 // ECOMMERCE
 // ============================================================
 function renderEcommSection(d, p) {
-  const e=d.ecomm;
+  const e=d.ecomm, pe=p?.ecomm;
   let html=`<div class="section-block mb24"><div class="section-block-hdr ecomm"><div class="section-block-title">Ecommerce · ${d.range}</div></div><div class="section-block-body">`;
   html+=`<div class="eco-kpi-row mb12">
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas brutas</div><div class="kpi-v">${fmtEur(e.brutas)}</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas netas</div><div class="kpi-v">${fmtEur(e.netas)}</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Pedidos</div><div class="kpi-v">${e.pedidos||'—'}</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">AOV</div><div class="kpi-v">${fmtEur(e.aov)}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Ventas brutas</div><div class="kpi-v">${fmtEur(e.brutas)}</div><div class="kpi-s">${vsAnt(e.brutas,pe?.brutas)||'&nbsp;'}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Ventas netas</div><div class="kpi-v">${fmtEur(e.netas)}</div><div class="kpi-s">${vsAnt(e.netas,pe?.netas)||'&nbsp;'}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Pedidos</div><div class="kpi-v">${e.pedidos||'—'}</div><div class="kpi-s">${vsAnt(e.pedidos,pe?.pedidos)||'&nbsp;'}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">AOV</div><div class="kpi-v">${fmtEur(e.aov)}</div><div class="kpi-s">${vsAnt(e.aov,pe?.aov)||'&nbsp;'}</div></div>
   </div>`;
   if (e.kids || e.woman) {
     const kBadge=e.kids&&e.kids.vsPrev!=null?`<span class="delta-badge ${e.kids.vsPrev>=0?'pos':'neg'}">${e.kids.vsPrev>=0?'+':''}${e.kids.vsPrev}% vs ant.</span>`:'';
@@ -1309,12 +1428,12 @@ function renderEcommSection(d, p) {
   html+=`<div class="mb12">
     <div class="eco-box"><div class="eco-box-title">Datos de conversión</div>
       <div class="conv-grid">
-        <div><div class="conv-l">Sesiones</div><div class="conv-v">${e.sesiones?e.sesiones.toLocaleString('es-ES'):'—'}</div><div class="conv-s">&nbsp;</div></div>
-        <div><div class="conv-l">Tasa conversión</div><div class="conv-v">${fmtPct(e.conv)}</div><div class="conv-s">&nbsp;</div></div>
+        <div><div class="conv-l">Sesiones</div><div class="conv-v">${e.sesiones?e.sesiones.toLocaleString('es-ES'):'—'}</div><div class="conv-s">${vsAnt(e.sesiones,pe?.sesiones)||'&nbsp;'}</div></div>
+        <div><div class="conv-l">Tasa conversión</div><div class="conv-v">${fmtPct(e.conv)}</div><div class="conv-s">${vsAnt(e.conv,pe?.conv)||'&nbsp;'}</div></div>
         <div><div class="conv-l">Añadido carrito</div><div class="conv-v">${fmtPct(e.carrito)}</div><div class="conv-s">${e.cartSes||'—'} ses.</div></div>
         <div><div class="conv-l">Llegaron a pago</div><div class="conv-v">${fmtPct(e.pago)}</div><div class="conv-s">${e.pagoSes||'—'} ses.</div></div>
         <div><div class="conv-l">Completaron compra</div><div class="conv-v">${fmtPct(e.compra)}</div><div class="conv-s">${e.compraSes||'—'} ses.</div></div>
-        <div><div class="conv-l">Clientes habituales</div><div class="conv-v">${fmtPct(e.habituales)}</div><div class="conv-s">&nbsp;</div></div>
+        <div><div class="conv-l">Clientes habituales</div><div class="conv-v">${fmtPct(e.habituales)}</div><div class="conv-s">${vsAnt(e.habituales,pe?.habituales)||'&nbsp;'}</div></div>
       </div>
     </div>
   </div>`;
@@ -1379,7 +1498,7 @@ function renderWeek(wk, prevWk) {
   let html=generateSummary(d,p);
   html+=renderMetaSection(d,p);
   html+=renderCreativasSection(d);
-  html+=renderMailSection(d);
+  html+=renderMailSection(d,p);
   html+=renderCreativosSection(d);
   if(d.ecomm) html+=renderEcommSection(d,p);
   if(d.ecomm&&(d.ecomm.topPaises||[]).length) html+=renderPaisesSection(d);
