@@ -1004,15 +1004,14 @@ const WEEKS = {
   cw11: {
     label: '5–11 oct', month: 'oct', range: '5–11 oct 2026',
     puntos: [
-      { cat: 'Meta Ads', texto: 'Campañas no outlet (las de outlet van en su pestaña): 23 compras sobre 648€ (13 la semana anterior). CPA baja de 63,12€ a 28,19€ y el valor de conversión sube a 6.120€. Retargeting CAT: 14 compras ROAS 25,62x · CPA 12,80€. FW26-KIDS se recupera: 9 compras ROAS 5,14x. Testing EEUU sigue sin compras con CPM de 90,20€. ROAS Meta 9,44x · ROAS Negocio 9,98x (ventas no outlet) · ROAS Neto 9,67x.' },
+      { cat: 'Meta Ads', texto: 'Campañas no outlet (las de outlet van en su pestaña): 23 compras sobre 648€ (13 la semana anterior). CPA baja de 63,12€ a 28,19€ y el valor de conversión sube a 6.120€. Retargeting CAT: 14 compras ROAS 25,62x · CPA 12,80€. FW26-KIDS se recupera: 9 compras ROAS 5,14x. Testing EEUU sigue sin compras con CPM de 90,20€. ROAS Meta 9,44x · ROAS Negocio 9,44x (ventas FW) · ROAS Neto 9,15x.' },
       { cat: 'Email', texto: 'Carpet Print (6 oct): 565€ · 3 pedidos · 62,67% ap. Outlet (8 oct): 1.946€ · 12 pedidos · 6,13% clics. Influencer Yin (11 oct): 1.022€ · 4 pedidos · 58,91% ap. Newsletter: 3.533€ · Flujos: 2.304€ (Checkout Started 2.119€ · Bienvenida Ambos 185€). Total: 5.837€.' },
-      { cat: 'Shopify', texto: 'Ventas online (Online Store): 12.600€ brutas (x2,1 vs semana anterior) · 83 pedidos. Mitad outlet (6.483€) y mitad no outlet (6.468€, tienda completa). AOV baja a 154,48€ por el peso del outlet. Sesiones 7.057 (+76%) y la conversión sube del 0,49% al 0,92%. Clientes habituales 52,43%. Top: Litchy Pink Boot 1.300€ · Early Bird Boot Pink 376€ · Bear Bomber Green 375€.' }
+      { cat: 'Shopify', texto: 'Ventas FW (sin outlet): 6.117€ brutas · 50 pedidos (la semana anterior, 5.968€ y 25 pedidos). El outlet suma otros 6.483€ desde el 8 oct (ver pestaña Outlet). Total online de la semana: 12.600€. Sesiones 7.057 (+76%) y la conversión sube del 0,49% al 0,92%. Clientes habituales 52,43%. Top: Litchy Pink Boot 1.300€ · Early Bird Boot Pink 376€ · Bear Bomber Green 375€.' }
     ],
     meta: {
-      // Solo campañas NO outlet. ROAS Negocio = "Ventas brutas no outlet" Shopify 6.468,25 / inversión;
-      // ROAS Neto estimado aplicando la proporción netas/brutas de la semana (12.218,35 / 12.599,57).
+      // Solo campañas NO outlet. ROAS Negocio = ventas FW online 6.117,25 / inversión; ROAS Neto con netas FW estimadas.
       inv: 648.33, compras: 23, valConv: 6119.86, cpa: 28.19,
-      roasMeta: 9.44, roasNeg: 9.98, roasNeto: 9.67,
+      roasMeta: 9.44, roasNeg: 9.44, roasNeto: 9.15,
       campanas: [
         { nombre: 'FW26 - KIDS - VENTAS',               tipo: 'main',      cat: 'venta',     inv: 297.08, compras:  9, val: 1527.27, roas:  5.14, ctr:  5.37, cpm: 26.43 },
         { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main',      cat: 'venta',     inv: 179.24, compras: 14, val: 4592.59, roas: 25.62, ctr:  4.69, cpm:  1.83 },
@@ -1039,12 +1038,16 @@ const WEEKS = {
       ]
     },
     ecomm: {
-      // Solo canal Online Store: tienda 12.950,75 − Shop 249 − Marketplacer 102.
-      // La tarjeta "Ventas online totales" (12.848,57) esta semana incluye Shop: 12.848,57 − 249 = 12.599,57.
-      // netas = 12.569,35 − Shop 249 − Marketplacer 102.
+      // Solo productos NO outlet (FW). Consulta Shopify product_collections NOT CONTAINS 'OUTLET':
+      // brutas 6.468,25 · 50 pedidos. Se restan Shop 249 y Marketplacer 102 (canal no online) → 6.117,25.
+      // netas estimadas con la proporción netas/brutas online de la semana (12.218,35 / 12.599,57).
+      // Total online semana (FW + outlet): brutas 12.599,57 · netas 12.218,35 · 83 pedidos.
+      // Total: tienda 12.950,75 − Shop 249 − Marketplacer 102; netas 12.569,35 − 249 − 102.
       brutas: 12599.57, descuentos: 128.34, devoluciones: 253.06, netas: 12218.35,
       envio: 712.60, devCargos: 15.00, impuestos: 2037.39, totales: 12599.57,
       pedidos: 83, aov: 154.48,
+      seg: { label: 'FW26', brutas: 6117.25, netas: 5932.16, netasEst: true, pedidos: 50, aov: 118.64 },
+      nota: 'FW26 = productos sin outlet. Sesiones y conversión: total de la tienda.',
       sesiones: 7057, conv: 0.92, carrito: 9.19, pago: 2.66, compra: 0.92,
       habituales: 52.43, cartSes: 649, pagoSes: 188, compraSes: 65,
       topVentas: [
@@ -1063,13 +1066,13 @@ const WEEKS = {
     puntos: [
       { cat: 'Meta Ads', texto: 'Campañas outlet (ADV+ y Retargeting): 306€ · 29 compras · 4.380€ · CPA 10,54€ · ROAS Meta 14,32x · ROAS Negocio 28,04x (ventas outlet). [OUTLET]_2026_ADV+: 23 compras ROAS 12,13x. Retargeting Outlet: 6 compras ROAS 34,04x.' },
       { cat: 'Email', texto: 'Outlet (8 oct): 1.946€ · 12 pedidos · 6,13% clics. Influencer Yin (11 oct, no es de outlet): 1.022€ · 4 pedidos. Outlet V2 (13 oct): 304€ · 3 pedidos · 33,41% ap. Newsletter: 3.272€ · Flujos: 2.359€ (Checkout Started). Total: 5.631€.' },
-      { cat: 'Shopify', texto: 'Ventas online (Online Store): 13.845€ brutas · 103 pedidos · AOV 135,73€. Productos outlet: 8.574€ (61% de las ventas) · no outlet: 5.520€. Sesiones 6.724 y conversión 1,2%, la más alta de las últimas semanas (añadido al carrito 11,31%). Las páginas de outlet concentran las visitas: /collections/outlet en sus versiones ja-jp, es, en-es y fr-fr suman 2.321 sesiones. Japón es el primer país en ventas del outlet.' }
+      { cat: 'Shopify', texto: 'Ventas outlet: 8.574€ brutas · 8.472€ netas · 88 pedidos · AOV 96,27€ (61% de las ventas del periodo; FW: 5.520€). Sesiones 6.724 y conversión 1,2%, la más alta de las últimas semanas (añadido al carrito 11,31%). Las páginas de outlet concentran las visitas: /collections/outlet en sus versiones ja-jp, es, en-es y fr-fr suman 2.321 sesiones. Japón es el primer país en ventas del outlet.' }
     ],
     meta: {
       // Solo campañas outlet. ROAS Negocio = "Ventas brutas outlet" Shopify 8.573,76 / inversión;
-      // ROAS Neto estimado aplicando la proporción netas/brutas del periodo (13.571,21 / 13.844,82).
+      // ROAS Neto = netas outlet 8.471,79 / inversión.
       inv: 305.79, compras: 29, valConv: 4379.50, cpa: 10.54,
-      roasMeta: 14.32, roasNeg: 28.04, roasNeto: 27.48,
+      roasMeta: 14.32, roasNeg: 28.04, roasNeto: 27.70,
       campanas: [
         { nombre: '[OUTLET]_2026_ADV+',                 tipo: 'main', cat: 'venta', inv: 275.18, compras: 23, val: 3337.56, roas: 12.13, ctr: 13.78, cpm:  8.77 },
         { nombre: 'RETARGETTIN_OUTLET_2026',            tipo: 'main', cat: 'venta', inv:  30.61, compras:  6, val: 1041.94, roas: 34.04, ctr: 10.14, cpm: 10.76 }
@@ -1091,11 +1094,15 @@ const WEEKS = {
       ]
     },
     ecomm: {
-      // Solo canal Online Store: tienda 14.093,82 − Shop 249 (sin Marketplacer).
-      // netas = 13.820,21 − Shop 249. Outlet 8.573,76 / no outlet 5.520,06 (tienda completa).
+      // Solo productos outlet. Consulta Shopify product_collections CONTAINS 'OUTLET':
+      // brutas 8.573,76 · netas 8.471,79 · 88 pedidos (Shop 249 se asigna a FW).
+      // Total online periodo (outlet + FW): brutas 13.844,82 · netas 13.571,21 · 103 pedidos.
+      // Total: tienda 14.093,82 − Shop 249; netas 13.820,21 − 249.
       brutas: 13844.82, descuentos: 113.30, devoluciones: 160.31, netas: 13571.21,
       envio: 920.30, devCargos: 15.00, impuestos: 2410.87, totales: 13844.82,
       pedidos: 103, aov: 135.73,
+      seg: { label: 'Outlet', brutas: 8573.76, netas: 8471.79, netasEst: false, pedidos: 88, aov: 96.27 },
+      nota: 'Sesiones y conversión: total de la tienda.',
       sesiones: 6724, conv: 1.20, carrito: 11.31, pago: 3.40, compra: 1.20,
       habituales: 47.52, cartSes: 761, pagoSes: 229, compraSes: 81,
       topVentas: [
@@ -1409,6 +1416,16 @@ function renderEcommSection(d, p) {
     <div class="eco-kpi-cell"><div class="kpi-l">Pedidos</div><div class="kpi-v">${e.pedidos||'—'}</div><div class="kpi-s">${vsAnt(e.pedidos,pe?.pedidos)||'&nbsp;'}</div></div>
     <div class="eco-kpi-cell"><div class="kpi-l">AOV</div><div class="kpi-v">${fmtEur(e.aov)}</div><div class="kpi-s">${vsAnt(e.aov,pe?.aov)||'&nbsp;'}</div></div>
   </div>`;
+  if (e.seg) {
+    const g=e.seg;
+    html+=`<div class="eco-kpi-row mb12">
+    <div class="eco-kpi-cell"><div class="kpi-l">Ventas brutas · ${g.label}</div><div class="kpi-v">${fmtEur(g.brutas)}</div><div class="kpi-s">${fmt(g.brutas/e.brutas*100,0)}% del total</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Ventas netas · ${g.label}</div><div class="kpi-v">${fmtEur(g.netas)}</div><div class="kpi-s">${g.netasEst?'estimadas':'&nbsp;'}</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">Pedidos · ${g.label}</div><div class="kpi-v">${g.pedidos||'—'}</div><div class="kpi-s">&nbsp;</div></div>
+    <div class="eco-kpi-cell"><div class="kpi-l">AOV · ${g.label}</div><div class="kpi-v">${fmtEur(g.aov)}</div><div class="kpi-s">&nbsp;</div></div>
+  </div>`;
+  }
+  if (e.nota) html+=`<div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin:-4px 0 12px">${e.nota}</div>`;
   if (e.kids || e.woman) {
     const kBadge=e.kids&&e.kids.vsPrev!=null?`<span class="delta-badge ${e.kids.vsPrev>=0?'pos':'neg'}">${e.kids.vsPrev>=0?'+':''}${e.kids.vsPrev}% vs ant.</span>`:'';
     const wBadge=e.woman&&e.woman.vsPrev!=null?`<span class="delta-badge ${e.woman.vsPrev>=0?'pos':'neg'}">${e.woman.vsPrev>=0?'+':''}${e.woman.vsPrev}% vs ant.</span>`:'';
