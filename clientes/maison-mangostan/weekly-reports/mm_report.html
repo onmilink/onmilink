@@ -44,6 +44,7 @@ a{color:inherit;text-decoration:none;}
 .summary-tag.neg{background:#fdf0ee;color:#b53a2f;border:1px solid #f0c4be;}
 .summary-lines{display:flex;flex-direction:column;gap:6px;}
 .summary-line{font-size:12px;color:#444;padding-left:12px;border-left:2px solid var(--border);}
+.summary-destacado{font-size:14px;color:#1a6f3e;background:#e8f5ee;border-left:3px solid #1a6f3e;padding:10px 14px;margin-bottom:14px;}
 .section-block{border:1px solid var(--border);margin-bottom:24px;}
 .kpi-v-prev{font-size:.6em;color:var(--muted);margin-left:10px;font-weight:400;vertical-align:middle}
 .yoy-toggle{background:transparent;border:1px solid var(--muted);border-radius:4px;color:var(--muted);font-size:11px;padding:3px 9px;cursor:pointer;margin-left:auto;transition:all .15s;white-space:nowrap}
@@ -1362,6 +1363,7 @@ const WEEKS = {
   },
   cw15: {
     label: '2–8 nov', month: 'nov', range: '2–8 nov 2026',
+    destacado: 'Las ventas online suben un <strong>40%</strong>, hasta <strong>8.220 €</strong>, con solo un <strong>15% más de inversión</strong>. ROAS Negocio <strong>9,77x</strong>.<br>El <strong>81% de los clientes</strong> de la semana son <strong>nuevos</strong> (26 de 32).',
     puntos: [
       { cat: 'Meta Ads', texto: '23 compras sobre 841€ · CPA 36,56€ · ROAS Meta 7,26x. FW26-KIDS: 16 compras · 3.799€ · ROAS 6,86x. Nueva campaña Retargeting Restock Botas: 5 compras con 70€ · ROAS 21,26x. Retargeting CAT: 2 compras ROAS 7,86x. Testing EEUU (ATC) sigue sin compras. MERCADO_MADRID (tráfico): 1.030 clics con CPC 0,02€. ROAS Negocio 9,77x · ROAS Neto 8,69x.' },
       { cat: 'Email', texto: 'Restock botas (2 nov): 943€ · 5 pedidos · 43,57% ap. Mercado Outlet (3 nov, lista España): 0€. Ruffle Jacket (5 nov): 334€ · 1 pedido. Pants (8 nov): 0€ · 54,91% ap. Newsletter: 1.277€ · Flujos: 1.446€ (Bienvenida Kids 840€ · Bienvenida Mujer 383€ · Viewed Product 223€). Total: 2.724€.' },
@@ -1612,7 +1614,7 @@ function generateSummary(d, p) {
     lines.push(`Email Marketing: ${fmtEur(totalEmail)} en ${mail.envios.length} envíos · ${mail.envios.reduce((s,e)=>s+(e.pedidos||0),0)} pedidos.`);
   }
   if (!tags.length) return `<div class="summary mb32"><div class="summary-title">Resumen de quincena</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)">Sin datos.</div></div>`;
-  return `<div class="summary mb32"><div class="summary-title">Resumen de quincena</div><div class="summary-tags">${tags.map(t=>`<span class="summary-tag ${t.pos?'pos':'neg'}">${t.label}</span>`).join('')}</div><div class="summary-lines">${lines.map(l=>`<div class="summary-line">${l}</div>`).join('')}</div></div>`;
+  return `<div class="summary mb32"><div class="summary-title">Resumen de quincena</div>${d.destacado?`<div class="summary-destacado">${d.destacado}</div>`:''}<div class="summary-tags">${tags.map(t=>`<span class="summary-tag ${t.pos?'pos':'neg'}">${t.label}</span>`).join('')}</div><div class="summary-lines">${lines.map(l=>`<div class="summary-line">${l}</div>`).join('')}</div></div>`;
 }
 
 // ============================================================
