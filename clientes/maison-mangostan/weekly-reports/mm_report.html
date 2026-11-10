@@ -1116,104 +1116,425 @@ const WEEKS = {
       woman: null
     }
   },
-  acumulado: {
-    label: 'Acumulado', month: 'acumulado', range: '29 jun–13 sep 2026',
+  cw12: {
+    label: '12–18 oct', month: 'oct', range: '12–18 oct 2026',
     puntos: [
-      { cat: 'Meta Ads', texto: '180 compras sobre 7.735€. Retargeting CAT: 33 compras acumuladas. FW26-KIDS: 34 compras ROAS 5,10x. ROAS Meta 5,16x · ROAS Negocio 10,72x · ROAS Neto 8,59x.' },
-      { cat: 'Email', texto: '32 envíos. Newsletter: 13.424€ · Flujos: 9.840€. Total email: 23.264€.' },
-      { cat: 'Shopify', texto: 'Ventas netas acumuladas: 66.430€ sobre 361 pedidos. AOV 229,67€. BARCOS SKIRT WHITE lidera SS26 con 1.879€.' }
+      { cat: 'Meta Ads', texto: 'Última semana con el outlet activo. 47 compras sobre 1.035€ · CPA 22,02€ · ROAS Meta 8,03x. Campañas outlet (ADV+ y Retargeting Outlet): 527€ · 34 compras · 4.409€ · ROAS 8,36x. Retargeting CAT: 11 compras ROAS 20,84x. FW26-KIDS cae a 2 compras ROAS 1,09x. Testing EEUU y Prospecting CAT sin compras. ROAS Negocio 9,71x · ROAS Neto 9,48x.' },
+      { cat: 'Email', texto: 'Outlet V2 (13 oct): 1.120€ · 6 pedidos. Mously (15 oct): 1.339€ · 5 pedidos · 61,92% ap. Outlet Last 24h (17 oct): 20€ · 1 pedido · 2,95% clics. Newsletter: 2.479€ · Flujos: 1.163€ (Checkout Started). Total: 3.642€.' },
+      { cat: 'Shopify', texto: 'Ventas online (Online Store): 10.050€ brutas · 80 pedidos (12.600€ y 83 pedidos la semana anterior). FW26: 5.119€ · outlet: 4.931€. Sesiones 6.549 · conversión 0,96%. Clientes habituales 31,57%. Top: Early Bird Boot Pink 564€ · Early Bird Boot 379€ · Leopard Print Jacket 378€.' }
     ],
     meta: {
-      inv: 7734.88, compras: 180, valConv: 39906.04, cpa: 42.97,
-      roasMeta: 5.16, roasNeg: 10.72, roasNeto: 8.59,
+      inv: 1034.84, compras: 47, valConv: 8309.67, cpa: 22.02,
+      roasMeta: 8.03, roasNeg: 9.71, roasNeto: 9.48,
       campanas: [
-        { nombre: 'FLASH_SALES', tipo: 'main', cat: 'venta',
-          inv: 2012.77, compras: 64, val: 8352.93, roas: 4.15, ctr: 2.67, cpm: 14.04 },
-        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS', tipo: 'main', cat: 'venta',
-          inv: 2082.51, compras: 36, val: 7999.37, roas: 3.84, ctr: 4.60, cpm: 18.10 },
-        { nombre: 'FW26 - KIDS - VENTAS', tipo: 'main', cat: 'venta',
-          inv: 1961.14, compras: 34, val: 10002.73, roas: 5.10, ctr: 4.56, cpm: 19.81 },
-        { nombre: 'VTA - MMxSN - 28MAYO2026', tipo: 'main', cat: 'venta',
-          inv:  413.10, compras:  8, val: 1420.97, roas: 3.44, ctr: 2.41, cpm: 10.61 },
-        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main', cat: 'venta',
-          inv:  336.84, compras: 33, val: 7633.06, roas: 22.66, ctr: 4.79, cpm:  3.44 },
-        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]', tipo: 'main', cat: 'venta',
-          inv:  188.82, compras:  4, val: 3836.46, roas: 20.32, ctr: 6.13, cpm: 18.86 },
-        { nombre: '[TESTING]_[ABO]_[VENTAS]_[OPEN]', tipo: 'main', cat: 'venta',
-          inv:  124.86, compras:  1, val:  661.52, roas:  5.30, ctr: 3.39, cpm: 22.54 },
-        { nombre: '[VENTAS]_[KIDS]_[JAPON]_[ADV+]', tipo: 'main', cat: 'venta',
-          inv:  185.71, compras:  0, val:    0,    roas:  0,    ctr: 2.99, cpm:  8.20 },
-        { nombre: 'IG - FOLLOW - WOMAN', tipo: 'awareness', cat: 'awareness',
-          inv:  267.52, compras:  0, val:    0,    roas:  0,    ctr: 6.54, cpm:  3.73 },
-        { nombre: 'IG - FOLLOW - KIDS', tipo: 'awareness', cat: 'awareness',
-          inv:  161.61, compras:  0, val:    0,    roas:  0,    ctr: 6.56, cpm:  3.39 }
+        { nombre: '[OUTLET]_2026_ADV+',                 tipo: 'main', cat: 'venta', inv: 470.23, compras: 28, val: 3463.37, roas:  7.37, ctr:  8.58, cpm:  8.07 },
+        { nombre: 'FW26 - KIDS - VENTAS',               tipo: 'main', cat: 'venta', inv: 245.93, compras:  2, val:  268.14, roas:  1.09, ctr:  5.79, cpm: 21.29 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main', cat: 'venta', inv: 174.25, compras: 11, val: 3632.22, roas: 20.84, ctr:  3.86, cpm:  2.25 },
+        { nombre: 'RETARGETTIN_OUTLET_2026',            tipo: 'main', cat: 'venta', inv:  57.18, compras:  6, val:  945.94, roas: 16.54, ctr: 10.95, cpm: 10.94 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[EEUU]',    tipo: 'main', cat: 'venta', inv:  52.42, compras:  0, val:    0,    roas:  0,    ctr:  6.68, cpm: 63.08 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',  tipo: 'main', cat: 'venta', inv:  34.83, compras:  0, val:    0,    roas:  0,    ctr:  3.36, cpm: 14.98 }
       ]
     },
     creatividades: [],
     mail: {
       envios: [
-        { subject: 'Birds Patchwork',                fecha: '1 jul · 10:30',  dest: 1731, apertura: 58.44, clics: 1.72, pedidos: 2, ingresos:  249.68 },
-        { subject: 'Uvas Mesh Set',                  fecha: '5 jul · 20:00',  dest: 1718, apertura: 58.00, clics: 1.22, pedidos: 3, ingresos:  977.06 },
-        { subject: 'Summer Sales (AUS & NZ)',         fecha: '7 jul · 10:00',  dest: 1681, apertura: 57.18, clics: 4.69, pedidos: 6, ingresos:  928.58 },
-        { subject: 'Woman Collections',              fecha: '10 jul · 10:30', dest: 1594, apertura: 53.65, clics: 0.91, pedidos: 2, ingresos:  292.73 },
-        { subject: 'Hulu prints + sales (AUS & NZ)', fecha: '12 jul · 20:00', dest: 1267, apertura: 43.04, clics: 1.73, pedidos: 1, ingresos:   81.68 },
-        { subject: 'Kids Collections',               fecha: '14 jul · 10:30', dest: 1626, apertura: 54.71, clics: 1.31, pedidos: 2, ingresos:  704.68 },
-        { subject: 'Swimwear',                       fecha: '16 jul · 10:30', dest: 1620, apertura: 54.29, clics: 1.58, pedidos: 2, ingresos:  145.92 },
-        { subject: 'Barcos woman',                   fecha: '19 jul · 10:30', dest: 1399, apertura: 46.90, clics: 0.70, pedidos: 0, ingresos:    0    },
-        { subject: '10 Year Anniversary',            fecha: '22 jul · 10:30', dest: 1727, apertura: 40.67, clics: 1.25, pedidos: 2, ingresos:  416.96 },
-        { subject: 'Mother-daughter',                fecha: '24 jul · 10:30', dest: 1717, apertura: 56.70, clics: 1.09, pedidos: 0, ingresos:    0    },
-        { subject: 'Matching outfits',               fecha: '26 jul · 10:30', dest: 1700, apertura: 56.16, clics: 1.12, pedidos: 0, ingresos:    0    },
-        { subject: 'Woman · Descuentos',             fecha: '28 jul · 19:00', dest: 1638, apertura: 56.86, clics: 2.19, pedidos: 3, ingresos:  765.04 },
-        { subject: 'Colección Niño',                 fecha: '30 jul · 10:00', dest: 1596, apertura: 52.76, clics: 1.79, pedidos: 1, ingresos:   99.68 },
-        { subject: 'Hype FW26',                      fecha: '3 ago · 10:00',  dest: 1687, apertura: 55.73, clics: 2.08, pedidos: 0, ingresos:    0    },
-        { subject: 'Extra discount · Rebajas',       fecha: '5 ago · 10:00',  dest: 1569, apertura: 51.95, clics: 1.79, pedidos: 4, ingresos:  783.76 },
-        { subject: 'Shorts and skirts',              fecha: '7 ago · 10:30',  dest: 1512, apertura: 52.50, clics: 3.13, pedidos: 4, ingresos: 1048.79 },
-        { subject: 'Birds + sale',                   fecha: '9 ago · 10:00',  dest: 1306, apertura: 45.41, clics: 1.57, pedidos: 2, ingresos:  325.08 },
-        { subject: 'Last hours sale',                fecha: '11 ago · 10:00', dest: 1726, apertura: 57.21, clics: 3.05, pedidos: 3, ingresos:  714.00 },
-        { subject: 'FW26 · Lanzamiento',             fecha: '13 ago · 10:00', dest: 1734, apertura: 60.48, clics: 4.71, pedidos: 5, ingresos: 1303.32 },
-        { subject: 'FW26 · Not grey',                fecha: '16 ago · 10:30', dest: 1733, apertura: 60.36, clics: 1.95, pedidos: 2, ingresos:  461.03 },
-        { subject: 'Back to school',                 fecha: '18 ago · 10:00', dest: 1652, apertura: 57.48, clics: 1.71, pedidos: 2, ingresos:  283.36 },
-        { subject: 'Pink ruffles jacket',            fecha: '20 ago · 10:00', dest: 1702, apertura: 59.22, clics: 2.61, pedidos: 3, ingresos:  838.68 },
-        { subject: 'Animal Prints',                  fecha: '23 ago · 10:00', dest: 1589, apertura: 55.31, clics: 1.32, pedidos: 1, ingresos:  230.00 },
-        { subject: 'Cow fur',                        fecha: '25 ago · 10:00', dest: 1724, apertura: 60.30, clics: 1.71, pedidos: 2, ingresos:  495.15 },
-        { subject: 'Woman Sales',                    fecha: '28 ago · 10:30', dest: 1621, apertura: 54.11, clics: 3.54, pedidos: 4, ingresos: 1160.30 },
-        { subject: 'Hoodies',                        fecha: '30 ago · 10:30', dest: 1433, apertura: 50.18, clics: 1.51, pedidos: 0, ingresos:    0    },
-        { subject: 'Knits',                          fecha: '8 sept · 10:30', dest: 1769, apertura: 61.62, clics: 1.53, pedidos: 2, ingresos:  395.36 },
-        { subject: 'Postcard set',                   fecha: '10 sept · 10:30',dest: 1759, apertura: 61.44, clics: 1.05, pedidos: 1, ingresos:   72.68 },
-        { subject: 'Fotos ugc chicos',               fecha: '13 sept · 10:00',dest: 1690, apertura: 59.24, clics: 1.19, pedidos: 2, ingresos:  436.68 }
+        { subject: 'Outlet V2',          fecha: '13 oct · 10:00', dest: 1798, apertura: 41.03, clics: 2.92, pedidos: 6, ingresos: 1120.44 },
+        { subject: 'Mously',             fecha: '15 oct · 10:00', dest: 1784, apertura: 61.92, clics: 1.01, pedidos: 5, ingresos: 1338.55 },
+        { subject: 'Outlet Last 24h',    fecha: '17 oct · 10:00', dest: 1836, apertura: 42.03, clics: 2.95, pedidos: 1, ingresos:   19.96 }
       ],
       flujos: [
-        { nombre: 'CHECK OUT STARTED',      estado: 'Activo',   ingresos: 4972.58 },
-        { nombre: 'Flow Bienvenida Kids',   estado: 'Activo',   ingresos: 1831.62 },
-        { nombre: 'Flow Bienvenida Ambos',  estado: 'Activo',   ingresos: 1761.64 },
-        { nombre: 'Flow Bienvenida Mujer',  estado: 'Activo',   ingresos:  765.40 },
-        { nombre: 'Viewed Product',         estado: 'Activo',   ingresos:  236.97 },
-        { nombre: 'Carrito abandonado',     estado: 'Activo',   ingresos:  204.08 },
-        { nombre: 'Serie bienvenida email', estado: 'Borrador', ingresos:   68.14 }
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos: 1162.70 },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Activo', ingresos:    0    },
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos:    0    },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos:    0    },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos:    0    }
+      ]
+    },
+    ecomm: {
+      // Solo canal Online Store: tienda 12.253,54 − Marketplacer 1.880,89 − Shop 323.
+      // Marketplacer = tienda − tarjeta "Ventas online totales" (10.372,65, incluye Shop).
+      // netas: descuentos + reversiones (242,27) son todos de la tarjeta Kids online → 10.049,65 − 242,27.
+      // FW26 = "Ventas brutas no outlet" 7.322,83 − Marketplacer − Shop; outlet 4.930,71.
+      brutas: 10049.65, descuentos: 133.07, devoluciones: 109.20, netas: 9807.38,
+      envio: 792.79, devCargos: 0, impuestos: 2215.42, totales: 10049.65,
+      pedidos: 80, aov: 151.50,
+      sesiones: 6549, conv: 0.96, carrito: 8.41, pago: 2.45, compra: 0.96,
+      habituales: 31.57, cartSes: 551, pagoSes: 161, compraSes: 63,
+      seg: { label: 'FW26', brutas: 5118.94, netas: null, netasEst: false, pedidos: null, aov: null, otro: { label: 'Outlet', brutas: 4930.71 } },
+      nota: 'FW26 = productos sin outlet. Sesiones y conversión: total de la tienda.',
+      topVentas: [
+        { nombre: 'EARLY BIRD BOOT PINK',  val: 564 },
+        { nombre: 'EARLY BIRD BOOT',       val: 379 },
+        { nombre: 'LEOPARD PRINT JACKET',  val: 378 }
       ],
-      popup: { nombre: 'POP UP (ONMI)', ingresos: 5963, tasaEnvio: 1.88, envios: 263, formularioVisto: 14000,
-               prev: { rango: '1–15 jun 2026', ingresos: 1400, tasaEnvio: 0.90, envios: 44, formularioVisto: 4900 } },
+      topPaginas: [], topProductos: [],
+      topPaises: [],
+      kids:  null,
+      woman: null
+    }
+  },
+  cw13: {
+    label: '19–25 oct', month: 'oct', range: '19–25 oct 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: 'Semana sin outlet: 8 compras sobre 620€ · CPA 77,44€ · ROAS Meta 4,26x. FW26-KIDS: 3 compras ROAS 4,02x. Retargeting CAT baja a 3 compras ROAS 4,59x (20,84x la semana anterior). Prospecting CAT: 1 compra ROAS 8,05x. Outlet ADV+ residual: 1 compra con 18€. TRAF_WEB_EUROPA_FRIO vuelve: 1.162 visitas con CPC 0,04€. Testing EEUU sigue sin compras con CPM de 68€. ROAS Negocio 6,62x · ROAS Neto 6,21x.' },
+      { cat: 'Email', texto: 'Influencer Shell (20 oct): 198€ · 1 pedido · 61,95% ap. Halloween Discount (22 oct): 0€ · 2,48% clics. Halloween Kyra (25 oct): 97€ · 1 pedido. Newsletter: 295€ · Flujos: 528€ (Bienvenida Kids 338€ · Checkout Started 190€). Total: 823€.' },
+      { cat: 'Shopify', texto: 'Ventas online (Online Store): 4.101€ brutas (−59%) · 23 pedidos. Casi todo FW26 (3.931€); outlet residual 170€. AOV sube a 227,68€. Sesiones 4.815 y la conversión cae al 0,33%. Clientes habituales 40%. Top: Early Bird Boot Pink 907€ · Early Bird Boot 589€ · Passiflora Metallic Boot 456€.' }
+    ],
+    meta: {
+      inv: 619.55, compras: 8, valConv: 2637.77, cpa: 77.44,
+      roasMeta: 4.26, roasNeg: 6.62, roasNeto: 6.21,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',               tipo: 'main',      cat: 'venta',     inv: 308.97, compras: 3, val: 1242.62, roas:  4.02, ctr: 6.18, cpm: 16.06 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main',      cat: 'venta',     inv: 130.57, compras: 3, val:  598.68, roas:  4.59, ctr: 2.59, cpm:  1.36 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[EEUU]',    tipo: 'main',      cat: 'venta',     inv:  51.96, compras: 0, val:    0,    roas:  0,    ctr: 4.79, cpm: 68.10 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',  tipo: 'main',      cat: 'venta',     inv:  51.57, compras: 1, val:  415.00, roas:  8.05, ctr: 4.37, cpm: 12.97 },
+        { nombre: '[OUTLET]_2026_ADV+',                 tipo: 'main',      cat: 'venta',     inv:  18.47, compras: 1, val:  381.47, roas: 20.65, ctr: 5.61, cpm:  8.12 },
+        { nombre: 'RETARGETTIN_OUTLET_2026',            tipo: 'main',      cat: 'venta',     inv:   2.51, compras: 0, val:    0,    roas:  0,    ctr: 6.04, cpm:  9.88 },
+        { nombre: 'TRAF_WEB_EUROPA_FRIO',                tipo: 'awareness', cat: 'awareness', inv:  55.50, compras: 0, val:    0,    roas:  0,    ctr: 6.75, cpm:  2.70 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Influencer Shell',   fecha: '20 oct · 10:30', dest: 1801, apertura: 61.95, clics: 0.93, pedidos: 1, ingresos: 197.68 },
+        { subject: 'Halloween Discount', fecha: '22 oct · 20:00', dest: 1783, apertura: 61.44, clics: 2.48, pedidos: 0, ingresos:   0    },
+        { subject: 'Halloween Kyra',     fecha: '25 oct · 10:30', dest: 1608, apertura: 55.49, clics: 0.79, pedidos: 1, ingresos:  96.96 }
+      ],
+      flujos: [
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos: 338.40 },
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos: 189.88 },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Activo', ingresos:   0    },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos:   0    },
+        { nombre: 'Postcompra',            estado: 'Activo', ingresos:   0    },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos:   0    }
+      ]
+    },
+    ecomm: {
+      // Solo canal Online Store: tienda 5.288,70 − Marketplacer 900,71 − Shop 287.
+      // Marketplacer = tienda − tarjeta "Ventas online totales" (4.387,99, incluye Shop).
+      // netas: descuentos + reversiones (252,02) son todos de la tarjeta Kids online → 4.100,99 − 252,02.
+      // FW26 = "Ventas brutas no outlet" 5.118,98 − Marketplacer − Shop; outlet 169,72.
+      brutas: 4100.99, descuentos: 51.85, devoluciones: 200.17, netas: 3848.97,
+      envio: 180.48, devCargos: 20.00, impuestos: 549.60, totales: 4100.99,
+      pedidos: 23, aov: 227.68,
+      sesiones: 4815, conv: 0.33, carrito: 3.21, pago: 1.22, compra: 0.33,
+      habituales: 40.00, cartSes: 155, pagoSes: 59, compraSes: 16,
+      seg: { label: 'FW26', brutas: 3931.27, netas: null, netasEst: false, pedidos: null, aov: null, otro: { label: 'Outlet', brutas: 169.72 } },
+      nota: 'FW26 = productos sin outlet. Sesiones y conversión: total de la tienda.',
+      topVentas: [
+        { nombre: 'EARLY BIRD BOOT PINK',     val: 906.85 },
+        { nombre: 'EARLY BIRD BOOT',          val: 589 },
+        { nombre: 'PASSIFLORA METALLIC BOOT', val: 456 }
+      ],
+      topPaginas: [], topProductos: [],
+      topPaises: [],
+      kids:  null,
+      woman: null
+    }
+  },
+  cw14: {
+    label: '26 oct–1 nov', month: 'oct', range: '26 oct–1 nov 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '15 compras sobre 734€ · CPA 48,94€ (77,44€ la semana anterior) · ROAS Meta 7,25x. FW26-KIDS remonta: 11 compras · 4.166€ · ROAS 8,85x. Retargeting CAT: 4 compras ROAS 11,13x. Testing EEUU (ahora ATC) y Prospecting CAT sin compras. TRAF_WEB_EUROPA_FRIO: 1.395 clics con CPC 0,03€. ROAS Negocio 8,00x · ROAS Neto 7,44x.' },
+      { cat: 'Email', texto: 'Knits (27 oct): 365€ · 1 pedido. Doro (29 oct): 327€ · 1 pedido · 1,30% clics. Outwear (1 nov): 0€. Newsletter: 692€ · Flujos: 1.769€ (Checkout Started 1.164€ · Bienvenida Kids 415€ · Viewed Product 190€). Total: 2.461€.' },
+      { cat: 'Shopify', texto: 'Ventas online (Online Store): 5.873€ brutas (+43%) · 25 pedidos. Sin ventas de outlet. AOV 246,32€. Sesiones 5.355 · conversión 0,41%. Clientes habituales 52,17%. Top: Ruffles Nylon Jacket Black 1.336€ · Cow Fur Jacket Beige 526€ · Petal Boot 441€.' }
+    ],
+    meta: {
+      inv: 734.03, compras: 15, valConv: 5320.19, cpa: 48.94,
+      roasMeta: 7.25, roasNeg: 8.00, roasNeto: 7.44,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',               tipo: 'main',      cat: 'venta',     inv: 470.72, compras: 11, val: 4166.47, roas:  8.85, ctr:  4.58, cpm: 22.68 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main',      cat: 'venta',     inv: 103.64, compras:  4, val: 1153.72, roas: 11.13, ctr:  2.70, cpm:  0.70 },
+        { nombre: '[TESTING]_[ABO]_[ATC]_[EEUU]',       tipo: 'main',      cat: 'venta',     inv:  61.35, compras:  0, val:    0,    roas:  0,    ctr:  5.89, cpm: 17.54 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',  tipo: 'main',      cat: 'venta',     inv:  45.10, compras:  0, val:    0,    roas:  0,    ctr:  5.62, cpm: 13.42 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[EEUU]',    tipo: 'main',      cat: 'venta',     inv:   8.82, compras:  0, val:    0,    roas:  0,    ctr:  4.58, cpm: 57.65 },
+        { nombre: 'TRAF_WEB_EUROPA_FRIO',                tipo: 'awareness', cat: 'awareness', inv:  44.40, compras:  0, val:    0,    roas:  0,    ctr: 10.93, cpm:  3.33 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Knits',   fecha: '27 oct · 10:00', dest: 1829, apertura: 41.64, clics: 0.68, pedidos: 1, ingresos: 365.30 },
+        { subject: 'Doro',    fecha: '29 oct · 10:15', dest: 1803, apertura: 41.02, clics: 1.30, pedidos: 1, ingresos: 326.58 },
+        { subject: 'Outwear', fecha: '1 nov · 10:15',  dest: 1853, apertura: 42.00, clics: 0.98, pedidos: 0, ingresos:   0    }
+      ],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos: 1164.37 },
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos:  415.31 },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos:  189.68 },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Activo', ingresos:    0    },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos:    0    },
+        { nombre: 'Postcompra',            estado: 'Activo', ingresos:    0    }
+      ]
+    },
+    ecomm: {
+      // Datos sacados directamente de Shopify (ShopifyQL), canal Online Store.
+      // Pedidos, AOV, sesiones y habituales: total de la tienda, como en las semanas anteriores.
+      // Sin ventas de productos OUTLET2025 esta semana.
+      brutas: 5872.66, descuentos: 196.14, devoluciones: 213.79, netas: 5462.73,
+      envio: 229.37, devCargos: 0, impuestos: 593.11, totales: 5872.66,
+      pedidos: 25, aov: 246.32,
+      sesiones: 5355, conv: 0.41, carrito: 2.80, pago: 1.53, compra: 0.41,
+      habituales: 52.17, cartSes: 150, pagoSes: 82, compraSes: 22,
+      nota: 'Sesiones y conversión: total de la tienda.',
+      topVentas: [
+        { nombre: 'RUFFLES NYLON JACKET BLACK', val: 1335.69 },
+        { nombre: 'COW FUR JACKET BEIGE',       val:  526.03 },
+        { nombre: 'PETAL BOOT',                 val:  440.99 }
+      ],
+      topPaginas: [], topProductos: [],
+      topPaises: [],
+      kids:  null,
+      woman: null
+    }
+  },
+  acum_oct: {
+    label: 'Acumulado oct', month: 'oct', range: '1–31 oct 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '119 compras sobre 3.548€ · CPA 29,81€ · ROAS Meta 7,70x. Retargeting CAT es la campaña más rentable del mes: 38 compras · ROAS 17,66x. El outlet (ADV+ y Retargeting Outlet) suma 53 compras con 728€ · ROAS 9,97x. FW26-KIDS: 25 compras · ROAS 5,06x. Testing EEUU gasta 261€ sin compras. ROAS Negocio 9,93x · ROAS Neto 9,29x.' },
+      { cat: 'Email', texto: '12 envíos · 6.999€ newsletter · 35 pedidos. Top: Outlet 8 oct (1.946€ · 12 pedidos), Mously (1.339€) y Outlet V2 (1.120€). Flujos: 5.731€, casi todo Checkout Started (4.679€). Total email: 12.730€.' },
+      { cat: 'Shopify', texto: 'Ventas online (Online Store): 35.225€ brutas · 32.965€ netas · 221 pedidos (+24% en brutas vs septiembre). Facturación real de productos outlet: 13.860€ brutas · 13.675€ netas · 124 pedidos (39% de las ventas online). Resto de colección: 21.365€. El outlet baja el AOV a 174,57€. Sesiones 26.158 · conversión 0,67%. Clientes habituales 41,38%. Top: Litchy Pink Boot 2.375€ · Ruffles Nylon Jacket Black 2.216€ · Early Bird Boot Pink 1.837€.' }
+    ],
+    meta: {
+      inv: 3547.81, compras: 119, valConv: 27330.60, cpa: 29.81,
+      roasMeta: 7.70, roasNeg: 9.93, roasNeto: 9.29,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',                tipo: 'main',      cat: 'venta',     inv: 1424.32, compras: 25, val: 7204.50, roas: 5.06, ctr: 3.46, cpm: 21.35 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]',  tipo: 'main',      cat: 'venta',     inv: 677.97, compras: 38, val: 11973.08, roas: 17.66, ctr: 3.76, cpm: 1.65 },
+        { nombre: '[OUTLET]_2026_ADV+',                  tipo: 'main',      cat: 'venta',     inv: 649.94, compras: 44, val: 5724.62, roas: 8.81, ctr: 6.06, cpm: 8.39 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[EEUU]',     tipo: 'main',      cat: 'venta',     inv: 260.56, compras: 0, val: 0.00, roas: 0.00, ctr: 5.81, cpm: 75.74 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',   tipo: 'main',      cat: 'venta',     inv: 199.08, compras: 2, val: 735.00, roas: 3.69, ctr: 5.56, cpm: 15.11 },
+        { nombre: 'RETARGETTIN_OUTLET_2026',             tipo: 'main',      cat: 'venta',     inv: 78.55, compras: 9, val: 1537.30, roas: 19.57, ctr: 3.78, cpm: 10.97 },
+        { nombre: '[TESTING]_[ABO]_[ATC]_[EEUU]',        tipo: 'main',      cat: 'venta',     inv: 45.40, compras: 0, val: 0.00, roas: 0.00, ctr: 6.28, cpm: 18.51 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[OPEN]',     tipo: 'main',      cat: 'venta',     inv: 37.13, compras: 1, val: 156.10, roas: 4.20, ctr: 3.71, cpm: 23.76 },
+        { nombre: 'TRAF_WEB_EUROPA_FRIO',                tipo: 'awareness', cat: 'awareness', inv: 141.10, compras: 0, val: 0.00, roas: 0.00, ctr: 7.77, cpm: 2.88 },
+        { nombre: 'IG - FOLLOW - KIDS',                  tipo: 'awareness', cat: 'awareness', inv: 33.76, compras: 0, val: 0.00, roas: 0.00, ctr: 7.21, cpm: 4.93 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Animal Day',         fecha: '4 oct · 10:00',    dest: 1813, apertura: 64.18, clics: 1.38, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Carpet Print',       fecha: '6 oct · 10:30',    dest: 1800, apertura: 63.88, clics: 1.03, pedidos: 3, ingresos: 565.44 },
+        { subject: 'Outlet',             fecha: '8 oct · 10:00',    dest: 1916, apertura: 43.52, clics: 6.18, pedidos: 12, ingresos: 1946.19 },
+        { subject: 'Influencer Yin',     fecha: '11 oct · 10:00',   dest: 1813, apertura: 63.46, clics: 1.44, pedidos: 4, ingresos: 1021.50 },
+        { subject: 'Outlet V2',          fecha: '13 oct · 10:00',   dest: 1820, apertura: 41.53, clics: 2.97, pedidos: 6, ingresos: 1120.44 },
+        { subject: 'Mously',             fecha: '15 oct · 10:00',   dest: 1806, apertura: 62.69, clics: 1.04, pedidos: 5, ingresos: 1338.55 },
+        { subject: 'Outlet Last 24h',    fecha: '17 oct · 10:00',   dest: 1865, apertura: 42.70, clics: 3.02, pedidos: 1, ingresos: 19.96 },
+        { subject: 'Influencer Shell',   fecha: '20 oct · 10:30',   dest: 1835, apertura: 63.12, clics: 0.96, pedidos: 1, ingresos: 197.68 },
+        { subject: 'Halloween Discount', fecha: '22 oct · 20:00',   dest: 1863, apertura: 64.20, clics: 2.58, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Halloween Kyra',     fecha: '25 oct · 10:30',   dest: 1799, apertura: 62.06, clics: 0.86, pedidos: 1, ingresos: 96.96 },
+        { subject: 'Knits',              fecha: '27 oct · 10:00',   dest: 1829, apertura: 41.64, clics: 0.68, pedidos: 1, ingresos: 365.30 },
+        { subject: 'Doro',               fecha: '29 oct · 10:15',   dest: 1803, apertura: 41.02, clics: 1.30, pedidos: 1, ingresos: 326.58 }
+      ],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',        estado: 'Activo',   ingresos: 4679.31 },
+        { nombre: 'Flow Bienvenida Kids',     estado: 'Activo',   ingresos: 753.71 },
+        { nombre: 'Flow Bienvenida Ambos',    estado: 'Activo',   ingresos: 298.16 },
+        { nombre: 'Flow Bienvenida Mujer',    estado: 'Activo',   ingresos: 0.00 },
+        { nombre: 'Viewed Product',           estado: 'Activo',   ingresos: 0.00 },
+        { nombre: 'Postcompra',               estado: 'Activo',   ingresos: 0.00 }
+      ]
+    },
+    ecomm: {
+      // Solo canal Online Store, 1–31 oct 2026 (ShopifyQL). Excluye Marketplacer 3.262€, Shop 958€ y REVER 155€.
+      // Pedidos, AOV, sesiones y habituales: total de la tienda.
+      brutas: 35225.06, descuentos: 864.34, devoluciones: 1395.49, netas: 32965.23,
+      envio: 1934.00, devCargos: 0, impuestos: 5282.34, totales: 35225.06,
+      pedidos: 221, aov: 174.57,
+      sesiones: 26158, conv: 0.67, carrito: 6.04, pago: 2.03, compra: 0.67,
+      habituales: 41.38, cartSes: 1581, pagoSes: 531, compraSes: 175,
+      // Outlet = productos con etiqueta OUTLET2025 vendidos en Online Store (ShopifyQL).
+      seg: { label: 'Outlet', brutas: 13859.97, netas: 13674.56, netasEst: false, pedidos: 124, aov: null, otro: { label: 'Resto (sin outlet)', brutas: 21365.09 } },
+      nota: 'Outlet = productos con etiqueta OUTLET2025 · pedidos outlet = pedidos con algún producto outlet. Sesiones y conversión: total de la tienda.',
+      topVentas: [
+        { nombre: 'LITCHY PINK BOOT',           val: 2374.79 },
+        { nombre: 'RUFFLES NYLON JACKET BLACK', val: 2215.63 },
+        { nombre: 'EARLY BIRD BOOT PINK',       val: 1837.17 },
+        { nombre: 'EARLY BIRD BOOT',            val: 1346.67 },
+        { nombre: 'RUFFLES NYLON JACKET PINK',  val: 1110.34 }
+      ],
+      topPaginas: [], topProductos: [],
+      topPaises: [],
+      kids:  null,
+      woman: null
+    }
+  },
+  cw15: {
+    label: '2–8 nov', month: 'nov', range: '2–8 nov 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '23 compras sobre 841€ · CPA 36,56€ · ROAS Meta 7,26x. FW26-KIDS: 16 compras · 3.799€ · ROAS 6,86x. Nueva campaña Retargeting Restock Botas: 5 compras con 70€ · ROAS 21,26x. Retargeting CAT: 2 compras ROAS 7,86x. Testing EEUU (ATC) sigue sin compras. MERCADO_MADRID (tráfico): 1.030 clics con CPC 0,02€. ROAS Negocio 9,77x · ROAS Neto 8,69x.' },
+      { cat: 'Email', texto: 'Restock botas (2 nov): 943€ · 5 pedidos · 43,57% ap. Mercado Outlet (3 nov, lista España): 0€. Ruffle Jacket (5 nov): 334€ · 1 pedido. Pants (8 nov): 0€ · 54,91% ap. Newsletter: 1.277€ · Flujos: 1.446€ (Bienvenida Kids 840€ · Bienvenida Mujer 383€ · Viewed Product 223€). Total: 2.724€.' },
+      { cat: 'Shopify', texto: 'Ventas online (Online Store): 8.220€ brutas (+40%) · 33 pedidos. AOV 236,11€. Las sesiones casi se duplican (10.169) pero la conversión baja al 0,30%. Clientes habituales 18,75%: casi todo cliente nuevo. Top: Litchy Pink Boot 2.077€ · Early Bird Boot 1.015€ · Tomate Knitted Green 411€.' }
+    ],
+    meta: {
+      inv: 840.90, compras: 23, valConv: 6101.96, cpa: 36.56,
+      roasMeta: 7.26, roasNeg: 9.77, roasNeto: 8.69,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',               tipo: 'main',      cat: 'venta',     inv: 554.02, compras: 16, val: 3799.07, roas:  6.86, ctr:  6.17, cpm: 18.47 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]', tipo: 'main',      cat: 'venta',     inv: 103.78, compras:  2, val:  816.20, roas:  7.86, ctr:  3.39, cpm:  0.38 },
+        { nombre: '[TESTING]_[ABO]_[ATC]_[EEUU]',       tipo: 'main',      cat: 'venta',     inv:  84.28, compras:  0, val:    0,    roas:  0,    ctr:  5.78, cpm: 16.03 },
+        { nombre: 'RETARGETTING_RESTOCK BOTAS',         tipo: 'main',      cat: 'venta',     inv:  69.93, compras:  5, val: 1486.69, roas: 21.26, ctr:  3.50, cpm: 13.45 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',  tipo: 'main',      cat: 'venta',     inv:   2.52, compras:  0, val:    0,    roas:  0,    ctr:  3.79, cpm: 19.09 },
+        { nombre: 'MERCADO_MADRID',                      tipo: 'awareness', cat: 'awareness', inv:  25.06, compras:  0, val:    0,    roas:  0,    ctr: 11.24, cpm:  2.79 },
+        { nombre: 'TRAF_WEB_EUROPA_FRIO',                tipo: 'awareness', cat: 'awareness', inv:   1.31, compras:  0, val:    0,    roas:  0,    ctr: 16.18, cpm:  3.85 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Restock botas',  fecha: '2 nov · 10:30', dest: 1922, apertura: 43.57, clics: 1.68, pedidos: 5, ingresos: 943.47 },
+        { subject: 'Mercado Outlet', fecha: '3 nov · 20:00', dest:  177, apertura: 42.75, clics: 1.45, pedidos: 0, ingresos:   0    },
+        { subject: 'Ruffle Jacket',  fecha: '5 nov · 10:30', dest: 1847, apertura: 41.73, clics: 1.22, pedidos: 1, ingresos: 334.00 },
+        { subject: 'Pants',          fecha: '8 nov · 10:00', dest: 1682, apertura: 54.91, clics: 1.01, pedidos: 0, ingresos:   0    }
+      ],
+      flujos: [
+        { nombre: 'Flow Bienvenida Kids',  estado: 'Activo', ingresos: 840.16 },
+        { nombre: 'Flow Bienvenida Mujer', estado: 'Activo', ingresos: 383.40 },
+        { nombre: 'Viewed Product',        estado: 'Activo', ingresos: 222.68 },
+        { nombre: 'CHECK OUT STARTED',     estado: 'Activo', ingresos:   0    },
+        { nombre: 'Flow Bienvenida Ambos', estado: 'Activo', ingresos:   0    },
+        { nombre: 'Postcompra',            estado: 'Activo', ingresos:   0    }
+      ]
+    },
+    ecomm: {
+      // Datos sacados directamente de Shopify (ShopifyQL), canal Online Store (se excluye REVER).
+      // Pedidos, AOV, sesiones y habituales: total de la tienda, como en las semanas anteriores.
+      // Sin ventas de productos OUTLET2025 esta semana.
+      brutas: 8219.52, descuentos: 554.89, devoluciones: 355.26, netas: 7309.37,
+      envio: 338.02, devCargos: 0, impuestos: 1090.87, totales: 8219.52,
+      pedidos: 33, aov: 236.11,
+      sesiones: 10169, conv: 0.30, carrito: 1.86, pago: 0.97, compra: 0.30,
+      habituales: 18.75, cartSes: 189, pagoSes: 99, compraSes: 30,
+      nota: 'Sesiones y conversión: total de la tienda.',
+      topVentas: [
+        { nombre: 'LITCHY PINK BOOT',     val: 2076.86 },
+        { nombre: 'EARLY BIRD BOOT',      val: 1015.00 },
+        { nombre: 'TOMATE KNITTED GREEN', val:  410.88 }
+      ],
+      topPaginas: [], topProductos: [],
+      topPaises: [],
+      kids:  null,
+      woman: null
+    }
+  },
+  acumulado: {
+    label: 'Acumulado', month: 'acumulado', range: '29 jun–31 oct 2026',
+    puntos: [
+      { cat: 'Meta Ads', texto: '333 compras sobre 13.250€ · CPA 39,79€ · ROAS Meta 5,69x. Retargeting CAT es la campaña más rentable: 91 compras · ROAS 17,23x. FW26-KIDS es la de más inversión: 4.140€ · 68 compras · ROAS 4,67x. ROAS Negocio 9,39x · ROAS Neto 8,13x.' },
+      { cat: 'Email', texto: '51 envíos. Newsletter: 23.151€ · Flujos: 20.866€ (Checkout Started 10.148€). Total email: 44.017€.' },
+      { cat: 'Shopify', texto: 'Ventas online (Online Store): 124.356€ brutas · 107.729€ netas · 718 pedidos. AOV 182,65€. Sesiones 76.241 · conversión 0,71%. Top: Litchy Pink Boot 8.395€ · Early Bird Boot 5.543€ · Ruffles Nylon Jacket Black 5.240€ · Early Bird Boot Pink 5.159€.' }
+    ],
+    meta: {
+      inv: 13250.34, compras: 333, valConv: 75381.13, cpa: 39.79,
+      roasMeta: 5.69, roasNeg: 9.39, roasNeto: 8.13,
+      campanas: [
+        { nombre: 'FW26 - KIDS - VENTAS',                tipo: 'main',      cat: 'venta',     inv: 4139.85, compras: 68, val: 19342.57, roas: 4.67, ctr: 3.59, cpm: 21.80 },
+        { nombre: 'WOMAN - LAUNCH MAYO - VENTAS',        tipo: 'main',      cat: 'venta',     inv: 2241.95, compras: 39, val: 8297.66, roas: 3.70, ctr: 3.99, cpm: 19.36 },
+        { nombre: 'FLASH_SALES',                         tipo: 'main',      cat: 'venta',     inv: 2012.77, compras: 64, val: 8352.93, roas: 4.15, ctr: 2.59, cpm: 13.76 },
+        { nombre: '[VENTS]_[ABO]_[RETARGETTING]_[CAT]',  tipo: 'main',      cat: 'venta',     inv: 1428.08, compras: 91, val: 24608.32, roas: 17.23, ctr: 3.82, cpm: 2.38 },
+        { nombre: '[OUTLET]_2026_ADV+',                  tipo: 'main',      cat: 'venta',     inv: 649.94, compras: 44, val: 5724.62, roas: 8.81, ctr: 6.06, cpm: 8.39 },
+        { nombre: '[VENTS]_[ABO]_[PROSPECTING]_[CAT]',   tipo: 'main',      cat: 'venta',     inv: 573.99, compras: 8, val: 5279.14, roas: 9.20, ctr: 5.99, cpm: 20.17 },
+        { nombre: 'VTA - MMxSN - 28MAYO2026',            tipo: 'main',      cat: 'venta',     inv: 413.10, compras: 8, val: 1420.97, roas: 3.44, ctr: 2.82, cpm: 10.51 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[OPEN]',     tipo: 'main',      cat: 'venta',     inv: 407.49, compras: 2, val: 817.62, roas: 2.01, ctr: 3.35, cpm: 24.81 },
+        { nombre: '[TESTING]_[ABO]_[VENTAS]_[EEUU]',     tipo: 'main',      cat: 'venta',     inv: 341.07, compras: 0, val: 0.00, roas: 0.00, ctr: 5.49, cpm: 76.15 },
+        { nombre: '[VENTAS]_[KIDS]_[JAPON]_[ADV+]',      tipo: 'main',      cat: 'venta',     inv: 185.71, compras: 0, val: 0.00, roas: 0.00, ctr: 2.54, cpm: 9.91 },
+        { nombre: 'RETARGETTIN_OUTLET_2026',             tipo: 'main',      cat: 'venta',     inv: 78.55, compras: 9, val: 1537.30, roas: 19.57, ctr: 3.78, cpm: 10.97 },
+        { nombre: '[TESTING]_[ABO]_[ATC]_[EEUU]',        tipo: 'main',      cat: 'venta',     inv: 45.40, compras: 0, val: 0.00, roas: 0.00, ctr: 6.28, cpm: 18.51 },
+        { nombre: 'IG - FOLLOW - KIDS',                  tipo: 'awareness', cat: 'awareness', inv: 279.52, compras: 0, val: 0.00, roas: 0.00, ctr: 7.08, cpm: 3.81 },
+        { nombre: 'IG - FOLLOW - WOMAN',                 tipo: 'awareness', cat: 'awareness', inv: 267.52, compras: 0, val: 0.00, roas: 0.00, ctr: 6.64, cpm: 3.67 },
+        { nombre: 'TRAF_WEB_EUROPA_FRIO',                tipo: 'awareness', cat: 'awareness', inv: 185.40, compras: 0, val: 0.00, roas: 0.00, ctr: 7.51, cpm: 2.75 }
+      ]
+    },
+    creatividades: [],
+    mail: {
+      envios: [
+        { subject: 'Birds Patchwork',                fecha: '1 jul · 10:30',    dest: 1767, apertura: 59.66, clics: 1.72, pedidos: 2, ingresos: 249.68 },
+        { subject: 'Uvas Mesh Set',                  fecha: '5 jul · 20:00',    dest: 1779, apertura: 60.06, clics: 1.22, pedidos: 3, ingresos: 977.06 },
+        { subject: 'Summer Sales (AUS & NZ)',        fecha: '7 jul · 10:00',    dest: 1740, apertura: 59.18, clics: 4.76, pedidos: 6, ingresos: 928.58 },
+        { subject: 'Woman Collections',              fecha: '10 jul · 10:30',   dest: 1746, apertura: 58.77, clics: 0.98, pedidos: 3, ingresos: 337.73 },
+        { subject: 'Hulu prints + sales (AUS & NZ)', fecha: '12 jul · 20:00',   dest: 1768, apertura: 60.03, clics: 2.04, pedidos: 1, ingresos: 81.68 },
+        { subject: 'Kids Collections',               fecha: '14 jul · 10:30',   dest: 1716, apertura: 57.74, clics: 1.31, pedidos: 2, ingresos: 704.68 },
+        { subject: 'Swimwear',                       fecha: '16 jul · 10:30',   dest: 1762, apertura: 59.05, clics: 1.68, pedidos: 2, ingresos: 145.92 },
+        { subject: 'Barcos woman',                   fecha: '19 jul · 10:30',   dest: 1774, apertura: 59.47, clics: 0.81, pedidos: 0, ingresos: 0.00 },
+        { subject: '10 Year Anniversary',            fecha: '22 jul · 10:30',   dest: 1772, apertura: 41.73, clics: 1.27, pedidos: 2, ingresos: 416.96 },
+        { subject: 'Mother-daughter',                fecha: '24 jul · 10:30',   dest: 1776, apertura: 58.65, clics: 1.12, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Matching outfits',               fecha: '26 jul · 10:30',   dest: 1778, apertura: 58.74, clics: 1.12, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Woman · Descuentos',             fecha: '28 jul · 17:00',   dest: 1750, apertura: 60.74, clics: 2.22, pedidos: 3, ingresos: 765.04 },
+        { subject: 'Colección Niño',                 fecha: '30 jul · 08:00',   dest: 1732, apertura: 57.26, clics: 1.88, pedidos: 1, ingresos: 99.68 },
+        { subject: 'Hype FW26',                      fecha: '3 ago · 08:00',    dest: 1802, apertura: 59.53, clics: 2.08, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Extra discount · Rebajas',       fecha: '5 ago · 10:00',    dest: 1690, apertura: 55.96, clics: 1.85, pedidos: 4, ingresos: 783.76 },
+        { subject: 'Shorts and skirts',              fecha: '7 ago · 10:30',    dest: 1717, apertura: 59.62, clics: 3.19, pedidos: 4, ingresos: 1048.79 },
+        { subject: 'Birds + sale',                   fecha: '9 ago · 10:00',    dest: 1780, apertura: 61.89, clics: 1.84, pedidos: 2, ingresos: 325.08 },
+        { subject: 'Last hours sale',                fecha: '11 ago · 10:00',   dest: 1758, apertura: 58.27, clics: 3.12, pedidos: 3, ingresos: 714.00 },
+        { subject: 'FW26 · Lanzamiento',             fecha: '13 ago · 10:00',   dest: 1762, apertura: 61.46, clics: 4.71, pedidos: 5, ingresos: 1303.32 },
+        { subject: 'FW26 · Not grey',                fecha: '16 ago · 10:30',   dest: 1766, apertura: 61.51, clics: 1.95, pedidos: 2, ingresos: 461.03 },
+        { subject: 'Back to school',                 fecha: '18 ago · 10:00',   dest: 1743, apertura: 60.65, clics: 1.78, pedidos: 2, ingresos: 283.36 },
+        { subject: 'Pink ruffles jacket',            fecha: '20 ago · 10:00',   dest: 1801, apertura: 62.67, clics: 2.61, pedidos: 3, ingresos: 838.68 },
+        { subject: 'Animal Prints',                  fecha: '23 ago · 10:00',   dest: 1772, apertura: 61.68, clics: 1.39, pedidos: 1, ingresos: 230.00 },
+        { subject: 'Cow fur',                        fecha: '25 ago · 10:00',   dest: 1813, apertura: 63.41, clics: 1.71, pedidos: 2, ingresos: 495.15 },
+        { subject: 'Woman Sales',                    fecha: '28 ago · 10:30',   dest: 1777, apertura: 59.31, clics: 3.61, pedidos: 4, ingresos: 1160.30 },
+        { subject: 'Hoodies',                        fecha: '30 ago · 10:30',   dest: 1768, apertura: 61.91, clics: 1.51, pedidos: 1, ingresos: 594.00 },
+        { subject: 'Ovejas Set',                     fecha: '1 sept · 10:30',   dest: 1790, apertura: 62.72, clics: 1.02, pedidos: 1, ingresos: 213.00 },
+        { subject: 'Boots',                          fecha: '3 sept · 10:30',   dest: 1835, apertura: 64.32, clics: 2.73, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Back to school',                 fecha: '6 sept · 10:00',   dest: 1831, apertura: 63.89, clics: 2.02, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Knits',                          fecha: '8 sept · 10:30',   dest: 1823, apertura: 63.50, clics: 1.53, pedidos: 2, ingresos: 395.36 },
+        { subject: 'Postcard set',                   fecha: '10 sept · 10:30',  dest: 1833, apertura: 64.02, clics: 1.05, pedidos: 1, ingresos: 72.68 },
+        { subject: 'Fotos UGC chicos',               fecha: '13 sept · 10:00',  dest: 1813, apertura: 63.55, clics: 1.23, pedidos: 2, ingresos: 436.68 },
+        { subject: 'Blue postcard',                  fecha: '15 sept · 10:30',  dest: 1827, apertura: 64.02, clics: 1.12, pedidos: 2, ingresos: 1019.00 },
+        { subject: 'Woman FW',                       fecha: '17 sept · 10:00',  dest: 1808, apertura: 63.37, clics: 2.38, pedidos: 1, ingresos: 197.68 },
+        { subject: 'Vegetables set',                 fecha: '20 sept · 10:00',  dest: 1807, apertura: 63.45, clics: 0.67, pedidos: 2, ingresos: 294.59 },
+        { subject: 'Ovejas set',                     fecha: '22 sept · 10:00',  dest: 1805, apertura: 63.65, clics: 1.38, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Outwear',                        fecha: '24 sept · 10:00',  dest: 1791, apertura: 63.33, clics: 1.34, pedidos: 1, ingresos: 169.20 },
+        { subject: 'Denim',                          fecha: '27 sept · 10:00',  dest: 1837, apertura: 65.00, clics: 0.81, pedidos: 1, ingresos: 410.00 },
+        { subject: 'Concurso Botas',                 fecha: '30 sept · 10:30',  dest: 1857, apertura: 65.71, clics: 1.95, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Animal Day',                     fecha: '4 oct · 10:00',    dest: 1813, apertura: 64.18, clics: 1.38, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Carpet Print',                   fecha: '6 oct · 10:30',    dest: 1800, apertura: 63.88, clics: 1.03, pedidos: 3, ingresos: 565.44 },
+        { subject: 'Outlet',                         fecha: '8 oct · 10:00',    dest: 1916, apertura: 43.52, clics: 6.18, pedidos: 12, ingresos: 1946.19 },
+        { subject: 'Influencer Yin',                 fecha: '11 oct · 10:00',   dest: 1813, apertura: 63.46, clics: 1.44, pedidos: 4, ingresos: 1021.50 },
+        { subject: 'Outlet V2',                      fecha: '13 oct · 10:00',   dest: 1820, apertura: 41.53, clics: 2.97, pedidos: 6, ingresos: 1120.44 },
+        { subject: 'Mously',                         fecha: '15 oct · 10:00',   dest: 1806, apertura: 62.69, clics: 1.04, pedidos: 5, ingresos: 1338.55 },
+        { subject: 'Outlet Last 24h',                fecha: '17 oct · 10:00',   dest: 1865, apertura: 42.70, clics: 3.02, pedidos: 1, ingresos: 19.96 },
+        { subject: 'Influencer Shell',               fecha: '20 oct · 10:30',   dest: 1835, apertura: 63.12, clics: 0.96, pedidos: 1, ingresos: 197.68 },
+        { subject: 'Halloween Discount',             fecha: '22 oct · 20:00',   dest: 1863, apertura: 64.20, clics: 2.58, pedidos: 0, ingresos: 0.00 },
+        { subject: 'Halloween Kyra',                 fecha: '25 oct · 10:30',   dest: 1799, apertura: 62.06, clics: 0.86, pedidos: 1, ingresos: 96.96 },
+        { subject: 'Knits',                          fecha: '27 oct · 10:00',   dest: 1829, apertura: 41.64, clics: 0.68, pedidos: 1, ingresos: 365.30 },
+        { subject: 'Doro',                           fecha: '29 oct · 10:15',   dest: 1803, apertura: 41.02, clics: 1.30, pedidos: 1, ingresos: 326.58 }
+      ],
+      flujos: [
+        { nombre: 'CHECK OUT STARTED',        estado: 'Activo',   ingresos: 10148.03 },
+        { nombre: 'Flow Bienvenida Kids',     estado: 'Activo',   ingresos: 4457.86 },
+        { nombre: 'Flow Bienvenida Ambos',    estado: 'Activo',   ingresos: 2283.48 },
+        { nombre: 'Flow Bienvenida Mujer',    estado: 'Activo',   ingresos: 1077.07 },
+        { nombre: 'Viewed Product',           estado: 'Activo',   ingresos: 922.48 },
+        { nombre: 'Carrito abandonado',       estado: 'Borrador', ingresos: 867.88 },
+        { nombre: 'Serie bienvenida email',   estado: 'Borrador', ingresos: 1109.41 },
+        { nombre: 'Postcompra',               estado: 'Activo',   ingresos: 0.00 }
+      ],
       soloResumen: true
     },
     ecomm: {
-      brutas: 79119.25, descuentos: 5624.52, devoluciones: 7081.22, netas: 66429.50,
-      envio: 3723.07, devCargos: 453.05, impuestos: 10113.05, totales: 82911.32,
-      pedidos: 361, aov: 229.67,
-      sesiones: 33258, conv: 0.78, carrito: 5.60, pago: 2.19, compra: 0.78,
-      habituales: 39.62, cartSes: 1861, pagoSes: 727, compraSes: 259,
+      // Solo canal Online Store, 29 jun–31 oct 2026 (ShopifyQL). Excluye Marketplacer, Shop, REVER, Draft Orders y Facebook & Instagram.
+      // Pedidos, AOV, sesiones y habituales: total de la tienda. Kids/Woman = netas online con etiqueta KIDS / ADULTS.
+      brutas: 124355.91, descuentos: 6442.02, devoluciones: 10184.52, netas: 107729.37,
+      envio: 6039.53, devCargos: 0, impuestos: 16751.19, totales: 124355.91,
+      pedidos: 718, aov: 182.65,
+      sesiones: 76241, conv: 0.71, carrito: 5.72, pago: 2.22, compra: 0.71,
+      habituales: 37.21, cartSes: 4360, pagoSes: 1695, compraSes: 539,
+      nota: 'Sesiones y conversión: total de la tienda.',
       topVentas: [
-        { nombre: 'BARCOS SKIRT WHITE',                 val: 1879 },
-        { nombre: 'BEVERLY FRINGE PANTS DEEP LAVENDER', val: 1084 },
-        { nombre: 'LITCHY PINK (pre-order)',             val:  722 },
-        { nombre: 'EARLY BIRD BOOT',                    val:  401 },
-        { nombre: 'BARCOS DRESS RED',                   val:  574 },
-        { nombre: 'BARCOS BOW BIKINI RED',              val:  524 },
-        { nombre: 'BIRDS PATCHWORK SKIRT BLUSH',        val:  510 }
+        { nombre: 'LITCHY PINK BOOT',           val: 8394.61 },
+        { nombre: 'EARLY BIRD BOOT',            val: 5543.26 },
+        { nombre: 'RUFFLES NYLON JACKET BLACK', val: 5240.43 },
+        { nombre: 'EARLY BIRD BOOT PINK',       val: 5158.60 },
+        { nombre: 'RUFFLES NYLON JACKET PINK',  val: 3238.17 },
+        { nombre: 'BARCOS SKIRT WHITE',         val: 2808.51 },
+        { nombre: 'COW FUR JACKET BEIGE',       val: 2294.33 }
       ],
-      topPaginas: [],
-      topProductos: [],
-      kids:  { netas: 61555.96 },
-      woman: { netas: 12088.82 }
+      topPaginas: [], topProductos: [],
+      topPaises: [],
+      kids:  { netas: 80442.23 },
+      woman: { netas: 11894.12 }
     }
   }
 };
@@ -1418,12 +1739,13 @@ function renderEcommSection(d, p) {
   </div>`;
   if (e.seg) {
     const g=e.seg;
-    html+=`<div class="eco-kpi-row mb12">
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas brutas · ${g.label}</div><div class="kpi-v">${fmtEur(g.brutas)}</div><div class="kpi-s">${fmt(g.brutas/e.brutas*100,0)}% del total</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Ventas netas · ${g.label}</div><div class="kpi-v">${fmtEur(g.netas)}</div><div class="kpi-s">${g.netasEst?'estimadas':'&nbsp;'}</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">Pedidos · ${g.label}</div><div class="kpi-v">${g.pedidos||'—'}</div><div class="kpi-s">&nbsp;</div></div>
-    <div class="eco-kpi-cell"><div class="kpi-l">AOV · ${g.label}</div><div class="kpi-v">${fmtEur(g.aov)}</div><div class="kpi-s">&nbsp;</div></div>
-  </div>`;
+    // Solo se pintan las métricas del segmento que tenemos
+    const cells=[`<div class="eco-kpi-cell"><div class="kpi-l">Ventas brutas · ${g.label}</div><div class="kpi-v">${fmtEur(g.brutas)}</div><div class="kpi-s">${fmt(g.brutas/e.brutas*100,0)}% del total</div></div>`];
+    if (g.netas!=null) cells.push(`<div class="eco-kpi-cell"><div class="kpi-l">Ventas netas · ${g.label}</div><div class="kpi-v">${fmtEur(g.netas)}</div><div class="kpi-s">${g.netasEst?'estimadas':'&nbsp;'}</div></div>`);
+    if (g.pedidos!=null) cells.push(`<div class="eco-kpi-cell"><div class="kpi-l">Pedidos · ${g.label}</div><div class="kpi-v">${g.pedidos}</div><div class="kpi-s">&nbsp;</div></div>`);
+    if (g.aov!=null) cells.push(`<div class="eco-kpi-cell"><div class="kpi-l">AOV · ${g.label}</div><div class="kpi-v">${fmtEur(g.aov)}</div><div class="kpi-s">&nbsp;</div></div>`);
+    if (g.otro) cells.push(`<div class="eco-kpi-cell"><div class="kpi-l">Ventas brutas · ${g.otro.label}</div><div class="kpi-v">${fmtEur(g.otro.brutas)}</div><div class="kpi-s">${fmt(g.otro.brutas/e.brutas*100,0)}% del total</div></div>`);
+    html+=`<div class="eco-kpi-row mb12"${cells.length<4?` style="grid-template-columns:repeat(${cells.length},minmax(0,1fr))"`:''}>${cells.join('')}</div>`;
   }
   if (e.nota) html+=`<div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin:-4px 0 12px">${e.nota}</div>`;
   if (e.kids || e.woman) {
@@ -1559,7 +1881,7 @@ let currentWeek=weekKeys[weekKeys.length-1];
 currentMonth=WEEKS[currentWeek].month;
 
 function buildMonthSelector(){
-  const labels={jul:'Jul',ago:'Ago',sep:'Sep',oct:'Oct',acumulado:'Acumulado'};
+  const labels={jul:'Jul',ago:'Ago',sep:'Sep',oct:'Oct',nov:'Nov',acumulado:'Acumulado'};
   document.getElementById('month-selector').innerHTML=months.map(m=>`<button class="month-btn ${m===currentMonth?'active':''}" onclick="selectMonth('${m}')">${labels[m]||m}</button>`).join('');
 }
 function buildWeekSelector(){
