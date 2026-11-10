@@ -20,13 +20,14 @@ body{font-family:"DM Sans",sans-serif;background:var(--surface);color:var(--ink)
 .rh-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
 .rh-period{font-size:22px;font-weight:300;letter-spacing:-.02em}
 .rh-sub{font-size:12px;color:var(--ink3);margin-top:3px}
-.tab-bar{display:flex;gap:2px;background:var(--rule2);border-radius:var(--r);padding:3px;width:fit-content;margin-bottom:28px}
+.tab-bar{display:flex;flex-wrap:wrap;gap:2px;background:var(--rule2);border-radius:var(--r);padding:3px;max-width:100%;margin-bottom:28px}
 .tb{padding:8px 22px;font-family:"DM Sans",sans-serif;font-size:13px;font-weight:400;color:var(--ink2);background:transparent;border:none;border-radius:6px;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap}
 .tb:hover{background:rgba(0,0,0,.04)}
 .tb.on{background:var(--white);color:var(--ink);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .tab-pane{display:none}.tab-pane.on{display:block}
 .kg{display:grid;gap:12px;margin-bottom:24px}
 .kg-5{grid-template-columns:repeat(5,1fr)}
+.kc,.ev-item{min-width:0}
 .kc{background:var(--white);border:1px solid var(--rule);border-radius:var(--rl);padding:18px 20px}
 .kl{font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
 .kv{font-size:26px;font-weight:300;letter-spacing:-.03em;line-height:1;margin-bottom:6px}
@@ -62,9 +63,21 @@ body{font-family:"DM Sans",sans-serif;background:var(--surface);color:var(--ink)
 .ev-badge{font-size:12px;font-weight:500;font-family:"DM Mono",monospace;padding:3px 8px;border-radius:5px;display:inline-block}
 .footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--ink3)}
 .footer img{height:18px;opacity:.4}
+@media(max-width:900px){
+  .ev-strip,.kg-5{grid-template-columns:repeat(3,1fr)}
+  .tb{padding:8px 14px}
+}
 @media(max-width:700px){
-  .page{padding:24px 16px 60px}.kg-5{grid-template-columns:repeat(3,1fr)}
-  .ev-strip{grid-template-columns:repeat(3,1fr)}.rh{flex-direction:column;align-items:flex-start}.rh-meta{text-align:left}
+  .page{padding:24px 16px 60px}
+  .rh{flex-direction:column;align-items:flex-start}.rh-meta{text-align:left}.rh-logos img{height:30px}
+  .tab-bar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tab-bar::-webkit-scrollbar{display:none}
+  .tb{padding:7px 12px;font-size:12px}
+  .ev-strip,.kg-5,.kg[style]{grid-template-columns:repeat(2,1fr)!important}
+  .ev-curr{font-size:19px}.kv{font-size:22px}
+  .card{padding:16px}
+  .notice{font-size:11.5px}
+  .footer{flex-direction:column;align-items:flex-start;gap:10px}
 }</style>
 </head>
 <body>
@@ -1592,6 +1605,7 @@ function switchTab(e,name){
   document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on');});
   document.getElementById('tab-'+name).classList.add('on');
   e.currentTarget.classList.add('on');
+  e.currentTarget.scrollIntoView({block:'nearest',inline:'nearest'});
 }
 </script>
 </body>
